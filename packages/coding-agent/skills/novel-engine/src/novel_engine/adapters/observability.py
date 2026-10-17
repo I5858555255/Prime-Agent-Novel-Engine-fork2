@@ -117,6 +117,8 @@ class ProductionTracer:
             metadata=meta,
         ))
         self._ensure_chapter(chapter_num)
+        self._accumulate_chapter(chapter_num, model, tokens_input, tokens_output,
+                                  cost_usd, error, {**meta, "operation": operation})
 
     def mark_rlm_subagent(self, chapter_num: int, group_size: int) -> None:
         """Record an RLM subagent dispatch."""
