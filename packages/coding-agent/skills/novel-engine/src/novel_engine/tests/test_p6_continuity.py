@@ -84,17 +84,8 @@ class TestQualityGateConsistency:
     def test_deterministic_gate_consistency(self, tmp_path):
         from novel_engine.quality.continuity_gate import detect_inversions
         specs = [
-            {"seq": 1, "scene_id": 1, "text": "开场描写"},
-    def test_deterministic_gate_consistency(self, tmp_path):
-        from novel_engine.quality.continuity_gate import detect_inversions
-        specs = [
             {"seq": 1, "scene_id": 1, "text": "开场描写", "bp_text": "goal; beats"},
             {"seq": 2, "scene_id": 2, "text": "后续发展", "bp_text": "goal2; beats2"},
-        ]
-        r1 = detect_inversions(specs)
-        r2 = detect_inversions(specs)
-        assert r1 == r2
-            {"seq": 2, "scene_id": 2, "text": "后续发展"},
         ]
         r1 = detect_inversions(specs)
         r2 = detect_inversions(specs)
