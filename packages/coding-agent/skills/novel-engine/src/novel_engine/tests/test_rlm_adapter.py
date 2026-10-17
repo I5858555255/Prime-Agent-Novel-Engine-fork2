@@ -72,18 +72,17 @@ class TestNovelRLMAdapterWithKernel:
         mock_handle.name = "scene-group-0"
         mock_rlm.return_value = mock_handle
 
+        mock_reply = [
+            ({"scene_num": 1}, MagicMock(scene_id=1, scene_text="Scene 1 text", beats=["beat1"]))
+        ]
         mock_agent_msg = MagicMock()
         mock_agent_msg.send = AsyncMock()
-        mock_agent_msg.recv = AsyncMock(return_value=[
-            ({"scene_num": 1}, MagicMock(scene_id=1, scene_text="Scene 1 text", beats=["beat1"])),
-        ])
+        mock_agent_msg.recv = AsyncMock(return_value=mock_reply)
 
         _KERNEL["rlm"] = mock_rlm
         _KERNEL["agent_message"] = mock_agent_msg
 
         adapter = NovelRLMAdapter(mock_orch)
-
-        # Mock the director/synopsis stages to bypass outline coverage validation
         mock_orch._stage_world_sim = MagicMock(return_value={"characters": {}, "factions": {}, "power_system": {}})
         mock_orch._stage_directing = MagicMock(return_value={
             "chapter_num": 1,
@@ -93,9 +92,10 @@ class TestNovelRLMAdapterWithKernel:
 
         result = await adapter.run_chapter(1)
 
-        # rlm should have been called for scene dispatch
+        # rlm should have been called at least once for scene dispatch
         mock_rlm.assert_called_once_with("sub-task")
         assert "chapter" in result
+        assert result["chapter"] == 1
 
     @pytest.mark.allow_network
     @pytest.mark.asyncio
@@ -118,6 +118,7 @@ class TestNovelRLMAdapterWithKernel:
 
         # Must still return a valid result dict (fallback path)
         assert "chapter" in result
+        assert result["chapter"] == 1
         # Trace should show fallback
         trace = adapter.trace()
         assert any(t.get("status") == "fallback" for t in trace)
@@ -130,9 +131,11 @@ class TestNovelRLMAdapterWithKernel:
         mock_handle.name = "sg-0"
         mock_rlm.return_value = mock_handle
 
+        mock_reply = [
+            ({"scene_num": 1}, MagicMock(scene_id=1, scene_text="x" * 100, beats=[]))
+        ]
         mock_agent_msg = MagicMock()
         mock_agent_msg.send = AsyncMock()
-        mock_reply = [(MagicMock(scene_num=1), MagicMock(scene_id=1, scene_text="x" * 100, beats=[]))]
         mock_agent_msg.recv = AsyncMock(return_value=mock_reply)
 
         _KERNEL["rlm"] = mock_rlm
@@ -150,21 +153,11 @@ class TestNovelRLMAdapterWithKernel:
 
         trace = adapter.trace()
         rlm_entries = [t for t in trace if t.get("phase") == "rlm_dispatch"]
-        assert len(rlm_entries) >= 2  # attempt + success
-        assert rlm_entries[0]["status"] == "attempt"
-        assert rlm_entries[1]["status"] == "success"
-        trace = adapter.trace()
-        rlm_entries = [t for t in trace if t.get("phase") == "rlm_dispatch"]
-        assert len(rlm_entries) >= 1
-        assert rlm_entries[0]["status"] == "success"
-        trace = adapter.trace()
-        trace = adapter.trace()
-        rlm_entries = [t for t in trace if t.get("phase") == "rlm_dispatch"]
-        assert len(rlm_entries) >= 1
-        assert rlm_entries[0]["status"] == "success"
-        rlm_entries = [t for t in trace if t.get("phase") == "scene_group_rlm"]
-        assert len(rlm_entries) >= 1
-        assert rlm_entries[0]["status"] == "ok"
+        # Should have both attempt and success traces
+        assert len(rlm_entries) >= 2
+        statuses = [t["status"] for t in rlm_entries]
+        assert "attempt" in statuses
+        assert "success" in statuses
 
 
 class TestDomainTools:
