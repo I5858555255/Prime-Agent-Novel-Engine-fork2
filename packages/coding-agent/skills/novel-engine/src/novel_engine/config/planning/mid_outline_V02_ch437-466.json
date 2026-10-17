@@ -1,0 +1,312 @@
+{
+  "meta": {
+    "vid": "V02",
+    "range": [
+      437,
+      466
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-14T22:33:41+00:00",
+    "batch_size": 6,
+    "status": "approved"
+  },
+  "entries": {
+    "437": {
+      "chapter": 437,
+      "core_event": "乾都朝堂议事，三殿臣子就皇室三件残物的归属与封存期限激烈争论",
+      "characters": [
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "438": {
+      "chapter": 438,
+      "core_event": "仙门内门长老私下密会，暗示下一轮候选人验证将扩大监控范围",
+      "characters": [
+        "C005",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "439": {
+      "chapter": 439,
+      "core_event": "陆烬在街头目睹两名黑衣暗探对流浪儿进行跟踪与盘问，察觉异常",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "440": {
+      "chapter": 440,
+      "core_event": "陈老根向陆烬解释朝堂与仙门代理人的复杂关系，告诫其勿涉深",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "441": {
+      "chapter": 441,
+      "core_event": "皇室秘使发布新令，加强皇城周边对可疑人员的排查力度",
+      "characters": [
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "442": {
+      "chapter": 442,
+      "core_event": "陆烬夜间感应到远处隐约的灵气波动，决定次日前往街市打听消息",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "443": {
+      "chapter": 443,
+      "core_event": "乾京暗卫排查仙门代理人，陆烬因身份存疑被列为边缘观察对象",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "444": {
+      "chapter": 444,
+      "core_event": "朝堂旧臣争论皇室残物处置，七窍碑残页因纹路异常引发内部小范围争议",
+      "characters": [
+        "C003",
+        "C004"
+      ],
+      "boundary_note": "F001七窍碑残页仅实物呈现与内部争议，未解读用途未暗示钥匙，按V01判例放行",
+      "status": "approved"
+    },
+    "445": {
+      "chapter": 445,
+      "core_event": "陆烬在街市偶遇仙门散修，对方对其气质产生误判并试图套话",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "446": {
+      "chapter": 446,
+      "core_event": "乾武帝特遣使者向陆烬发放优厚资助，条件反常但未说明背后动机",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "乾武帝资助仅条件反常不坐实赎罪/补偿动机，按V02 forbidden判例放行",
+      "status": "approved"
+    },
+    "447": {
+      "chapter": 447,
+      "core_event": "仙门候选人验证名单流转，陆烬名字被错误列入引发朝堂与仙门代理人博弈",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "448": {
+      "chapter": 448,
+      "core_event": "陆烬被暂时软禁于府邸边缘，陈老根暗中通风报信助其理清脱身线索",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "449": {
+      "chapter": 449,
+      "core_event": "陆烬随行观察朝堂廷议，发现三件残物被刻意回避且秘使态度强硬",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "450": {
+      "chapter": 450,
+      "core_event": "陈老根私下演练呼吸法，陆烬仅旁观并记录其气息节奏变化",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "451": {
+      "chapter": 451,
+      "core_event": "仙门代理人借口查验户口，对陆烬身份进行隐秘背景调查",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "452": {
+      "chapter": 452,
+      "core_event": "陆烬在市集购买药材，发现卖家暗中收取皇室金令作为担保",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "453": {
+      "chapter": 453,
+      "core_event": "陆烬目睹仙门与朝堂信使在巷角短促交锋，双方互指对方越界",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "454": {
+      "chapter": 454,
+      "core_event": "陆烬回到宅院整理所得情报，梳理出朝堂与仙门博弈的初步脉络",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "455": {
+      "chapter": 455,
+      "core_event": "乾国京郊猎场，陆烬随商队目睹两名仙门使者对“候选童子”进行灵力渗透测试，测试手段诡异且带有收编意味",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "456": {
+      "chapter": 456,
+      "core_event": "沈商队在归途遭遇截杀，陆烬发现劫匪使用的符箓带有皇室禁军特有的朱砂配方，暗示朝堂暗流涌动",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "457": {
+      "chapter": 457,
+      "core_event": "陆烬在马车中研读随身携带的鹿台阵图残卷，发现图纸边缘有一处刻意涂抹的墨迹，疑似被人为掩盖的关键信息",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "458": {
+      "chapter": 458,
+      "core_event": "抵达边境城市，陆烬因身上残留的皇室气息被本地仙门监视网察觉，一名低级监察者上门盘问，气氛紧绷",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "459": {
+      "chapter": 459,
+      "core_event": "陆烬利用商队内部的混乱与监察者周旋，暗中将七窍碑残页藏入货物夹层，成功规避直接搜身",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "460": {
+      "chapter": 460,
+      "core_event": "商队抵达下一座大型坊市，陆烬在喧闹市集中发现一件售卖的旧物上刻有与皇室残物相同的纹路，决定深入调查",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "461": {
+      "chapter": 461,
+      "core_event": "陆烬随商队抵京城外驿馆，目睹皇朝护卫严密查探，隐约感到气氛压抑",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "462": {
+      "chapter": 462,
+      "core_event": "陆烬在驿馆整理行装，发现随行信物有轻微灵气波动，引起老镖师注意",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "463": {
+      "chapter": 463,
+      "core_event": "陆烬进城前在茶肆听闻朝堂近日严抓仙门代理人，议论纷杂",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "464": {
+      "chapter": 464,
+      "core_event": "陆烬混入人流初入京城，被一名神秘女子暗中打量，眼神复杂",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "465": {
+      "chapter": 465,
+      "core_event": "陆烬在夜市被卷入一场小冲突，见官府执法者手段凌厉，似与仙门有关",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "466": {
+      "chapter": 466,
+      "core_event": "陆烬在客栈中复盘入城经历，察觉神秘女子并非恶人，决定继续深入",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

@@ -1,0 +1,68 @@
+node_modules/
+dist/
+*.log
+.DS_Store
+*.tsbuildinfo
+# packages/*/node_modules/
+packages/*/dist/
+packages/*/dist-chrome/
+packages/*/dist-firefox/
+*.cpuprofile
+
+# Environment
+.env
+
+# Editor files
+.vscode/
+.zed/
+.idea/
+.claude/
+*.swp
+*.swo
+*~
+
+# Package specific
+.npm/
+coverage/
+.nyc_output/
+.pi_config/
+tui-debug.log
+compaction-results/
+.opencode/
+syntax.jsonl
+out.jsonl
+pi-*.html
+out.html
+packages/coding-agent/binaries/
+todo.md
+plans/
+.prime/agent/
+collect.sh
+.kernel-venv/
+.worktrees/
+
+__pycache__/
+*.pyc
+
+# Novel Engine runtime outputs
+packages/coding-agent/skills/novel-engine/src/novel_engine/chapters/
+packages/coding-agent/skills/novel-engine/src/novel_engine/memory/
+packages/coding-agent/skills/novel-engine/src/novel_engine/audit/
+packages/coding-agent/skills/novel-engine/src/novel_engine/runtime/
+packages/coding-agent/skills/novel-engine/src/novel_engine/test_out.txt
+
+# Local launch scripts with secrets (contains API keys) — never commit
+launch_prod.bat
+launch_10.bat
+launch_10_wmi.ps1
+launch_p0p1_3.bat
+
+# Local superpowers tooling data
+.superpowers/
+
+# Local one-off diagnostics (hardcoded machine paths, not project code)
+packages/coding-agent/skills/novel-engine/src/novel_engine/scripts/diagnostic_director_fix.py
+
+# Local manual runtime backups (state snapshots, not source code)
+packages/coding-agent/skills/novel-engine/src/novel_engine/manual_backup_ch5_pre_20260923-113045/
+packages/coding-agent/skills/novel-engine/src/novel_engine/manual_backup_ch6_pre_20260923-1620/

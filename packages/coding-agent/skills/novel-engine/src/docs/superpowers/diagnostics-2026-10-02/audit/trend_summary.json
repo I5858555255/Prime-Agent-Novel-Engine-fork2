@@ -1,0 +1,86 @@
+{
+  "project_root": ".",
+  "total_chapters_reviewed": 5,
+  "chapters_with_issues": 5,
+  "total_issues_recorded": 28,
+  "forced_draft_count": 0,
+  "unique_issue_kinds": [
+    "character_consistency",
+    "cliffhensity",
+    "foreshadow_execution",
+    "hook_strength",
+    "innovation",
+    "pacing",
+    "reader_retention",
+    "style_match"
+  ],
+  "recurring_chapters_count": 0,
+  "recurring_chapters": [],
+  "per_chapter_sample": {
+    "1": {
+      "total_issues": 5,
+      "issue_kinds": [
+        "character_consistency",
+        "foreshadow_execution",
+        "hook_strength",
+        "pacing",
+        "style_match"
+      ],
+      "avg_score": 86.0,
+      "forced_draft": false,
+      "rounds_seen": []
+    },
+    "2": {
+      "total_issues": 5,
+      "issue_kinds": [
+        "character_consistency",
+        "hook_strength",
+        "pacing",
+        "reader_retention",
+        "style_match"
+      ],
+      "avg_score": 88.4,
+      "forced_draft": false,
+      "rounds_seen": []
+    },
+    "3": {
+      "total_issues": 6,
+      "issue_kinds": [
+        "character_consistency",
+        "foreshadow_execution",
+        "hook_strength",
+        "pacing",
+        "reader_retention",
+        "style_match"
+      ],
+      "avg_score": 81.3,
+      "forced_draft": false,
+      "rounds_seen": []
+    },
+    "4": {
+      "total_issues": 6,
+      "issue_kinds": [
+        "character_consistency",
+        "cliffhensity",
+        "foreshadow_execution",
+        "pacing",
+        "style_match"
+      ],
+      "avg_score": 82.6,
+      "forced_draft": false,
+      "rounds_seen": []
+    },
+    "5": {
+      "total_issues": 6,
+      "issue_kinds": [
+        "hook_strength",
+        "innovation",
+        "pacing",
+        "style_match"
+      ],
+      "avg_score": 88.9,
+      "forced_draft": false,
+      "rounds_seen": []
+    }
+  }
+}

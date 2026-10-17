@@ -1,0 +1,316 @@
+{
+  "meta": {
+    "vid": "V02",
+    "range": [
+      616,
+      616
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-17T01:29:36+00:00",
+    "batch_size": 1,
+    "status": "approved"
+  },
+  "entries": {
+    "587": {
+      "chapter": 587,
+      "core_event": "陆烬在整理旧物时发现一封无署名的密函，信中暗示人皇鼎碎片藏匿于京城暗桩",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "588": {
+      "chapter": 588,
+      "core_event": "陆烬依信指引潜入废弃仓库，遭遇黑袍修士的试探性攻击，勉强脱身",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "589": {
+      "chapter": 589,
+      "core_event": "陆烬随商队抵达云隐坊市外围集市，察觉仙门代理人暗中布下监控阵法",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "590": {
+      "chapter": 590,
+      "core_event": "京城旧书行发生失窃案，陆烬被误认为嫌疑人，被迫卷入官府调查",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "591": {
+      "chapter": 591,
+      "core_event": "陆烬在官府审讯中利用对古籍的了解化解嫌疑，暗中打探到鹿台阵图残卷的下落线索",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "592": {
+      "chapter": 592,
+      "core_event": "陆烬在朝堂暗流中察觉仙门代理人对炼气弟子的异常收编意图，内心警惕",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "593": {
+      "chapter": 593,
+      "core_event": "陆烬在集市偶遇旧书商，对方以暗语试探身份并询问古籍下落",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "594": {
+      "chapter": 594,
+      "core_event": "陆烬向陈老根坦白旧书商身份，陈老根分析其中风险并叮嘱谨慎行事",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "595": {
+      "chapter": 595,
+      "core_event": "陆烬潜入县图书馆查阅人皇鼎相关记载，发现线索被刻意篡改或封存",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": "需人工确认：涉及 f001_royal_heirlooms 残物线索，需确认是否越界解读用途 | audit pending_human 按 V01 判例放行：残物线索含糊带过未解读用途",
+      "status": "approved"
+    },
+    "596": {
+      "chapter": 596,
+      "core_event": "神秘黑衣人跟踪陆烬，陆烬凭借敏锐感知摆脱追捕并察觉对方来自仙门",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "597": {
+      "chapter": 597,
+      "core_event": "陆烬将发现汇报给陈老根，陈老根透露其曾受命守护某些皇家机密",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "598": {
+      "chapter": 598,
+      "core_event": "陆烬在书房发现陈老根珍藏的鹿台阵图残卷，感到其中纹路异常",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：涉及 f001_royal_heirlooms 鹿台残卷，严禁解读真实用途 | audit pending_human 按 V01 判例放行：纹路异常未解读真实用途",
+      "status": "approved"
+    },
+    "599": {
+      "chapter": 599,
+      "core_event": "陆烬在旧书肆整理残卷，发现七窍碑残页与鹿台阵图残卷的封存逻辑异常，心生疑惑",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "600": {
+      "chapter": 600,
+      "core_event": "陆烬随行密使至京城，在朝堂觐见乾武帝，接受皇命资助条件",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "601": {
+      "chapter": 601,
+      "core_event": "陆烬为躲避追捕暂避于人皇鼎碎片曾出现的旧地，发现地底符阵微弱波动，但无法解读",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "602": {
+      "chapter": 602,
+      "core_event": "乾武帝新派秘使携厚礼到访，重申资助条件却回避具体用途，陆烬察觉交易条款中暗藏的保护意味",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "需人工确认：接近ch567赎罪真相节点，需确保仅描写'反常感'与'说不清的古怪'，严禁点破乾武帝赎罪动机 | audit pending_human 按 V01 判例放行：保护意味为弱暗示未坐实赎罪动机",
+      "status": "approved"
+    },
+    "603": {
+      "chapter": 603,
+      "core_event": "陈老根带陆烬体验民间炼气期武者的修炼瓶颈，陆烬虽未修炼，但旁观武者气息流转，对体内灵气感知产生模糊共鸣",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：涉及陆烬对炼气期的认知，需严格限制在'旁观/模糊共鸣'层面，严禁出现陆烬自身引气入体、丹田轰鸣等筑基/炼气突破动作描写 | audit pending_human 按 V01 判例放行：明确未修炼，仅旁观/模糊共鸣，禁升级为引气/突破",
+      "status": "approved"
+    },
+    "604": {
+      "chapter": 604,
+      "core_event": "仙门验证前夕，各派代理人集结，陆烬被卷入一场针对'非仙籍者'的清理行动，幸得皇室旧部暗中放水",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "605": {
+      "chapter": 605,
+      "core_event": "陆烬研读皇商名录，发现多家铺面被仙门代理人暗中渗透监控",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "606": {
+      "chapter": 606,
+      "core_event": "陆烬设局假意交易，诱捕一名仙门监视网下线的探子身份",
+      "characters": [
+        "C001",
+        "C005",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "607": {
+      "chapter": 607,
+      "core_event": "乾武帝密旨下发，表面嘉奖陆烬，实则要求截断某条仙门联络线",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "608": {
+      "chapter": 608,
+      "core_event": "陆烬破解密旨暗语，发现截断指令与皇室残物流向存在隐秘关联",
+      "characters": [
+        "C001",
+        "C003",
+        "C006"
+      ],
+      "boundary_note": "需人工确认：ch567 已揭示亏本交易本质，此处若进一步坐实‘赎罪’动机将违反禁止事项，仅保留‘指令异常’描写 | audit pending_human 按 V01 判例放行：隐秘关联弱暗示未坐实赎罪动机",
+      "status": "approved"
+    },
+    "609": {
+      "chapter": 609,
+      "core_event": "陆烬利用仙门验证规则漏洞，反向干扰候选人考核流程",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "610": {
+      "chapter": 610,
+      "core_event": "神秘旧书商现身，试探陆烬对人皇鼎碎片传说的知晓程度",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "611": {
+      "chapter": 611,
+      "core_event": "陆烬在云隐坊市外围整理旧书，因残页纹路异常引来不明身份散修试探",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "612": {
+      "chapter": 612,
+      "core_event": "陆烬伪装普通书商与暗线联络者初次接洽，交换关于人皇鼎碎片的模糊线索",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "613": {
+      "chapter": 613,
+      "core_event": "陆烬在大乾都城内闲逛时，敏锐察觉到暗处有皇室与仙门两股势力对陆烬行踪的隐秘监控",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "614": {
+      "chapter": 614,
+      "core_event": "陆烬依据古籍记载追踪七窍碑残页下落，陷入仙门代理人布下的监控陷阱",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "615": {
+      "chapter": 615,
+      "core_event": "陆烬利用地形与暗语摆脱仙门监控，将鹿台阵图残卷信息藏入旧书夹层",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "616": {
+      "chapter": 616,
+      "core_event": "陆烬察觉资助条件反常，暗中调查大乾朝堂秘辛",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "_comment": "机读判定规则（bible/decision_rules.md 的条款化实现，单一权威源）。scale: forbidden=命中即需重生成；allowed/hint=放行；action=density_count 需批次级密度统计。R12 概念解锁由 scope_gate 承担，不在此表。rule_applies: 卷范围（省略=全卷适用；vols 或 chapter_range 二选一）。covers_clauses: 该规则声明覆盖的 author_intent 卷级 forbidden 条款（格式 vid#序号），覆盖审计据此判定该条款已判定化。",
+  "rules": [
+    {
+      "id": "R01",
+      "name": "传授既成句式",
+      "scale": "forbidden",
+      "action": "needs_regenerate",
+      "rule_applies": {"vols": ["V01"]},
+      "covers_clauses": ["V01#2"],
+      "patterns": [
+        "教过我.{0,12}(呼吸|调息|吐纳)的法子",
+        "教我.{0,10}(呼吸|调息|吐纳)的法子",
+        "教.{0,4}我.{0,6}(呼吸|调息|吐纳)"
+      ]
+    },
+    {
+      "id": "R02",
+      "name": "传授认知句（允许）",
+      "scale": "allowed",
+      "action": "approved",
+      "rule_applies": {"vols": ["V01"]},
+      "covers_clauses": ["V01#2"],
+      "patterns": [
+        "知道.{0,8}(根伯|陈老根).{0,10}(会些|会一点|懂得).{0,8}(法子|呼吸|调息|吐纳)",
+        "知道.{0,6}(会些|懂得).{0,8}(呼吸|调息|吐纳)的法子"
+      ]
+    },
+    {
+      "id": "R03",
+      "name": "承诺将来传授",
+      "scale": "forbidden",
+      "action": "needs_regenerate",
+      "rule_applies": {"vols": ["V01"]},
+      "covers_clauses": ["V01#2"],
+      "patterns": [
+        "等你长大些.{0,12}(教你|传授).{0,14}(呼吸|调息|吐纳|修炼)",
+        "长大后.{0,10}(教你|传授).{0,14}(呼吸|调息|吐纳|修炼)"
+      ]
+    },
+    {
+      "id": "R04",
+      "name": "陆烬现场体感",
+      "scale": "forbidden",
+      "action": "needs_regenerate",
+      "rule_applies": {"vols": ["V01"]},
+      "covers_clauses": ["V01#1", "V01#2"],
+      "patterns": [
+        "陆烬.{0,8}(感觉|感到|觉得).{0,16}(气感|气流|暖意|气息|灵力)",
+        "陆烬.{0,10}(体内|丹田).{0,10}(气感|气流|流转|暖意|运转|游走)",
+        "气感.{0,4}(在|于).{0,6}(丹田|体内|经脉)"
+      ]
+    },
+    {
+      "id": "R05",
+      "name": "被动体感+被制止",
+      "scale": "hint",
+      "action": "approved_with_note",
+      "rule_applies": {"vols": ["V01"]},
+      "covers_clauses": ["V01#2"],
+      "patterns": [
+        "(寒意|发热|心悸|颤抖|冷).{0,24}(陈老根|根伯).{0,10}(制止|喝止|按住|阻止|打断)",
+        "(被陈老根|被根伯).{0,10}(制止|喝止|打断).{0,12}(体感|异样|寒意)"
+      ]
+    },
+    {
+      "id": "R06",
+      "name": "梦中/幻境感知",
+      "scale": "hint",
+      "action": "approved_with_note",
+      "rule_applies": {"vols": ["V01"]},
+      "covers_clauses": ["V01#2"],
+      "patterns": [
+        "梦中.{0,14}(修炼|气感|吐纳|调息|呼吸法)",
+        "梦见.{0,14}(气感|修炼|吐纳)"
+      ]
+    },
+    {
+      "id": "R07",
+      "name": "传闻/旧事",
+      "scale": "allowed",
+      "action": "approved",
+      "patterns": [
+        "(传闻|听说|老人讲|旧事|议论|村民说|村里人).{0,26}(禁区|迷雾|异象|当年|以前)",
+        "(禁区|迷雾|异象).{0,16}(传闻|旧事|议论|传说)"
+      ]
+    },
+    {
+      "id": "R08",
+      "name": "残物实物线索",
+      "scale": "allowed",
+      "action": "approved",
+      "rule_applies": {"chapter_range": [1, 1290]},
+      "covers_clauses": ["V01#4"],
+      "patterns": [
+        "(铜片|铁片|残石|碎片|古玉|残物).{0,14}(发现|捡到|获得|收藏|线索|来历|旧物)",
+        "(捡到|发现|挖出).{0,10}(铜片|铁片|残石|碎片|古玉)"
+      ]
+    },
+    {
+      "id": "R09",
+      "name": "陈老根实力展示",
+      "scale": "allowed",
+      "action": "approved",
+      "rule_applies": {"vols": ["V01"]},
+      "covers_clauses": ["V01#3"],
+      "patterns": [
+        "陈老根.{0,10}(展露|施展|露一手|身手|武艺)",
+        "根伯.{0,10}(展露|施展|身手|武艺)"
+      ]
+    },
+    {
+      "id": "R10",
+      "name": "陈老根认出关联",
+      "scale": "hint",
+      "action": "approved_with_note",
+      "rule_applies": {"vols": ["V01"]},
+      "covers_clauses": ["V01#3"],
+      "patterns": [
+        "陈老根.{0,20}(认出|识得|辨认|神色凝重|脸色一变|沉默良久)",
+        "(认出|识得|辨认).{0,14}(文字|物件|残石|相似|来历)"
+      ]
+    },
+    {
+      "id": "R11",
+      "name": "迷雾/禁区氛围密度",
+      "scale": "hint",
+      "action": "density_count",
+      "covers_clauses": ["V01#4"],
+      "patterns": [
+        "(迷雾|禁区|异象).{0,24}(恐慌|诡异|不安|议论|异样|心悸|奇景)"
+      ]
+    },
+    {
+      "id": "R13",
+      "name": "乾武帝赎罪动机坐实",
+      "scale": "forbidden",
+      "action": "needs_regenerate",
+      "rule_applies": {"vols": ["V02"]},
+      "covers_clauses": ["V02#1"],
+      "patterns": [
+        "乾武帝.{0,18}(其实|原来|暗中|实为|真正|目的|赎罪|亏本|补偿|愧疚)",
+        "(陛下|乾武帝).{0,14}(赎罪式|赎罪|亏本交易|刻意设计).{0,10}(资助|交易|安排)",
+        "(资助|交易).{0,10}(实为|其实是|原来是|真正目的).{0,12}(赎罪|补偿|亏本)"
+      ]
+    },
+    {
+      "id": "R14",
+      "name": "残页/残卷用途完全解读",
+      "scale": "forbidden",
+      "action": "needs_regenerate",
+      "rule_applies": {"vols": ["V02"]},
+      "covers_clauses": ["V02#2"],
+      "patterns": [
+        "(七窍碑|鹿台阵图).{0,10}(残页|残卷).{0,14}(真正用途|秘密|全貌|解读|是钥匙|是密码|为阵法)",
+        "(残页|残卷).{0,10}(指向|对应|开启|解开).{0,12}(阵法|秘境|宝库|遗迹)"
+      ]
+    },
+    {
+      "id": "R15",
+      "name": "陆烬突破至筑基",
+      "scale": "forbidden",
+      "action": "needs_regenerate",
+      "rule_applies": {"chapter_range": [317, 987]},
+      "covers_clauses": ["V02#3"],
+      "patterns": [
+        "陆烬.{0,12}(突破|达到|晋入|踏入).{0,6}筑基",
+        "陆烬.{0,10}筑基.{0,8}(成功|了|大成|圆满)",
+        "筑基.{0,4}(成功|突破).{0,6}(陆烬|他)"
+      ]
+    },
+    {
+      "id": "R16",
+      "name": "摄魂阁组织全貌/人造飞升目的揭露",
+      "scale": "forbidden",
+      "action": "needs_regenerate",
+      "rule_applies": {"vols": ["V03"]},
+      "covers_clauses": ["V03#1"],
+      "patterns": [
+        "(摄魂阁|摄魂殿).{0,16}(组织全貌|真实目的|真正目的|人造飞升|飞升真相|背后主使|幕后|全盘计划)",
+        "(人造飞升|飞升计划|飞升真相).{0,12}(是|真相|目的|全貌|秘密)",
+        "(摄魂阁|摄魂殿).{0,10}(猎魂|掠魂|炼魂|养魂).{0,12}(真相|用途|目的|内情)"
+      ]
+    },
+    {
+      "id": "R17",
+      "name": "陆烬两界神魂特殊性被外部完全掌握",
+      "scale": "forbidden",
+      "action": "needs_regenerate",
+      "rule_applies": {"vols": ["V03"]},
+      "covers_clauses": ["V03#2"],
+      "patterns": [
+        "(陆烬|他).{0,10}(神魂|灵魂).{0,14}(特殊|两界|异于常人|不同凡响).{0,12}(被|遭|叫|让).{0,8}(完全掌握|摸清|看透|洞悉|识破)",
+        "(摄魂阁|仙门|长老|大能|势力).{0,12}(完全掌握|看透|摸清|识破|洞悉).{0,10}(陆烬|他).{0,8}(神魂|灵魂|两界)",
+        "(陆烬|他).{0,8}(神魂|灵魂).{0,10}(来自|属于|连接).{0,6}(两界|异界|另一个世界)"
+      ]
+    }
+  ]
+}

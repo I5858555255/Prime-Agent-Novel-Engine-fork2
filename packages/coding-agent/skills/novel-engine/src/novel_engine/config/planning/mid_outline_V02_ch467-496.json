@@ -1,0 +1,315 @@
+{
+  "meta": {
+    "vid": "V02",
+    "range": [
+      467,
+      496
+    ],
+    "node_chapters_in_range": [
+      489
+    ],
+    "generated_at": "2026-10-15T06:15:37+00:00",
+    "batch_size": 1,
+    "status": "approved"
+  },
+  "entries": {
+    "467": {
+      "chapter": 467,
+      "core_event": "陆烬随行大乾禁军护送皇室贡品，途经边陲遭神秘刺客拦截，陆烬发现刺客使用的暗器刻有非朝堂熟悉的纹样",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "468": {
+      "chapter": 468,
+      "core_event": "禁军统领向陆烬透露刺客隶属江湖某势力，陆烬意识到皇室与江湖的冲突比想象中更复杂，双方试探性结盟",
+      "characters": [
+        "C001",
+        "C003",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "469": {
+      "chapter": 469,
+      "core_event": "陆烬随队进入大乾王城，目睹朝堂对仙门代理人审查的异常严苛，一名官员对陆烬的出身表现出过度的警惕与好奇",
+      "characters": [
+        "C001",
+        "C003",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "470": {
+      "chapter": 470,
+      "core_event": "陆烬在王城暗巷遇到自称仙门候选人的少年，少年言语中暗示仙门测试并非单纯的修为考核，而是对人的绝对监控与收编",
+      "characters": [
+        "C001",
+        "C006",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "471": {
+      "chapter": 471,
+      "core_event": "陆烬试图接触少年打听测试细节，被王城护卫发现，陆烬巧妙周旋脱身，并注意到护卫身上携带的一枚形制古怪的玉牌，隐约关联到皇室残物",
+      "characters": [
+        "C001",
+        "C006",
+        "C003"
+      ],
+      "boundary_note": "已判定放行(V01判例)：玉牌仅视觉展示与关联暗示，未解读残物用途、未点全貌",
+      "status": "approved"
+    },
+    "472": {
+      "chapter": 472,
+      "core_event": "陆烬与少年在王城外短暂接头，少年透露仙门测试即将开始，陆烬决定参与，少年突然失踪，陆烬在原地获得一枚无字的空白令牌",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "473": {
+      "chapter": 473,
+      "core_event": "陆烬在朝堂夹缝中遭遇仙门代理人试探，显露出对皇室残物流向的敏锐感知",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "474": {
+      "chapter": 474,
+      "core_event": "乾武帝密令陆烬协助清点部分皇室秘藏，资助条件出现反常优厚之处",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "475": {
+      "chapter": 475,
+      "core_event": "陆烬发现七窍碑残页纹路与寻常金石不同，引发对鹿台阵图残卷来历的疑惑",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "已判定放行(V01判例)：残页仅细节描写，未解读真正用途",
+      "status": "approved"
+    },
+    "476": {
+      "chapter": 476,
+      "core_event": "江湖势力洗牌引发震动，陆烬试图在朝堂与仙门之间寻找平衡点",
+      "characters": [
+        "C001",
+        "C004",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "477": {
+      "chapter": 477,
+      "core_event": "仙门候选人验证过程暴露监控收编本质，陆烬察觉其中暗藏的危机",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "478": {
+      "chapter": 478,
+      "core_event": "陆烬在炼气圆满门槛前反复打磨功法，体内灵气渐盛但距离筑基仍有一线之隔",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "479": {
+      "chapter": 479,
+      "core_event": "陆烬在黑市目睹仙门代理人以“强身”为名采集凡体数据，记录异常反应",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "480": {
+      "chapter": 480,
+      "core_event": "陆烬随商队途经乾州黑市，撞见仙门代理人暗中查验散修神魂印记",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "481": {
+      "chapter": 481,
+      "core_event": "沈无涯化名药师潜入黑市，以鹿台阵图残卷碎片换取通行令牌",
+      "characters": [
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "482": {
+      "chapter": 482,
+      "core_event": "陆烬在坊市听闻皇室残物暗流，感到资助背后有难言怪异",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "已判定放行(V01/V02判例)：仅反常感未坐实赎罪动机，未点破残物用途",
+      "status": "approved"
+    },
+    "483": {
+      "chapter": 483,
+      "core_event": "皇使秘营中，乾武帝特使对异常资金流向发出疑问，陆烬因交易细节被标记嫌疑",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "已判定放行(V02判例ch446先例)：资助反常感未坐实赎罪动机",
+      "status": "approved"
+    },
+    "484": {
+      "chapter": 484,
+      "core_event": "沈无涯销毁鹿台阵图残卷副本，陆烬保留拓片，两人分道扬镳前互留暗号",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "485": {
+      "chapter": 485,
+      "core_event": "陆烬在朝堂夹缝中周旋，目睹仙门代理人对皇室三件残物的监控收编动作加剧",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "已判定放行(V01判例)：仅展示监控行为，未点明残物真实用途",
+      "status": "approved"
+    },
+    "486": {
+      "chapter": 486,
+      "core_event": "乾武帝密令陆烬参与残物争夺暗流，资助条件优厚得反常但未说明真实动机",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "已判定放行(V02判例)：反常感未坐实赎罪动机",
+      "status": "approved"
+    },
+    "487": {
+      "chapter": 487,
+      "core_event": "陆烬在江湖势力洗牌中偶遇仙门候选人验证现场，发现验证过程具有监控收编本质",
+      "characters": [
+        "C001",
+        "C005",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "488": {
+      "chapter": 488,
+      "core_event": "陆烬与仙门代理人正面交锋，利用残物暗流信息优势暂时周旋成功",
+      "characters": [
+        "C001",
+        "C005",
+        "C007"
+      ],
+      "boundary_note": "已判定放行(V01判例)：残物争夺未提前揭示真正用途",
+      "status": "approved"
+    },
+    "490": {
+      "chapter": 490,
+      "core_event": "陆烬离开朝堂场景，启程返回雾隐村，途中回顾近月朝堂与仙门博弈经历",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "491": {
+      "chapter": 491,
+      "core_event": "陆烬抵达雾隐村，沈无涯以采购药材之名现身，交付修真界对迷雾禁区的传闻卷",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "492": {
+      "chapter": 492,
+      "core_event": "沈无涯解析迷雾传闻卷，陆烬听闻仙门监控机制初显",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "493": {
+      "chapter": 493,
+      "core_event": "陆烬察觉乾皇资助反常，沈无涯暗示朝堂与仙门博弈背景",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "已判定放行(V02判例)：未坐实乾武帝赎罪动机",
+      "status": "approved"
+    },
+    "494": {
+      "chapter": 494,
+      "core_event": "陆烬在炼气圆满门槛前反复打磨，试图突破但未能成功",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "已判定放行(V02 forbidden第三条)：炼气圆满打磨、试图突破未成功，未出现筑基功成/气息大变；另遵A路线禁陆烬修炼样式动作(由director约束)",
+      "status": "approved"
+    },
+    "495": {
+      "chapter": 495,
+      "core_event": "陆烬研读迷雾禁区传闻，推测沈无涯动向并警惕仙门监控",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "已判定放行(重生成避撞)：研读迷雾禁区传闻/推测沈无涯动向，无呼吸法传授、无陆烬修炼动作",
+      "status": "approved"
+    },
+    "496": {
+      "chapter": 496,
+      "core_event": "沈无涯警告陆烬迷雾禁区异象，陆烬回忆婴儿降生恐慌",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "需人工确认：涉及 f004_mitochondria_earth 边界，需确认未触及核心伏笔",
+      "status": "approved"
+    }
+  }
+}

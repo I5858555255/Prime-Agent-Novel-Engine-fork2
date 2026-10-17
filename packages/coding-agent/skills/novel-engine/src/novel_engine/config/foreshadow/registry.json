@@ -1,0 +1,288 @@
+{
+  "foreshadows": [
+    {
+      "id": "F001",
+      "plant_chapter": 74,
+      "plant_context": "皇室秘藏人皇鼎碎片、七窍碑残页、鹿台阵图残卷三件残物，皇室误以为是皇权象征",
+      "clue_plan": [
+        {
+          "chapter": 89,
+          "intensity": "隐晦提示",
+          "method": "武馆传说中提及人皇鼎碎片相关传闻"
+        },
+        {
+          "chapter": 621,
+          "intensity": "明显异样",
+          "method": "皇室秘使嘱托陆烬留意人皇鼎碎片古籍记载"
+        },
+        {
+          "chapter": 1425,
+          "intensity": "接近揭露前兆",
+          "method": "陆烬在秘档中发现人皇鼎碎片记载，回想秘使嘱托"
+        },
+        {
+          "chapter": 2738,
+          "intensity": "关键道具",
+          "method": "铁面执政官揭示传国玉玺即太初原核中央核心容器"
+        }
+      ],
+      "resolve_chapter": 3035,
+      "resolve_method": "陆烬与乾武帝就鼎碎片纪念碑方案达成共识，三件残物由皇权象征转化为人道公共信物",
+      "importance": 0.95,
+      "status": "planned",
+      "linked_node": "N044",
+      "fid": "f001_royal_heirlooms",
+      "anchors": [
+        "残物",
+        "铜片",
+        "铁片",
+        "碎片",
+        "残石",
+        "古玉",
+        "密码本",
+        "太初原核",
+        "残卷",
+        "残页",
+        "残片",
+        "拓片"
+      ]
+    },
+    {
+      "id": "F002",
+      "plant_chapter": 9,
+      "plant_context": "陈老根初传呼吸法残篇，只言强身健体不提修炼",
+      "clue_plan": [
+        {
+          "chapter": 940,
+          "intensity": "明显异样",
+          "method": "陆烬自苏问魂处获得《太上养魂经》，世人视为邪门残法"
+        },
+        {
+          "chapter": 1139,
+          "intensity": "接近揭露前兆",
+          "method": "血冥教被俘中层修士揭示'逆炼心魔'与'修心神'技术差异"
+        }
+      ],
+      "resolve_chapter": 2999,
+      "resolve_method": "《太上养魂经》作为人道'修心神'分支的最终定位在第八卷确认",
+      "importance": 0.9,
+      "status": "planned",
+      "linked_node": "N025",
+      "fid": "f002_hunyuan_scripture",
+      "anchors": [
+        "太上养魂经",
+        "养魂经",
+        "疗伤祛毒",
+        "邪门残法",
+        "修心神",
+        "呼吸法"
+      ]
+    },
+    {
+      "id": "F003",
+      "plant_chapter": 702,
+      "plant_context": "陆烬第一次听到摄魂阁的影子——组织在暗中收买'神魂特异者'",
+      "clue_plan": [
+        {
+          "chapter": 848,
+          "intensity": "明显异样",
+          "method": "残破笔记出现'以魂为引，假托飞升'，人造飞升概念首次暴露"
+        },
+        {
+          "chapter": 918,
+          "intensity": "接近揭露前兆",
+          "method": "苏问魂点明摄魂阁'不止猎魂，他们在造神或造门'"
+        }
+      ],
+      "resolve_chapter": 1843,
+      "resolve_method": "摄魂阁幕后操纵者为墟界未消散仙庭旧部意识的真相在第五卷揭示",
+      "importance": 0.92,
+      "status": "planned",
+      "linked_node": "N026",
+      "fid": "f003_shehun_ascension",
+      "anchors": [
+        "摄魂阁",
+        "人造飞升",
+        "猎魂",
+        "魂"
+      ]
+    },
+    {
+      "id": "F004",
+      "plant_chapter": 1,
+      "plant_context": "神魂跨界，陆烬以婴儿形态降生雾隐村外迷雾边缘，异象引发村民恐慌",
+      "clue_plan": [
+        {
+          "chapter": 5,
+          "intensity": "隐晦提示",
+          "method": "陆烬幼年对浊气异常敏感"
+        },
+        {
+          "chapter": 43,
+          "intensity": "隐晦提示",
+          "method": "呼吸法运转与迷雾方向隐隐共鸣"
+        },
+        {
+          "chapter": 2011,
+          "intensity": "接近揭露前兆",
+          "method": "心魔幻境中李淳与陆烬身份撕裂对峙"
+        }
+      ],
+      "resolve_chapter": 2200,
+      "resolve_method": "陆烬线粒体源自地球、可吸收暴走活化氧的原因被彻底解释，化神突破完成身份统合",
+      "importance": 0.98,
+      "status": "planned",
+      "linked_node": "N036",
+      "fid": "f004_mitochondria_earth",
+      "anchors": [
+        "线粒体",
+        "活化氧",
+        "地球",
+        "跨界"
+      ]
+    },
+    {
+      "id": "F005",
+      "plant_chapter": 1130,
+      "plant_context": "陆烬在远古仙妖大战遗迹感应到比所有残留意志更古老的一丝余韵",
+      "clue_plan": [
+        {
+          "chapter": 1612,
+          "intensity": "隐晦提示",
+          "method": "心魔幻境中瞥见比天地更广阔的轮廓一闪而过"
+        },
+        {
+          "chapter": 2173,
+          "intensity": "明显异样",
+          "method": "神魂锚定时感知门芯位置是空洞的，留有凹痕"
+        },
+        {
+          "chapter": 3324,
+          "intensity": "接近揭露前兆",
+          "method": "太初议会反对派文献揭示原核为七极环绕、一元居中的八元之体"
+        }
+      ],
+      "resolve_chapter": 3438,
+      "resolve_method": "陆烬追溯地脉信号定位禁区地脉深处的门芯，完成门芯回收，八块组件真相闭环",
+      "importance": 0.96,
+      "status": "planned",
+      "linked_node": "N048",
+      "fid": "f005_fog_core",
+      "anchors": [
+        "迷雾",
+        "禁区",
+        "异变",
+        "太初原核",
+        "门芯"
+      ]
+    },
+    {
+      "id": "F006",
+      "plant_chapter": 2499,
+      "plant_context": "上官鸿坦白体内藏有太初议会时代的残脉，被仙庭旧部暂缓提取",
+      "clue_plan": [
+        {
+          "chapter": 2738,
+          "intensity": "明显异样",
+          "method": "铁面执政官透露共守派幸存者流落凡间，可能融入人族血脉"
+        }
+      ],
+      "resolve_chapter": 3035,
+      "resolve_method": "大乾皇室或为共守派后裔的身份与传国玉玺揭示的太初原核关联相互印证",
+      "importance": 0.8,
+      "status": "planned",
+      "linked_node": "N041",
+      "fid": "f006_jade_seal_bloodline",
+      "anchors": [
+        "传国玉玺",
+        "玉玺",
+        "共守派",
+        "大乾皇室",
+        "血脉"
+      ]
+    },
+    {
+      "id": "F007",
+      "plant_chapter": 2393,
+      "plant_context": "陆烬在档案馆翻阅飞升者档案，发现平安信寄信时间高度集中，最初的疑惑",
+      "clue_plan": [
+        {
+          "chapter": 2399,
+          "intensity": "明显异样",
+          "method": "笔迹过于规范，像临摹的馆阁体，不像个人亲笔信"
+        },
+        {
+          "chapter": 2408,
+          "intensity": "接近揭露前兆",
+          "method": "前仙门文职人员临终记录曝光其曾负责模板信撰写"
+        },
+        {
+          "chapter": 2413,
+          "intensity": "惊悚揭示",
+          "method": "铁证出炉：所有平安信均为同一人按模板抄写，伪回音机制确认"
+        }
+      ],
+      "resolve_chapter": 2413,
+      "resolve_method": "伪回音机制真相公开，引发飞升派系基层信徒信仰崩溃",
+      "importance": 0.85,
+      "status": "planned",
+      "linked_node": "N037",
+      "fid": "f007_fake_echo",
+      "anchors": [
+        "飞升",
+        "伪回音",
+        "回音",
+        "契约"
+      ]
+    },
+    {
+      "id": "F008",
+      "plant_chapter": 1844,
+      "plant_context": "守夜人向陆烬首次说明'我是门之影'，交代基本信息",
+      "clue_plan": [
+        {
+          "chapter": 2201,
+          "intensity": "明显异样",
+          "method": "守夜人补充'我曾尝试过，但我失败了'，增加悲情"
+        }
+      ],
+      "resolve_chapter": 3800,
+      "resolve_method": "守夜人完整回顾从自愿、守护、失败到见证陆烬成功的完整弧光",
+      "importance": 0.75,
+      "status": "planned",
+      "linked_node": "N049",
+      "fid": "f008_doorkeeper",
+      "anchors": [
+        "守夜人",
+        "门影守",
+        "门之影",
+        "守门人"
+      ]
+    },
+    {
+      "id": "F009",
+      "plant_chapter": 702,
+      "plant_context": "陆烬两界神魂的特殊性首次被外部势力（摄魂阁传闻）间接察觉",
+      "clue_plan": [
+        {
+          "chapter": 786,
+          "intensity": "明显异样",
+          "method": "陆烬刻下债符担保，成为摄魂阁后续追踪线索"
+        }
+      ],
+      "resolve_chapter": 3800,
+      "resolve_method": "陆烬两界神魂的完整意义在终局的'两界呼吸协调者'身份中得到最终确认",
+      "importance": 0.88,
+      "status": "planned",
+      "linked_node": "N023",
+      "fid": "f009_soul_duality",
+      "anchors": [
+        "神魂",
+        "两界",
+        "特殊",
+        "察觉"
+      ]
+    }
+  ],
+  "_comment": "伏笔权威注册表（单一维护源）。fid=稳定语义ID（引用点优先使用），id=legacy F编号（兼容旧引用，双向可解析）；anchors 用于中纲 boundary_note 锚点校验；plant/resolve 与 ending_bible.md 同步维护。foreshadow_anchors.json 已并入本文件并废弃。"
+}

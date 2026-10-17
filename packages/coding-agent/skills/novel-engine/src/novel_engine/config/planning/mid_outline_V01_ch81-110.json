@@ -1,0 +1,264 @@
+{
+  "meta": {
+    "vid": "V01",
+    "range": [
+      81,
+      110
+    ],
+    "node_chapters_in_range": [
+      90,
+      98,
+      100
+    ],
+    "generated_at": "2026-10-06T06:23:32+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "approved_at": "2026-10-06",
+    "approved_note": "5章需人工确认全部放行（ch84/92/104/107/110）；ch92 F004标号为LLM生成层标错（实为降生异象铺垫，对应F005/forbidden第4条，非脚本bug），不影响门禁"
+  },
+  "entries": {
+    "101": {
+      "chapter": 101,
+      "core_event": "陆烬等待最终考核名单，目睹武馆内部弟子因资源分配不均而争执",
+      "characters": [
+        "C001",
+        "C005",
+        "C008"
+      ],
+      "boundary_note": null
+    },
+    "102": {
+      "chapter": 102,
+      "core_event": "陆烬随县城武馆弟子晨练，因体质出众被教头单独关注",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null
+    },
+    "103": {
+      "chapter": 103,
+      "core_event": "县城武馆教头私下询问陆烬来历，提及迷雾禁区传闻",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null
+    },
+    "104": {
+      "chapter": 104,
+      "core_event": "陆烬在武馆练习中发现自身恢复力异于常人，暗自困惑",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：体质异于常人是否接近伏笔F004（神魂跨界）的暗示边界"
+    },
+    "105": {
+      "chapter": 105,
+      "core_event": "陈老根托人捎信提醒陆烬谨言慎行，莫要显露特殊",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "106": {
+      "chapter": 106,
+      "core_event": "武馆同期弟子嫉妒陆烬受关注，设计让其独自执行危险采药任务",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null
+    },
+    "107": {
+      "chapter": 107,
+      "core_event": "陆烬在采药途中遭遇野兽袭击，危急时本能反应异常敏捷",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：本能反应异常是否接近伏笔F004（神魂跨界）的暗示边界"
+    },
+    "108": {
+      "chapter": 108,
+      "core_event": "陆烬跟随县城武馆教习学习基础拳脚，教习对其体质暗自惊讶",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null
+    },
+    "109": {
+      "chapter": 109,
+      "core_event": "陆烬在武馆小比中击败年长学徒，引来看热闹的江湖人士注意",
+      "characters": [
+        "C001",
+        "C006",
+        "C007"
+      ],
+      "boundary_note": null
+    },
+    "110": {
+      "chapter": 110,
+      "core_event": "江湖人士私下接触陆烬，试探其是否知晓修士传闻，陆烬警觉推脱",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "需人工确认：江湖人士提及'修士'传闻，接近伏笔F001相关背景知识边界"
+    },
+    "81": {
+      "chapter": 81,
+      "core_event": "陈老根在晨雾中练习呼吸法，陆烬于旁观察其呼吸节奏变化",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "82": {
+      "chapter": 82,
+      "core_event": "陆烬整理狩猎工具时发现一截刻有奇异纹路的兽骨",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null
+    },
+    "83": {
+      "chapter": 83,
+      "core_event": "村中老猎户讲述迷雾边缘曾出现发光兽群的传闻",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "84": {
+      "chapter": 84,
+      "core_event": "陆烬尝试用兽骨纹路对比村中残破石碑，发现局部相似",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：兽骨纹路与石碑关联可能接近F001(残页)或F004(异象)边界"
+    },
+    "85": {
+      "chapter": 85,
+      "core_event": "陈老根察觉陆烬对兽骨的兴趣，严肃告诫勿深究来历不明之物",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "86": {
+      "chapter": 86,
+      "core_event": "陆烬将兽骨埋藏于屋后，决定先专注提升生存技艺",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null
+    },
+    "87": {
+      "chapter": 87,
+      "core_event": "巡查队武官暗中观察陆烬与陈老根的互动，旁敲侧击询问陆烬体质特异之事",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "88": {
+      "chapter": 88,
+      "core_event": "陈老根为打消武官疑虑，展示祖传的‘普通’强身呼吸法，陆烬旁观",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "89": {
+      "chapter": 89,
+      "core_event": "武官离去，临行前留下县城武馆招收弟子线索，暗示陆烬可去尝试",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "91": {
+      "chapter": 91,
+      "core_event": "陆烬在村中帮厨，听外来行商闲谈大乾皇朝的奇闻异事，提及‘非人之力’",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null
+    },
+    "92": {
+      "chapter": 92,
+      "core_event": "陆烬夜晚追问陈老根关于自身来历与迷雾异象的传言，陈老根搪塞推说不知",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：提及F004（降生异象）但未揭示，接近forbidden边界"
+    },
+    "93": {
+      "chapter": 93,
+      "core_event": "雾隐村长老再次集会，部分人因陆烬引起的关注而更坚定要将其‘送走’",
+      "characters": [
+        "C002",
+        "C005",
+        "C006"
+      ],
+      "boundary_note": null
+    },
+    "94": {
+      "chapter": 94,
+      "core_event": "陆烬随陈老根前往县城，途中遭遇野兽袭击，陆烬利用地形掩护脱险",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "95": {
+      "chapter": 95,
+      "core_event": "抵达县城，武馆招收弟子在即，门庭若市，陆烬初步观察考核内容",
+      "characters": [
+        "C001",
+        "C002",
+        "C005"
+      ],
+      "boundary_note": null
+    },
+    "96": {
+      "chapter": 96,
+      "core_event": "陈老根为陆烬购置基础草药与衣物，偶遇昔日旧识，短暂交谈后匆匆离开",
+      "characters": [
+        "C001",
+        "C002",
+        "C006"
+      ],
+      "boundary_note": null
+    },
+    "97": {
+      "chapter": 97,
+      "core_event": "陆烬在客栈听闻武馆考核变故，有外来势力插手，名额可能缩减",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null
+    },
+    "99": {
+      "chapter": 99,
+      "core_event": "陆烬参加武馆初步筛选，凭借敏锐观察与体力通过基础测试",
+      "characters": [
+        "C001",
+        "C005",
+        "C007"
+      ],
+      "boundary_note": null
+    }
+  }
+}

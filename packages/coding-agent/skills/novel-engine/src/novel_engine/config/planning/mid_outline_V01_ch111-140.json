@@ -1,0 +1,322 @@
+{
+  "meta": {
+    "vid": "V01",
+    "range": [
+      111,
+      140
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-07T16:16:31+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "approved_chapters": "all 30 (6 flagged reviewed and released)",
+    "audit": {
+      "last_run": true
+    }
+  },
+  "entries": {
+    "111": {
+      "chapter": 111,
+      "core_event": "陆烬随陈老根在县城街市熟悉环境，观察市井人情",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "112": {
+      "chapter": 112,
+      "core_event": "陆烬帮陈老根打理临时落脚的小院，初次接触县城生活的柴米油盐",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "113": {
+      "chapter": 113,
+      "core_event": "陆烬在街角目睹一场因摊位争执引发的普通斗殴，见识县城底层生存法则",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "114": {
+      "chapter": 114,
+      "core_event": "陈老根向陆烬提及呼吸法对赶路后恢复体力的好处，但未传授",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：提及呼吸法效果，但未涉及修炼动作，符合约束但接近边界",
+      "status": "pending_human"
+    },
+    "115": {
+      "chapter": 115,
+      "core_event": "陆烬独自去市集采买，因口音和生面孔被小贩试探性地抬价",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "116": {
+      "chapter": 116,
+      "core_event": "陈老根带陆烬去县城外围认路，远远望见官道和更远处的山影",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "117": {
+      "chapter": 117,
+      "core_event": "陆烬随商队抵达县城，初次见识大乾皇朝市集繁华",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "118": {
+      "chapter": 118,
+      "core_event": "陆烬在县城客栈安顿，听闻江湖客谈论迷雾异闻",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "119": {
+      "chapter": 119,
+      "core_event": "陆烬偶遇前章救助的旅人，得其引荐接触县城底层人脉",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "120": {
+      "chapter": 120,
+      "core_event": "陆烬目睹县城捕快追缉江湖逃犯，初窥皇朝律法执行",
+      "characters": [
+        "C001",
+        "C005",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "121": {
+      "chapter": 121,
+      "core_event": "陆烬在旧书摊翻到残破地理图志，隐约看到迷雾边缘标记",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "需人工确认：地理图志涉及迷雾禁区描述，是否触及异变根源暗示边界",
+      "status": "pending_human"
+    },
+    "122": {
+      "chapter": 122,
+      "core_event": "陆烬返回客栈，听闻陈老根托人捎来口信提及呼吸法近况",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "123": {
+      "chapter": 123,
+      "core_event": "陆烬随商队前往县城途中，遭遇山匪劫掠",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "124": {
+      "chapter": 124,
+      "core_event": "陆烬凭借对雾隐村地形的熟悉，带领商队从山匪包围中脱身",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "125": {
+      "chapter": 125,
+      "core_event": "抵达县城后，商队首领为感谢陆烬，引荐其认识县城武馆教头",
+      "characters": [
+        "C001",
+        "C003",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "126": {
+      "chapter": 126,
+      "core_event": "武馆教头考验陆烬身手，发现其虽无章法但反应极快，收为记名弟子",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "127": {
+      "chapter": 127,
+      "core_event": "陆烬在武馆开始学习基础拳脚与兵器常识，首次接触凡俗武学体系",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "128": {
+      "chapter": 128,
+      "core_event": "武馆同门切磋时，陆烬无意识展现出超常的危机直觉与身体协调性",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "需人工确认：主角展现的超常直觉是否接近'不属于凡人的力量'感知边界",
+      "status": "pending_human"
+    },
+    "129": {
+      "chapter": 129,
+      "core_event": "陆烬随村人进山采药，意外发现一处隐秘岩洞",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "130": {
+      "chapter": 130,
+      "core_event": "岩洞内壁画描绘祭祀场景，陆烬凭记忆画出图案",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "131": {
+      "chapter": 131,
+      "core_event": "陈老根看到图案后神色骤变，追问岩洞位置",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "132": {
+      "chapter": 132,
+      "core_event": "陈老根独自夜探岩洞，次日带回一块残破石碑",
+      "characters": [
+        "C002"
+      ],
+      "boundary_note": "需人工确认：陈老根带回残破石碑，可能涉及伏笔F001（七窍碑残页）或禁区异变相关，请评估是否过早触及禁区异变根源",
+      "status": "pending_human"
+    },
+    "133": {
+      "chapter": 133,
+      "core_event": "村中老猎户认出石碑部分纹路曾在禁区边缘见过",
+      "characters": [
+        "C002",
+        "C003"
+      ],
+      "boundary_note": "需人工确认：石碑纹路与禁区关联，可能接近禁区异变根源描述边界",
+      "status": "pending_human"
+    },
+    "134": {
+      "chapter": 134,
+      "core_event": "陈老根严令陆烬不得再接近岩洞，并开始频繁外出",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "135": {
+      "chapter": 135,
+      "core_event": "陆烬随陈老根在雾隐村外围采集野果，途中遇瘴气短暂迷失方向",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "136": {
+      "chapter": 136,
+      "core_event": "陈老根为驱寒，在火堆旁练习呼吸法，陆烬旁观但未询问",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "137": {
+      "chapter": 137,
+      "core_event": "两人返回途中发现一处废弃猎人小屋，内藏陈旧地图残片",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "138": {
+      "chapter": 138,
+      "core_event": "根据地图残片提示，陈老根决定带陆烬探索附近一条隐秘溪流",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "139": {
+      "chapter": 139,
+      "core_event": "在溪流源头发现一处小型天然石洞，洞壁刻有模糊古文字",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "140": {
+      "chapter": 140,
+      "core_event": "陈老根尝试解读古文字，仅认出几个无关修炼的零散词汇",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：古文字内容是否涉及修炼概念或异变根源暗示",
+      "status": "approved"
+    }
+  }
+}

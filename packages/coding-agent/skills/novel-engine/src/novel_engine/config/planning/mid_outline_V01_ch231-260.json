@@ -1,0 +1,330 @@
+{
+  "meta": {
+    "vid": "V01",
+    "range": [
+      231,
+      260
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-11T09:16:25+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "approved_at": "2026-10-11T09:30:00+00:00",
+    "audit": {
+      "last_run": true
+    }
+  },
+  "entries": {
+    "231": {
+      "chapter": 231,
+      "core_event": "陈老根教陆烬辨认草药，陆烬记性惊人引起村医侧目",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "232": {
+      "chapter": 232,
+      "core_event": "陆烬在集市上目睹有人争执，隐约察觉对方眼神中的杀意",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "233": {
+      "chapter": 233,
+      "core_event": "陈老根夜间练功，陆烬在窗外窥见光影异变，心生敬畏",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "234": {
+      "chapter": 234,
+      "core_event": "村民议论迷雾边缘近期频发怪声，陈老根神色凝重",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "235": {
+      "chapter": 235,
+      "core_event": "陆烬随陈老根进山采药，险遇迷兽，被陈老根护住",
+      "characters": [
+        "C001",
+        "C002",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "236": {
+      "chapter": 236,
+      "core_event": "陈老根回村后沉默良久，陆烬察觉其情绪低落，试图安慰",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "237": {
+      "chapter": 237,
+      "core_event": "陆烬随陈老根整理旧药铺，发现夹在账本中的泛黄信笺提及南方行商",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "238": {
+      "chapter": 238,
+      "core_event": "行商路过村口询问迷雾边缘异象，陆烬旁观行商对迷雾表现出的忌讳",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "239": {
+      "chapter": 239,
+      "core_event": "陈老根向陆烬讲述早年游历见闻，暗示江湖中有超出常人的手段",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "240": {
+      "chapter": 240,
+      "core_event": "雾隐村遭遇野狼群围困，陆烬在混乱中本能躲避，陈老根独力护村",
+      "characters": [
+        "C001",
+        "C002",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "241": {
+      "chapter": 241,
+      "core_event": "伤愈后陈老根带陆烬修缮漏风屋檐，途中陆烬首次远望迷雾深处黑雾流动",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "242": {
+      "chapter": 242,
+      "core_event": "陈老根夜间独自于院中调息，陆烬在门外聆听，感知到养父气息变化",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "243": {
+      "chapter": 243,
+      "core_event": "村口老槐树下，陆烬目睹陈老根独自练功后神清气爽，心生好奇询问细节",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "244": {
+      "chapter": 244,
+      "core_event": "县城集市传闻迷雾禁区近期常有异象，村民议论纷纷引发陆烬不安",
+      "characters": [
+        "C001",
+        "C002",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "245": {
+      "chapter": 245,
+      "core_event": "陈老根严厉告诫陆烬勿靠近迷雾，并以过往经历警示禁区危险",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "246": {
+      "chapter": 246,
+      "core_event": "陆烬随陈老根采买药材，途中偶遇江湖散修询问村落去向引起疑云",
+      "characters": [
+        "C001",
+        "C002",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "247": {
+      "chapter": 247,
+      "core_event": "陈老根对陌生散修态度冷淡并转移话题，陆烬察觉其神色异样",
+      "characters": [
+        "C001",
+        "C002",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "248": {
+      "chapter": 248,
+      "core_event": "陈老根深夜独自擦拭旧铜镜，陆烬偷窥发现镜面隐约有非人痕迹",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "249": {
+      "chapter": 249,
+      "core_event": "迷雾边缘异动加剧，陈老根察觉气机紊乱，加固村寨外围禁制",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "250": {
+      "chapter": 250,
+      "core_event": "陆烬因雾气侵扰夜哭不止，陈老根彻夜守候并尝试安抚",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "251": {
+      "chapter": 251,
+      "core_event": "邻村猎户带来外界消息，称近期多起失踪案与雾林有关",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "252": {
+      "chapter": 252,
+      "core_event": "陈老根深夜独自演练呼吸法稳心神，陆烬在旁旁观未介入",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "253": {
+      "chapter": 253,
+      "core_event": "迷雾中传来异响，村中老人议论纷纷，恐惧情绪蔓延",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "254": {
+      "chapter": 254,
+      "core_event": "陈老根决定暂留村中静待迷雾消退，陆烬情绪逐渐平稳",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "255": {
+      "chapter": 255,
+      "core_event": "陆烬在雾隐村边缘玩耍，无意间触碰到迷雾中飘落的残卷碎片",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "人工确认放行：残卷碎片为 F001 实物线索埋设（同 ch40/ch45 判例，V01 埋线索不揭示机制；F001 第五卷起拼凑、ch3400 前完成）",
+      "status": "approved"
+    },
+    "256": {
+      "chapter": 256,
+      "core_event": "陈老根发现陆烬捡回的碎片，神色凝重，将其藏入床底暗格",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "257": {
+      "chapter": 257,
+      "core_event": "村里突发疫病，陈老根运用过往经验调配草药，陆烬协助采药",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "258": {
+      "chapter": 258,
+      "core_event": "疫病平息后，陆烬发现陈老根夜间对着残卷默念符文，似在推演",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "259": {
+      "chapter": 259,
+      "core_event": "陈老根告知陆烬，迷雾禁区近日异动，禁止靠近边缘",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "260": {
+      "chapter": 260,
+      "core_event": "陆烬因好奇深夜溜向迷雾边缘，被陈老根及时截回，斥责甚严",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

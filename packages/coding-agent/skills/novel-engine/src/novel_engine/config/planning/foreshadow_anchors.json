@@ -1,0 +1,5 @@
+{
+  "_deprecated": true,
+  "_migrated_to": "config/foreshadow/registry.json",
+  "_comment": "本文件已废弃（2026-10-13）。伏笔锚点已并入 config/foreshadow/registry.json 的每条 foreshadows[].anchors 字段，引用点统一从权威注册表读取。请勿再编辑本文件。"
+}

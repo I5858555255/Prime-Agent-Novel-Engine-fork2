@@ -1,0 +1,290 @@
+{
+  "meta": {
+    "vid": "V01",
+    "range": [
+      171,
+      200
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-10T06:37:29+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "approved_at": "2026-10-10"
+  },
+  "entries": {
+    "171": {
+      "chapter": 171,
+      "core_event": "陆烬在县城武馆旁目睹少年练武，惊叹人体极限并询问陈老根呼吸法效果",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "172": {
+      "chapter": 172,
+      "core_event": "陈老根私下练习呼吸法，陆烬旁观时感到体内有微弱异样，陈老根制止其模仿",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：陆烬感到体内异样可能接近修炼感知边界，需确认是否仅描写为普通生理反应"
+    },
+    "173": {
+      "chapter": 173,
+      "core_event": "雾隐村旧友来访，提及迷雾边缘出现不明黑雾，陆烬直觉不安",
+      "characters": [
+        "C001",
+        "C002",
+        "C005"
+      ],
+      "boundary_note": null
+    },
+    "174": {
+      "chapter": 174,
+      "core_event": "黑雾波及村落边缘，村民恐慌，陆烬在迷雾边缘看见幻象，陈老根强行带其离开",
+      "characters": [
+        "C001",
+        "C002",
+        "C005",
+        "C006"
+      ],
+      "boundary_note": null
+    },
+    "175": {
+      "chapter": 175,
+      "core_event": "回城后陆烬高烧，陈老根用土法照料，期间陆烬梦游般说出陈老根秘密",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "176": {
+      "chapter": 176,
+      "core_event": "陈老根察觉异常，决定强化隐藏行踪，陆烬协助转移家中旧物",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "177": {
+      "chapter": 177,
+      "core_event": "陆烬在溪边发现陈老根藏起的旧布包，内有一块非木非石的残片",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "178": {
+      "chapter": 178,
+      "core_event": "陈老根谎称残片是护身符，严令陆烬不得触碰，眼神闪过慌乱",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "179": {
+      "chapter": 179,
+      "core_event": "山匪探子潜入村外哨塔，被陆烬无意间发现的阵法异动惊扰",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "180": {
+      "chapter": 180,
+      "core_event": "陈老根借夜色清理村口防御痕迹，陆烬旁观目睹其动作反常迅速",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "181": {
+      "chapter": 181,
+      "core_event": "村民议事指责陈老根私藏异物惹祸，陈老根隐忍不发",
+      "characters": [
+        "C001",
+        "C002",
+        "C004"
+      ],
+      "boundary_note": null
+    },
+    "182": {
+      "chapter": 182,
+      "core_event": "陆烬梦见残片上纹路会流动发光（视觉奇观，非气感），醒后向陈老根发问残片来历",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "183": {
+      "chapter": 183,
+      "core_event": "陆烬在县城医馆帮工期间，暗中观察陈老根每日清晨在隐蔽处练习呼吸法，仅存于目击记忆",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "184": {
+      "chapter": 184,
+      "core_event": "江湖客因医馆药材纠纷找茬，陆烬以机智周旋化解，显露出超越年龄的冷静与洞察力",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null
+    },
+    "185": {
+      "chapter": 185,
+      "core_event": "陈老根因劳累旧伤复发咳血，陆烬守在旁侧，目睹父亲痛苦却因禁令无法施展任何气感动作，只能默默陪伴",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "186": {
+      "chapter": 186,
+      "core_event": "当地豪强听闻陆烬智计，欲强行将其收为义子以此炫耀，陈老根带陆烬连夜逃离县城回村",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "187": {
+      "chapter": 187,
+      "core_event": "归途中陆烬目睹山间异兽伤人，陈老根出手驱赶，陆烬首次直观感知到凡人力量与潜在修士力量的界限模糊地带",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：事件接近F001/F002伏笔边界，且涉及对“不属于凡人的力量”的初步感知，需确认是否符合卷高潮前奏的渐进铺垫且不违反禁止事项"
+    },
+    "188": {
+      "chapter": 188,
+      "core_event": "回到雾隐村，陈老根向陆烬简述江湖险恶，陆烬心中埋下对雾外世界与自身身世之谜更强烈的探索欲",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "189": {
+      "chapter": 189,
+      "core_event": "陈老根夜间演练呼吸法，陆烬目睹其气息平稳，被告诫勿要模仿",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "190": {
+      "chapter": 190,
+      "core_event": "雾气渐浓，村寨边界出现不明生物痕迹，村民恐慌情绪蔓延",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "191": {
+      "chapter": 191,
+      "core_event": "陆烬在迷雾边缘捡到一块斑驳石片，陈老根神色微变未直言",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "192": {
+      "chapter": 192,
+      "core_event": "猎人老周受伤回村，提及迷雾深处似有人影，引发对未知力量的猜测",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "193": {
+      "chapter": 193,
+      "core_event": "陈老根严厉禁止陆烬靠近迷雾，陆烬因好奇私自潜行，险些误入深雾",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "194": {
+      "chapter": 194,
+      "core_event": "陆烬被陈老根寻回并严厉训斥，两人关系陷入短暂冷战，身世谜团加深",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "195": {
+      "chapter": 195,
+      "core_event": "陆烬随陈老根去集市，目睹江湖帮派斗殴，陈老根以凡人武学制服闹事者",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "196": {
+      "chapter": 196,
+      "core_event": "陆烬在县城茶馆旁听侠客争执，隐约察觉言语中提及的'灵气'一词与陈老根平日所言相悖，内心困惑加深",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "197": {
+      "chapter": 197,
+      "core_event": "雾隐村边缘迷雾涌动，村民议论迷雾中的异响，陆烬感到的隐约不安",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "198": {
+      "chapter": 198,
+      "core_event": "陆烬在田间劳作，发现迷雾边缘的杂草异常茂盛，暗示迷雾对土地的影响",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null
+    },
+    "199": {
+      "chapter": 199,
+      "core_event": "陈老根讲述过往在山中采药的经历，提及曾见过的奇异光影，陆烬侧耳倾听",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "200": {
+      "chapter": 200,
+      "core_event": "陆烬整理屋舍，在旧箱中发现一块无字玉佩，陈老根神色复杂但未解释",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    }
+  }
+}

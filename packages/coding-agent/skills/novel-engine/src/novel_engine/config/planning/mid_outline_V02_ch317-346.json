@@ -1,0 +1,325 @@
+{
+  "meta": {
+    "vid": "V02",
+    "range": [
+      317,
+      346
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-13T09:31:15+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audited_at": "2026-10-13",
+    "audit_notes": "ch319 regenerated (A-route breath fix); ch322/328/336/341 human-approved per V01 precedent & V02 forbidden scope; 25 auto-approved"
+  },
+  "entries": {
+    "317": {
+      "chapter": 317,
+      "core_event": "陆烬离村初行，在官道目睹修士斗法余波，惊惧中拾获一枚散落的残破玉简碎片",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "318": {
+      "chapter": 318,
+      "core_event": "陆烬因玉简碎片引来一名行商修士的注意，被迫隐瞒身份，在集市上展现超越常人的直觉",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "319": {
+      "chapter": 319,
+      "core_event": "陆烬整理观战所得，决意向外界寻找入门途径",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：ch319属于无plot节点章，当前卷（V02 大乾人间）起始于ch317，但前置剧情仅承接至ch20且ch316节点描述陆烬为婴儿/幼年期并刚目睹修士手段，存在时间线与角色成长阶段（炼气期 vs 婴幼儿）的严重逻辑断层，且本章无具体plot节点，无法规划具体剧情，需人工确认剧情衔接与主角状态设定",
+      "status": "approved"
+    },
+    "320": {
+      "chapter": 320,
+      "core_event": "陆烬随陈老根回村，发现村外迷雾边缘出现异样波动，村民惊慌，陆烬察觉异常却只能旁观",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "321": {
+      "chapter": 321,
+      "core_event": "朝廷密使抵达附近县城，调查近期散修动向，陈老根因熟悉地形被临时征召协助排查，陆烬随行",
+      "characters": [
+        "C001",
+        "C002",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "322": {
+      "chapter": 322,
+      "core_event": "密使在排查中提及皇室秘藏传闻，陆烬听到“残物”一词，心中泛起不安，但无法得知具体信息",
+      "characters": [
+        "C001",
+        "C002",
+        "C007"
+      ],
+      "boundary_note": "需人工确认：ch322提及皇室秘藏传闻，接近f001_royal_heirlooms埋设节点（plant@74已发生，此处为后续涟漪），需确认是否过早泄露残物核心性质",
+      "status": "approved"
+    },
+    "323": {
+      "chapter": 323,
+      "core_event": "陆烬随母舅在村中观察异象，村民对迷雾边缘恐慌加剧",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "324": {
+      "chapter": 324,
+      "core_event": "陈老根察觉陆烬夜间异常安静，暗中排查迷雾波动",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "325": {
+      "chapter": 325,
+      "core_event": "猎户老周带陆烬上山采集药材，途中遭遇迷雾异兽",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "326": {
+      "chapter": 326,
+      "core_event": "老周讲述迷雾传说，陆烬对‘不属于凡人的力量’产生向往",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "327": {
+      "chapter": 327,
+      "core_event": "村中长者警告陆烬勿近迷雾，陆烬表面顺从暗中记录",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "328": {
+      "chapter": 328,
+      "core_event": "陆烬在迷雾边缘发现古老石符，初步确认仙门痕迹存在",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：石符细节可能涉及f004_mitochondria_earth后续揭秘，需确认是否提前泄露跨界神魂信息",
+      "status": "approved"
+    },
+    "329": {
+      "chapter": 329,
+      "core_event": "陆烬随商队离开雾隐村，踏入大乾边境州府青石镇",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "330": {
+      "chapter": 330,
+      "core_event": "陈老根患风寒，陆烬照料中察觉父亲气息紊乱似有隐疾",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "331": {
+      "chapter": 331,
+      "core_event": "神秘黑袍人现身青石镇暗处，与陈老根隔街对视后遁走",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "332": {
+      "chapter": 332,
+      "core_event": "陆烬被卷入当地士绅与行会的利益冲突，目睹官府介入",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "333": {
+      "chapter": 333,
+      "core_event": "陆烬意外拾得一枚破旧玉坠，引来两名陌生修士暗中探查",
+      "characters": [
+        "C001",
+        "C003",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "334": {
+      "chapter": 334,
+      "core_event": "陈老根病情稍缓却讳莫如深，陆烬察觉其刻意隐瞒异样",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "335": {
+      "chapter": 335,
+      "core_event": "陆烬跟随陈老根入县城集市，目睹高阶修士碾压凡人修士并察觉规则差异",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "336": {
+      "chapter": 336,
+      "core_event": "神秘蓝袍使臣在城中秘密收买情报，陆烬因异常直觉被其短暂窥视未深究",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": "需人工确认：f004_mitochondria_earth 神魂跨界伏笔未完全解除，需确认陆烬此时的“直觉”是否违规暗示神魂残留影响",
+      "status": "approved"
+    },
+    "337": {
+      "chapter": 337,
+      "core_event": "陈老根旧友江湖客来访透露朝廷与仙门对特定遗物的争夺传闻",
+      "characters": [
+        "C002",
+        "C006",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "338": {
+      "chapter": 338,
+      "core_event": "陆烬试图理解传闻中力量体系，被陈老根严令禁止深究修炼之事",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "339": {
+      "chapter": 339,
+      "core_event": "蓝袍使臣设局试探城中可疑人物，陆烬被卷入混乱中目睹秘术痕迹",
+      "characters": [
+        "C001",
+        "C004",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "340": {
+      "chapter": 340,
+      "core_event": "事件平息后陆烬对凡俗与超凡界限产生动摇，陈老根暗中加固护体禁制",
+      "characters": [
+        "C002",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "341": {
+      "chapter": 341,
+      "core_event": "陆烬在朝堂外目睹仙门使者与皇室特使交涉，察觉双方言语中皆暗藏针对三件残物的试探",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "需人工确认：涉及 F001 皇室三件残物争夺暗流，需确认是否过度暗示残物真实用途",
+      "status": "approved"
+    },
+    "342": {
+      "chapter": 342,
+      "core_event": "陆烬因护卫皇室车队遭遇仙门弟子盘查，被迫展示自身独特气息以自证清白",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "343": {
+      "chapter": 343,
+      "core_event": "仙门弟子对陆烬的气息产生兴趣，试图以验证者身份接触，陆烬察觉其中带有监控与收编意味",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "344": {
+      "chapter": 344,
+      "core_event": "陆烬被要求接受仙门例行探查，他谨慎应对，只展现凡人之躯，隐藏深处异常",
+      "characters": [
+        "C001",
+        "C004",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "345": {
+      "chapter": 345,
+      "core_event": "仙门探查结果判定为“异常但无害”，陆烬获得临时通行信物，但被暗中列入观察名单",
+      "characters": [
+        "C001",
+        "C006",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "346": {
+      "chapter": 346,
+      "core_event": "陆烬离开仙门驻地，回顾过程，意识到仙门验证本质是筛选与控制，而非单纯选拔",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

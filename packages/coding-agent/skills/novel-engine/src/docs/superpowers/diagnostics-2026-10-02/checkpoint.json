@@ -1,0 +1,469 @@
+{
+  "checkpoints": [
+    {
+      "chapter": 1,
+      "novel_hash": "f6093c60bc76f347e1ac9e70823a1caa5a730084985b098a0f24306175567838",
+      "synopsis_hash": "eb3b969ca7e0dfd4cfc66be9341221e62acb9dd522d94918c26aac50bacb0dad",
+      "outline_hash": "4c549a3266e3fbf16f06217942c9c20701b4757c21f2b026fafe3af568c5487b",
+      "world_state_hash": "974c32392a4b97b5755905753d9f7486a4c7540a88840e5c9aaa7db2c94980d1",
+      "timestamp": "2026-09-19T03:52:48.222201+00:00",
+      "complete": true
+    },
+    {
+      "chapter": 2,
+      "novel_hash": "be6a8ebf7c293c51d1737b41b2cb6814b124712dbfdcea960800ce7ff67a7210",
+      "synopsis_hash": "cd58f7a78f18e666ab1c90fd8206415ec421b2f8c99d03de3a6781abffcefe83",
+      "outline_hash": "0bf8a89ba6722e3996ca9c5f52a623f5df77a6ca9114b584537debeaae0215fe",
+      "world_state_hash": "1a4a8e558e1204673bc05bec2013e713ce3f36207581826c0e13f0725532305e",
+      "timestamp": "2026-09-19T07:41:04.512130+00:00",
+      "complete": true
+    },
+    {
+      "chapter": 3,
+      "novel_hash": "641140e1006d2cfa78d3da24443463ab8838c7eddd3d1a5ccc889344655e59f6",
+      "synopsis_hash": "0ce8882aa903a25a31e2f6750b10b638ccdb9c85275b6b3b35986913908970a9",
+      "outline_hash": "395e0074609ced7eb08a066f0fca9f95a998f1b87608d544422336691462428e",
+      "world_state_hash": "7ef5902fb5e4e5b99d818f5a9896500ca740a4a56f6dcbd2540c11ed9b68843f",
+      "timestamp": "2026-09-20T22:57:09.439901+00:00",
+      "complete": true
+    },
+    {
+      "chapter": 4,
+      "novel_hash": "db2e2cbce6900974d63b5c1dde9ec5a2559fc9e7cde4e585ac84e5297ddf5f5c",
+      "synopsis_hash": "3454d8afeef8ef9f5d981e6766145d92d95d854bd0acdcb81e568b136e19ee31",
+      "outline_hash": "8fe7119d5d57572411831f39dea2c91400e6c78d15cee67a24c069b8ed9bbd4f",
+      "world_state_hash": "a816e59868aa97aa7e7687f94faa9a3a1a62dd4f00d8dfa13d127326c0db9468",
+      "timestamp": "2026-09-21T08:45:04.124728+00:00",
+      "complete": true
+    },
+    {
+      "chapter": 5,
+      "novel_hash": "888088facdc8897fc4a4ad736cab2c7627f5f03510edd07b7548526f5bcdbc4e",
+      "synopsis_hash": "d23bde88dfd5d5bed702a9e3cd1cd26e4db54d27c4f109a9f446acfa546473f6",
+      "outline_hash": "b1e34196be07001ff2ab5de63a321247816738c903f15484e9332a287350b64c",
+      "world_state_hash": "6176c4814797ae34076e06cd234e78ed216a6e93babf47acc4ceb1e02d86f5b5",
+      "timestamp": "2026-09-23T03:38:04.957314+00:00",
+      "complete": true
+    },
+    {
+      "chapter": 8,
+      "novel_hash": "472de3c01694b6bba993fd16a7063636a1b8ac19aa065639d3545aa0e432e4d9",
+      "synopsis_hash": "c550376e836c4263e7fd1bd713a4978919e4202269c8ea267961472d50298c76",
+      "outline_hash": "5413a82e39c5ca8e46b61a28c949ddb34e6cf8c03802ea8bfa96e1a6df2dfbc4",
+      "world_state_hash": "7ef9d2f2a3e2872a7cd991d63bc016cb96eb5eb5b0401ac315820218619598c2",
+      "timestamp": "2026-09-28T15:28:54.812676+00:00",
+      "complete": true
+    },
+    {
+      "chapter": 10,
+      "novel_hash": "63099a89133d1f85b5fad7bb32f31a4bcc392e2fe84a965f36b9fe233c192a50",
+      "synopsis_hash": "fd3ae65623d0bbc3109afc8dd320e2c2b89778af98319be1f4565737ed52db48",
+      "outline_hash": "d4d5f6750a8106473d89848470c4241109f114302496c2890b1a255f2ae2f5b2",
+      "world_state_hash": "874824c3c8e99b2056a54104923ef43c9775fdd6483f5f1c4e16a41b707dedc3",
+      "timestamp": "2026-09-28T16:05:55.512545+00:00",
+      "complete": true
+    },
+    {
+      "chapter": 7,
+      "novel_hash": "0cedc6e4d030d9766ebd0a74f3fb6a8747923eb4511f1fcfbd7faa53208436cf",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-09-29T19:54:33.804621+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 9,
+      "novel_hash": "e6840a5423153874f338bd72f7c0adf4a475cb6457775aa7877a0bf4f8ec44b4",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-09-29T20:08:23.281885+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 6,
+      "novel_hash": "175fb7a56ca46efe3021fc8bd03c966484c700c614fb6efc0cec8b560c9b9c0b",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-09-29T23:35:37.773533+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 13,
+      "novel_hash": "6a12e80f86614bb84c542aa44ef9cf14d881dfacc5f5903cf7c6a5db853ef7e8",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-09-30T14:29:09.362030+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 14,
+      "novel_hash": "eb818e3ab9a78150754989540121d80af26ed48730a1f8683b262b97fc178b29",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-09-30T14:49:15.811056+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 17,
+      "novel_hash": "0646fe52a22aa6bffa33522de81528b869e533a568345087bd5444ed6790f2a2",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-09-30T17:08:05.935291+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 18,
+      "novel_hash": "260a010198f132025c9ad6993c6c5534c00731d9f3cc727fcb3b398ab5bb8a53",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-09-30T17:48:12.602971+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 19,
+      "novel_hash": "313503f61d71e8ef3af42ab6427ad9089e21f3a708f829d8bb8eefde92403e18",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-09-30T18:18:07.896071+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 20,
+      "novel_hash": "ebbffa04fddf6c33e4011024bd9348509cb0ea88024da045382fd5d27cde51fb",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-09-30T18:42:37.126811+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 12,
+      "novel_hash": "3f421ba403a83ad2549562d115d26ff9d429d2576bd440506e2b9f389150aa20",
+      "synopsis_hash": "0ff868d87d42887bc628cc87f381eb0a1251f088dc855bb01b6f894f99538ba5",
+      "outline_hash": "2018b492a06abb2b96e05e0d4a9fc592caba7bab1e091b9cfa08bac81385db23",
+      "world_state_hash": "a972435beae9a7f01dc4b4550c5dacdb6c15244d76bbca895799f508b3a82360",
+      "timestamp": "2026-10-01T05:57:40.164501+00:00",
+      "complete": true
+    },
+    {
+      "chapter": 15,
+      "novel_hash": "f64a8449fc001a90eacbca552eb63ca80ebe54e96a8c1778ab0f225cd489cf17",
+      "synopsis_hash": "5034679b7f79166affcc77c13a92d7d3b53a3fa3a178dc3ae3a9bb08c6dbeb0c",
+      "outline_hash": "47edfd37e245e7beb40fdf1fd005d4956ae0a0addad4462701febd7c95b27e4e",
+      "world_state_hash": "01d2a06888960ff6fca072db6f1eb6a20dfcc329f7c092084290e792fb31f38a",
+      "timestamp": "2026-10-01T06:13:54.633325+00:00",
+      "complete": true
+    },
+    {
+      "chapter": 16,
+      "novel_hash": "082ad4e60d7cf080732c56bfa3fd48a845469fc594e507f37080f54f9f3aa629",
+      "synopsis_hash": "d7cc87e4434ee691a6831def692a26ab7e790f5f6a7a119a458db797c9398f05",
+      "outline_hash": "fa58119da5395434f4f9f5a567baad2c472a0fe53a3cafce65f3a8f953d36d13",
+      "world_state_hash": "36d2ee5b8abd102c7c555fc1fd73bcb729874ec6889bb2cfb4bfa4ca69664415",
+      "timestamp": "2026-10-01T06:37:44.512481+00:00",
+      "complete": true
+    },
+    {
+      "chapter": 11,
+      "novel_hash": "7bd70451f9a8598b3ebfd14861cdf5670c9bb80b01271c1405b30e3d14496b42",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-01T10:28:22.977598+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 21,
+      "novel_hash": "ad3af3aac8d3ed04ae7e784e46d0c66a21495ace8132504bdfbc2edfb24566e8",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-01T14:48:00.057357+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 22,
+      "novel_hash": "735fb9313f10632a0621736ce42ac5ee948294fec6d9d23c1ab80d8bf79e705c",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-01T15:09:06.123431+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 23,
+      "novel_hash": "1a8a2c3d797740bb087cdd2ae60e9e212497f6c61525c65cf1219b3c12b8883d",
+      "synopsis_hash": "6b96a8cdf96fdf406e8cad29052303337ee03daf8ad7d4e10933de8242d4174f",
+      "outline_hash": "b430820941f3f9af2d359b89bf1cdb57e32351fa3ff32ac5183301ac7aa3dfd1",
+      "world_state_hash": "1c56e5971e6275c26693171403244c2857ac0ff0a5dd56f0b6e77c235c294e6b",
+      "timestamp": "2026-10-01T15:30:06.989333+00:00",
+      "complete": true
+    },
+    {
+      "chapter": 26,
+      "novel_hash": "46fdf9bc43068cbcca7339eb86daa2e6bc84b727ac387507024e36a81e1fd3cd",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-01T18:53:26.312232+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 27,
+      "novel_hash": "ab04483e032260ffecafe30c19a3d6728fa967d46295971dd59403b43d153eac",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-01T19:25:56.853254+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 29,
+      "novel_hash": "ef0c4366dbb0f79ef2251c4d9b628ac1e28ae339ae97f163605e5b386c309510",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-01T20:01:42.726232+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 30,
+      "novel_hash": "e1dfa82a6b4ff71d14430c68e31305953c7a64a7c6bd4f080f7558209244c2bf",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-01T20:21:03.063808+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 31,
+      "novel_hash": "57ca24ad38ea0c89279cca267f3622457761e5bf7d1a6d443f841ae3cc23b56a",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-01T20:45:22.337211+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 32,
+      "novel_hash": "9a0812dd35ff73035e6d9bf75556fc41689fec17b7fce67abae9b5dcceac8d75",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-01T21:09:03.467686+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 33,
+      "novel_hash": "2e1bb340359d39c1e25ecc5cc6faa4f00e66dd21727b6abed6b8cb0304b3c320",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-01T21:31:59.597480+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 34,
+      "novel_hash": "319b68b968b0aadad288ea3fafc135856f2ac1b888c86c4ece85658004898791",
+      "synopsis_hash": "484a6368dc1276ff2b2649bb0a29ebd48fee2f382eba4da821707899be2b551d",
+      "outline_hash": "f7f0cecac45db6ccf9869fec19c516cdc1f013bbbee6fb1838a042e697b5755a",
+      "world_state_hash": "0b8422a801c1919611d32ac20794931ac5c0041c6792c93f6cd41701612b1a55",
+      "timestamp": "2026-10-01T21:57:37.119042+00:00",
+      "complete": true
+    },
+    {
+      "chapter": 35,
+      "novel_hash": "e05e8a50cd23182ac2bfa756d4f3b646bc876cdf2973ceba7e130f2e906e3ce1",
+      "synopsis_hash": "bc35f7572fdfa4a79cbb56339914f8253fc06ab581c4b6c1529b45eb970eac45",
+      "outline_hash": "7de784c625bbffdb0ff90604c2a98c5e39e6dba955dee3a5106081f8e4cbadf2",
+      "world_state_hash": "e0b3c85ce140acbbaf23e5c81acfd0922fec0251b496c397a033c32e8f9a6dfc",
+      "timestamp": "2026-10-01T22:14:51.605653+00:00",
+      "complete": true
+    },
+    {
+      "chapter": 36,
+      "novel_hash": "90e1dbabce080df0eba25caa72a3433810b720b774879b865d3fd8d2f3a2a4eb",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-01T22:37:40.340957+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 39,
+      "novel_hash": "7c8971610cc385c4396509feacedf5d89314a387daa12d593094131718ec1f23",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-01T23:39:40.052738+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 40,
+      "novel_hash": "49950b51a1bb444d3b239967fcbb465fec1ea6de4f133e100dc1be8744dba118",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-01T23:58:40.178730+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 28,
+      "novel_hash": "c25fd207d37a0053fc5b18aa36a24d42e2c9a9f37b5398d2c2823234c700e1aa",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-02T04:17:57.262361+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 38,
+      "novel_hash": "349dd15b5f687caf73a0c92b564413370813ac7da7e003539a265a4da2a39b67",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-02T04:48:26.395134+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 41,
+      "novel_hash": "2f610f20003dea21a82bda31416d739cf5963fd71e2ab0b0504aec9fab74a657",
+      "synopsis_hash": "2145b04b55afcf5900e116d51cfc623c6aa82621c2929a3751725a7e3c400ac1",
+      "outline_hash": "dc19b29c2ffe898f14036ceb1e61e9172e7b851f772aa295caddf40df76c1b27",
+      "world_state_hash": "99de6e7ac01ef78df52758a8ec7efe4f640f23bec19e7b24dc90c811ff89757a",
+      "timestamp": "2026-10-02T04:55:33.453161+00:00",
+      "complete": true
+    },
+    {
+      "chapter": 43,
+      "novel_hash": "1d5b9821aee099ca98a48be1bb76217e12cdc776171106b6750fd718c273319a",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-02T05:36:05.323141+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 44,
+      "novel_hash": "7f2ad904b4e83177190ffc69eb955a94671e87e13038b5d4e18aac0997bd2393",
+      "synopsis_hash": "943e78efa2746008b9084e3e579335806470e8fb816a2f9cf6309ef65132f0b3",
+      "outline_hash": "482f05853caf37be57b760ca66facf6713e7aade6bed925596d7bac21e66ce36",
+      "world_state_hash": "c5f769da389dd2de2cc81fe3c4f628dbfd9768ab3b7f94a6b3eccd780e5c6885",
+      "timestamp": "2026-10-02T05:53:19.971334+00:00",
+      "complete": true
+    },
+    {
+      "chapter": 45,
+      "novel_hash": "830b28e7777ffcdb2b818f5daa6b6ffd9d59537491c63ed8899d69b358166859",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-02T06:19:35.830668+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 47,
+      "novel_hash": "342723fcaa45a536dd38f42b89522c7e157a7c458e6aad57496a23dba6be73fc",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-02T07:21:16.014668+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 50,
+      "novel_hash": "37e0d411b5a5debfbfa481c009c6182abdcfa1c94662cb3eb5d56c3b101245a5",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-02T08:35:16.222576+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 24,
+      "novel_hash": "62c7a39c72055f6b8c0ca2845508ec9d64ada8b86eabeef1aa1111bc79373d29",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-02T14:40:29.270391+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 37,
+      "novel_hash": "9e4c74dd8abc29effda7892d068d8f3cc3f7937526fe21b372e275a65ae020c0",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-02T15:21:00.887208+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 42,
+      "novel_hash": "db48ae38dba7491e60e1aa7d4b7408b0dcdf640bf665dd6fc608244519eac57e",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-02T15:39:12.855916+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    },
+    {
+      "chapter": 46,
+      "novel_hash": "23d0f3d9b9b0c5ee499308358483001610fd5f5a6c41a36b8aa9d449ec35fdb7",
+      "synopsis_hash": "78daef19e0487cd75cefc62ebe0fd3edf7f45e8ac5d4fbd4de45a4ca434f7c22",
+      "outline_hash": "0348b72d81f2212c3136fa263c2f50cb95764570aa3b1b12213f4b0ccfc04c91",
+      "world_state_hash": "e8a538806e93ecb7b4a6850f074c5e7da9dcefa0a8643ac21d2bd64de3fb32b2",
+      "timestamp": "2026-10-02T15:57:39.478478+00:00",
+      "complete": true
+    },
+    {
+      "chapter": 49,
+      "novel_hash": "a4a64e574fa71f1bbe094f56192f752b843adfd68dd5dcc5abf08ee92c42125f",
+      "synopsis_hash": "",
+      "outline_hash": "",
+      "world_state_hash": "",
+      "timestamp": "2026-10-02T16:47:10.535941+00:00",
+      "complete": true,
+      "mode": "force_best_draft"
+    }
+  ],
+  "last_complete": 49
+}

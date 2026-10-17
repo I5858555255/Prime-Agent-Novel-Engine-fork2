@@ -1,0 +1,324 @@
+{
+  "_help": "把 active_profile 改成 profiles 里的供应商即可整体切换；api_key 只写环境变量名。相位级模型：writer 链路 scenes/outline/director/synopsis 用 agnes-2.5-flash；文字精修 polish/refine(扩写+文学重写) 与 review 用 agnes-2.5-pro（首位为主，flash 为故障回退）。phases 可覆盖 response_format/concurrency/stream/idle_timeout_s/total_timeout_s。",
+  "active_profile": "agnes_30_token",
+  "profiles": {
+    "agnes": {
+      "family": "agnes",
+      "base_url": "https://apihub.agnes-ai.com",
+      "api_key_env": "AGNES_API_KEY",
+      "timeout_s": 120,
+      "max_retries": 2,
+      "default_extra_body": {
+        "reasoning_effort": "none"
+      },
+      "phases": {
+        "outline": {
+          "models": [
+            "agnes-2.5-flash"
+          ],
+          "response_format": null,
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 220
+        },
+        "director": {
+          "models": [
+            "agnes-2.5-flash"
+          ],
+          "response_format": "json_object",
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 560
+        },
+        "synopsis": {
+          "models": [
+            "agnes-2.5-flash"
+          ],
+          "response_format": "json_object",
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 560
+        },
+        "scenes": {
+          "models": [
+            "agnes-2.5-flash"
+          ],
+          "response_format": "json_object",
+          "concurrency": 4,
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 650
+        },
+        "polish": {
+          "models": [
+            "agnes-2.5-pro",
+            "agnes-2.5-flash"
+          ],
+          "response_format": null,
+          "concurrency": 4,
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 650
+        },
+        "review": {
+          "models": [
+            "agnes-2.5-pro",
+            "agnes-2.5-flash"
+          ],
+          "response_format": "json_object",
+          "extra_body": {
+            "reasoning_effort": "none"
+          },
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 220
+        },
+        "refine": {
+          "models": [
+            "agnes-2.5-pro",
+            "agnes-2.5-flash"
+          ],
+          "response_format": null,
+          "concurrency": 4,
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 650
+        }
+      }
+    },
+    "siliconflow": {
+      "family": "siliconflow",
+      "base_url": "https://api.siliconflow.cn",
+      "api_key_env": "LLM_API_KEY",
+      "timeout_s": 120,
+      "max_retries": 2,
+      "pricing": {
+        "input_per_1m_tokens": 0.05,
+        "output_per_1m_tokens": 0.15
+      },
+      "default_extra_body": {},
+      "phases": {
+        "outline": {
+          "models": [
+            "deepseek-ai/DeepSeek-V3.2"
+          ],
+          "response_format": null,
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 220
+        },
+        "director": {
+          "models": [
+            "deepseek-ai/DeepSeek-V3.2"
+          ],
+          "response_format": "json_object",
+          "stream": true,
+          "idle_timeout_s": 240,
+          "total_timeout_s": 240
+        },
+        "synopsis": {
+          "models": [
+            "deepseek-ai/DeepSeek-V3.2"
+          ],
+          "response_format": "json_object",
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 560
+        },
+        "scenes": {
+          "models": [
+            "deepseek-ai/DeepSeek-V3.2"
+          ],
+          "response_format": "json_object",
+          "concurrency": 4,
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 650
+        },
+        "polish": {
+          "models": [
+            "deepseek-ai/DeepSeek-V3.2"
+          ],
+          "response_format": null,
+          "concurrency": 4,
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 650
+        },
+        "review": {
+          "models": [
+            "deepseek-ai/DeepSeek-V3.2"
+          ],
+          "response_format": "json_object",
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 220
+        },
+        "refine": {
+          "models": [
+            "deepseek-ai/DeepSeek-V3.2"
+          ],
+          "response_format": null,
+          "concurrency": 4,
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 650
+        }
+      }
+    },
+    "agnes_30": {
+      "family": "agnes",
+      "base_url": "https://apihub.agnes-ai.com",
+      "api_key_env": "AGNES_API_KEY",
+      "timeout_s": 120,
+      "max_retries": 2,
+      "default_extra_body": {},
+      "phases": {
+        "outline": {
+          "models": [
+            "agnes-3.0-flash"
+          ],
+          "response_format": null,
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 220
+        },
+        "director": {
+          "models": [
+            "agnes-3.0-flash"
+          ],
+          "response_format": "json_object",
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 560
+        },
+        "synopsis": {
+          "models": [
+            "agnes-3.0-flash"
+          ],
+          "response_format": "json_object",
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 560
+        },
+        "scenes": {
+          "models": [
+            "agnes-3.0-flash"
+          ],
+          "response_format": "json_object",
+          "concurrency": 4,
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 650
+        },
+        "polish": {
+          "models": [
+            "agnes-3.0-flash"
+          ],
+          "response_format": null,
+          "concurrency": 4,
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 650
+        },
+        "review": {
+          "models": [
+            "agnes-3.0-flash"
+          ],
+          "response_format": "json_object",
+          "stream": true,
+          "temperature": 0,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 220
+        },
+        "refine": {
+          "models": [
+            "agnes-3.0-flash"
+          ],
+          "response_format": null,
+          "concurrency": 4,
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 650
+        }
+      }
+    },
+    "agnes_30_token": {
+      "family": "agnes",
+      "base_url": "https://apihub.agnes-ai.com",
+      "api_key_env": "AGNES_TOKEN_API_KEY",
+      "timeout_s": 120,
+      "max_retries": 2,
+      "default_extra_body": {},
+      "phases": {
+        "outline": {
+          "models": [
+            "agnes-3.0-flash"
+          ],
+          "response_format": null,
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 220
+        },
+        "director": {
+          "models": [
+            "agnes-3.0-flash"
+          ],
+          "response_format": "json_object",
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 560
+        },
+        "synopsis": {
+          "models": [
+            "agnes-3.0-flash"
+          ],
+          "response_format": "json_object",
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 560
+        },
+        "scenes": {
+          "models": [
+            "agnes-3.0-flash"
+          ],
+          "response_format": "json_object",
+          "concurrency": 4,
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 650
+        },
+        "polish": {
+          "models": [
+            "agnes-3.0-flash"
+          ],
+          "response_format": null,
+          "concurrency": 4,
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 650
+        },
+        "review": {
+          "models": [
+            "agnes-3.0-flash"
+          ],
+          "response_format": "json_object",
+          "stream": true,
+          "temperature": 0,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 220
+        },
+        "refine": {
+          "models": [
+            "agnes-3.0-flash"
+          ],
+          "response_format": null,
+          "concurrency": 4,
+          "stream": true,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 650
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,311 @@
+{
+  "meta": {
+    "vid": "V02",
+    "range": [
+      497,
+      526
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-15T16:42:40+00:00",
+    "batch_size": 6,
+    "status": "approved"
+  },
+  "entries": {
+    "497": {
+      "chapter": 497,
+      "core_event": "沈无涯解读传闻卷，揭露迷雾禁区实为仙门废弃试炼场雏形，暗藏杀机",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "498": {
+      "chapter": 498,
+      "core_event": "陆烬因神魂异动吸引禁地外低阶妖兽，陈老根习练呼吸法初步镇住气息护子周全",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "499": {
+      "chapter": 499,
+      "core_event": "猎户老周透露村边枯井异动，沈无涯暗示其下或藏有与皇室残物相关的古老封印",
+      "characters": [
+        "C004",
+        "C004"
+      ],
+      "boundary_note": "V01 F001 判例放行：皇室残物封印仅作未知谜团出现，不解读用途",
+      "status": "approved"
+    },
+    "500": {
+      "chapter": 500,
+      "core_event": "陆烬被卷入枯井异动，目睹异象但无法理解，陈老根以凡人视角安抚并记录异常",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "501": {
+      "chapter": 501,
+      "core_event": "沈无涯试探陆烬对异象的记忆，发现其神魂反应远超常理，遂决定暗中上报仙门代理人",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "502": {
+      "chapter": 502,
+      "core_event": "仙门使者以资助药材为名接近陈老根，条件优厚反常，陆烬在旁感知到陌生威压",
+      "characters": [
+        "C002",
+        "C001"
+      ],
+      "boundary_note": "V02 判例放行：资助仅表现说不清的古怪/陌生威压，未坐实乾武帝赎罪动机",
+      "status": "approved"
+    },
+    "503": {
+      "chapter": 503,
+      "core_event": "陆烬在乾都茶馆听商队传闻，得知皇家采购奇物与迷雾禁区边缘的异宝传闻",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "504": {
+      "chapter": 504,
+      "core_event": "沈无涯以药材商身份接触陆烬，透露仙门对迷雾禁区的监控已延伸至大乾边境",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "505": {
+      "chapter": 505,
+      "core_event": "陆烬目睹朝堂使者与江湖势力在码头冲突，意识到皇室残物争夺已公开化",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "506": {
+      "chapter": 506,
+      "core_event": "陆烬在集市偶遇神秘修士，对方试探其神魂状态，陆烬因婴儿形态掩饰过关",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "V01 弱暗示未坐实放行：修士无法从婴儿身上探查到神魂痕迹为被动结果；禁止伪装/掩饰等坐实非真身表述",
+      "status": "approved"
+    },
+    "507": {
+      "chapter": 507,
+      "core_event": "陈老根来信（或口信）提及自身修炼呼吸法成效，陆烬对其修炼方式产生好奇但未模仿",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "508": {
+      "chapter": 508,
+      "core_event": "陆烬潜入乾都暗市，寻找迷雾禁区传闻中的辅助灵药，被仙门眼线发现但未暴露身份",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "509": {
+      "chapter": 509,
+      "core_event": "陆烬研读修真界传闻卷，发现迷雾禁区边缘出现玄铁马商队足迹，推断仙门代理人活动范围扩大",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：涉及f004_mitochondria_earth迷雾异象关联区域，需确认是否提前泄露禁区内部状况",
+      "status": "approved"
+    },
+    "510": {
+      "chapter": 510,
+      "core_event": "玄铁商队遭袭，陆烬随沈无涯暗中观察，目睹仙门弟子使用高阶术法拦截马车，残物气息波动",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "V01 F001 判例放行：仅描写残物气息反常，禁止解读七窍碑/鹿台阵图用途",
+      "status": "approved"
+    },
+    "511": {
+      "chapter": 511,
+      "core_event": "乾京邸报惊现仙门候选遴选名录，陆烬初闻云隐坊市传闻",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": "V02 判例放行：邸报/云隐坊市仅停留表面传闻，不揭示验证监控收编本质，不解析残卷关联",
+      "status": "approved"
+    },
+    "512": {
+      "chapter": 512,
+      "core_event": "陆烬审阅沈无涯留下的迷雾禁区传闻卷，试图从中寻找大乾皇朝与外界仙门联系的蛛丝马迹",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "513": {
+      "chapter": 513,
+      "core_event": "朝堂密使抵达雾隐村附近驿站，陆烬借采买药材之便接近，记录密使与地方官的异常低声交谈",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "514": {
+      "chapter": 514,
+      "core_event": "陆烬整理近月观察笔记，确认仙门候选人验证名单即将发布，自己尚未被收录，危机感加深",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "515": {
+      "chapter": 515,
+      "core_event": "陆烬在雾隐村协助陈老根整理草药，听闻外界皇朝使者抵达邻镇的传闻",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "516": {
+      "chapter": 516,
+      "core_event": "陈老根决定带陆烬前往邻镇集市采购稀缺药材，途中偶遇神秘黑衣商人",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "517": {
+      "chapter": 517,
+      "core_event": "陆烬研读迷雾传闻卷，对禁区异象提出疑问，沈无涯回避解释",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "V01 弱暗示未坐实放行：陆烬仅对禁区异象提出疑问、沈无涯回避解释，不暴露异界属性认知；禁止深化 f004 或提前揭示异界属性",
+      "status": "approved"
+    },
+    "518": {
+      "chapter": 518,
+      "core_event": "集市出现混乱，黑衣人欲强购药材，陈老根以身份压制对方，显露出些许江湖背景",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "519": {
+      "chapter": 519,
+      "core_event": "陈老根与黑衣人对峙后离去，陆烬询问对方身份，得知其受雇于朝堂某派系",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "520": {
+      "chapter": 520,
+      "core_event": "陆烬与陈老根返回雾隐村，途中陆烬对朝堂暗流产生好奇，陈老根告诫其勿卷入纷争",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "521": {
+      "chapter": 521,
+      "core_event": "陆烬在朝堂文书堆中整理皇室秘藏目录，发现三件残物记载的异常空白",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "522": {
+      "chapter": 522,
+      "core_event": "江湖势力派往京城的代表与仙门代理人发生摩擦，陆烬作为中间人调解",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "523": {
+      "chapter": 523,
+      "core_event": "乾武帝派秘使送来资助，陆烬察觉条件优厚反常但无法确认真实动机",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "V02 判例放行：秘使资助仅保留古怪/反常，不坐实赎罪动机",
+      "status": "approved"
+    },
+    "524": {
+      "chapter": 524,
+      "core_event": "陆烬在验证流程中发现仙门监控手段，意识到候选人验证实为收编前置步骤",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "525": {
+      "chapter": 525,
+      "core_event": "七窍碑残页被取出查阅，陆烬发现其纹路寻常金石不同但无人能解用途",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "V01/V02 判例放行：七窍碑残页保留谜团状态，不解读与鹿台/秘境关系",
+      "status": "approved"
+    },
+    "526": {
+      "chapter": 526,
+      "core_event": "陆烬在炼气圆满门槛前反复打磨功法，气息渐盛但仍未突破",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "realm_progression": {
+    "description": "各境界突破所需平均章节数（默认值，参照编写指南建议，未在大纲中另行指定具体数值）",
+    "base_rates": {
+      "炼气": {"min_chapters": 30, "max_chapters": 80, "average": 50},
+      "筑基": {"min_chapters": 40, "max_chapters": 100, "average": 70},
+      "金丹": {"min_chapters": 60, "max_chapters": 150, "average": 100},
+      "元婴": {"min_chapters": 80, "max_chapters": 200, "average": 140},
+      "化神": {"min_chapters": 100, "max_chapters": 250, "average": 170},
+      "飞升": {"min_chapters": 100, "max_chapters": 300, "average": 200},
+      "人道之主": {"min_chapters": 150, "max_chapters": 400, "average": 250}
+    },
+    "modifiers": {
+      "天材地宝": 0.7,
+      "顿悟": 0.5,
+      "人皇信物代价": 0.6
+    }
+  },
+  "faction_expansion": {
+    "description": "势力扩张速率规则（默认值）",
+    "base_growth_per_100_chapters": {
+      "太虚仙门": 1.0,
+      "大乾皇朝": 1.0,
+      "摄魂阁": 0.8,
+      "血冥教": 0.6
+    },
+    "conflict_chance_per_chapter": 0.05
+  },
+  "resource_distribution": {
+    "description": "资源分布密度（默认值）",
+    "rare_item_per_chapters": 20,
+    "common_item_per_chapters": 5
+  },
+  "power_scaling": {
+    "description": "战力平衡规则（默认值）",
+    "realm_gap_multiplier": 3.0,
+    "same_realm_variance": 0.3
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "scoring_dimensions": [
+    { "name": "剧情一致性", "weight": 25, "description": "章节是否严格遵循 plot_graph 节点目标与伏笔计划" },
+    { "name": "人物一致性", "weight": 20, "description": "角色行为、语气、境界是否与 world_state 一致" },
+    { "name": "伏笔执行", "weight": 20, "description": "clue_plan 中的写作指令是否在缩写/正文中体现" },
+    { "name": "文风符合度", "weight": 15, "description": "是否符合 style_bible.md 的叙事视角、语言风格、情感基调" },
+    { "name": "节奏控制", "weight": 10, "description": "场景切换、情绪曲线是否符合任务卡设计" },
+    { "name": "创新亮点", "weight": 10, "description": "是否有超出模板的生动细节或意外转折" }
+  ],
+  "grading": {
+    "pass": 88,
+    "fix": 60,
+    "fail": 0
+  },
+  "fix_strategy": {
+    "60_87": "局部修复：仅重新生成被标记的问题段落，保留其余内容",
+    "below_60": "全量回退到导演环节重来，最多3次"
+  },
+  "change_validation": {
+    "hard": ["entity_not_found", "realm_regression", "dead_character_action"],
+    "soft": ["realm_jump_too_large"],
+    "realm_order": [
+      "凡人体质",
+      "炼气一层", "炼气二层", "炼气三层", "炼气四层", "炼气五层",
+      "炼气六层", "炼气七层", "炼气八层", "炼气九层", "炼气圆满",
+      "筑基", "筑基期", "筑基初期", "筑基中期", "筑基后期", "筑基圆满",
+      "金丹", "金丹期", "金丹初期", "金丹中期", "金丹后期", "金丹圆满",
+      "元婴", "元婴期", "元婴初期", "元婴中期", "元婴后期", "元婴圆满",
+      "化神", "化神期", "化神初期", "化神中期", "化神后期", "化神圆满",
+      "飞升", "飞升期",
+      "人道之主"
+    ]
+  },
+  "past_life_reveal": {
+    "window_chars": 150,
+    "detail_hits": 3,
+    "detail_terms": [
+      "前世", "上辈子", "上一世", "重生前", "弥留", "病床", "病房",
+      "抢救", "临终", "咽气", "消毒水", "白墙", "吊瓶", "输液", "心电图"
+    ]
+  }
+}

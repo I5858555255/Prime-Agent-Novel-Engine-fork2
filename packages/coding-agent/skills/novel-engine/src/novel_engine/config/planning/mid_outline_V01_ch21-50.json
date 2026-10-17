@@ -1,0 +1,273 @@
+{
+  "meta": {
+    "vid": "V01",
+    "range": [
+      21,
+      50
+    ],
+    "node_chapters_in_range": [
+      43,
+      50
+    ],
+    "generated_at": "2026-10-04T10:05:41+00:00",
+    "batch_size": 2,
+    "status": "approved",
+    "approved_at": "2026-10-04T00:00:00+00:00",
+    "approved_note": "用户审阅：ch31/ch35/ch40/ch45 放行，ch42 按指定文案修改后放行"
+  },
+  "entries": {
+    "21": {
+      "chapter": 21,
+      "core_event": "陈老根带陆烬进县城采买，陆烬目睹江湖帮派争斗",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "22": {
+      "chapter": 22,
+      "core_event": "采买途中遭遇迷雾边界异常扰动，陈老根紧急带陆烬撤离",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "23": {
+      "chapter": 23,
+      "core_event": "村中老人闲聊提及多年前迷雾异动曾有婴啼，陆烬暗中记下",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "24": {
+      "chapter": 24,
+      "core_event": "陈老根演示呼吸法后咳嗽加重，陆烬察觉养父身体异常",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "25": {
+      "chapter": 25,
+      "core_event": "陆烬帮陈老根整理旧物，发现一本记载着诡异图腾的残破兽皮册",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "26": {
+      "chapter": 26,
+      "core_event": "村中孩童嬉闹时误入迷雾边缘，陆烬凭对浊气的敏感将其寻回，引发陈老根更深忧虑",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "27": {
+      "chapter": 27,
+      "core_event": "陈老根带陆烬进山采药，陆烬因浊气敏感而提前避开瘴气",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "28": {
+      "chapter": 28,
+      "core_event": "陆烬在山中发现一处风化严重的古碑，上有模糊鸟篆，无法辨认",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null
+    },
+    "29": {
+      "chapter": 29,
+      "core_event": "陆烬帮陈老根打理药圃时，发现数种药草特性与呼吸法残篇提及的辅材相符，询问陈老根",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "30": {
+      "chapter": 30,
+      "core_event": "陈老根含糊其辞，只道是祖传强身方子，带陆烬入山辨识药草，途中遭遇野猪袭扰",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "31": {
+      "chapter": 31,
+      "core_event": "陆烬随村民进山采药，在迷雾边缘发现一具身着异域服饰的尸骨",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "需人工确认：迷雾边缘异域尸骨可能接近禁区异变或身世之谜线索"
+    },
+    "32": {
+      "chapter": 32,
+      "core_event": "采药途中陆烬察觉林间异动，发现有人暗中窥伺雾隐村",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "33": {
+      "chapter": 33,
+      "core_event": "陆烬随陈老根学习辨识草药，在村后山发现一株形状怪异的植物",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "34": {
+      "chapter": 34,
+      "core_event": "陈老根告诫陆烬远离后山那株怪植物，并讲述早年入山采药遇险的模糊旧事",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "35": {
+      "chapter": 35,
+      "core_event": "陈老根教陆烬辨识草药时，偶然提及呼吸法对疗伤祛毒确有奇效",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：C002提及呼吸法具体功效，可能接近F002边界"
+    },
+    "36": {
+      "chapter": 36,
+      "core_event": "陆烬随陈老根上山采药，意外发现一处被野兽刨开的浅坑，内有奇异碎骨",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "37": {
+      "chapter": 37,
+      "core_event": "陆烬随陈老根进山采药，遭遇山体小范围滑坡被困浅洞",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "38": {
+      "chapter": 38,
+      "core_event": "困顿中陈老根讲述早年山间遇险往事，隐晦提及'山中有异，非人力可及'",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "39": {
+      "chapter": 39,
+      "core_event": "陆烬在村外拾柴时偶遇陈老根练习呼吸法，他仅在一旁观望不敢打扰",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "40": {
+      "chapter": 40,
+      "core_event": "陆烬帮陈老根整理柴房旧物时发现一枚样式古朴的残缺铜片，陈老根迅速收起",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：铜片样式可能与皇室秘藏相关，接近F001伏笔埋设边界"
+    },
+    "41": {
+      "chapter": 41,
+      "core_event": "陆烬随陈老根进山采药，在溪边发现一块刻有模糊古字的残石",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "42": {
+      "chapter": 42,
+      "core_event": "陈老根看到残石后沉默不语，只含糊说了句“莫要多想”便将其收起",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "44": {
+      "chapter": 44,
+      "core_event": "陈老根带陆烬进山采药，途中避开一处雾气异常翻涌的区域",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "45": {
+      "chapter": 45,
+      "core_event": "陆烬整理旧物发现陈老根珍藏的一块黯淡旧铁片，问及来历被含糊带过",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：旧铁片可能与皇室秘藏碎片或陈老根过往产生联系，需界定其性质以避免触及身世或修炼伏笔边界"
+    },
+    "46": {
+      "chapter": 46,
+      "core_event": "陆烬帮陈老根整理杂物，发现陈老根旧物箱底压着几张古怪的兽皮残图",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "47": {
+      "chapter": 47,
+      "core_event": "村中孩童因迷雾异变传闻而恐慌，陆烬试图安抚却勾起自身对迷雾身世的隐忧",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "48": {
+      "chapter": 48,
+      "core_event": "陆烬将山中见闻告诉陈老根，陈老根面色凝重却避而不谈，只叮嘱莫再靠近",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "49": {
+      "chapter": 49,
+      "core_event": "陈老根借故带陆烬远离村落，途中讲述年轻时一段江湖险事，隐晦提及体质异常者",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    }
+  }
+}

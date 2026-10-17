@@ -1,0 +1,273 @@
+{
+  "meta": {
+    "vid": "V01",
+    "range": [
+      291,
+      316
+    ],
+    "node_chapters_in_range": [
+      316
+    ],
+    "generated_at": "2026-10-12T02:08:44+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "last_run": true
+    },
+    "approved_at": "2026-10-12"
+  },
+  "entries": {
+    "291": {
+      "chapter": 291,
+      "core_event": "陆烬在迷雾边缘捡到刻有奇异符文的青铜残片，陈老根神色凝重将其封存",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "292": {
+      "chapter": 292,
+      "core_event": "大乾县城暗卫追踪气味线索至雾隐村附近，村民因外来者入侵陷入恐慌",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "293": {
+      "chapter": 293,
+      "core_event": "陈老根深夜独自修炼呼吸法压制体内旧伤，陆烬在门外目睹其气息紊乱",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "294": {
+      "chapter": 294,
+      "core_event": "村中少年因擅自闯入迷雾禁区失联，陈老根强撑病体带队搜救未果",
+      "characters": [
+        "C001",
+        "C002",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "295": {
+      "chapter": 295,
+      "core_event": "暗卫包围村庄逼问身世线索，陈老根以凡人之身利用地形拖延时间",
+      "characters": [
+        "C001",
+        "C002",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "296": {
+      "chapter": 296,
+      "core_event": "陆烬在混乱中抱住陈老根，其眼中闪过异光，陈老根决意带陆烬离开村庄",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "297": {
+      "chapter": 297,
+      "core_event": "陆烬在县城暗巷目击神秘买家高价收购迷雾草，初次意识到迷雾禁区资源价值",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "298": {
+      "chapter": 298,
+      "core_event": "陈老根因旧伤复发行动不便，陆烬需独自处理集市琐事并应对地痞挑衅",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "299": {
+      "chapter": 299,
+      "core_event": "陆烬试图通过非修炼手段验证迷雾草效用，结果因认知局限导致误判与冲突升级",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "300": {
+      "chapter": 300,
+      "core_event": "陈老根以闲谈方式说起自己在迷雾边缘讨生活的经验，强调凡人的谨慎与观察远比蛮力重要，陆烬默默记下",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved",
+      "audit_note": "改写避开传授语义词（传授/教/传）：P6-1 传授检测对非修炼宾语也 hard 属误报（原句\"传授谋生策略\"），已记录 backlog；本条为内容层规避"
+    },
+    "301": {
+      "chapter": 301,
+      "core_event": "陆烬利用新策略避开追踪，在迷雾边缘遭遇环境异象并记录细节以寻找规律",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "302": {
+      "chapter": 302,
+      "core_event": "陆烬整理迷雾草交易与环境观察笔记，初步构建脱离陈老根指导的独立生存框架",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "303": {
+      "chapter": 303,
+      "core_event": "陆烬随陈老根在迷雾边缘采药，察觉雾气中隐约传来未知异响，心生好奇却不敢靠近",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：ch303为伏笔F001的回收节点，涉及皇室秘藏人皇鼎碎片等核心伏笔回收，需确认是否允许在陆烬视角下提前揭示或暗示",
+      "status": "approved",
+      "audit_note": "放行：实际内容为采药遇雾气异响、好奇不敢靠近，未点异变根源；audit 预测性标注\"F001 回收节点/皇室秘藏\"与实际 core_event 不符，已记录"
+    },
+    "304": {
+      "chapter": 304,
+      "core_event": "陈老根为陆烬讲解村寨生存法则，陆烬记录笔记并尝试整理近期遭遇的江湖传闻",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "305": {
+      "chapter": 305,
+      "core_event": "大乾皇朝密探伪装成货郎进入雾隐村，陆烬在集市上察觉对方眼神中的杀意并报告陈老根",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "306": {
+      "chapter": 306,
+      "core_event": "陈老根夜间在院中练习呼吸法，陆烬在旁旁观，事后陈老根称此举可强身健体",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "307": {
+      "chapter": 307,
+      "core_event": "陆烬因好奇靠近迷雾禁区，被一股无形力量阻挡，惊出一身冷汗，意识到非人力可敌",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "308": {
+      "chapter": 308,
+      "core_event": "陈老根酒后在篝火边说起年轻时的一些恩怨往事，点到为止便不再多言，陆烬隐约觉得根伯来历不简单，却问不出什么",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：陈老根过往身份之谜属本卷核心冲突，此章为临近高潮ch316的铺垫，需确认叙事尺度",
+      "status": "approved",
+      "audit_note": "放行并收紧：去掉\"暗示身份不凡\"式自我标榜，改为点到为止的往事暗示（未揭穿真实来历），保留悬念感"
+    },
+    "309": {
+      "chapter": 309,
+      "core_event": "陈老根在院中独自吐纳调息，陆烬在旁观看，根伯提及雾气渐浓需防迷雾",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "310": {
+      "chapter": 310,
+      "core_event": "陆烬随陈老根出村探路，发现迷雾禁区边缘异变加剧，村民恐慌加剧",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "311": {
+      "chapter": 311,
+      "core_event": "江湖暗卫潜入雾隐村周边，陈老根察觉异样守护陆烬，暗中观察其动作",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "312": {
+      "chapter": 312,
+      "core_event": "陈老根向陆烬透露江湖势力复杂，暗示其身份特殊但拒绝透露真相",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "313": {
+      "chapter": 313,
+      "core_event": "陆烬在村外发现修士遗留的符纸，陈老根紧急销毁证据并警告勿再靠近",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "314": {
+      "chapter": 314,
+      "core_event": "陈老根决定带陆烬离开雾隐村前往大乾皇朝县城，临行前交代注意事项",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "315": {
+      "chapter": 315,
+      "core_event": "陆烬在街头目睹修士破庙斩妖，惊骇未平即遭暗卫围堵，生死一线",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

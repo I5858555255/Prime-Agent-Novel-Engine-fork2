@@ -1,0 +1,6 @@
+{
+  "rules": [
+    {"name": "english_word", "pattern": "\\b(steady|crossed|arms|however|therefore|meanwhile|suddenly|whispered|nodded|silence|realized|finally|actually|literally|okay|hello|yes|no)\\b", "severity": "high", "description": "英文词汇出现在中文正文"},
+    {"name": "latin_script_fragment", "pattern": "(?i)\\b(?:chapter|hook|blueprint|synopsis|climax|scene|scene_id|scene_text|blueprints|forbidden|checks|pacing|goal|world_state|summary|events|entities|task_card|blueprint_id|scene_num)\\b", "severity": "medium", "description": "正文中出现控制层结构标记（task card/scene blueprint 键名与标记）"}
+  ]
+}

@@ -1,0 +1,293 @@
+{
+  "meta": {
+    "vid": "V02",
+    "range": [
+      407,
+      436
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-14T13:40:29+00:00",
+    "batch_size": 6,
+    "status": "approved"
+  },
+  "entries": {
+    "407": {
+      "chapter": 407,
+      "core_event": "陆烬随行商队抵达洛水渡口，见官船严查货物，显露出对仙门物资流动的紧张管控",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "408": {
+      "chapter": 408,
+      "core_event": "渡口遇匪劫掠，陆烬展现过目不忘之能辅助陈老根记路脱身，引起随行护卫暗中记录",
+      "characters": [
+        "C001",
+        "C002",
+        "C004"
+      ],
+      "boundary_note": null
+    },
+    "409": {
+      "chapter": 409,
+      "core_event": "进入京畿外围城镇，听闻朝廷正招募“贤良之才”赴京，实为仙门代理人选拔的前奏",
+      "characters": [
+        "C001",
+        "C002",
+        "C005"
+      ],
+      "boundary_note": null
+    },
+    "410": {
+      "chapter": 410,
+      "core_event": "客栈中陆烬偶然目睹修士低声争执，提及“残物”与“阵图”，隐约感知皇室秘辛的暗流",
+      "characters": [
+        "C001",
+        "C002",
+        "C006"
+      ],
+      "boundary_note": null
+    },
+    "411": {
+      "chapter": 411,
+      "core_event": "陈老根因旧疾复发需静养，陆烬独自整理包袱时发现夹带的七窍碑残页边缘微光，心生疑惑",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "F001残页边缘微光属弱暗示未坐实，未解读用途，按V01判例放行",
+      "status": "approved"
+    },
+    "412": {
+      "chapter": 412,
+      "core_event": "京郊驿站收编行动开始，陆烬被标记为“异常者”候选，面临被强制留观的风险",
+      "characters": [
+        "C001",
+        "C002",
+        "C007"
+      ],
+      "boundary_note": null
+    },
+    "413": {
+      "chapter": 413,
+      "core_event": "京城茶楼闲谈，江湖客议论皇室近期频繁征召各地奇材，气氛微妙",
+      "characters": [
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "414": {
+      "chapter": 414,
+      "core_event": "陆烬路过宫墙阴影处，觉出空气凝滞异样，似有无形目光扫过",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "宫墙氛围/无形目光为弱暗示未坐实，未触及皇室残物全貌，放行",
+      "status": "approved"
+    },
+    "415": {
+      "chapter": 415,
+      "core_event": "陈老根在田间练呼吸法，神情疲惫，陆烬旁观未敢打扰",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "416": {
+      "chapter": 416,
+      "core_event": "市井流传仙门使者将至大乾，百姓窃窃私语，朝堂暗流涌动",
+      "characters": [
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null
+    },
+    "417": {
+      "chapter": 417,
+      "core_event": "神秘黑衣人夜探客栈，似在搜寻特定物品，陆烬惊醒察觉异常",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "黑衣人搜寻特定物品为争夺行为，未解读七窍碑/鹿台残卷用途，放行",
+      "status": "approved"
+    },
+    "418": {
+      "chapter": 418,
+      "core_event": "陆烬察觉资助条款中隐含的仙门考察意图，心生警惕并暗中记录异常细节",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "重生成：改为察觉资助条款异常（乾武帝资助仅条件反常不坐实赎罪动机），去修炼意象，放行",
+      "status": "approved"
+    },
+    "419": {
+      "chapter": 419,
+      "core_event": "朝堂密议皇室残物封存之事，陆烬感知到异常灵气波动",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "420": {
+      "chapter": 420,
+      "core_event": "江湖势力洗牌，陈老根偶遇仙门代理人并听闻验证传闻",
+      "characters": [
+        "C002",
+        "C004"
+      ],
+      "boundary_note": null
+    },
+    "421": {
+      "chapter": 421,
+      "core_event": "陆烬被卷入朝堂与仙门代理人之间的夹缝冲突中",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null
+    },
+    "422": {
+      "chapter": 422,
+      "core_event": "七窍碑残页现世，各方势力对其用途产生分歧与争夺",
+      "characters": [
+        "C003",
+        "C006"
+      ],
+      "boundary_note": "各方对残页用途分歧为争夺语境，未坐实解读，放行",
+      "status": "approved"
+    },
+    "423": {
+      "chapter": 423,
+      "core_event": "仙门候选人验证机制曝光，揭示其监控收编本质",
+      "characters": [
+        "C004",
+        "C007"
+      ],
+      "boundary_note": null
+    },
+    "424": {
+      "chapter": 424,
+      "core_event": "鹿台阵图残卷被层层封存，陆烬试图探寻其来历受阻",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "残卷封存/探寻受阻未解读全貌，放行",
+      "status": "approved"
+    },
+    "425": {
+      "chapter": 425,
+      "core_event": "大乾皇宫司库密访，查验陆烬所献七窍碑残页真伪，暗中试探皇权象征价值",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "426": {
+      "chapter": 426,
+      "core_event": "江湖势力代表在京城茶楼密会，讨论仙门验证名额缩减对各派利益影响",
+      "characters": [
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null
+    },
+    "427": {
+      "chapter": 427,
+      "core_event": "乾武帝遣禁军护送鹿台阵图残卷回宫，途中遭遇不明刺客截击",
+      "characters": [
+        "C006",
+        "C007"
+      ],
+      "boundary_note": null
+    },
+    "428": {
+      "chapter": 428,
+      "core_event": "陆烬在街头偶遇神秘商队，对方提出高价收购残页但拒绝透露买家身份",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null
+    },
+    "429": {
+      "chapter": 429,
+      "core_event": "朝堂爆发激烈争吵，主和派与主战派就仙门代理人监控体系展开博弈",
+      "characters": [
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null
+    },
+    "430": {
+      "chapter": 430,
+      "core_event": "陆烬深夜潜入旧宅查看父亲遗留的封缄铁盒，盒内衬着半张残卷，盒上刻有陌生符文",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铁盒符文为F001残物载体描写，未关联f004跨界异象，放行",
+      "status": "approved"
+    },
+    "431": {
+      "chapter": 431,
+      "core_event": "陆烬随使团出京，于官道驿站发现随行文书中夹带的异常残页碎片",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "432": {
+      "chapter": 432,
+      "core_event": "使团途中遭遇不明势力拦截，陈老根以呼吸法护体，陆烬旁观其气韵变化",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "433": {
+      "chapter": 433,
+      "core_event": "陆烬在驿站静思时，隐约感知到残页纹路与自身神魂的微弱共鸣",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "神魂微弱共鸣为弱暗示未坐实f004，无修炼体感动作，放行",
+      "status": "approved"
+    },
+    "434": {
+      "chapter": 434,
+      "core_event": "皇室密使抵达，告知陆烬资助条件优厚但要求定期汇报行踪，陆烬感到古怪",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "435": {
+      "chapter": 435,
+      "core_event": "陆烬整理所得物品，发现七窍碑残页与鹿台阵图残卷被封存，来历讳莫如深",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null
+    },
+    "436": {
+      "chapter": 436,
+      "core_event": "陆烬在炼气期瓶颈前反复打磨，体内灵气渐盛，但始终未能突破",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "修为推进仅炼气期内、未突破筑基、未涉静坐吐纳等体感动作，放行；若与cultivation_system解锁口径冲突记backlog待用户拍板",
+      "status": "approved"
+    }
+  }
+}

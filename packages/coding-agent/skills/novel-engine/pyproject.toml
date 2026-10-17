@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "novel-engine"
+version = "0.1.0"
+description = "Novel-Engine skill package for Prime-Agent"
+authors = ["Jules <jules@prime-agent.ai>"]
+readme = "SKILL.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+httpx = "^0.28.1"
+jieba = ">=0.42"
+json-repair = "^0.63.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

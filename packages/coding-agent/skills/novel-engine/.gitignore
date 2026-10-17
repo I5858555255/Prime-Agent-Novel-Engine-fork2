@@ -1,0 +1,39 @@
+# Runtime config (may contain API keys)
+src/novel_engine/config/runtime_config.json
+
+# Secrets
+src/.env
+
+# SQLite state database
+src/novel_engine/runtime/state.db
+
+# Generated runtime state
+src/novel_engine/runtime/checkpoint.json
+src/novel_engine/runtime/session_tree.json
+src/novel_engine/runtime/recovery_policy.json
+src/novel_engine/runtime/state_machine.json
+src/novel_engine/runtime/logs/
+src/novel_engine/runtime/backups/
+
+# Generated audit reports
+src/novel_engine/audit/
+
+# Generated task-card cache
+src/novel_engine/cache/
+
+# Generated novel output (novel/outline/synopsis text)
+src/novel_engine/chapters/
+
+# Stray process-id files
+*.pid
+
+# Generated memory data (regenerate via init_state.py)
+src/novel_engine/memory/short_term/
+src/novel_engine/memory/long_term/
+src/novel_engine/memory/world_state/
+src/novel_engine/memory/quality_memory.json
+
+# Python caches
+__pycache__/
+*.pyc
+.pytest_cache/

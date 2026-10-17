@@ -1,0 +1,140 @@
+{
+  "arc": "infant",
+  "chapters": [
+    1,
+    9
+  ],
+  "unlock_schedule": [
+    {
+      "vol": "V01",
+      "range": [1, 316],
+      "status": "covered",
+      "notes": "ch25 起修炼词汇（xianxia_system）全解锁；陆烬个人禁修炼由 R04（rule_applies=V01）与 A 路线硬红线覆盖，本卷无需新增概念"
+    },
+    {
+      "vol": "V02",
+      "range": [317, 652],
+      "status": "planned",
+      "unlocks": [
+        {
+          "concept_id": "lj_path_start",
+          "unlocked_at_chapter": 317,
+          "unlocked_by": "陆烬确认修士力量真实存在（V01 结尾'决意'），正式踏入修仙世界",
+          "applies_to_character": "陆烬",
+          "terms": ["寻路", "访仙", "拜师", "打听仙门", "踏入修仙", "求仙问道"]
+        },
+        {
+          "concept_id": "lj_qi_refinement",
+          "unlocked_at_chapter": 317,
+          "unlocked_by": "陆烬开始炼气期修炼（V02 主题'大乾人间'，筑基突破仍禁，见 R15）",
+          "applies_to_character": "陆烬",
+          "terms": ["炼气", "引气", "聚气", "功法修炼", "打坐修炼"]
+        }
+      ],
+      "notes": "ch317 起陆烬修炼体感放行（R04 已限定 V01）；筑基突破仍受 R15 拦截至 V03 高潮 ch988"
+    },
+    {
+      "vol": "V03",
+      "range": [653, 988],
+      "status": "planned",
+      "unlocks": [
+        {
+          "concept_id": "sect_life",
+          "unlocked_at_chapter": 653,
+          "unlocked_by": "陆烬入仙门开始宗门生活（V03 主题'仙门初渡'）",
+          "applies_to_character": "*",
+          "terms": ["仙门", "宗门", "外门", "内门", "灵田", "藏经阁", "丹房", "演武场", "灵脉"]
+        },
+        {
+          "concept_id": "lj_foundation",
+          "unlocked_at_chapter": 988,
+          "unlocked_by": "陆烬筑基突破（V03 高潮，获《太上养魂经》残卷）",
+          "applies_to_character": "陆烬",
+          "terms": ["筑基", "筑基期", "筑基成功"]
+        }
+      ],
+      "notes": "炼气期修炼词已由 lj_qi_refinement@317 解锁；筑基词（筑基/筑基期）锁定至 ch988（R15 同窗拦截），988 起放行"
+    }
+  ],
+  "concepts": [
+    {
+      "concept_id": "cultivation_system",
+      "unlocked_at_chapter": 6,
+      "unlocked_by": "陈老根夜间吐纳被陆烬旁观窥见",
+      "applies_to_character": "陈老根",
+      "terms": [
+        "吐纳",
+        "调息"
+      ]
+    },
+    {
+      "concept_id": "guardian_identity",
+      "unlocked_at_chapter": 20,
+      "unlocked_by": "迷雾守护者身份揭示",
+      "applies_to_character": "*",
+      "terms": [
+        "魂魄印记",
+        "魂魄里有",
+        "魂印",
+        "跨界",
+        "不属于这个世界",
+        "不属于这世界",
+        "另一个世界",
+        "守护者",
+        "古老存在"
+      ]
+    },
+    {
+      "concept_id": "martial_identity",
+      "unlocked_at_chapter": 15,
+      "unlocked_by": "陈老根军旅往事揭露",
+      "applies_to_character": "陈老根",
+      "terms": [
+        "军中",
+        "从军",
+        "军营",
+        "军医",
+        "军中医",
+        "医官",
+        "教头",
+        "将军",
+        "千总",
+        "百户",
+        "朝廷命官",
+        "当差官府"
+      ]
+    },
+    {
+      "concept_id": "xianxia_system",
+      "unlocked_at_chapter": 25,
+      "unlocked_by": "修仙体系正式引入",
+      "applies_to_character": "*",
+      "terms": [
+        "太虚仙门",
+        "丹田",
+        "经脉",
+        "灵胎",
+        "灵台",
+        "炼气",
+        "开窍",
+        "引气入体",
+        "灵根",
+        "筑基",
+        "金丹",
+        "元婴",
+        "化神",
+        "仙门",
+        "宗门",
+        "修炼体系",
+        "功法",
+        "丹药",
+        "神识",
+        "法力",
+        "道心",
+        "飞升",
+        "渡劫",
+        "剑气"
+      ]
+    }
+  ]
+}

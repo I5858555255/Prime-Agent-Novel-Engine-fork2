@@ -1,0 +1,298 @@
+{
+  "meta": {
+    "vid": "V02",
+    "range": [
+      557,
+      586
+    ],
+    "node_chapters_in_range": [
+      567
+    ],
+    "generated_at": "2026-10-16T07:57:16+00:00",
+    "batch_size": 6,
+    "status": "approved"
+  },
+  "entries": {
+    "557": {
+      "chapter": 557,
+      "core_event": "陆烬在府外偶遇神秘灰衣人，对方暗中记录其言行，陆烬察觉异样未敢深究",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "558": {
+      "chapter": 558,
+      "core_event": "皇室秘使带来新的资助物资，条件优厚得反常，陆烬与陈老根对其来源心生疑惑",
+      "characters": [
+        "C001",
+        "C002",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "559": {
+      "chapter": 559,
+      "core_event": "陆烬整理旧物时翻出七窍碑残页，只觉纹路古怪，无法解读，暂且封存",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "560": {
+      "chapter": 560,
+      "core_event": "江湖势力因皇室残物流传暗流涌动，陆烬被卷入一场小型纷争边缘，被迫周旋",
+      "characters": [
+        "C001",
+        "C007",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "561": {
+      "chapter": 561,
+      "core_event": "仙门候选人的监控收编性质初现端倪，陆烬发现自身已被纳入某种观察视野",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "562": {
+      "chapter": 562,
+      "core_event": "陆烬在炼气期门槛前反复打磨灵力，虽未突破筑基，但气感愈发凝实稳定",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "563": {
+      "chapter": 563,
+      "core_event": "陆烬察觉皇室资助条款暗藏亏损，秘使刻意回避解释，引发其内心疑虑",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "564": {
+      "chapter": 564,
+      "core_event": "陆烬走访坊市旧档，发现七窍碑残页流转记录中断，仅存模糊纹样描述",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "565": {
+      "chapter": 565,
+      "core_event": "陈老根讲述早年听闻的鹿台旧事，暗示阵图残卷封存于皇库深处",
+      "characters": [
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "566": {
+      "chapter": 566,
+      "core_event": "陆烬推演皇室交易逻辑，确认多笔资助皆呈非理性亏本状，动机成谜",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "568": {
+      "chapter": 568,
+      "core_event": "陆烬试探性提及赎罪之疑，秘使神色微变后迅速回归公事，对话终止",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "V01弱暗示放行：试探性提及赎罪之疑仅一句，秘使神色微变即回归公事，未坐实赎罪因果（N017节点后仍保持反常感）",
+      "status": "approved"
+    },
+    "569": {
+      "chapter": 569,
+      "core_event": "陆烬收敛思绪转回仙门监控测试，记录自身反应被数据化收编的细节",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "570": {
+      "chapter": 570,
+      "core_event": "陆烬察觉皇命资金流向异常，追问来源遭神秘代理人的刻意回避",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "571": {
+      "chapter": 571,
+      "core_event": "陈老根私下演练呼吸法时气息外泄，引来邻家野狗狂吠不止，陆烬在旁困惑",
+      "characters": [
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "572": {
+      "chapter": 572,
+      "core_event": "朝堂内廷暗流涌动，两位皇子为争夺某处禁地看守权爆发激烈冲突",
+      "characters": [
+        "C005",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "573": {
+      "chapter": 573,
+      "core_event": "陆烬在整理皇室秘藏时触碰七窍碑残页，感到指尖发麻却无法解读其全貌",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "574": {
+      "chapter": 574,
+      "core_event": "江湖势力洗牌加剧，某门派掌门因卷入仙门代理监控事件被迫交出部分情报",
+      "characters": [
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "575": {
+      "chapter": 575,
+      "core_event": "陆烬在废墟中发现鹿台阵图残卷的封蜡印记，发现其来历讳莫如深且被层层封存",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "576": {
+      "chapter": 576,
+      "core_event": "朝堂针对陆烬的资助案进行内部审计，文书出现异常涂改痕迹",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "577": {
+      "chapter": 577,
+      "core_event": "江湖势力暗中调查皇室秘藏动向，发现鹿台阵图残卷被转移出京",
+      "characters": [
+        "C001",
+        "C006",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "578": {
+      "chapter": 578,
+      "core_event": "陆烬在府邸察觉资助条件反常，试图追问幕后细节被管家婉拒",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "579": {
+      "chapter": 579,
+      "core_event": "仙门代理人以考核为名接触陆烬，暗示其具备进入云隐坊市的潜质",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "580": {
+      "chapter": 580,
+      "core_event": "皇室内部爆发关于三件残物归属的争论，七窍碑残页被列为禁品",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "581": {
+      "chapter": 581,
+      "core_event": "朝堂新贵弹劾仙门监控，陆烬察觉皇室资助反常加剧却未探明动机",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "582": {
+      "chapter": 582,
+      "core_event": "陆烬因皇室交易反常感察觉乾武帝意图，向陈老根提及资助背后的隐晦疑云",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "V01弱暗示放行：反常资助与隐晦疑云仅停留在察觉/提及层面，未坐实乾武帝赎罪动机",
+      "status": "approved"
+    },
+    "583": {
+      "chapter": 583,
+      "core_event": "陈老根在旁提及七窍碑残页，陆烬注意到其纹路异于寻常金石，无法断定用途",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "V01石符实物不点全貌判例放行：提及七窍碑残页纹路异于寻常金石且无法断定用途，未解读用途未点全貌",
+      "status": "approved"
+    },
+    "584": {
+      "chapter": 584,
+      "core_event": "朝堂传召密议，陆烬随行护卫时察觉仙门监察使暗中截听，双方试探周旋",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "585": {
+      "chapter": 585,
+      "core_event": "鹿台阵图残卷被层层封存，陆烬听闻其来历讳莫如深，对皇室秘辛产生探究欲",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "V01判例放行：鹿台阵图残卷层层封存、来历讳莫如深仅产生探究欲，未解读用途未揭示同出一源",
+      "status": "approved"
+    },
+    "586": {
+      "chapter": 586,
+      "core_event": "陆烬将三件残物信息串联，意识到它们在皇室眼中的权象征意义引发朝堂暗流",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "V01判例放行：三残物信息串联至权象征/朝堂暗流属政治层面，未解读功能用途、未点破全貌、未坐实赎罪动机",
+      "status": "approved"
+    }
+  }
+}

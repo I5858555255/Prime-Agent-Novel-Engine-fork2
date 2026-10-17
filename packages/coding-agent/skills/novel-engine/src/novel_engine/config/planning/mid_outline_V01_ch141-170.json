@@ -1,0 +1,287 @@
+{
+  "meta": {
+    "vid": "V01",
+    "range": [
+      141,
+      170
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-09T10:39:30+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "approved_at": "2026-10-09T00:00:00+00:00",
+    "approved_by": "user: 7章全部放行"
+  },
+  "entries": {
+    "141": {
+      "chapter": 141,
+      "core_event": "陆烬跟随陈老根学习辨识山中毒草与可食菌类",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "142": {
+      "chapter": 142,
+      "core_event": "陆烬帮陈老根晾晒草药，发现几株从未见过的奇异草叶",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "143": {
+      "chapter": 143,
+      "core_event": "陈老根带陆烬深入村后老林，采集一味疗伤草药的主材",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：接近描述陈老根呼吸法运用场景的边界"
+    },
+    "144": {
+      "chapter": 144,
+      "core_event": "归途中遭遇小型山兽袭击，陈老根以呼吸法配合猎刀迅速制伏",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：陆烬旁观呼吸法实战运用，涉及C002能力展示"
+    },
+    "145": {
+      "chapter": 145,
+      "core_event": "陆烬询问陈老根那快速的几刀是怎么回事，陈老根只答是年轻时学的把式",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "146": {
+      "chapter": 146,
+      "core_event": "陆烬将奇异草叶拿给村里老人看，老人神色微变，称似是迷雾边缘才有的东西",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "需人工确认：涉及迷雾边缘物产，接近F004相关环境"
+    },
+    "147": {
+      "chapter": 147,
+      "core_event": "陆烬随陈老根入山采集药草，意外发现一处隐蔽的山洞入口",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "148": {
+      "chapter": 148,
+      "core_event": "陈老根谨慎探查山洞，发现洞壁有模糊的古老刻痕，似文字非文字",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：涉及古老刻痕，可能接近未知传承信息边界"
+    },
+    "149": {
+      "chapter": 149,
+      "core_event": "陈老根禁止陆烬深入，并讲述早年听闻的、关于山中怪事的零碎传闻",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "150": {
+      "chapter": 150,
+      "core_event": "两人采集完药草回村，途中遭遇野猪袭击，陈老根以娴熟手法化解",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "151": {
+      "chapter": 151,
+      "core_event": "回村后，陆烬帮陈老根处理药草，听其提及呼吸法对伤势恢复的效用",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "152": {
+      "chapter": 152,
+      "core_event": "陆烬夜里回想山洞与野猪袭击，对养父的身手和过往产生更多好奇",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null
+    },
+    "153": {
+      "chapter": 153,
+      "core_event": "陆烬跟随陈老根进山采药，发现一处被野兽破坏的旧猎屋",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "154": {
+      "chapter": 154,
+      "core_event": "陈老根在旧猎屋附近练习呼吸法，陆烬旁观感到好奇",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：C001旁观呼吸法练习，是否接近F002边界"
+    },
+    "155": {
+      "chapter": 155,
+      "core_event": "归途遇雨，两人在废弃山神庙避雨，发现庙内残破壁画",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "156": {
+      "chapter": 156,
+      "core_event": "陆烬询问壁画内容，陈老根含糊提及古老传说",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "157": {
+      "chapter": 157,
+      "core_event": "雨停返村，途中遭遇野猪，陈老根以技巧驱赶保护陆烬",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "158": {
+      "chapter": 158,
+      "core_event": "陆烬夜梦碎片景象，隐约与白日所见壁画相关，惊醒",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null
+    },
+    "159": {
+      "chapter": 159,
+      "core_event": "陆烬在雾隐村外山林中发现一块刻有奇异纹路的残碑，带回给陈老根看",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "160": {
+      "chapter": 160,
+      "core_event": "陈老根辨认残碑纹路，神色凝重但未解释，只叮嘱陆烬不得再深入山林",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "161": {
+      "chapter": 161,
+      "core_event": "村中猎户老周进山失踪三日，村民组织搜寻队，陆烬随陈老根参与",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "162": {
+      "chapter": 162,
+      "core_event": "搜寻队在迷雾边缘发现老周遗留的猎刀与血迹，但未见其人，气氛诡异",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "163": {
+      "chapter": 163,
+      "core_event": "陈老根私下检查血迹，发现异常干涸痕迹，独自在院中练习呼吸法至深夜",
+      "characters": [
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "164": {
+      "chapter": 164,
+      "core_event": "陆烬察觉养父异常，追问无果，夜间梦见婴儿时所见迷雾中的模糊光晕",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：梦境涉及降生异象（F004埋设），但未点明根源，是否触及边界？"
+    },
+    "165": {
+      "chapter": 165,
+      "core_event": "陈老根早起练习呼吸法，陆烬在旁看着但未询问",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "166": {
+      "chapter": 166,
+      "core_event": "陆烬随陈老根进山采药，在迷雾边缘发现异常脚印",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "167": {
+      "chapter": 167,
+      "core_event": "陆烬向村中老人打听迷雾传说，得知异象往事",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "需人工确认：提及迷雾异象往事，接近伏笔F004（神魂跨界异象）"
+    },
+    "168": {
+      "chapter": 168,
+      "core_event": "陈老根告诫陆烬远离迷雾，并展示呼吸法强身效果",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "169": {
+      "chapter": 169,
+      "core_event": "陆烬帮陈老根整理药材，发现一张陈旧兽皮图纸",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "170": {
+      "chapter": 170,
+      "core_event": "村中猎户带回迷雾附近发现的奇异金属碎片",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null
+    }
+  }
+}

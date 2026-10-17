@@ -1,0 +1,258 @@
+{
+  "meta": {
+    "vid": "V01",
+    "range": [
+      51,
+      80
+    ],
+    "node_chapters_in_range": [
+      60,
+      68,
+      74,
+      79
+    ],
+    "generated_at": "2026-10-05T05:48:51+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "approved_at": "2026-10-05",
+    "approved_note": "8章需人工确认全部放行（ch53/54/59/63/67/69/76/78）；F004编号标注为LLM生成层标错（实为迷雾异象铺垫，非脚本bug），不影响门禁"
+  },
+  "entries": {
+    "51": {
+      "chapter": 51,
+      "core_event": "陈老根在晨练呼吸法时，陆烬无意中注意到其呼吸节奏与迷雾异动微妙同步",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "52": {
+      "chapter": 52,
+      "core_event": "村中谣传陆烬是迷雾妖邪化身，几名青壮暗中商议要将他驱逐出村",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null
+    },
+    "53": {
+      "chapter": 53,
+      "core_event": "陆烬为自证清白，主动要求加入巡逻队深入迷雾外围探查异动源头",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": "需人工确认：接近F004伏笔（迷雾边缘异象），但未触及禁区根源"
+    },
+    "54": {
+      "chapter": 54,
+      "core_event": "巡逻队在迷雾边缘发现一块刻有奇异纹路的焦黑石碑碎片，无人能识",
+      "characters": [
+        "C001",
+        "C002",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": "需人工确认：发现疑似与皇室秘藏相关的残物，但未明确点明"
+    },
+    "55": {
+      "chapter": 55,
+      "core_event": "陈老根私下警告陆烬远离石碑，暗示其可能与陆烬的身世有关联",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "56": {
+      "chapter": 56,
+      "core_event": "陆烬将石碑碎片秘密藏匿，决心日后弄清其来历，村中谣言暂时平息",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "57": {
+      "chapter": 57,
+      "core_event": "陆烬被村民指派去迷雾边缘收集药草，遭遇小型异兽",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "58": {
+      "chapter": 58,
+      "core_event": "陆烬带回异兽爪牙，陈老根面色凝重但未解释来源",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "59": {
+      "chapter": 59,
+      "core_event": "村中老人讲述迷雾禁区曾有孩童失踪的旧事，暗示陆烬来历",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "接近F004埋设，需人工确认：村民旧事可能触及陆烬降生异象边缘"
+    },
+    "61": {
+      "chapter": 61,
+      "core_event": "陆烬发现陈老根深夜独自面对迷雾方向静立，未敢打扰",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "62": {
+      "chapter": 62,
+      "core_event": "村中决定加强对迷雾的巡逻，陆烬主动要求加入巡逻队",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "63": {
+      "chapter": 63,
+      "core_event": "陆烬在村里偶然听到关于自己降生时迷雾异象的零碎议论，心中疑窦更深",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：接近伏笔F004（降生异象）的提及边界，但未明确揭示根源"
+    },
+    "64": {
+      "chapter": 64,
+      "core_event": "陆烬在村口石碑旁发现模糊的刻痕与梦中场景相似",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null
+    },
+    "65": {
+      "chapter": 65,
+      "core_event": "陆烬向陈老根询问石碑刻痕来历，陈老根含糊其辞",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "66": {
+      "chapter": 66,
+      "core_event": "村民因近期怪事增多而议论纷纷，有人再次提及陆烬身世",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "67": {
+      "chapter": 67,
+      "core_event": "陆烬独自前往迷雾边缘试图寻找线索，却因心悸被迫折返",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：接近迷雾禁区探索边界，可能关联F004"
+    },
+    "69": {
+      "chapter": 69,
+      "core_event": "陈老根深夜外出，陆烬尾随发现其于村外对月调整呼吸",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：C002练习呼吸法被C001旁观，符合规则但接近边界"
+    },
+    "70": {
+      "chapter": 70,
+      "core_event": "陆烬根据所见询问呼吸法奥秘，陈老根只答强身健体之效",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "71": {
+      "chapter": 71,
+      "core_event": "陆烬随陈老根处理村中疫后事务，发现几处异常枯萎的植物",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "72": {
+      "chapter": 72,
+      "core_event": "陆烬在枯萎植物附近发现一块带有奇异纹路的碎陶片",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null
+    },
+    "73": {
+      "chapter": 73,
+      "core_event": "陈老根见到碎陶片神色微变，告诫陆烬勿再深入追查",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "75": {
+      "chapter": 75,
+      "core_event": "陆烬暗中记录陶片纹路，与村中流传的古老传说片段比对",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null
+    },
+    "76": {
+      "chapter": 76,
+      "core_event": "陆烬在村志残页中看到与陶片纹路相似的模糊图案，旁注'人皇'二字",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：涉及F001伏笔（皇室秘藏人皇鼎碎片）的初步线索，但尚未点明，仅为图案相似与文字提及"
+    },
+    "77": {
+      "chapter": 77,
+      "core_event": "陈老根察觉陆烬的探究，首次严肃谈及'有些东西知道了便是祸端'",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "78": {
+      "chapter": 78,
+      "core_event": "陆烬从村民恐慌对话中得知自己降生时的迷雾异象，引发自我怀疑",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "需人工确认：接近伏笔F004的初步信息暴露边界"
+    },
+    "80": {
+      "chapter": 80,
+      "core_event": "村中长老秘密会议决定暗中试探陆烬与迷雾的关系，陈老根察觉异常带陆烬提前离村避风头",
+      "characters": [
+        "C001",
+        "C002",
+        "C004",
+        "C006"
+      ],
+      "boundary_note": null
+    }
+  }
+}

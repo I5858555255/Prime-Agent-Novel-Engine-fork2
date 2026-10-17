@@ -1,0 +1,813 @@
+{
+  "nodes": [
+    {
+      "id": "N001",
+      "type": "main_plot",
+      "volume": "V01",
+      "chapter_target": 1,
+      "description": "神魂跨界，陆烬以婴儿形态降生雾隐村外迷雾边缘，异象引发村民恐慌",
+      "depends_on": [],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "惊悚",
+      "foreshadow_links": [
+        "F004"
+      ]
+    },
+    {
+      "id": "N002",
+      "type": "character_development",
+      "volume": "V01",
+      "chapter_target": 2,
+      "description": "陈老根抱婴归家，取名'陆烬'，村中议论纷纷",
+      "depends_on": [
+        "N001"
+      ],
+      "required_characters": [
+        "C001",
+        "C002"
+      ],
+      "emotional_tone": "探索",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N003",
+      "type": "foreshadow",
+      "volume": "V01",
+      "chapter_target": 5,
+      "description": "陆烬幼年体弱多病，极对浊气异常敏感，首次体质伏笔",
+      "depends_on": [
+        "N002"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "疑惑",
+      "foreshadow_links": [
+        "F004"
+      ]
+    },
+    {
+      "id": "N004",
+      "type": "main_plot",
+      "volume": "V01",
+      "chapter_target": 9,
+      "description": "陈老根初传呼吸法残篇，只言'强身健体'不提修炼",
+      "depends_on": [
+        "N002"
+      ],
+      "required_characters": [
+        "C001",
+        "C002"
+      ],
+      "emotional_tone": "探索",
+      "foreshadow_links": [
+        "F002"
+      ]
+    },
+    {
+      "id": "N005",
+      "type": "foreshadow",
+      "volume": "V01",
+      "chapter_target": 17,
+      "description": "陆烬抱得迷雾边界奇异枯枝，陈老根发现后神色骤变，严令远离迷雾",
+      "depends_on": [
+        "N003"
+      ],
+      "required_characters": [
+        "C001",
+        "C002"
+      ],
+      "emotional_tone": "疑惑",
+      "foreshadow_links": [
+        "F004"
+      ]
+    },
+    {
+      "id": "N006",
+      "type": "foreshadow",
+      "volume": "V01",
+      "chapter_target": 43,
+      "description": "陆烬体内呼吸法运转时与迷雾方向隐隐共鸣，他自己也未曾察觉",
+      "depends_on": [
+        "N004"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "疑惑",
+      "foreshadow_links": [
+        "F004"
+      ]
+    },
+    {
+      "id": "N007",
+      "type": "main_plot",
+      "volume": "V01",
+      "chapter_target": 50,
+      "description": "阶段收束：迷雾异动被村人察觉加剧，陆烬立誓要弄清自己的来历",
+      "depends_on": [
+        "N005",
+        "N006"
+      ],
+      "required_characters": [
+        "C001",
+        "C002"
+      ],
+      "emotional_tone": "决意",
+      "foreshadow_links": [
+        "F004"
+      ]
+    },
+    {
+      "id": "N008",
+      "type": "character_development",
+      "volume": "V01",
+      "chapter_target": 60,
+      "description": "陆烬旁观陈老根出手镇压村中骚乱，展现超出武道范畴的深藏武艺",
+      "depends_on": [
+        "N007"
+      ],
+      "required_characters": [
+        "C001",
+        "C002"
+      ],
+      "emotional_tone": "震撼",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N009",
+      "type": "main_plot",
+      "volume": "V01",
+      "chapter_target": 68,
+      "description": "宵小趁夜潜入雾隐村，陈老根与陆烬合力抵御，陆烬首次实战",
+      "depends_on": [
+        "N008"
+      ],
+      "required_characters": [
+        "C001",
+        "C002"
+      ],
+      "emotional_tone": "抗争",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N010",
+      "type": "world_expansion",
+      "volume": "V01",
+      "chapter_target": 74,
+      "description": "陆烬独立诊断出瘟疫源头与浊气异变有关",
+      "depends_on": [
+        "N009"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "疑惑",
+      "foreshadow_links": [
+        "F004"
+      ]
+    },
+    {
+      "id": "N011",
+      "type": "side_plot",
+      "volume": "V01",
+      "chapter_target": 79,
+      "description": "有长老提议将陆烬送往迷雾禁区'验证'其身份，陈老根强烈反对引发冲突",
+      "depends_on": [
+        "N010"
+      ],
+      "required_characters": [
+        "C001",
+        "C002"
+      ],
+      "emotional_tone": "Σ机",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N012",
+      "type": "side_plot",
+      "volume": "V01",
+      "chapter_target": 90,
+      "description": "巡查队武官对陆烬体质产生兴趣，离去前留下县城武馆招收弟子的线索",
+      "depends_on": [
+        "N011"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "探索",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N013",
+      "type": "side_plot",
+      "volume": "V01",
+      "chapter_target": 98,
+      "description": "陆烬;中救助一名受伤旅人，埋下人脉伏笔",
+      "depends_on": [
+        "N012"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "探索",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N014",
+      "type": "main_plot",
+      "volume": "V01",
+      "chapter_target": 100,
+      "description": "阶段收束：陆烬正式踏入大乾皇朝体系，雾隐村生活落幕",
+      "depends_on": [
+        "N012",
+        "N013"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "开阔",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N015",
+      "type": "main_plot",
+      "volume": "V01",
+      "chapter_target": 316,
+      "description": "陆烬首次亲眼目睹修士手段，确认'不属于凡人的力量'真实存在，决心寻路而入",
+      "depends_on": [
+        "N014"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "决意",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N016",
+      "type": "foreshadow",
+      "volume": "V02",
+      "chapter_target": 489,
+      "description": "陆烬回雾隐村，沈无涯以采购药材之名出现，交付修真界对迷雾禁区的传闻卷",
+      "depends_on": [
+        "N015"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "沉淀",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N017",
+      "type": "foreshadow",
+      "volume": "V02",
+      "chapter_target": 567,
+      "description": "陆烬意识到皇室每次'交易'实为乾武帝刻意设计的亏本交易，赎罪真相浮现",
+      "depends_on": [
+        "N015"
+      ],
+      "required_characters": [
+        "C001",
+        "C007"
+      ],
+      "emotional_tone": "疑惑",
+      "foreshadow_links": [
+        "F001"
+      ]
+    },
+    {
+      "id": "N018",
+      "type": "foreshadow",
+      "volume": "V02",
+      "chapter_target": 621,
+      "description": "秘使嘱托陆烬留意人皇鼎碎Ƭ相关古籍记载，以'旧书商'Ϊ暗语联络",
+      "depends_on": [
+        "N017"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "沉淀",
+      "foreshadow_links": [
+        "F001"
+      ]
+    },
+    {
+      "id": "N019",
+      "type": "main_plot",
+      "volume": "V02",
+      "chapter_target": 652,
+      "description": "陆烬因缘际会接触云隐坊市，确认仙门测试机会",
+      "depends_on": [
+        "N018"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "ϣ望",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N020",
+      "type": "foreshadow",
+      "volume": "V03",
+      "chapter_target": 702,
+      "description": "陆烬第一次听到摄魂阁的寻子——组֯暗中收买'神魂特异者'",
+      "depends_on": [
+        "N019"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "疑惑",
+      "foreshadow_links": [
+        "F003"
+      ]
+    },
+    {
+      "id": "N021",
+      "type": "character_development",
+      "volume": "V03",
+      "chapter_target": 687,
+      "description": "沈֪΢出手Ϊ陆烬解Χ，上官烈心结埋下",
+      "depends_on": [
+        "N019"
+      ],
+      "required_characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "emotional_tone": "探索",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N022",
+      "type": "side_plot",
+      "volume": "V03",
+      "chapter_target": 780,
+      "description": "黑市入场֧线：陆烬以信誉担保完成送信任务，全程无战斗",
+      "depends_on": [
+        "N021"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "抗争",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N023",
+      "type": "foreshadow",
+      "volume": "V03",
+      "chapter_target": 786,
+      "description": "陆烬刻下ծ符作Ϊ担保，成Ϊ摄魂阁后续׷踪线索",
+      "depends_on": [
+        "N022"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "Σ机",
+      "foreshadow_links": [
+        "F003"
+      ]
+    },
+    {
+      "id": "N024",
+      "type": "foreshadow",
+      "volume": "V03",
+      "chapter_target": 848,
+      "description": "陆烬看到'以魂Ϊ引，假托飞升'的残破笔记，人造飞升概念第一次暴露",
+      "depends_on": [
+        "N020"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "疑惑",
+      "foreshadow_links": [
+        "F003"
+      ]
+    },
+    {
+      "id": "N025",
+      "type": "main_plot",
+      "volume": "V03",
+      "chapter_target": 988,
+      "description": "陆烬筑基突破，正式获得《太上养魂经》残卷",
+      "depends_on": [
+        "N023",
+        "N024"
+      ],
+      "required_characters": [
+        "C001",
+        "C006"
+      ],
+      "emotional_tone": "破茧",
+      "foreshadow_links": [
+        "F002"
+      ]
+    },
+    {
+      "id": "N026",
+      "type": "foreshadow",
+      "volume": "V04",
+      "chapter_target": 918,
+      "description": "苏问魂揭露摄魂阁'不只猎魂，他们在造神或造门'",
+      "depends_on": [
+        "N025"
+      ],
+      "required_characters": [
+        "C001",
+        "C006"
+      ],
+      "emotional_tone": "震撼",
+      "foreshadow_links": [
+        "F003"
+      ]
+    },
+    {
+      "id": "N027",
+      "type": "character_development",
+      "volume": "V04",
+      "chapter_target": 1128,
+      "description": "陆烬与荒尾信任建立完成三步验证，荒尾说出妖族世代的预言",
+      "depends_on": [
+        "N025"
+      ],
+      "required_characters": [
+        "C001",
+        "C008"
+      ],
+      "emotional_tone": "沉淀",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N028",
+      "type": "world_expansion",
+      "volume": "V04",
+      "chapter_target": 1130,
+      "description": "陆烬在远古仙妖大战遗迹感Ӧ到比所有残留意־更古老的余韵",
+      "depends_on": [
+        "N027"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "疑惑",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N029",
+      "type": "foreshadow",
+      "volume": "V04",
+      "chapter_target": 1290,
+      "description": "陆烬以人皇古玉催动护盾力抗Ѫڤ教长老，事后痛心钝痛，首次意识到古玉代价",
+      "depends_on": [
+        "N018"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "Σ机",
+      "foreshadow_links": [
+        "F001"
+      ]
+    },
+    {
+      "id": "N030",
+      "type": "main_plot",
+      "volume": "V04",
+      "chapter_target": 1422,
+      "description": "金丹突破，首次直面仙门刻意隐瞒凡人修仙的真相一角",
+      "depends_on": [
+        "N026",
+        "N029"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "开阔",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N031",
+      "type": "foreshadow",
+      "volume": "V05",
+      "chapter_target": 1380,
+      "description": "陆烬在皇室藏书中看到'天之上有域，域之上有界'，不解其意但记下",
+      "depends_on": [
+        "N030"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "疑惑",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N032",
+      "type": "character_development",
+      "volume": "V05",
+      "chapter_target": 1580,
+      "description": "沈知微私下质疑渐进改革路线，陆烬回Ӧ'让人道取代仙门成Ϊ新秩序'",
+      "depends_on": [
+        "N031"
+      ],
+      "required_characters": [
+        "C001",
+        "C003"
+      ],
+      "emotional_tone": "抗争",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N033",
+      "type": "main_plot",
+      "volume": "V05",
+      "chapter_target": 1843,
+      "description": "陆烬确认'人道'并非仙门的低阶替代Ʒ，而是独立于成仙之外的另一条大道",
+      "depends_on": [
+        "N032"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "震撼",
+      "foreshadow_links": [
+        "F001"
+      ]
+    },
+    {
+      "id": "N034",
+      "type": "foreshadow",
+      "volume": "V06",
+      "chapter_target": 2011,
+      "description": "心魔幻境中李淳ָ责陆烬'借壳而活'，两个自己开始相互质疑",
+      "depends_on": [
+        "N033"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "背叛",
+      "foreshadow_links": [
+        "F004"
+      ]
+    },
+    {
+      "id": "N035",
+      "type": "main_plot",
+      "volume": "V06",
+      "chapter_target": 2157,
+      "description": "陆烬顿悟'从李淳走向陆烬'的路径本身就是完整的，心魔消ɢ",
+      "depends_on": [
+        "N034"
+      ],
+      "required_characters": [
+        "C001",
+        "C003"
+      ],
+      "emotional_tone": "蜕变",
+      "foreshadow_links": [
+        "F004"
+      ]
+    },
+    {
+      "id": "N036",
+      "type": "main_plot",
+      "volume": "V06",
+      "chapter_target": 2200,
+      "description": "陆烬化神突破，主动ѡ择ֱ面天道布局而非被动接受命运",
+      "depends_on": [
+        "N035"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "蜕变",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N037",
+      "type": "foreshadow",
+      "volume": "V07",
+      "chapter_target": 2413,
+      "description": "陆烬揭出α回音机制铁证：所有ƽ安信均Ϊ同一人按ģ板抄直",
+      "depends_on": [
+        "N036"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "震撼",
+      "foreshadow_links": [
+        "F007"
+      ]
+    },
+    {
+      "id": "N038",
+      "type": "main_plot",
+      "volume": "V07",
+      "chapter_target": 2478,
+      "description": "陆烬布下古玉结界，沈֪΢、上官烈、柳踏歌三才护魂阵坐镇，神魂离体进入墟界",
+      "depends_on": [
+        "N037"
+      ],
+      "required_characters": [
+        "C001",
+        "C003",
+        "C004",
+        "C005"
+      ],
+      "emotional_tone": "决意",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N039",
+      "type": "main_plot",
+      "volume": "V07",
+      "chapter_target": 2600,
+      "description": "陆烬发现墟界深处存在远古人皇体系的遗迹入口",
+      "depends_on": [
+        "N038"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "惊悚",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N040",
+      "type": "foreshadow",
+      "volume": "V08",
+      "chapter_target": 2499,
+      "description": "上官鸿̹白体内藏太初议会时代残脉，被仙门旧部暂缓提取",
+      "depends_on": [
+        "N039"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "震撼",
+      "foreshadow_links": [
+        "F006"
+      ]
+    },
+    {
+      "id": "N041",
+      "type": "foreshadow",
+      "volume": "V08",
+      "chapter_target": 2738,
+      "description": "铁面ִ政官揭现传国玉玺是共守派带出的核心封װ体，落入大乾皇室之手",
+      "depends_on": [
+        "N040"
+      ],
+      "required_characters": [
+        "C001",
+        "C007"
+      ],
+      "emotional_tone": "震撼",
+      "foreshadow_links": [
+        "F006"
+      ]
+    },
+    {
+      "id": "N042",
+      "type": "side_plot",
+      "volume": "V08",
+      "chapter_target": 2803,
+      "description": "柳踏歌察觉求和派联络Ա行动异常，陆烬决定'持续观察、定向Ͷ放'",
+      "depends_on": [
+        "N041"
+      ],
+      "required_characters": [
+        "C001",
+        "C005"
+      ],
+      "emotional_tone": "Σ机",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N043",
+      "type": "main_plot",
+      "volume": "V08",
+      "chapter_target": 3000,
+      "description": "陆烬确认自己是人道体系在当代的Ψ一完整继承可能",
+      "depends_on": [
+        "N042"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "决意",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N044",
+      "type": "side_plot",
+      "volume": "V09",
+      "chapter_target": 3025,
+      "description": "乾武帝与陆烬就鼎碎Ƭ纪念碑方案达成共识，乾武帝亲自奠基",
+      "depends_on": [
+        "N043"
+      ],
+      "required_characters": [
+        "C001",
+        "C007"
+      ],
+      "emotional_tone": "沉淀",
+      "foreshadow_links": [
+        "F001"
+      ]
+    },
+    {
+      "id": "N045",
+      "type": "foreshadow",
+      "volume": "V09",
+      "chapter_target": 3324,
+      "description": "太初议会反对派文献揭示ԭ核Ϊ'七极环绕，一Ԫ居中'的八Ԫ之体",
+      "depends_on": [
+        "N044"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "疑惑",
+      "foreshadow_links": [
+        "F005"
+      ]
+    },
+    {
+      "id": "N046",
+      "type": "main_plot",
+      "volume": "V09",
+      "chapter_target": 3400,
+      "description": "陆烬以人道之力击破仙门对'成仙资格'的垄断叙事",
+      "depends_on": [
+        "N045"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "终局",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N047",
+      "type": "foreshadow",
+      "volume": "V10",
+      "chapter_target": 3397,
+      "description": "陆烬顿悟ԭ核体系ȱ的不是碎Ƭ而是能控制节奏的'心跳'，提出法则反馈+自由市场双轨机制",
+      "depends_on": [
+        "N046"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "沉淀",
+      "foreshadow_links": []
+    },
+    {
+      "id": "N048",
+      "type": "foreshadow",
+      "volume": "V10",
+      "chapter_target": 3438,
+      "description": "陆烬从守ҹ人处获֪门о脱落真相，定λ地脉深处完成门о回收",
+      "depends_on": [
+        "N047"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "震撼",
+      "foreshadow_links": [
+        "F005"
+      ]
+    },
+    {
+      "id": "N049",
+      "type": "main_plot",
+      "volume": "V10",
+      "chapter_target": 3800,
+      "description": "陆烬以人道重定仙天秩序，完成传承仪式后主动退场",
+      "depends_on": [
+        "N048"
+      ],
+      "required_characters": [
+        "C001"
+      ],
+      "emotional_tone": "终局",
+      "foreshadow_links": [
+        "F005"
+      ]
+    }
+  ],
+  "edges": []
+}

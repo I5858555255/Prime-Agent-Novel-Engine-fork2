@@ -1,0 +1,64 @@
+{
+  "C001": {
+    "name": "陆烬",
+    "realm_lock": {
+      "current": "凡人体质",
+      "locked_until_chapter": 653,
+      "reason": "第752章前需完整走完人间武林→散修→坊市→仙门测试的过渡路径，拒绝'突然拜师'式跳跃；炼气圆满至筑基发生于第三卷(653-988章)"
+    }
+  },
+  "C002": {
+    "name": "陈老根",
+    "plot_lock": {
+      "first_appearance_chapter": 2,
+      "identity_reveal_chapter": 61,
+      "reason": "陈老根'废弃武者'身份需在第60章展露武艺后、第61章才正式松口，之前只作为普通养父示人，保留其'有秘密的观察者'悬念"
+    }
+  },
+  "C003": {
+    "name": "沈知微",
+    "plot_lock": {
+      "first_appearance_chapter": 688,
+      "identity_reveal_chapter": 1580,
+      "reason": "第688章首次登场为道友；其'加速主义'改革理念分歧需延后至第五卷阶段六(1580-1595章)才展开，避免过早暴露立场冲突"
+    }
+  },
+  "C004": {
+    "name": "上官烈",
+    "plot_lock": {
+      "first_appearance_chapter": 684,
+      "reason": "第684章正式登场，言辞倨傲，出身仙门内部重要脉系，与陆烬的心结需经第687-689章逐步铺垫"
+    }
+  },
+  "C005": {
+    "name": "柳踏歌",
+    "plot_lock": {
+      "first_appearance_chapter": 714,
+      "identity_reveal_chapter": null,
+      "reason": "柳踏歌身份需长期保持模糊性，不设定确切揭露章节，由后续剧情按需推进，避免过早定性"
+    }
+  },
+  "C006": {
+    "name": "苏问魂",
+    "plot_lock": {
+      "first_appearance_chapter": 890,
+      "reason": "苏问魂在第三卷阶段五(890-939章)'疯魂踪迹'登场，其传功条件（协助完成不可能遗愿）需在阶段六(940-989章)兑现"
+    }
+  },
+  "C007": {
+    "name": "乾武帝",
+    "plot_lock": {
+      "first_appearance_chapter": 387,
+      "identity_reveal_chapter": 567,
+      "reason": "第二卷阶段二(387-436章)'皇室秘使'登场，其'亏本交易'赎罪真相需延后至阶段六(567-569章)方可揭示"
+    }
+  },
+  "C008": {
+    "name": "荒尾",
+    "plot_lock": {
+      "first_appearance_chapter": 1063,
+      "identity_reveal_chapter": 1128,
+      "reason": "信任建立需经第1063-1068、1089-1093、1124-1128章'试探→交换→验证'三阶段，不可一步到位透露妖族立场"
+    }
+  }
+}

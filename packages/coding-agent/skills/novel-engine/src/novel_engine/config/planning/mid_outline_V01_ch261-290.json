@@ -1,0 +1,328 @@
+{
+  "meta": {
+    "vid": "V01",
+    "range": [
+      261,
+      290
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-12T02:08:01+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "last_run": true
+    },
+    "approved_at": "2026-10-12"
+  },
+  "entries": {
+    "261": {
+      "chapter": 261,
+      "core_event": "陈老根带陆烬进县城，目睹街头医馆被神秘修士以神念探查，陆烬震惊",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "262": {
+      "chapter": 262,
+      "core_event": "陈老根向陆烬透露迷雾禁区近期异动，警告其不要靠近危险区域边缘",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "263": {
+      "chapter": 263,
+      "core_event": "陆烬在村中偶遇云游道人，道人对其气质产生好奇但未深究，暗中观察",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "264": {
+      "chapter": 264,
+      "core_event": "陈老根独自练习呼吸法，陆烬在旁旁观，感受到养父气息变化但无个人修为提升",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "265": {
+      "chapter": 265,
+      "core_event": "县城爆发小规模江湖争斗，陆烬与陈老根置身事外，目睹修士间接手段介入凡人纠纷",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "266": {
+      "chapter": 266,
+      "core_event": "陈老根决定带陆烬前往更偏远的山村暂居，以避开城中日益频繁的修士踪迹",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "267": {
+      "chapter": 267,
+      "core_event": "陆烬县城医馆帮陈老根抓药，旁听医者讨论迷雾雾毒病症",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "268": {
+      "chapter": 268,
+      "core_event": "陈老根夜间独自在院中吐纳，陆烬隔窗旁观未介入",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "269": {
+      "chapter": 269,
+      "core_event": "商队进镇带来南方消息，江湖门派暗探在集市窥视陆烬",
+      "characters": [
+        "C001",
+        "C002",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "270": {
+      "chapter": 270,
+      "core_event": "陆烬替陈老根跑腿送信至镇外驿站，途中遭遇马匪劫掠",
+      "characters": [
+        "C001",
+        "C002",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "271": {
+      "chapter": 271,
+      "core_event": "陈老根讲述年轻时游历见闻，暗示自己曾有江湖身份",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：此章涉及陈老根过往背景细节，需确认是否触及“身世之谜隐隐浮现”红线及“真实来历被完全揭穿”禁令",
+      "status": "approved",
+      "audit_note": "放行：讲述游历见闻暗示曾有江湖背景，未揭穿真实来历（废弃武者/迷雾观察者身份未提），符合 forbidden#2 边界；参照 ch35/ch45 先例"
+    },
+    "272": {
+      "chapter": 272,
+      "core_event": "迷雾禁区边界出现轻微异象，村民恐慌，陆烬被陈老根安抚",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "273": {
+      "chapter": 273,
+      "core_event": "陈老根在村口目睹远处雾气回流，神色凝重，未向陆烬解释",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "274": {
+      "chapter": 274,
+      "core_event": "陆烬在溪边捡拾碎石，发现一枚刻有模糊符文的灰石碎片",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "275": {
+      "chapter": 275,
+      "core_event": "陈老根将灰石藏入墙缝，夜间独自擦拭旧木箱，陆烬在窗外窥见",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "276": {
+      "chapter": 276,
+      "core_event": "邻村游方郎中来村义诊，陈老根拒绝让陆烬接受检查，态度强硬",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "277": {
+      "chapter": 277,
+      "core_event": "暴雨夜雷击村头老槐，陆烬惊醒，发现窗外迷雾比往日更近",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：迷雾逼近可能关联F004异象余波，需确认是否触及禁区异变根源边界",
+      "status": "approved",
+      "audit_note": "放行：暴雨夜迷雾更近为气氛描写，未点明异变根源，符合 forbidden#3；audit 标注 F004 有误（F004=线粒体/地球起源，与迷雾无关，应关联 forbidden#3）"
+    },
+    "278": {
+      "chapter": 278,
+      "core_event": "陈老根清晨练功吐纳，陆烬旁观后感到身体异常轻盈，产生疑惑",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "279": {
+      "chapter": 279,
+      "core_event": "陈老根讲述昔日江湖恩怨，暗示迷雾禁区危险",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "280": {
+      "chapter": 280,
+      "core_event": "陆烬在村寨集市遭遇地痞刁难，陈老根出手化解",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "281": {
+      "chapter": 281,
+      "core_event": "陈老根独自院中吐纳，陆烬旁观并提及强身健体",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "282": {
+      "chapter": 282,
+      "core_event": "村民议论迷雾异象，陆烬隐约察觉身世异常",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "283": {
+      "chapter": 283,
+      "core_event": "陈老根拒绝回答陆烬关于父亲的问题，气氛压抑",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "284": {
+      "chapter": 284,
+      "core_event": "县令巡查村寨，查问迷雾禁区传闻，陆烬躲藏",
+      "characters": [
+        "C001",
+        "C002",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "285": {
+      "chapter": 285,
+      "core_event": "陆烬在县城药铺帮工，因识得草药被掌柜看中，引出江湖底层交易网络",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "286": {
+      "chapter": 286,
+      "core_event": "陈老根夜间独自吐纳，陆烬旁观察觉其气息异常，首次质疑养父凡人身份",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "287": {
+      "chapter": 287,
+      "core_event": "县城爆发瘟疫，陆烬协助分药，结识行脚医官，听闻迷雾禁区外的传说",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "288": {
+      "chapter": 288,
+      "core_event": "神秘买家收买陆烬记忆中的草药配方，留下银色信物，引发追踪隐患",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "289": {
+      "chapter": 289,
+      "core_event": "陈老根隐瞒受伤真相，陆烬发现其藏匿的旧式护身符，困惑加剧",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "290": {
+      "chapter": 290,
+      "core_event": "陆烬随陈老根回村暂避，村中老人言语暗示陈老根非本地人，身世谜团加深",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：陈老根过往线索进一步浮现，需确认是否触及\"真实来历被完全揭穿\"边界",
+      "status": "approved",
+      "audit_note": "放行：村中老人含糊暗示非本地人，属第三方模糊线索，未揭穿真实来历，同 ch45 先例"
+    }
+  }
+}

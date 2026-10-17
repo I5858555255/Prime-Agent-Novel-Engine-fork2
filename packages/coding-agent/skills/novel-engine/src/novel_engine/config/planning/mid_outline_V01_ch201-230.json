@@ -1,0 +1,289 @@
+{
+  "meta": {
+    "vid": "V01",
+    "range": [
+      201,
+      230
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-10T16:57:19+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "approved_at": "2026-10-11"
+  },
+  "entries": {
+    "201": {
+      "chapter": 201,
+      "core_event": "陈老根在田埂上秘密练习呼吸法，陆烬在旁默默观看未发声",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "202": {
+      "chapter": 202,
+      "core_event": "镇上粮行突发米价波动，村民抱怨，陈老根提醒陆烬留意市井人心",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "203": {
+      "chapter": 203,
+      "core_event": "神秘货郎进村兜售杂药，陆烬因嗅觉敏锐察觉异味而心生警惕",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "204": {
+      "chapter": 204,
+      "core_event": "陈老根修补渔网时提及旧事，暗示自身过往与山野隐居有关",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "205": {
+      "chapter": 205,
+      "core_event": "雾隐村边缘出现零星白雾，陆烬感觉不安，陈老根叮嘱勿靠近禁区",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "206": {
+      "chapter": 206,
+      "core_event": "村中孩童玩耍时误触迷雾边缘，受惊而啼，陈老根迅速将其拉回",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": "需人工确认：涉及迷雾禁区异变边缘描写，需确认是否触犯'迷雾禁区异变根源被点明'红线"
+    },
+    "207": {
+      "chapter": 207,
+      "core_event": "陆烬随陈老根前往县城，集市上遭遇江湖帮派冲突，陈老根以呼吸法强身避伤",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "208": {
+      "chapter": 208,
+      "core_event": "陆烬在客栈目睹修士斗法，首次直观感受超凡力量，内心震撼",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：涉及修士手段展示，接近卷高潮ch316的铺垫边界，但尚未触及“陆烬获得体系”红线"
+    },
+    "209": {
+      "chapter": 209,
+      "core_event": "陈老根安抚惊恐的陆烬，讲述早年江湖见闻，隐晦提及迷雾禁区传闻",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：提及迷雾禁区，需确认未点明异变根源（禁止事项）"
+    },
+    "210": {
+      "chapter": 210,
+      "core_event": "陆烬在县城角落捡到旧物时一阵头晕目眩（生理反应），陈老根察觉异样并制止其继续把玩",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "211": {
+      "chapter": 211,
+      "core_event": "陈老根带陆烬离开县城返回雾隐村，途中遭遇野兽袭击，陈老根出手化解",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "212": {
+      "chapter": 212,
+      "core_event": "回到村中，陆烬因受惊发烧，陈老根教导日常养生，陆烬被动接受建议",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "213": {
+      "chapter": 213,
+      "core_event": "陆烬随陈老根在集市贩卖草药，因孩童喧闹引发小冲突被家丁训斥",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "214": {
+      "chapter": 214,
+      "core_event": "陈老根深夜独自演练呼吸法，陆烬在门外旁观其气息平稳异常",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "215": {
+      "chapter": 215,
+      "core_event": "江湖散修误入雾隐村外围，试图探查迷雾禁区边缘被雾气驱赶",
+      "characters": [
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "216": {
+      "chapter": 216,
+      "core_event": "陆烬帮村中孩童修补渔网，意外发现网眼中有奇异发光鳞片",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null
+    },
+    "217": {
+      "chapter": 217,
+      "core_event": "陈老根带陆烬进山采药，避开迷雾禁区核心区域并警告其危险",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "218": {
+      "chapter": 218,
+      "core_event": "陆烬在溪边清洗鳞片时溪水泛起异常涟漪（外界视觉异象），陈老根迅速介入平息",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "219": {
+      "chapter": 219,
+      "core_event": "陆烬帮陈老根整理草药，无意中发现一本残破笔记，隐约记得是呼吸法篇目",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "220": {
+      "chapter": 220,
+      "core_event": "陆烬在县城集市目睹修士争执，确认超凡力量存在并生离意",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "221": {
+      "chapter": 221,
+      "core_event": "镇上米粮紧缺，陆烬随陈老根下山采购，目睹商队被不明势力拦截",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null
+    },
+    "222": {
+      "chapter": 222,
+      "core_event": "遭遇匪徒时，陆烬本能反应极快，陈老根暗中运用呼吸法压制气息护人",
+      "characters": [
+        "C001",
+        "C002",
+        "C004"
+      ],
+      "boundary_note": null
+    },
+    "223": {
+      "chapter": 223,
+      "core_event": "回到雾隐村，陈老根因旧疾复发卧床，陆烬照料并回想身世疑云",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "224": {
+      "chapter": 224,
+      "core_event": "陈老根稍愈，透露迷雾深处近日异动，禁止陆烬靠近边界区域",
+      "characters": [
+        "C001",
+        "C002",
+        "C005"
+      ],
+      "boundary_note": null
+    },
+    "225": {
+      "chapter": 225,
+      "core_event": "陈老根因旧伤复发，限制陆烬夜间活动范围以保安全",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "226": {
+      "chapter": 226,
+      "core_event": "雾隐村集市物价波动，陆烬尝试帮陈老根核算账目显露聪慧",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "227": {
+      "chapter": 227,
+      "core_event": "外来行脚商人驻足村口，询问迷雾禁区边缘的异常传闻",
+      "characters": [
+        "C002",
+        "未知村民角色"
+      ],
+      "boundary_note": "需人工确认：触及迷雾禁区异变根源伏笔边界，仅停留在传闻层面"
+    },
+    "228": {
+      "chapter": 228,
+      "core_event": "陆烬在溪边捡拾奇石，陈老根严厉禁止其靠近深水区域",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "229": {
+      "chapter": 229,
+      "core_event": "陈老根向陆烬讲述凡人江湖规矩，强调低调隐忍生存之道",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    },
+    "230": {
+      "chapter": 230,
+      "core_event": "暴雨夜屋漏，陆烬协助修补屋顶，陈老根感叹家道艰难",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null
+    }
+  }
+}
