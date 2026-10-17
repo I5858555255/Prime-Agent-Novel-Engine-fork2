@@ -66,3 +66,15 @@ packages/coding-agent/skills/novel-engine/src/novel_engine/scripts/diagnostic_di
 # Local manual runtime backups (state snapshots, not source code)
 packages/coding-agent/skills/novel-engine/src/novel_engine/manual_backup_ch5_pre_20260923-113045/
 packages/coding-agent/skills/novel-engine/src/novel_engine/manual_backup_ch6_pre_20260923-1620/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+pip-wheel-metadata/
