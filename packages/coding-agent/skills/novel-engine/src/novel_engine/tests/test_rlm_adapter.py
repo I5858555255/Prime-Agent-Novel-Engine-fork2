@@ -132,9 +132,8 @@ class TestNovelRLMAdapterWithKernel:
 
         mock_agent_msg = MagicMock()
         mock_agent_msg.send = AsyncMock()
-        mock_agent_msg.recv = AsyncMock(return_value=[
-            ({"scene_num": 1}, MagicMock(scene_id=1, scene_text="x" * 100, beats=[])),
-        ])
+        mock_reply = [(MagicMock(scene_num=1), MagicMock(scene_id=1, scene_text="x" * 100, beats=[]))]
+        mock_agent_msg.recv = AsyncMock(return_value=mock_reply)
 
         _KERNEL["rlm"] = mock_rlm
         _KERNEL["agent_message"] = mock_agent_msg
@@ -150,6 +149,19 @@ class TestNovelRLMAdapterWithKernel:
         await adapter.run_chapter(1)
 
         trace = adapter.trace()
+        rlm_entries = [t for t in trace if t.get("phase") == "rlm_dispatch"]
+        assert len(rlm_entries) >= 2  # attempt + success
+        assert rlm_entries[0]["status"] == "attempt"
+        assert rlm_entries[1]["status"] == "success"
+        trace = adapter.trace()
+        rlm_entries = [t for t in trace if t.get("phase") == "rlm_dispatch"]
+        assert len(rlm_entries) >= 1
+        assert rlm_entries[0]["status"] == "success"
+        trace = adapter.trace()
+        trace = adapter.trace()
+        rlm_entries = [t for t in trace if t.get("phase") == "rlm_dispatch"]
+        assert len(rlm_entries) >= 1
+        assert rlm_entries[0]["status"] == "success"
         rlm_entries = [t for t in trace if t.get("phase") == "scene_group_rlm"]
         assert len(rlm_entries) >= 1
         assert rlm_entries[0]["status"] == "ok"

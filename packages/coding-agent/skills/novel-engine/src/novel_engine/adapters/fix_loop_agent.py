@@ -1,15 +1,7 @@
 """Agent-driven fix loop router for novel production.
 
-When Prime-Agent RLM kernel is available, the fix loop can leverage
-agent reasoning to decide remediation strategy instead of hardcoded
-deterministic branching.
-
-Decision flow (per fix-loop iteration):
-  1. Collect review issues + deterministic gate issues
-  2. Present structured diagnostic to agent
-  3. Agent returns recommended action: patch | rewrite_scene | rewrite_chapter | stop
-  4. Router executes the recommended action
-  5. Loop continues or terminates based on agent decision
+This module provides decision-making logic for the fix loop,
+determining whether to patch, rewrite, or stop based on quality signals.
 """
 
 from __future__ import annotations
@@ -53,15 +45,15 @@ class FixRecommendation:
 
 class FixLoopAgent:
     """Analyzes fix-loop state and recommends remediation strategy.
-
-    This is a thin wrapper around the domain tools that structures
-    the diagnostic context for Prime-Agent reasoning. When no RLM
-    kernel is present, it returns a default recommendation to let
-    the existing deterministic path run.
+    
+    In Phase 3, this can be extended to use RLM subagents for reasoning.
+    Currently implements rule-based defaults consistent with the existing
+    deterministic logic, providing a clean interface for future expansion.
     """
 
-    def __init__(self, orchestrator: "PipelineOrchestrator"):
+    def __init__(self, orchestrator: Optional["PipelineOrchestrator"] = None):
         self.orch = orchestrator
+        self._trace: list[dict] = []
 
     def build_diagnostic(self, chapter_num: int, current: str,
                          best_state: "_gates.BestCandidateState",
@@ -71,76 +63,83 @@ class FixLoopAgent:
         """Collect all quality signals into a structured diagnostic."""
         staged = self.orch._stage_review(
             chapter_num, task_card,
-            self.orch._frozen_synopsis.get(chapter_num) or {},
+            self.orch._frozen_synopsis.get(chapter_num) if self.orch else {},
             current, world_state,
-        )
+        ) if self.orch else {"score": 0, "review": {}}
+        
         score = staged.get("score", 0)
         review = staged.get("review", {})
         issues = review.get("issues", [])
 
-        policy = self.orch._policy
+        policy = self.orch._policy if self.orch else {}
         has_high = any(
             b for b, _ in (
-                self.orch._review_issue_is_blocking(policy, iss)
+                self.orch._review_issue_is_blocking(policy, iss) if self.orch else (False, False)
                 for iss in issues
             )
         )
 
-        det = self.orch._deterministic_quality_gate(current, task_card)
+        det = self.orch._deterministic_quality_gate(current, task_card) if self.orch else {"issues": [], "soft_issues": []}
         det_issues = det.get("issues", [])
         soft = det.get("soft_issues", [])
 
-        min_ch = int(policy["publication_line"])
-        soft_line = int(policy.get("soft_publication_line", min_ch - 3))
-        _lsr_cfg = policy.get("low_score_rewrite") or {}
+        min_ch = int(policy.get("publication_line", 88)) if policy else 88
+        _lsr_cfg = policy.get("low_score_rewrite") or {} if policy else {}
         _lsr_floor = float(_lsr_cfg.get("floor", min_ch - 28))
         low_score = score < _lsr_floor
 
         return FixDiagnostic(
             chapter_num=chapter_num,
             current_score=score,
-            best_score=best_state.best_score,
+            best_score=best_state.best_score if best_state else 0,
             has_high_issues=has_high,
             deterministic_issues=det_issues,
             soft_issues=soft,
             review_issues=issues,
             reaction_pending=bool(det.get("reaction_hits")) and _reaction_fix_budget > 0,
             low_score_eligible=low_score,
-            no_improve_count=best_state.no_improve,
-            max_iterations=int(self.orch.config.get("pipeline", {}).get("max_chapter_fix_rounds", 2)),
+            no_improve_count=best_state.no_improve if best_state else 0,
+            max_iterations=int((self.orch.config.get("pipeline", {}) or {}).get("max_chapter_fix_rounds", 2)) if self.orch else 2,
             iteration=iteration,
         )
 
     def recommend(self, diagnostic: FixDiagnostic) -> FixRecommendation:
         """Return a remediation recommendation based on deterministic rules.
-
-        In Phase 3, this will be extended to call rlm() for agent reasoning.
-        Currently implements rule-based defaults consistent with the existing
-        deterministic logic.
+        
+        Rules (in priority order):
+        1. If score >= 88 and no high issues → proceed (pass)
+        2. If no improvement for 3+ iterations → stop
+        3. If low score eligible at iteration 0 → rewrite_chapter
+        4. If reaction pending → patch (targeted scene fix)
+        5. If high issues in review → patch
+        6. If deterministic hard issues → rewrite_scene
+        7. If gray band (85-88) → proceed with flag
+        8. Default → patch
         """
         d = diagnostic
 
-        # Terminal conditions — no more action needed
+        # Rule 1: Pass condition
         if d.current_score >= 88 and not d.has_high_issues:
             return FixRecommendation(
                 action="proceed",
                 reasoning=f"score={d.current_score} >= 88, no high issues — pass",
             )
 
+        # Rule 2: Early stop
         if d.no_improve_count >= 3:
             return FixRecommendation(
                 action="stop",
                 reasoning=f"no improvement for {d.no_improve_count} iterations — terminate",
             )
 
-        # Low score — escalate to whole-chapter rewrite
+        # Rule 3: Low score escalation
         if d.low_score_eligible and d.iteration == 0:
             return FixRecommendation(
                 action="rewrite_chapter",
                 reasoning=f"score={d.current_score} below floor — escalate to whole-chapter rewrite",
             )
 
-        # Reaction consistency pending — patch specific scenes
+        # Rule 4: Reaction consistency
         if d.reaction_pending:
             return FixRecommendation(
                 action="patch",
@@ -148,7 +147,7 @@ class FixLoopAgent:
                 target_scenes=[],
             )
 
-        # High issues in review — patch weak scenes
+        # Rule 5: High review issues
         if d.has_high_issues:
             return FixRecommendation(
                 action="patch",
@@ -156,7 +155,7 @@ class FixLoopAgent:
                 target_scenes=[],
             )
 
-        # Deterministic hard issues — fulltext fix
+        # Rule 6: Deterministic hard issues
         hard_det = [i for i in d.deterministic_issues
                     if any(i.startswith(p) for p in
                            ("[称谓]", "[canon", "[泄漏]", "[命名矛盾]",
@@ -168,14 +167,14 @@ class FixLoopAgent:
                 target_scenes=[],
             )
 
-        # Gray band — proceed with flag
+        # Rule 7: Gray band
         if d.current_score >= 85:
             return FixRecommendation(
                 action="proceed",
                 reasoning=f"gray-band score={d.current_score} — accept with flag",
             )
 
-        # Default: patch
+        # Rule 8: Default
         return FixRecommendation(
             action="patch",
             reasoning=f"default: score={d.current_score} — targeted patch",
@@ -184,7 +183,7 @@ class FixLoopAgent:
     async def recommend_via_rlm(self, diagnostic: FixDiagnostic,
                                  rlm, agent_message) -> FixRecommendation:
         """Use Prime-Agent RLM to reason about the fix strategy.
-
+        
         Falls back to deterministic recommendation on any failure.
         """
         try:
@@ -207,21 +206,28 @@ class FixLoopAgent:
                         "iteration": diagnostic.iteration,
                         "max_iterations": diagnostic.max_iterations,
                     },
+                    "prompt": prompt,
                 }, ensure_ascii=False),
                 receiver_role="child",
                 receiver_name=handle.name,
             )
+            
             reply = await agent_message.recv(receiver_role="parent")
+            
+            # Parse reply
             if reply:
-                recommendation = json.loads(reply[0][1].scene_text if hasattr(reply[0][1], 'scene_text') else str(reply[0][1]))
-                return FixRecommendation(
-                    action=recommendation.get("action", "patch"),
-                    reasoning=recommendation.get("reasoning", "agent decision"),
-                    target_scenes=recommendation.get("target_scenes", []),
-                    directive=recommendation.get("directive", ""),
-                )
-        except Exception as exc:
-            logger.warning(f"RLM fix decision failed (ch{diagnostic.chapter_num}): {exc}; using deterministic")
+                reply_data = reply[0][1] if hasattr(reply[0][1], 'scene_text') else reply[0][1]
+                if isinstance(reply_data, dict):
+                    return FixRecommendation(
+                        action=reply_data.get("action", "patch"),
+                        reasoning=reply_data.get("reasoning", "agent decision"),
+                        target_scenes=reply_data.get("target_scenes", []),
+                        directive=reply_data.get("directive", ""),
+                    )
+            
+        except Exception as e:
+            logger.warning(f"RLM fix decision failed (ch{diagnostic.chapter_num}): {e}; using deterministic")
+        
         return self.recommend(diagnostic)
 
     def _build_rlm_prompt(self, diagnostic: FixDiagnostic) -> str:
@@ -240,3 +246,18 @@ class FixLoopAgent:
             f"Review issues:\n{issues_summary}\n"
             f"Recommend action: patch | rewrite_scene | rewrite_chapter | stop | proceed"
         )
+
+    def _record_trace(self, phase: str, chapter_num: int, **kwargs):
+        """Record a trace entry for observability."""
+        trace_entry = {
+            "chapter": chapter_num,
+            "phase": f"fix_{phase}",
+            "timestamp": __import__('time').time(),
+            **kwargs,
+        }
+        self._trace.append(trace_entry)
+        logger.debug(f"FixTrace [{phase}] ch{chapter_num}: {kwargs}")
+
+    def trace(self) -> list[dict]:
+        """Return the run-local trace entries."""
+        return list(self._trace)
