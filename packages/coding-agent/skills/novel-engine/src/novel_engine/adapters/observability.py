@@ -44,7 +44,7 @@ class ChapterMetrics:
     run_id: str
     success: bool
     score: Optional[float]
-    verdict: Optional[str]
+    verdict: Optional[str] = None
     total_llm_calls: int = 0
     total_tokens_input: int = 0
     total_tokens_output: int = 0
@@ -116,8 +116,7 @@ class ProductionTracer:
             error=error,
             metadata=meta,
         ))
-        self._accumulate_chapter(chapter_num, model, tokens_input, tokens_output,
-                                  cost_usd, error, meta)
+        self._ensure_chapter(chapter_num)
 
     def mark_rlm_subagent(self, chapter_num: int, group_size: int) -> None:
         """Record an RLM subagent dispatch."""
