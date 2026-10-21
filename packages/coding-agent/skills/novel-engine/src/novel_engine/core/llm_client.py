@@ -132,7 +132,7 @@ class MockLLMClient:
         # Task card generation (old single-call + new 3-call split director)
         if "生成任务卡" in user_content or "生成4个场景的骨架" in user_content \
                 or "补充每个场景的重字段" in user_content or "生成章级元数据" in user_content:
-            return {"role": "assistant", "content": _mock_full_task_card(chapter_num, combined)}
+            return {"role": "assistant", "content": _mock_full_task_card(chapter_num)}
         # Synopsis generation
         if "生成剧情缩写" in user_content or "生成缩写" in user_content or "state_changes" in user_content:
             return {"role": "assistant", "content": _mock_synopsis(chapter_num)}
@@ -228,23 +228,10 @@ def _mock_task_card(seed: int) -> str:
     }, ensure_ascii=False)
 
 
-def _mock_full_task_card(seed: int, prompt_text: str = "") -> str:
+def _mock_full_task_card(seed: int) -> str:
     """Complete task card for mock director (3-call split): adds chapter-level metadata
     and per-scene craft fields required by strict validation."""
     card = json.loads(_mock_task_card(seed))
-    if prompt_text:
-        # Dynamically inject outline task entities or keywords from prompt into mock card
-        # so mock mode satisfies outline coverage gates for any chapter.
-        m = re.search(r"(?:大纲核心任务|本章核心任务|本章唯一必须发生的核心事件)[:：]\s*([^\n\r]+)", prompt_text)
-        if m:
-            matches = re.findall(r"[一-鿿]{2,}", m.group(1))
-            stops = {"大纲", "核心", "任务", "要求", "决定", "主持", "是否", "传闻", "进行", "开始", "完成", "本章", "唯一", "必须", "发生"}
-            filtered = [w for w in matches if w not in stops]
-            extra = " ".join(filtered)
-            if extra and card.get("scene_blueprints"):
-                card["core_goal"] = f"第{seed}章核心目标：{extra}"
-                card["scene_blueprints"][0]["beats"].append(f"包含大纲任务要素：{extra}")
-                card["scene_blueprints"][0]["goal"] += f"（{extra}）"
     # Chapter-level metadata (Call3)
     card.update({
         "timeline_anchor": {
@@ -439,9 +426,9 @@ def _uniq_cjk_fill(target: int, offset: int = 0, scene: int = 0) -> str:
 def _mock_novel_scene(seed: int, target: int = 800, scene_num: int = 0) -> str:
     """确定性结构化场景：合法 JSON，正文长度达标、低重复、句末完整；beats 足量覆盖。"""
     opening = (
-        f"第{seed}章第{scene_num or 1}场。夜色如墨，浓雾自荒原尽头漫卷而来。动作发生状可见，第{_cn_num(int(scene_num or 1))}条线索伏笔埋设。"
+        f"第{seed}章第{scene_num or 1}场。夜色如墨，浓雾自荒原尽头漫卷而来。"
         if scene_num else
-        f"第{seed}章。夜色如墨，浓雾自荒原尽头漫卷而来，韩玄立在断崖边，目光穿过层层迷雾。动作发生状可见，第{_cn_num(int(scene_num or 1))}条线索伏笔埋设。"
+        f"第{seed}章。夜色如墨，浓雾自荒原尽头漫卷而来，韩玄立在断崖边，目光穿过层层迷雾。"
     )
     body = _uniq_cjk_fill(max(0, int(target) - len(opening)), scene=int(scene_num or 0))
     scene_text = (opening + body)[: max(len(opening) + 20, int(target))]

@@ -42,11 +42,10 @@ function resolveCacheRetention(cacheRetention?: CacheRetention): CacheRetention 
 	return "short";
 }
 
-function getCompat(model: Model<Api>): Required<OpenAIResponsesCompat> {
-	const compat = model.compat as OpenAIResponsesCompat | undefined;
+function getCompat(model: Model<"openai-responses">): Required<OpenAIResponsesCompat> {
 	return {
-		sendSessionIdHeader: compat?.sendSessionIdHeader ?? true,
-		supportsLongCacheRetention: compat?.supportsLongCacheRetention ?? true,
+		sendSessionIdHeader: model.compat?.sendSessionIdHeader ?? true,
+		supportsLongCacheRetention: model.compat?.supportsLongCacheRetention ?? true,
 	};
 }
 
@@ -67,8 +66,8 @@ export interface OpenAIResponsesOptions extends StreamOptions {
 /**
  * Generate function for OpenAI Responses API
  */
-export const streamOpenAIResponses: StreamFunction<Api, OpenAIResponsesOptions> = (
-	model: Model<Api>,
+export const streamOpenAIResponses: StreamFunction<"openai-responses", OpenAIResponsesOptions> = (
+	model: Model<"openai-responses">,
 	context: Context,
 	options?: OpenAIResponsesOptions,
 ): AssistantMessageEventStream => {
@@ -168,7 +167,7 @@ export const streamSimpleOpenAIResponses: StreamFunction<"openai-responses", Sim
 };
 
 function createClient(
-	model: Model<Api>,
+	model: Model<"openai-responses">,
 	context: Context,
 	apiKey?: string,
 	optionsHeaders?: Record<string, string>,
@@ -223,7 +222,7 @@ function createClient(
 	});
 }
 
-function buildParams(model: Model<Api>, context: Context, options?: OpenAIResponsesOptions) {
+function buildParams(model: Model<"openai-responses">, context: Context, options?: OpenAIResponsesOptions) {
 	const messages = convertResponsesMessages(model, context, OPENAI_TOOL_CALL_PROVIDERS);
 
 	const cacheRetention = resolveCacheRetention(options?.cacheRetention);
