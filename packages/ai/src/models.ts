@@ -12,172 +12,28 @@ for (const [provider, models] of Object.entries(MODELS)) {
 	modelRegistry.set(provider, providerModels);
 }
 
-type ModelsType = typeof MODELS;
+type ModelApi<
+	TProvider extends KnownProvider,
+	TModelId extends keyof (typeof MODELS)[TProvider],
+> = (typeof MODELS)[TProvider][TModelId] extends { api: infer TApi } ? (TApi extends Api ? TApi : never) : never;
 
-export const PROVIDER_DEFAULT_APIS: Record<string, Api> = {
-	"amazon-bedrock": "bedrock-converse-stream",
-	anthropic: "anthropic-messages",
-	"azure-openai-responses": "azure-openai-responses",
-	cerebras: "openai-completions",
-	"cloudflare-ai-gateway": "anthropic-messages",
-	"cloudflare-workers-ai": "openai-completions",
-	deepseek: "openai-completions",
-	fireworks: "anthropic-messages",
-	"github-copilot": "anthropic-messages",
-	google: "google-generative-ai",
-	"google-vertex": "google-vertex",
-	groq: "openai-completions",
-	huggingface: "openai-completions",
-	"kimi-coding": "anthropic-messages",
-	minimax: "anthropic-messages",
-	"minimax-cn": "anthropic-messages",
-	mistral: "mistral-conversations",
-	moonshotai: "anthropic-messages",
-	"moonshotai-cn": "anthropic-messages",
-	openai: "openai-responses",
-	"openai-codex": "openai-codex-responses",
-	openrouter: "openai-completions",
-	opencode: "openai-completions",
-	"opencode-go": "openai-completions",
-	"prime-inference": "openai-completions",
-	"vercel-ai-gateway": "anthropic-messages",
-	xai: "openai-completions",
-	xiaomi: "anthropic-messages",
-	"xiaomi-token-plan-ams": "anthropic-messages",
-	"xiaomi-token-plan-cn": "anthropic-messages",
-	"xiaomi-token-plan-sgp": "anthropic-messages",
-	zai: "openai-completions",
-};
-
-export type ProviderApiMap = typeof PROVIDER_DEFAULT_APIS;
-
-type ModelApi<TProvider extends string, TModelId extends string> = TProvider extends keyof ModelsType
-	? TModelId extends keyof ModelsType[TProvider]
-		? ModelsType[TProvider][TModelId] extends { api: infer TApi }
-			? TApi extends Api
-				? TApi
-				: Api
-			: Api
-		: TProvider extends
-					| "openrouter"
-					| "prime-inference"
-					| "deepseek"
-					| "groq"
-					| "cerebras"
-					| "xai"
-					| "cloudflare-workers-ai"
-					| "huggingface"
-					| "opencode"
-					| "opencode-go"
-					| "zai"
-			? "openai-completions"
-			: TProvider extends "github-copilot" | "cloudflare-ai-gateway"
-				? TModelId extends
-						| `${string}claude${string}`
-						| `${string}fable${string}`
-						| `${string}haiku${string}`
-						| `${string}opus${string}`
-						| `${string}sonnet${string}`
-					? "anthropic-messages"
-					: TModelId extends
-								| `${string}gpt${string}`
-								| `${string}o1${string}`
-								| `${string}o3${string}`
-								| `${string}o4${string}`
-						? "openai-responses"
-						: TProvider extends keyof ProviderApiMap
-							? ProviderApiMap[TProvider]
-							: Api
-				: TProvider extends keyof ProviderApiMap
-					? ProviderApiMap[TProvider]
-					: Api
-	: TProvider extends keyof ProviderApiMap
-		? ProviderApiMap[TProvider]
-		: Api;
-
-function resolveFallbackApi(provider: string, modelId: string, sampleModel?: Model<Api>): Api {
-	if (
-		provider === "openrouter" ||
-		provider === "prime-inference" ||
-		provider === "deepseek" ||
-		provider === "groq" ||
-		provider === "cerebras" ||
-		provider === "xai" ||
-		provider === "cloudflare-workers-ai" ||
-		provider === "huggingface" ||
-		provider === "opencode" ||
-		provider === "opencode-go" ||
-		provider === "zai"
-	) {
-		return "openai-completions";
-	}
-
-	if (provider === "github-copilot" || provider === "cloudflare-ai-gateway") {
-		const lower = modelId.toLowerCase();
-		if (
-			lower.includes("claude") ||
-			lower.includes("fable") ||
-			lower.includes("haiku") ||
-			lower.includes("opus") ||
-			lower.includes("sonnet")
-		) {
-			return "anthropic-messages";
-		}
-		if (lower.includes("gpt") || lower.includes("o1") || lower.includes("o3") || lower.includes("o4")) {
-			return "openai-responses";
-		}
-	}
-
-	return PROVIDER_DEFAULT_APIS[provider] ?? sampleModel?.api ?? "openai-completions";
-}
-
-export function getModel<
-	TProvider extends keyof ModelsType,
-	TModelId extends Extract<keyof ModelsType[TProvider], string>,
->(provider: TProvider, modelId: TModelId): Model<ModelApi<TProvider, TModelId>>;
-
-export function getModel<TProvider extends KnownProvider, TModelId extends string>(
+export function getModel<TProvider extends KnownProvider, TModelId extends keyof (typeof MODELS)[TProvider]>(
 	provider: TProvider,
 	modelId: TModelId,
-): Model<ModelApi<TProvider, TModelId>>;
-
-export function getModel(provider: string, modelId: string): Model<Api> {
+): Model<ModelApi<TProvider, TModelId>> {
 	const providerModels = modelRegistry.get(provider);
-	const existing = providerModels?.get(modelId);
-	if (existing) return existing;
-
-	const sampleModel = providerModels ? Array.from(providerModels.values())[0] : undefined;
-	const defaultApi = resolveFallbackApi(provider, modelId, sampleModel);
-
-	return {
-		id: modelId,
-		name: modelId,
-		api: defaultApi,
-		provider: provider as KnownProvider,
-		baseUrl: sampleModel?.baseUrl ?? "",
-		reasoning: true,
-		input: ["text", "image"],
-		cost: sampleModel?.cost ?? { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
-		contextWindow: sampleModel?.contextWindow ?? 128000,
-		maxTokens: sampleModel?.maxTokens ?? 16384,
-		headers: sampleModel?.headers,
-		compat: sampleModel?.compat,
-	};
+	return providerModels?.get(modelId as string) as Model<ModelApi<TProvider, TModelId>>;
 }
 
 export function getProviders(): KnownProvider[] {
 	return Array.from(modelRegistry.keys()) as KnownProvider[];
 }
 
-export function getModels<TProvider extends keyof ModelsType>(
+export function getModels<TProvider extends KnownProvider>(
 	provider: TProvider,
-): Model<ModelApi<TProvider, Extract<keyof ModelsType[TProvider], string>>>[];
-
-export function getModels<TProvider extends KnownProvider>(provider: TProvider): Model<ModelApi<TProvider, string>>[];
-
-export function getModels(provider: string): Model<Api>[] {
+): Model<ModelApi<TProvider, keyof (typeof MODELS)[TProvider]>>[] {
 	const models = modelRegistry.get(provider);
-	return models ? (Array.from(models.values()) as Model<Api>[]) : [];
+	return models ? (Array.from(models.values()) as Model<ModelApi<TProvider, keyof (typeof MODELS)[TProvider]>>[]) : [];
 }
 
 export function supportsFastMode<TApi extends Api>(model: Model<TApi>): boolean {
