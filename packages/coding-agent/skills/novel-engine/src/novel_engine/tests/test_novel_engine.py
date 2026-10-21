@@ -96,7 +96,7 @@ def _scene_text(scene_num: int, target: int = 1000) -> str:
         end = ends[(k * 11 + scene_num) % len(ends)]
         # 每个词缀唯一序号：任何 8 字滑窗必含序号片段 → 单场景内 8 字窗口全局唯一
         n = _cn_num(seq)
-        out.append(f"第{n}程，他{act}{n}{loc}{n}，{obj}{n}{end}{n}。")
+        out.append(f"第{_cn_num(scene_num)}场第{n}程，他{act}{n}{loc}{n}，{obj}{n}{end}{n}。")
         k += 1
         if k > 400:
             break
