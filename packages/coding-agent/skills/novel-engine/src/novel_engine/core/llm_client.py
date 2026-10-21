@@ -24,6 +24,50 @@ from .call_metrics import record_call
 
 logger = logging.getLogger(__name__)
 
+
+class CircuitBreaker:
+    """熔断器：防止 API 连续故障时死锁与无效重试。"""
+
+    def __init__(self, failure_threshold: int = 5, recovery_timeout: float = 30.0):
+        self.failure_threshold = failure_threshold
+        self.recovery_timeout = recovery_timeout
+        self.state = "CLOSED"  # CLOSED, OPEN, HALF_OPEN
+        self.failure_count = 0
+        self.last_state_change = 0.0
+        self._lock = threading.Lock()
+
+    def allow_request(self) -> bool:
+        with self._lock:
+            now = time.time()
+            if self.state == "OPEN":
+                if now - self.last_state_change >= self.recovery_timeout:
+                    self.state = "HALF_OPEN"
+                    self.last_state_change = now
+                    return True
+                return False
+            return True
+
+    def record_success(self):
+        with self._lock:
+            self.failure_count = 0
+            if self.state == "HALF_OPEN":
+                self.state = "CLOSED"
+                self.last_state_change = time.time()
+
+    def record_failure(self):
+        with self._lock:
+            self.failure_count += 1
+            if self.failure_count >= self.failure_threshold:
+                self.state = "OPEN"
+                self.last_state_change = time.time()
+
+
+def compute_exponential_backoff(attempt: int, base_delay: float = 1.0, max_delay: float = 10.0) -> float:
+    """计算带 Full Jitter 的指数退避时长（秒）。"""
+    calculated = min(max_delay, base_delay * (2 ** attempt))
+    return random.uniform(0.5 * calculated, calculated)
+
+
 # Module-level call log for cost tracking (single source of truth).
 # Guarded by _CALL_LOG_LOCK since scene generation is multi-threaded.
 _call_log: list[dict] = []
@@ -487,6 +531,7 @@ class LLMClient:
         # thread its own client via threading.local.
         self._local = threading.local()
         self._mock = MockLLMClient() if use_mock else None
+        self.circuit_breaker = CircuitBreaker()
         # CC30：可选退化事件观察者；observer(deg_cls) 在每次收到退化 200
         # （REASONING_ONLY/DEGENERATE_SHORT）跨温度重试前触发，供上层退化窗口计数。
         self.degenerate_observer = None
@@ -641,6 +686,11 @@ class LLMClient:
         use_stream = (timeout_spec is not None and timeout_spec.stream)
 
         for attempt in range(max_retries):
+            if self.circuit_breaker and not self.circuit_breaker.allow_request():
+                raise TransientLLMError(
+                    f"Circuit breaker OPEN for {self.model} at {self.api_base}",
+                    phase=getattr(self, 'phase', None)
+                )
             try:
                 body = {
                     "model": self.model,
@@ -695,6 +745,8 @@ class LLMClient:
                     )
                 except Exception:
                     pass
+                if self.circuit_breaker:
+                    self.circuit_breaker.record_success()
                 return {
                     "role": choice.get("message", {}).get("role", "assistant"),
                     "content": choice.get("message", {}).get("content", ""),
@@ -711,15 +763,21 @@ class LLMClient:
                 raise
             except (TransientLLMError, RateLimitError) as e:
                 last_error = e
+                if self.circuit_breaker:
+                    self.circuit_breaker.record_failure()
                 if not retry_on_error or attempt >= max_retries - 1:
                     raise
                 _wait = getattr(e, "retry_after", None)
-                time.sleep(float(_wait) if _wait else float(min(2 ** attempt * 5, 60)))
+                time.sleep(float(_wait) if _wait else compute_exponential_backoff(attempt))
             except httpx.HTTPStatusError as e:
                 last_error = e
+                if self.circuit_breaker:
+                    self.circuit_breaker.record_failure()
                 self._raise_status(e.response.status_code, e.response.read(), e.response.headers)
             except (httpx.ConnectError, httpx.ReadTimeout, httpx.TimeoutException) as e:
                 last_error = e
+                if self.circuit_breaker:
+                    self.circuit_breaker.record_failure()
                 msg = str(e)
                 is_disconnected = "Server disconnected" in msg or "RemoteProtocolError" in msg or "Connection closed" in msg
                 logger.error(f"连接失败 (尝试 {attempt+1}/{max_retries}): {e}")
@@ -727,16 +785,18 @@ class LLMClient:
                     raise TransientLLMError(f"API连接失败：{e}", phase=getattr(self, 'phase', None)) from e
                 if is_disconnected:
                     continue
-                time.sleep(2 if is_disconnected else 10)
+                time.sleep(compute_exponential_backoff(attempt))
             except Exception as e:
                 last_error = e
+                if self.circuit_breaker:
+                    self.circuit_breaker.record_failure()
                 msg = str(e)
                 if "429" in msg or getattr(e, 'status_code', None) == 429:
                     raise TransientLLMError(f"429 from {self.model}", phase=getattr(self, 'phase', None)) from e
                 logger.error(f"未知错误 (尝试 {attempt+1}/{max_retries}): {e}")
                 if not retry_on_error or attempt == max_retries - 1:
                     raise TransientLLMError(str(e), phase=getattr(self, 'phase', None)) from e
-                time.sleep(2 ** attempt)
+                time.sleep(compute_exponential_backoff(attempt))
 
         # Record final failure once if all retries exhausted
         try:

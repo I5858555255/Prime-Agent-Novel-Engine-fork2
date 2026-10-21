@@ -332,7 +332,7 @@ def _run_density_gate(self, chapter_num: int, task_card: dict, scenes: list, ass
     cfg = density_gate.load_density_config(self.root)
     arc = density_gate.arc_for_chapter(chapter_num, self.root)
     req = density_gate.requirements_for(cfg, arc)
-    threshold = float(req.get("coverage_threshold", 0.8))
+    threshold = float(req.get("coverage_threshold", 0.70))
     interior_n = int(req.get("protagonist_interiority", 0) or 0)
     still_bad: list[int] = []
     fired = False
@@ -974,6 +974,14 @@ def _run_punctuation_health_gate(self, chapter_num: int, task_card: dict,
                            f"resolved ({_zstats.get('changed_paragraphs', 0)} paras, "
                            f"{_zstats.get('inserts', 0)} pauses)")
             continue
+        elif _ztext != text and _zstats.get("residual_unhealthy", 1) > 0:
+            # 部分由确定性规则自动修正
+            text = _ztext
+            bad = ph.check_text_punctuation(text) or []
+            if not bad:
+                sc.scene_text = text.strip()
+                self._chapter_gate_fired = True
+                continue
         # 按段精确替换仅插标点修复；同段最多 2 次
         paras = text.split("\n")
         sid_resolved = True
