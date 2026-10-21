@@ -12,24 +12,24 @@ for (const [provider, models] of Object.entries(MODELS)) {
 	modelRegistry.set(provider, providerModels);
 }
 
-type ModelsDict = typeof MODELS;
+type KnownModelMap = typeof MODELS;
 
 type ModelApi<
 	TProvider extends KnownProvider,
-	TModelId extends TProvider extends keyof ModelsDict ? keyof ModelsDict[TProvider] : never,
-> = TProvider extends keyof ModelsDict
-	? TModelId extends keyof ModelsDict[TProvider]
-		? ModelsDict[TProvider][TModelId] extends { api: infer TApi }
+	TModelId extends TProvider extends keyof KnownModelMap ? keyof KnownModelMap[TProvider] : string,
+> = TProvider extends keyof KnownModelMap
+	? TModelId extends keyof KnownModelMap[TProvider]
+		? KnownModelMap[TProvider][TModelId] extends { api: infer TApi }
 			? TApi extends Api
 				? TApi
-				: never
-			: never
-		: never
-	: never;
+				: Api
+			: Api
+		: Api
+	: Api;
 
 export function getModel<
 	TProvider extends KnownProvider,
-	TModelId extends TProvider extends keyof ModelsDict ? keyof ModelsDict[TProvider] : never,
+	TModelId extends TProvider extends keyof KnownModelMap ? keyof KnownModelMap[TProvider] : string,
 >(
 	provider: TProvider,
 	modelId: TModelId,
@@ -44,9 +44,13 @@ export function getProviders(): KnownProvider[] {
 
 export function getModels<TProvider extends KnownProvider>(
 	provider: TProvider,
-): Model<ModelApi<TProvider, TProvider extends keyof ModelsDict ? keyof ModelsDict[TProvider] : never>>[] {
+): Model<ModelApi<TProvider, TProvider extends keyof KnownModelMap ? keyof KnownModelMap[TProvider] : string>>[] {
 	const models = modelRegistry.get(provider);
-	return models ? (Array.from(models.values()) as Model<ModelApi<TProvider, TProvider extends keyof ModelsDict ? keyof ModelsDict[TProvider] : never>>[]) : [];
+	return models
+		? (Array.from(models.values()) as Model<
+				ModelApi<TProvider, TProvider extends keyof KnownModelMap ? keyof KnownModelMap[TProvider] : string>
+		  >[])
+		: [];
 }
 
 export function supportsFastMode<TApi extends Api>(model: Model<TApi>): boolean {
