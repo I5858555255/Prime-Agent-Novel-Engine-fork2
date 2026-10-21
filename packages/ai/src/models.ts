@@ -12,25 +12,12 @@ for (const [provider, models] of Object.entries(MODELS)) {
 	modelRegistry.set(provider, providerModels);
 }
 
-type ModelsDict = typeof MODELS;
-
 type ModelApi<
 	TProvider extends KnownProvider,
-	TModelId extends string,
-> = TProvider extends keyof ModelsDict
-	? TModelId extends keyof ModelsDict[TProvider]
-		? ModelsDict[TProvider][TModelId] extends { api: infer TApi }
-			? TApi extends Api
-				? TApi
-				: Api
-			: Api
-		: Api
-	: Api;
+	TModelId extends keyof (typeof MODELS)[TProvider],
+> = (typeof MODELS)[TProvider][TModelId] extends { api: infer TApi } ? (TApi extends Api ? TApi : never) : never;
 
-export function getModel<
-	TProvider extends KnownProvider,
-	TModelId extends TProvider extends keyof ModelsDict ? keyof ModelsDict[TProvider] | (string & {}) : string,
->(
+export function getModel<TProvider extends KnownProvider, TModelId extends keyof (typeof MODELS)[TProvider]>(
 	provider: TProvider,
 	modelId: TModelId,
 ): Model<ModelApi<TProvider, TModelId>> {
@@ -44,9 +31,9 @@ export function getProviders(): KnownProvider[] {
 
 export function getModels<TProvider extends KnownProvider>(
 	provider: TProvider,
-): Model<Api>[] {
+): Model<ModelApi<TProvider, keyof (typeof MODELS)[TProvider]>>[] {
 	const models = modelRegistry.get(provider);
-	return models ? (Array.from(models.values()) as Model<Api>[]) : [];
+	return models ? (Array.from(models.values()) as Model<ModelApi<TProvider, keyof (typeof MODELS)[TProvider]>>[]) : [];
 }
 
 export function supportsFastMode<TApi extends Api>(model: Model<TApi>): boolean {
