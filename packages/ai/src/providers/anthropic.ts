@@ -62,7 +62,7 @@ function resolveCacheRetention(cacheRetention?: CacheRetention): CacheRetention 
 }
 
 function getCacheControl(
-	model: Model<"anthropic-messages">,
+	model: Model<Api>,
 	cacheRetention?: CacheRetention,
 ): { retention: CacheRetention; cacheControl?: CacheControlEphemeral } {
 	const retention = resolveCacheRetention(cacheRetention);
@@ -174,10 +174,11 @@ export type AnthropicThinkingDisplay = "summarized" | "omitted";
 const FINE_GRAINED_TOOL_STREAMING_BETA = "fine-grained-tool-streaming-2025-05-14";
 const INTERLEAVED_THINKING_BETA = "interleaved-thinking-2025-05-14";
 
-function getAnthropicCompat(model: Model<"anthropic-messages">): Required<AnthropicMessagesCompat> {
+function getAnthropicCompat(model: Model<Api>): Required<AnthropicMessagesCompat> {
+	const compat = model.compat as AnthropicMessagesCompat | undefined;
 	return {
-		supportsEagerToolInputStreaming: model.compat?.supportsEagerToolInputStreaming ?? true,
-		supportsLongCacheRetention: model.compat?.supportsLongCacheRetention ?? true,
+		supportsEagerToolInputStreaming: compat?.supportsEagerToolInputStreaming ?? true,
+		supportsLongCacheRetention: compat?.supportsLongCacheRetention ?? true,
 	};
 }
 
@@ -455,8 +456,8 @@ async function* iterateAnthropicEvents(
 	}
 }
 
-export const streamAnthropic: StreamFunction<"anthropic-messages", AnthropicOptions> = (
-	model: Model<"anthropic-messages">,
+export const streamAnthropic: StreamFunction<Api, AnthropicOptions> = (
+	model: Model<Api>,
 	context: Context,
 	options?: AnthropicOptions,
 ): AssistantMessageEventStream => {
@@ -847,7 +848,7 @@ function isOAuthToken(apiKey: string): boolean {
 }
 
 function createClient(
-	model: Model<"anthropic-messages">,
+	model: Model<Api>,
 	apiKey: string,
 	interleavedThinking: boolean,
 	useFineGrainedToolStreamingBeta: boolean,
@@ -953,7 +954,7 @@ function createClient(
 }
 
 function buildParams(
-	model: Model<"anthropic-messages">,
+	model: Model<Api>,
 	context: Context,
 	isOAuthToken: boolean,
 	options?: AnthropicOptions,
@@ -1065,7 +1066,7 @@ function normalizeToolCallId(id: string): string {
 
 function convertMessages(
 	messages: Message[],
-	model: Model<"anthropic-messages">,
+	model: Model<Api>,
 	isOAuthToken: boolean,
 	cacheControl?: CacheControlEphemeral,
 ): MessageParam[] {
@@ -1227,7 +1228,7 @@ function convertMessages(
 	return params;
 }
 
-function shouldUseFineGrainedToolStreamingBeta(model: Model<"anthropic-messages">, context: Context): boolean {
+function shouldUseFineGrainedToolStreamingBeta(model: Model<Api>, context: Context): boolean {
 	return !!context.tools?.length && !getAnthropicCompat(model).supportsEagerToolInputStreaming;
 }
 
