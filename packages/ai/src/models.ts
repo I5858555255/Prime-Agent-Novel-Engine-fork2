@@ -58,12 +58,78 @@ type ModelApi<TProvider extends string, TModelId extends string> = TProvider ext
 				? TApi
 				: Api
 			: Api
-		: TProvider extends keyof ProviderApiMap
-			? ProviderApiMap[TProvider]
-			: Api
+		: TProvider extends
+					| "openrouter"
+					| "prime-inference"
+					| "deepseek"
+					| "groq"
+					| "cerebras"
+					| "xai"
+					| "cloudflare-workers-ai"
+					| "huggingface"
+					| "opencode"
+					| "opencode-go"
+					| "zai"
+			? "openai-completions"
+			: TProvider extends "github-copilot" | "cloudflare-ai-gateway"
+				? TModelId extends
+						| `${string}claude${string}`
+						| `${string}fable${string}`
+						| `${string}haiku${string}`
+						| `${string}opus${string}`
+						| `${string}sonnet${string}`
+					? "anthropic-messages"
+					: TModelId extends
+								| `${string}gpt${string}`
+								| `${string}o1${string}`
+								| `${string}o3${string}`
+								| `${string}o4${string}`
+						? "openai-responses"
+						: TProvider extends keyof ProviderApiMap
+							? ProviderApiMap[TProvider]
+							: Api
+				: TProvider extends keyof ProviderApiMap
+					? ProviderApiMap[TProvider]
+					: Api
 	: TProvider extends keyof ProviderApiMap
 		? ProviderApiMap[TProvider]
 		: Api;
+
+function resolveFallbackApi(provider: string, modelId: string, sampleModel?: Model<Api>): Api {
+	if (
+		provider === "openrouter" ||
+		provider === "prime-inference" ||
+		provider === "deepseek" ||
+		provider === "groq" ||
+		provider === "cerebras" ||
+		provider === "xai" ||
+		provider === "cloudflare-workers-ai" ||
+		provider === "huggingface" ||
+		provider === "opencode" ||
+		provider === "opencode-go" ||
+		provider === "zai"
+	) {
+		return "openai-completions";
+	}
+
+	if (provider === "github-copilot" || provider === "cloudflare-ai-gateway") {
+		const lower = modelId.toLowerCase();
+		if (
+			lower.includes("claude") ||
+			lower.includes("fable") ||
+			lower.includes("haiku") ||
+			lower.includes("opus") ||
+			lower.includes("sonnet")
+		) {
+			return "anthropic-messages";
+		}
+		if (lower.includes("gpt") || lower.includes("o1") || lower.includes("o3") || lower.includes("o4")) {
+			return "openai-responses";
+		}
+	}
+
+	return PROVIDER_DEFAULT_APIS[provider] ?? sampleModel?.api ?? "openai-completions";
+}
 
 export function getModel<
 	TProvider extends keyof ModelsType,
@@ -81,8 +147,7 @@ export function getModel(provider: string, modelId: string): Model<Api> {
 	if (existing) return existing;
 
 	const sampleModel = providerModels ? Array.from(providerModels.values())[0] : undefined;
-	const defaultApi =
-		(PROVIDER_DEFAULT_APIS as Record<string, Api>)[provider] ?? sampleModel?.api ?? "openai-completions";
+	const defaultApi = resolveFallbackApi(provider, modelId, sampleModel);
 
 	return {
 		id: modelId,
