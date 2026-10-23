@@ -2260,7 +2260,7 @@ export class AgentsViewMode implements Component, Focusable {
 		// Saved-only rows already come from the durable catalog. Injecting their
 		// synthetic archived summary as a daemon record would move confirmation
 		// from Inactive to Idle.
-		if (!pending || pending.summary.lifecycle !== "live") {
+		if (pending?.summary.lifecycle !== "live") {
 			return [...sessions];
 		}
 		if (!this.isDeleteConfirmationVisible()) {

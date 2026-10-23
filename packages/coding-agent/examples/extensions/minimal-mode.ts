@@ -83,7 +83,7 @@ export default function (pi: ExtensionAPI) {
 
 			// Expanded mode: show full output
 			const textContent = result.content.find((c) => c.type === "text");
-			if (!textContent || textContent.type !== "text") {
+			if (textContent?.type !== "text") {
 				return new Text("", 0, 0);
 			}
 
@@ -131,7 +131,7 @@ export default function (pi: ExtensionAPI) {
 
 			// Expanded mode: show diff or error
 			const textContent = result.content.find((c) => c.type === "text");
-			if (!textContent || textContent.type !== "text") {
+			if (textContent?.type !== "text") {
 				return new Text("", 0, 0);
 			}
 

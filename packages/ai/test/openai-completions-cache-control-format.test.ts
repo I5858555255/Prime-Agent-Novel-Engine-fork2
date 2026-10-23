@@ -124,7 +124,8 @@ function expectAnthropicCacheMarkers(
 	const instructionMessage = getInstructionMessage(params);
 	expect(instructionMessage).toBeDefined();
 	expect(Array.isArray(instructionMessage?.content)).toBe(true);
-	expect((instructionMessage?.content as TextPart[])[0]?.cache_control).toEqual(expectedCacheControl);
+	const instructionContent = (instructionMessage?.content ?? []) as TextPart[];
+	expect(instructionContent[0]?.cache_control).toEqual(expectedCacheControl);
 
 	expect(params.tools).toHaveLength(1);
 	expect(params.tools?.[0]?.cache_control).toEqual(expectedCacheControl);

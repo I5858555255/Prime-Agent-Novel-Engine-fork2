@@ -547,7 +547,7 @@ export async function captureAgentCommandUsed(options: CaptureAgentCommandUsedOp
 }
 
 function errorCategory(message: AssistantMessage | undefined): string | null {
-	if (!message || message.stopReason !== "error") {
+	if (message?.stopReason !== "error") {
 		return null;
 	}
 	const error = message.errorMessage?.toLowerCase() ?? "";

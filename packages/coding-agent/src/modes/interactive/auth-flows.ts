@@ -66,7 +66,7 @@ export async function getAnthropicSubscriptionAuthWarning(
 	modelRegistry: ModelRegistry,
 	model: { provider: string } | undefined,
 ): Promise<string | undefined> {
-	if (!model || model.provider !== "anthropic") {
+	if (model?.provider !== "anthropic") {
 		return undefined;
 	}
 

@@ -3411,7 +3411,7 @@ export class AgentSession {
 				: event.type === "agent_end"
 					? this._findLastAssistantInMessages(event.messages)
 					: undefined;
-		if (!message || message.stopReason !== "error" || !message.errorMessage) {
+		if (message?.stopReason !== "error" || !message.errorMessage) {
 			return;
 		}
 		if (!isLikelyAuthenticationError(message.errorMessage)) {
@@ -5460,8 +5460,7 @@ export class AgentSession {
 				while (!preselected && mode === "all") {
 					const next = this._actionStore.queuedActions(first.delivery)[0];
 					if (
-						!next ||
-						next.payload.kind !== "turn" ||
+						next?.payload.kind !== "turn" ||
 						!turnExecutionPoliciesEqual(first.payload.executionPolicy, next.payload.executionPolicy)
 					) {
 						break;
@@ -8116,7 +8115,7 @@ export class AgentSession {
 
 		try {
 			const authResult = this.model ? await this._modelRegistry.getApiKeyAndHeaders(this.model) : undefined;
-			if (!this.model || !authResult || !authResult.ok || !authResult.apiKey) {
+			if (!this.model || !authResult?.ok || !authResult.apiKey) {
 				const detail =
 					!this.model || !authResult
 						? "no model is selected"

@@ -143,7 +143,7 @@ export class CompactAssistantStreamReconstructor {
 				break;
 			}
 			case "toolcall_start":
-				if (!delta.contentStart || delta.contentStart.type !== "toolCall") {
+				if (delta.contentStart?.type !== "toolCall") {
 					return undefined;
 				}
 				partial.content[event.contentIndex] = delta.contentStart;

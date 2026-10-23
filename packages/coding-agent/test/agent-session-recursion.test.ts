@@ -1780,7 +1780,7 @@ describe("AgentSession rlm recursion", () => {
 		const parentEntry = root.sessionManager
 			.getEntries()
 			.find((entry) => entry.type === "message" && entry.message === parentAssistant);
-		if (!parentEntry || parentEntry.type !== "message" || parentEntry.message.role !== "assistant") {
+		if (parentEntry?.type !== "message" || parentEntry.message.role !== "assistant") {
 			throw new Error("parent assistant entry was not recorded");
 		}
 		expect(parentEntry.message.usage.input).toBe(7);
@@ -1792,7 +1792,7 @@ describe("AgentSession rlm recursion", () => {
 		expect(readFileSync(sessionFile, "utf-8")).toContain('"type":"child_usage_attributed"');
 		const reloaded = SessionManager.open(sessionFile, join(tempDir, "sessions"));
 		const attribution = reloaded.getEntries().find((entry) => entry.type === "child_usage_attributed");
-		if (!attribution || attribution.type !== "child_usage_attributed") throw new Error("missing attribution");
+		if (attribution?.type !== "child_usage_attributed") throw new Error("missing attribution");
 		expect(attribution.childUsage.input).toBe(7);
 		expect(attribution.childUsage.output).toBe(3);
 		expect(attribution.aggregateUsage.cost.total).toBe(10);

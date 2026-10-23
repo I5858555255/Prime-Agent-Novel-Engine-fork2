@@ -283,7 +283,7 @@ function colorValueToRgb(value: string | number | undefined): Rgb | undefined {
 	if (typeof value === "number") {
 		return ansi256ToRgb(value);
 	}
-	if (!value || !value.startsWith("#")) {
+	if (!value?.startsWith("#")) {
 		return undefined;
 	}
 	try {

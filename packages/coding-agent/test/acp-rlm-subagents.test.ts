@@ -28,7 +28,7 @@ const model = getModel("anthropic", "claude-sonnet-4-5")!;
 
 function userText(context: Context): string {
 	const last = context.messages.at(-1);
-	if (!last || last.role !== "user") return "";
+	if (last?.role !== "user") return "";
 	if (typeof last.content === "string") return last.content;
 	return last.content
 		.filter((block): block is TextContent => block.type === "text")

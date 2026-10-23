@@ -2065,7 +2065,7 @@ export class AgentDaemon {
 			if (passiveSubagent && childState && this.getRunnableCronJob(job.id) === undefined) {
 				throw new RuntimeOpenCancelledError();
 			}
-			if (!childState || childState.runtime.metadata.kind !== "subagent") {
+			if (childState?.runtime.metadata.kind !== "subagent") {
 				this.cancelRlmHeartbeat(job.id);
 				return undefined;
 			}
@@ -6355,7 +6355,7 @@ export class AgentDaemon {
 		for (let index = 0; index < pending.length; index++) {
 			const { activeSessionId, purpose } = pending[index]!;
 			const state = this.sessions.get(activeSessionId);
-			if (!state || !state.clients.has(client)) {
+			if (!state?.clients.has(client)) {
 				continue;
 			}
 			try {
