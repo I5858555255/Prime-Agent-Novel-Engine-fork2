@@ -6,12 +6,14 @@ INIT → PLANNING → WORLD_SIM → DIRECTING → SYNOPSIS → WRITE_SCENE_1..N 
 每个状态转换写入 checkpoint。
 """
 import json
+import copy
 import logging
 from pathlib import Path
 from datetime import datetime, timezone
 from enum import Enum
 from typing import Optional
 
+from novel_engine.core.publication_transaction import atomic_write, publication_transaction
 from novel_engine.core.checkpoint import CheckpointManager, create_commit_transaction
 
 logger = logging.getLogger(__name__)
@@ -140,7 +142,7 @@ class StateMachine:
             "states": self.state_log,
             "next_state": self._get_next_possible_states()[0].value if self._get_next_possible_states() else None,
         }
-        self._state_file().write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        atomic_write(self._state_file(), json.dumps(data, ensure_ascii=False, indent=2))
 
     def _get_next_possible_states(self) -> list[ChapterPhase]:
         return self.VALID_TRANSITIONS.get(self.current_phase, [])
@@ -179,9 +181,16 @@ class StateMachine:
 
     def mark_needs_human(self, reason: str):
         """标记需要人工介入。"""
-        self.transition(ChapterPhase.NEEDS_HUMAN)
+        self.current_phase = ChapterPhase.NEEDS_HUMAN
+        self.state_log.setdefault(str(self.current_chapter), {})["phase"] = ChapterPhase.NEEDS_HUMAN.value
         self.record_error(reason)
         logger.critical(f"CHAPTER {self.current_chapter} NEEDS HUMAN: {reason}")
+
+    def mark_failed(self, reason: str):
+        """Persist a machine-repair terminal without requesting human intervention."""
+        self.current_phase = ChapterPhase.FAIL
+        self.state_log.setdefault(str(self.current_chapter), {})["phase"] = ChapterPhase.FAIL.value
+        self.record_error(reason)
 
     def advance_chapter(self):
         """推进到下一章。"""
@@ -242,23 +251,30 @@ class StateMachine:
         world_state_snapshot: dict,
     ):
         """提交章节：写入文件 + checkpoint。"""
-        checkpoint = create_commit_transaction(
-            manager=self.checkpoint_mgr,
-            project_root=self.root,
-            chapter=chapter_num,
-            novel_content=novel_content,
-            synopsis_content=synopsis_content,
-            outline_content=outline_content,
-            world_state_snapshot=world_state_snapshot,
-        )
+        if chapter_num != self.current_chapter:
+            raise ValueError("commit chapter does not match state machine chapter")
+        if ChapterPhase.COMMIT not in self._get_next_possible_states():
+            raise ValueError(f"cannot commit from phase {self.current_phase.value}")
+        paths = [self._state_file(), self.checkpoint_mgr.checkpoint_path]
+        for base in ("chapters", "runtime/backups/chapters"):
+            for kind, suffix in (("novel", "txt"), ("synopsis", "txt"), ("outline", "json")):
+                paths.append(self.root / base / kind / f"chapter_{chapter_num}.{suffix}")
+        phase, log = self.current_phase, copy.deepcopy(self.state_log)
+        try:
+            with publication_transaction(self.root, chapter_num, paths):
+                checkpoint = create_commit_transaction(
+                    manager=self.checkpoint_mgr, project_root=self.root, chapter=chapter_num,
+                    novel_content=novel_content, synopsis_content=synopsis_content,
+                    outline_content=outline_content, world_state_snapshot=world_state_snapshot)
+                if not self.transition(ChapterPhase.COMMIT):
+                    raise RuntimeError("commit transition failed")
+                self.state_log[str(chapter_num)]["commit_hash"] = checkpoint["world_state_hash"]
+                self._save_state()
+            return checkpoint
+        except BaseException:
+            self.current_phase, self.state_log = phase, log
+            raise
 
-        # 更新 state_log 中的 commit_hash
-        if str(chapter_num) in self.state_log:
-            self.state_log[str(chapter_num)]["commit_hash"] = checkpoint["world_state_hash"]
-        self._save_state()
-
-        self.transition(ChapterPhase.COMMIT)
-        return checkpoint
 
     def run_pipeline(self, pipeline_executor) -> dict:
         """

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """CC round-26：单离群崩票 gap 识别 + 补票收敛 + 算术废票 + 矛盾特征（纯确定性单测）。"""
+import pytest
 from novel_engine.quality import review_votes as rv
 from novel_engine.quality import review_hybrid as rh
 
@@ -194,22 +195,17 @@ def test_review_call_cap_constant():
 # ---------- 8. reviewer 顶层 list 容错（r33 真机 'list' object has no attribute 'get'）----------
 
 def test_reviewer_coerce_wrapped_list_and_bare_list():
-    from novel_engine.agents.reviewer_agent import _coerce_review_object, _normalize_review
-    inner = {"scores": {"plot_consistency": 20}, "issues": []}
-    # flash 把评审对象包进 list -> 捞出该 dict，normalize 后是有效票（raw>0）
+    from novel_engine.agents.reviewer_agent import _coerce_review_object, _normalize_review, DIM_MAX, ReviewResponseError
+    inner = {"scores": dict(DIM_MAX, plot_consistency=20), "issues": []}
     got = _normalize_review(_coerce_review_object([inner]))
-    assert got["raw_total"] == 20 and rh.is_valid_vote(got)
-    # 裸 list（无 dict）-> {} -> raw=0 技术废票，被 filter 剔除而非抛异常
-    empty = _normalize_review(_coerce_review_object(["一条裸字符串", "又一条"]))
-    assert not rh.is_valid_vote(empty)
-    pairs = [(empty, 0.0)]
-    assert rh.filter_valid_votes(pairs, hard_gates_all_clean=True) == []
-    # 原样 dict 不受影响
+    assert got["raw_total"] == 115 and rh.is_valid_vote(got)
+    # A bare list is a protocol failure, never a silently zero-filled literary vote.
+    with pytest.raises(ReviewResponseError):
+        _normalize_review(_coerce_review_object(["一条裸字符串", "又一条"]))
     assert _coerce_review_object(inner) is inner
-    # issues 内混入非 dict 不应崩 normalize
     mixed = _normalize_review(_coerce_review_object(
-        {"scores": {"plot_consistency": 10}, "issues": ["裸字符串问题", {"dimension": "pacing"}]}))
-    assert mixed["raw_total"] == 10
+        {"scores": dict(DIM_MAX, plot_consistency=10), "issues": ["裸字符串问题", {"dimension": "pacing"}]}))
+    assert mixed["raw_total"] == 105
 
 
 # ---------- 6. 门修复后最终全绿 -> 免强制三评（按最终状态而非历史轨迹）----------

@@ -1,12 +1,12 @@
 """Provider 抽象层：统一 LLM 调用的 reasoning 兜底 / both-empty 重试 / cache-bust。"""
 import re
-import time
 import logging
 from dataclasses import dataclass, field
 from typing import Optional
 
 from novel_engine.core.llm_client import _repair_json
 from .rate_limiter import RateLimitError
+from .execution import BudgetExceeded, budget_sleep, current_execution
 
 logger = logging.getLogger(__name__)
 
@@ -76,18 +76,20 @@ class LLMProvider:
                     if cfg.reasoning_fallback:
                         return reasoning_cache
                 raise RuntimeError("LLM返回空响应（content 与 reasoning_content 均空，已跨温度重试）")
+            except BudgetExceeded:
+                raise
             except RateLimitError as e:
                 last_err = f"rate_limit: {e}"
                 logger.error(f"限流重试 (429) 第 {attempt+1}/{attempt_limit} 次: {e}")
                 if attempt == attempt_limit - 1:
                     raise RuntimeError(f"provider failed: {last_err}") from e
-                time.sleep(min(2 ** attempt * 5, 120))
+                budget_sleep(min(2 ** attempt * 5, 120), current_execution(self.client))
             except Exception as e:
                 last_err = f"{type(e).__name__}: {e}"
                 logger.error(f"调用失败 (尝试 {attempt+1}/{attempt_limit}): {e}")
                 if attempt == attempt_limit - 1:
                     raise RuntimeError(f"provider failed: {last_err}") from e
-                time.sleep(min(2 ** attempt * 5, 120))
+                budget_sleep(min(2 ** attempt * 5, 120), current_execution(self.client))
 
     @staticmethod
     def _bust(messages):

@@ -58,9 +58,9 @@ def test_polish_scenes_fallback_on_exception():
         call_count = 0
         def chat_completion(self, messages, **k):
             self.call_count += 1
-            if self.call_count == 2:
-                raise RuntimeError("network timeout")
             content = messages[0]["content"]
+            if content.split("【正文】\n", 1)[-1].startswith("场景二正文内容"):
+                raise RuntimeError("network timeout")
             return {"role": "assistant", "content": "润色后的" + content.split("【正文】\n", 1)[-1]}
 
     w = WriterAgent(llm_client=ErrRec())
@@ -127,6 +127,7 @@ def test_polish_scenes_includes_anchors():
     w.polish_scenes(scenes, task_card, client=CaptureRec())
 
     assert len(captured_prompts) == 3
+    captured_prompts.sort(key=lambda prompt: prompt.split("【正文】\n", 1)[-1][0])
     # 场景 1：有 next_anchor，无 prev_anchor
     assert "上一场景结尾" not in captured_prompts[0]
     assert "下一场景开头" in captured_prompts[0]

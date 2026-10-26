@@ -18,6 +18,7 @@ if TYPE_CHECKING:
 
 import httpx
 
+from .execution import llm_request, current_execution, budget_sleep, BudgetExceeded
 from .rate_limiter import RateLimitError
 from .errors import TransientLLMError, PermanentLLMError, ConfigFatalError
 from .call_metrics import record_call
@@ -527,9 +528,10 @@ class LLMClient:
         self.max_tokens = max_tokens
         self.timeout = timeout
         self.use_mock = use_mock
-        # httpx.Client is not thread-safe for concurrent requests; give each
-        # thread its own client via threading.local.
+        # Preserve thread-local injection for tests; real requests use a shared HTTPX pool.
         self._local = threading.local()
+        self._pool_lock = threading.Lock()
+        self._shared_clients = {}
         self._mock = MockLLMClient() if use_mock else None
         self.circuit_breaker = CircuitBreaker()
         # CC30：可选退化事件观察者；observer(deg_cls) 在每次收到退化 200
@@ -635,6 +637,7 @@ class LLMClient:
         if self.use_mock or self._mock:
             return self._mock.chat_completion(messages, temperature, max_tokens, retry_on_error, max_retries, extra_body, timeout_spec)
 
+        self._local.request_attempt = 0
         base_temp = temperature if temperature is not None else self.temperature
 
         # CC round-11 Q1：空200/纯reasoning/极短正文属“可重试瞬时退化”，在本层跨温度
@@ -708,13 +711,7 @@ class LLMClient:
                     body["stream_options"] = {"include_usage": True}
                     return self._stream_chat(client, body, timeout_spec, max_tokens)
                 else:
-                    resp = client.post("/v1/chat/completions", json=body)
-                    self._raise_status(
-                        resp.status_code,
-                        self._resp_bytes(resp),
-                        getattr(resp, "headers", None) or {},
-                    )
-                    data = resp.json()
+                    data = self._post_chat(client, body)
                 usage = data.get("usage", {})
                 prompt_tokens = usage.get("prompt_tokens", 0)
                 completion_tokens = usage.get("completion_tokens", 0)
@@ -759,7 +756,7 @@ class LLMClient:
                         "reasoning_tokens": reasoning_tokens,
                     },
                 }
-            except (PermanentLLMError, ConfigFatalError):
+            except (BudgetExceeded, PermanentLLMError, ConfigFatalError):
                 raise
             except (TransientLLMError, RateLimitError) as e:
                 last_error = e
@@ -768,7 +765,7 @@ class LLMClient:
                 if not retry_on_error or attempt >= max_retries - 1:
                     raise
                 _wait = getattr(e, "retry_after", None)
-                time.sleep(float(_wait) if _wait else compute_exponential_backoff(attempt))
+                budget_sleep(float(_wait) if _wait else compute_exponential_backoff(attempt), current_execution(self))
             except httpx.HTTPStatusError as e:
                 last_error = e
                 if self.circuit_breaker:
@@ -785,7 +782,7 @@ class LLMClient:
                     raise TransientLLMError(f"API连接失败：{e}", phase=getattr(self, 'phase', None)) from e
                 if is_disconnected:
                     continue
-                time.sleep(compute_exponential_backoff(attempt))
+                budget_sleep(compute_exponential_backoff(attempt), current_execution(self))
             except Exception as e:
                 last_error = e
                 if self.circuit_breaker:
@@ -796,7 +793,7 @@ class LLMClient:
                 logger.error(f"未知错误 (尝试 {attempt+1}/{max_retries}): {e}")
                 if not retry_on_error or attempt == max_retries - 1:
                     raise TransientLLMError(str(e), phase=getattr(self, 'phase', None)) from e
-                time.sleep(compute_exponential_backoff(attempt))
+                budget_sleep(compute_exponential_backoff(attempt), current_execution(self))
 
         # Record final failure once if all retries exhausted
         try:
@@ -836,6 +833,25 @@ class LLMClient:
             "total_tokens": int(prompt + completion),
         }
 
+    def _request_timeout(self, spec=None):
+        execution = current_execution(self)
+        if execution is None:
+            return {}
+        remaining = execution.budget.remaining()
+        if spec is None:
+            return {"timeout": min(float(self.timeout), remaining)}
+        return {"timeout": httpx.Timeout(connect=min(spec.connect_s, remaining),
+                                         read=min(spec.idle_s, remaining),
+                                         write=min(spec.write_s, remaining),
+                                         pool=min(spec.pool_s, remaining))}
+
+    @llm_request
+    def _post_chat(self, client, body):
+        resp = client.post("/v1/chat/completions", json=body, **self._request_timeout())
+        self._raise_status(resp.status_code, self._resp_bytes(resp), getattr(resp, "headers", None) or {})
+        return resp.json()
+
+    @llm_request
     def _stream_chat(self, client, body: dict, spec, max_tokens) -> dict:
         """单次流式请求：解析 SSE 并累加 content/reasoning/usage。
 
@@ -855,7 +871,7 @@ class LLMClient:
         finish_reason = None
         usage = None
 
-        with client.stream("POST", "/v1/chat/completions", json=body) as resp:
+        with client.stream("POST", "/v1/chat/completions", json=body, **self._request_timeout(spec)) as resp:
             if resp.status_code != 200:
                 self._raise_status(
                     resp.status_code,
@@ -863,6 +879,9 @@ class LLMClient:
                     getattr(resp, "headers", None) or {},
                 )
             for line in resp.iter_lines():
+                execution = current_execution(self)
+                if execution:
+                    execution.budget.check()
                 now = time.monotonic()
                 elapsed = now - start
                 if elapsed > total_cap:
@@ -958,7 +977,10 @@ class LLMClient:
     def _resp_bytes(resp) -> bytes:
         # 兼容流式 context-manager 响应（.read）与测试 fake（.content/_content）。
         for attr in ("content", "_content"):
-            v = getattr(resp, attr, None)
+            try:
+                v = getattr(resp, attr, None)
+            except httpx.ResponseNotRead:
+                continue
             if isinstance(v, (bytes, bytearray)):
                 return bytes(v)
         try:
@@ -967,34 +989,25 @@ class LLMClient:
             return b""
 
     def _stream_client(self, spec: Optional[TimeoutSpec] = None) -> httpx.Client:
-        injected = getattr(self._local, 'client', None)
+        injected = getattr(self._local, "client", None)
         if injected is not None:
             return injected
-        key = (spec.connect_s, spec.idle_s, spec.write_s, spec.pool_s) if spec else (self.timeout, self.timeout, self.timeout, self.timeout)
-        cx = getattr(self._local, 'spec_client', None)
-        if cx is None or getattr(self._local, 'spec_key', None) != key:
-            headers = {'Content-Type': 'application/json'}
-            if self.api_key:
-                headers['Authorization'] = f'Bearer {self.api_key}'
-            timeout_kwargs = {}
-            if spec:
-                timeout_kwargs = dict(
-                    connect=spec.connect_s,
-                    read=spec.idle_s,
-                    write=spec.write_s,
-                    pool=spec.pool_s,
-                )
-            else:
-                timeout_kwargs['connect'] = self.timeout
-                timeout_kwargs['read'] = self.timeout
-                timeout_kwargs['write'] = self.timeout
-                timeout_kwargs['pool'] = self.timeout
-            import httpx
-            cx = httpx.Client(base_url=self.api_base, headers=headers,
-                              timeout=httpx.Timeout(**timeout_kwargs))
-            self._local.spec_client = cx
-            self._local.spec_key = key
-        return cx
+        key = ((spec.connect_s, spec.idle_s, spec.write_s, spec.pool_s) if spec
+               else (self.timeout,) * 4)
+        # HTTPX Client supports sharing across threads; keep connections across chapter pools.
+        with self._pool_lock:
+            client = self._shared_clients.get(key)
+            if client is None:
+                headers = {"Content-Type": "application/json"}
+                if self.api_key:
+                    headers["Authorization"] = f"Bearer {self.api_key}"
+                client = httpx.Client(
+                    base_url=self.api_base, headers=headers,
+                    timeout=httpx.Timeout(connect=key[0], read=key[1], write=key[2], pool=key[3]),
+                    limits=httpx.Limits(max_connections=16, max_keepalive_connections=8,
+                                       keepalive_expiry=60))
+                self._shared_clients[key] = client
+            return client
 
     def _raise_status(self, status: int, text: bytes, headers) -> None:
         if status == 400:
@@ -1013,10 +1026,15 @@ class LLMClient:
             raise TransientLLMError(f'HTTP {status}')
         # For 2xx and other success codes, do nothing
     def close(self):
-        client = getattr(self._local, "client", None)
-        if client is not None:
-            client.close()
+        injected = getattr(self._local, "client", None)
+        with self._pool_lock:
+            clients = list(self._shared_clients.values())
+            self._shared_clients.clear()
+        if injected is not None:
+            clients.append(injected)
             self._local.client = None
+        for client in {id(client): client for client in clients}.values():
+            client.close()
 
     def __enter__(self):
         return self

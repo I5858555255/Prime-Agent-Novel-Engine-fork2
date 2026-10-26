@@ -9,10 +9,24 @@
 import json
 import logging
 import os
+import threading
+import copy
+import hashlib
+import uuid
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import Optional
 
+from novel_engine.core.publication_transaction import publication_transaction, atomic_write
+from novel_engine.core.execution import (
+    chapter_run, stage, current_execution, BudgetExceeded, ContextExecutor,
+)
+from novel_engine.quality.chinese_gate import is_chinese_clean
+from novel_engine.quality.polish_policy import select_polish_scenes
+from novel_engine.quality.generation_constraints import generation_constraints, repair_constraints
+from novel_engine.quality.review_policy import review_on_demand
+from novel_engine.quality.repair_spans import build_repair_spans, resolve_span_edits
+from novel_engine.quality.punctuation_revision import revise_long_sentences, PUNCTUATION_INSTRUCTION
 from novel_engine.core.state_machine import StateMachine, ChapterPhase
 from novel_engine.core.checkpoint import CheckpointManager, create_draft_checkpoint, novel_chapter_path
 from novel_engine.core.quality_policy import load_quality_policy, is_blocking, derive_scene_targets
@@ -26,7 +40,7 @@ from novel_engine.core.errors import (
 from novel_engine.pipeline.chapter_journal import (
     append_scene, completed_scene_ids, load_scenes,
     load_authoritative_scenes, authoritative_completed_scene_ids,
-    snapshot_journal, restore_journal,
+    snapshot_journal, restore_journal, journal_path,
 )
 
 
@@ -67,7 +81,7 @@ from novel_engine.quality.review_votes import (
 )
 from novel_engine.quality import review_hybrid
 from novel_engine.pipeline.phase_cache import PhaseCache, content_key, model_fingerprint, PROMPT_VERSIONS
-from novel_engine.agents.reviewer_agent import ReviewerAgent, DIM_MAX
+from novel_engine.agents.reviewer_agent import ReviewerAgent, DIM_MAX, ReviewResponseError, review_context_fingerprint
 from novel_engine.agents.pacing_advisor import PacingAdvisor
 from novel_engine.core.memory_manager import MemoryManager
 from novel_engine.core.llm_client import LLMClient, call_llm, get_call_log, reset_call_log
@@ -203,6 +217,7 @@ class PipelineOrchestrator:
     """章节生成流水线编排器。"""
 
     def __init__(self, project_root: str | Path = None, llm_client: Optional[LLMClient] = None):
+        self._execution_lock = threading.RLock()
         self.root = Path(project_root or Path(__file__).parent.parent)
         # Ensure runtime dir exists (StateMachine/StateDB write into it during init)
         (self.root / "runtime").mkdir(parents=True, exist_ok=True)
@@ -275,7 +290,7 @@ class PipelineOrchestrator:
         self.session_tree_path = self.root / "runtime" / "session_tree.json"
         self._load_session_tree()
 
-        self.writer = WriterAgent(llm_client=self.scene_router)
+        self.writer = WriterAgent(llm_client=self.scene_router, project_root=self.root)
         # CC30（DS Q1/Q2/Q3）：仅真机开启按场 flash->pro 故障转移。真机判据用
         # production_runner 设置的 NOVEL_ENGINE_REAL_LANG_ENFORCE=1，并排除 MockLLMClient；
         # 注入的是真实 client 时为 pro 单独建 refine 池（agnes-2.5-pro），mock/离线零影响。
@@ -359,8 +374,11 @@ class PipelineOrchestrator:
         else:
             self.review_llm = self.review_router
             self.review_provider_cfg = self.provider_cfg
+        if review_cfg.get("temperature") is not None:
+            self.review_provider_cfg = copy.deepcopy(self.review_provider_cfg)
+            self.review_provider_cfg.retry_temperatures = [float(review_cfg["temperature"])]
         self.reviewer = ReviewerAgent(
-            llm_client=self.review_router, provider_config=self.review_provider_cfg)
+            llm_client=self.review_router, provider_config=self.review_provider_cfg, project_root=self.root)
 
         self._attempt_index = 0
 
@@ -455,6 +473,9 @@ class PipelineOrchestrator:
         stored = getattr(self, "_db_source_mtime", 0.0)
         if max_mtime <= stored:
             return  # No changes, skip reload
+        # Refresh in-memory world data as well as SQL after restart or another publisher.
+        for name in ("characters", "factions", "power_system"):
+            setattr(self.simulator, name, self.simulator._load_json(world_state_dir / f"{name}.json"))
         # Reload all DB instances
         self.db.import_from_json()
         if hasattr(self.simulator, "db"):
@@ -470,7 +491,17 @@ class PipelineOrchestrator:
             self._cached_policy = load_quality_policy(self.root)
         return self._cached_policy
 
+    @chapter_run
     def generate_single_chapter(self, chapter_num: int) -> dict:
+        result = self._generate_single_chapter_once(chapter_num)
+        if not result.get("published") and any(result.get(key) for key in (
+                "quality_repair_exhausted", "hard_block", "final_gate_blocked")):
+            if not result.get("quality_diagnostic_path"):
+                self._save_quality_failure(chapter_num, result,
+                    result.get("hard_block_reason") or "automatic quality repair exhausted")
+        return result
+
+    def _generate_single_chapter_once(self, chapter_num: int) -> dict:
         """
         生成单章的完整流水线。
         返回结果字典。
@@ -482,6 +513,24 @@ class PipelineOrchestrator:
             "errors": [],
         }
 
+        execution = current_execution(self)
+        if execution:
+            execution.current_result = result
+
+        if self.checkpoint_mgr.verify_published(chapter_num):
+            return {"chapter": chapter_num, "success": True, "published": True,
+                    "skipped_committed": True, "errors": []}
+        if chapter_num > 1 and not self.checkpoint_mgr.verify_published(chapter_num - 1):
+            return {"chapter": chapter_num, "success": False, "published": False,
+                    "predecessor_blocked": True, "errors": ["previous chapter is not published"]}
+        if getattr(self, "_active_generation_chapter", None) != chapter_num:
+            self._active_generation_chapter = chapter_num
+            self.writer.last_scenes = []
+            self._force_publish_best = False
+            self._low_score_rewrites_used = 0
+            self._boundary_hard = []
+            self._reprise_hard = []
+            self._last_deterministic_issues = []
         logger.info(f"=== Starting chapter {chapter_num} ===")
 
         # 清除上一章遗留的 pending changes
@@ -531,24 +580,29 @@ class PipelineOrchestrator:
             try:
                 from novel_engine.timeline.timeline_anchors import save_anchor, validate_continuity, get_prev_anchor
                 _ts = str(task_card.get("time_setting", ""))
+                declared_anchor = task_card.get("timeline_anchor") or {}
                 _anchor = {
                     "chapter_id": chapter_num,
-                    "in_world_datetime_start": _ts,
+                    "in_world_datetime_start": declared_anchor.get("chapter_start_marker") or _ts,
                     "in_world_datetime_end": "",
-                    "elapsed_since_prev": _ts if _ts else "数日内",
+                    "elapsed_since_prev": declared_anchor.get("elapsed_since_prev") or _ts or ("起始章" if chapter_num == 1 else "未声明"),
+                    "max_time_progression": declared_anchor.get("max_time_progression", ""),
                     "jump": ("年" in _ts) if _ts else False,
                     "character_age_snapshot": {},
                 }
-                _ok, _errs = validate_continuity(_anchor, get_prev_anchor(chapter_num))
+                _ok, _errs = validate_continuity(_anchor, get_prev_anchor(chapter_num, self.root))
                 if not _ok:
                     logger.warning(f"[timeline] ch{chapter_num} continuity fail: {_errs}")
-                save_anchor(_anchor)
+                save_anchor(_anchor, self.root)
                 logger.info(f"Timeline anchor saved for chapter {chapter_num} (elapsed={_anchor['elapsed_since_prev']})")
             except Exception:
                 logger.exception(f"[timeline] anchor save failed ch{chapter_num} (non-blocking)")
+        except BudgetExceeded:
+            raise
         except Exception as e:
             result["errors"].append(f"DIRECTING: {e}")
-            sm.handle_failure("directing_error", str(e))
+            result.update(quality_replan=True, replan_reason="planning_validation")
+            sm.mark_failed(str(e))
             return result
 
         # 阶段3：缩写生成（若 task_card 已含 synopsis 则复用，避免重生成导致目标漂移）
@@ -619,6 +673,8 @@ class PipelineOrchestrator:
                 result["gap_kind"] = getattr(ce, "gap_kind", None) or "quality"
                 result["gap_violations"] = list(getattr(ce, "violations", None) or [])
             return result
+        except BudgetExceeded:
+            raise
         except Exception as e:
             import traceback
             logger.error(f"WRITE: {e}\n{traceback.format_exc()}")
@@ -668,7 +724,7 @@ class PipelineOrchestrator:
             result['hard_block_reason'] = (
                 f'mandatory foreshadow beats unresolved: '
                 f'{list(_pre_mand.get("missing_fs_ids", []))}')
-            self._flag_for_human(
+            self._record_quality_failure(
                 chapter_num, 0,
                 f'mandatory foreshadow beats unresolved in scenes '
                 f'{list(_pre_mand.get("missing_scenes", {}).keys())}; isolate to draft/failed')
@@ -687,48 +743,17 @@ class PipelineOrchestrator:
         # 阶段5：审查评分
         try:
             self._finalize_current_novel(chapter_num)
-            stage_review = self._stage_review(chapter_num, task_card, synopsis, self._novel_string(), world_state)
+            stage_review = self._auto_repair_quality(chapter_num, task_card, synopsis, world_state, result)
+            if not stage_review.get("auto_quality_passed"):
+                result.update(success=False, published=False, pending_human_review=False,
+                              quality_repair_exhausted=True, score=stage_review.get("score"))
+                self._save_quality_failure(chapter_num, result, "automatic quality repair exhausted")
+                return result
             review = stage_review["review"]
             score = stage_review["score"]
             verdict = stage_review["verdict"]
             result["score"] = score
             apply_world_state = True
-
-            # CC round-8 P0-3：三评极差>15 → 评审本身不可靠，无论中位数是否过线都不自动提交，
-            # 落 draft 强制人工复核（不做整章重采，重采无法消除评审噪声）。
-            # 2026-10-13 ch292 归因补充：低分 unstable 章（如 ch292，5258 字严重短于 7310 下限）
-            # 先给一次 A 类整章重写预算——重写改变文本后评审噪声可能收敛（ch299 已验证 rewrite→fix
-            # 有效），这与"重采"（同文重评）不同；只有高分 unstable（score>=60）或升级未启用时
-            # 才直接强制人工，避免绕过已验证有效的修复路径。
-            if stage_review.get("review_unstable"):
-                _unstable_upgrade = _unstable_upgrade_eligible(self._policy, score)
-                if _unstable_upgrade:
-                    _lsr_floor = float(((self._policy or {}).get("low_score_rewrite") or {}).get(
-                        "floor", int((self._policy or {}).get("fix_threshold", 60))))
-                    logger.warning(
-                        f"Chapter {chapter_num} review highly unstable but low score "
-                        f"({score} < {_lsr_floor}) -> try whole-chapter rewrite first (A-class upgrade); "
-                        f"human review only if still unstable/low")
-                    verdict = "fail"  # 强制走 low_score_eligible 整章重写路径，不直接挂人工
-                else:
-                    logger.error(
-                        f"Chapter {chapter_num} review highly unstable (median-of-3 range>15, "
-                        f"score={score}) -> force human review, no commit")
-                    try:
-                        _dp = self.root / "chapters" / "draft" / f"chapter_{chapter_num}.txt"
-                        _dp.parent.mkdir(parents=True, exist_ok=True)
-                        _dp.write_text(self._novel_string(), encoding="utf-8")
-                    except Exception as _de:
-                        logger.warning(f"save unstable draft failed: {_de}")
-                    result["success"] = False
-                    result["published"] = False
-                    result["score"] = score
-                    result["review_unstable"] = True
-                    result["pending_human_review"] = True
-                    result["human_review_note"] = (
-                        f"score={score} 三评极差>15，评审极不稳定，强制人工复核（不自动重采）")
-                    self._flag_for_human(chapter_num, score, "review highly unstable (median-of-3 range>15)")
-                    return result
 
             # A类：低分整章重写——verdict="fail"（score 低于 fix_threshold）且启用时
             # 也进入修复路径（fix loop 内低分升级为整章重写），不再直接挂人工。
@@ -823,7 +848,7 @@ class PipelineOrchestrator:
                                            f"< topup line {_len18['topup_line']} -> flag human, no large auto-topup")
                             result["severe_shortfall"] = True
                             result["severe_shortfall_chars"] = _len18["current"]
-                            self._flag_for_human(chapter_num, best_score,
+                            self._record_quality_failure(chapter_num, best_score,
                                                  f"post-fix severe shortfall {_len18['current']}/{_soft_floor18}; please verify")
                     except Exception as _e18:
                         logger.warning(f"Post-fix length check skipped: {_e18}")
@@ -995,7 +1020,7 @@ class PipelineOrchestrator:
                         logger.warning(f"Gray-band final release ch{chapter_num} score {best_score} (gates pass, no-high) → publish to novel, flagged human spot-check")
                         result["gray_band_release"] = True
                         result["gray_band_score"] = best_score
-                        self._flag_for_human(chapter_num, best_score, f"gray-band final release {best_score}: spot-read required" + ("; reaction consistency 未消解（已尝试定点修订）" if (_final_det_g.get("reaction_hits") and _reaction_fix_budget == 0) else ""))
+                        self._record_quality_failure(chapter_num, best_score, f"gray-band final release {best_score}: spot-read required" + ("; reaction consistency 未消解（已尝试定点修订）" if (_final_det_g.get("reaction_hits") and _reaction_fix_budget == 0) else ""))
                     # Hoisted out of the if-branch: ensure final_det is always bound
                     # for the else path (force-best when best_score < min_ch and not gray_final).
                     # Previously UnboundLocalError was silently swallowed by the outer except.
@@ -1012,7 +1037,7 @@ class PipelineOrchestrator:
                             result["note"] = f"hard gate blocked but force publish {best_score}: det={final_det['issues']} high={final_high}"
                             apply_world_state = False
                             self._force_publish_best = True
-                            self._flag_for_human(chapter_num, best_score, f"force publish despite hard gate: det={final_det['issues']}")
+                            self._record_quality_failure(chapter_num, best_score, f"force publish despite hard gate: det={final_det['issues']}")
                         else:
                             result["success"] = True
                             apply_world_state = True
@@ -1043,7 +1068,7 @@ class PipelineOrchestrator:
                     else:
                         result["success"] = False
                         apply_world_state = False
-                        self._flag_for_human(chapter_num, pre_fix_score, "auto-fix failed; below min_ch")
+                        self._record_quality_failure(chapter_num, pre_fix_score, "auto-fix failed; below min_ch")
             else:
                 # 全量回退：回滚世界状态，避免污染后续章节。
                 # 不在章节内递归重试 —— 递归会和外层 _run_with_retry 的整章重试叠加，
@@ -1084,6 +1109,13 @@ class PipelineOrchestrator:
                 sm.handle_failure("review_exhausted", f"Score={score}")
                 result["success"] = False
                 return result
+        except ReviewResponseError as e:
+            result["errors"].append(f"REVIEW_PROTOCOL: {e}")
+            result["review_protocol_failed"] = True
+            self._save_quality_failure(chapter_num, result, "review response invalid after bounded format correction")
+            return result
+        except BudgetExceeded:
+            raise
         except Exception as e:
             result["errors"].append(f"REVIEW: {e}")
             sm.handle_failure("review_error", str(e))
@@ -1109,7 +1141,7 @@ class PipelineOrchestrator:
                 result["success"] = False
                 result["forbidden_violations"] = _fg_result.violations
                 if _fg_result.flag_human:
-                    self._flag_for_human(chapter_num, result.get("score", 0), _fg_result.flag_reason or "forbidden violation")
+                    self._record_quality_failure(chapter_num, result.get("score", 0), _fg_result.flag_reason or "forbidden violation")
             else:
                 logger.warning(
                     f"Chapter {chapter_num} non-blocking forbidden hits recorded: {[_v.get('name') for _v in _fg_result.violations]}")
@@ -1147,7 +1179,7 @@ class PipelineOrchestrator:
             result['published'] = False
             result['hard_block'] = True
             result['hard_block_reason'] = _stage6_result.get('hard_block_reason', 'stage6 foreshadow')
-            self._flag_for_human(
+            self._record_quality_failure(
                 chapter_num, cur_score,
                 f'stage6 foreshadow hard block: {_stage6_result.get("hard_block_reason", "unknown")}')
             return result
@@ -1205,7 +1237,7 @@ class PipelineOrchestrator:
                 logger.error(f"Failed to quarantine final-gate reject ch{chapter_num}: {_qe19}")
             logger.error(f"FINAL GATE BLOCK ch{chapter_num} score={cur_score}: {_vd19} "
                          f"-> quarantine+human, cursor continues")
-            self._flag_for_human(chapter_num, cur_score,
+            self._record_quality_failure(chapter_num, cur_score,
                                  "final pre-commit gate blocked: " + "; ".join(_vd19))
             result["success"] = False
             result["published"] = False
@@ -1240,7 +1272,7 @@ class PipelineOrchestrator:
             result["score"] = cur_score
             result["published"] = False
             result["force_published"] = True
-            self._flag_for_human(chapter_num, cur_score, f"force-best to draft: {result.get('note','')} high={high_list} det_hard={det_issues} soft={det_soft}")
+            self._record_quality_failure(chapter_num, cur_score, f"force-best to draft: {result.get('note','')} high={high_list} det_hard={det_issues} soft={det_soft}")
             return result
         can_publish, _publish_verdict = self._decide_publish(
             chapter_num=chapter_num, task_card=task_card,
@@ -1281,8 +1313,9 @@ class PipelineOrchestrator:
                 result["success"] = False
                 result["published"] = False
                 result["score"] = cur_score
-                result["pending_human_review"] = True
-                result["human_review_note"] = (f"score={cur_score}>=88 dim-gate blocked (high={high_list} "\
+                result["pending_human_review"] = False
+                result["quality_repair_exhausted"] = True
+                result["quality_failure_note"] = (f"score={cur_score}>=88 dim-gate blocked (high={high_list} "\
                                        f"det_hard={det_issues} det_soft={det_soft}), saved draft pending human review")
                 return result
             elif 82 <= cur_score < 88:
@@ -1296,16 +1329,17 @@ class PipelineOrchestrator:
                 result["success"] = False
                 result["published"] = False
                 result["score"] = cur_score
-                result["pending_human_review"] = True  # 新增标记
-                result["human_review_note"] = f"score={cur_score} in 82-87 range, queued for human review, not force-best"
+                result["pending_human_review"] = False
+                result["quality_repair_exhausted"] = True
+                result["quality_failure_note"] = f"score={cur_score} in 82-87 range, queued for human review, not force-best"
                 # ch267 归因：gray-band 授权被最终 det 硬项否决时，必须带归因进 note+errors，
                 # 禁止静默降级（之前 85.9 分无归因地 FAILED，日志查不出原因）
                 _gbd = result.get("gray_band_det_block")
                 if _gbd:
-                    result["human_review_note"] += f"; gray-band 授权被最终 det 硬项否决: {_gbd}"
+                    result["quality_failure_note"] += f"; gray-band 授权被最终 det 硬项否决: {_gbd}"
                     result["errors"].append(f"gray-band authorized but final det hard: {_gbd}")
                 elif _publish_verdict and _publish_verdict.get("reasons"):
-                    result["human_review_note"] += f"; 否决原因: {_publish_verdict['reasons'][:3]}"
+                    result["quality_failure_note"] += f"; 否决原因: {_publish_verdict['reasons'][:3]}"
                 # early return，避免进入下面成功后的 world_state 提交流程
                 return result
             else:
@@ -1322,7 +1356,7 @@ class PipelineOrchestrator:
                 result["success"] = False
                 result["published"] = False
                 result["score"] = cur_score
-                self._flag_for_human(chapter_num, cur_score, f"below 82: forced draft, score={cur_score}")
+                self._record_quality_failure(chapter_num, cur_score, f"below 82: forced draft, score={cur_score}")
                 return result
 
         self._commit_chapter(
@@ -1340,103 +1374,90 @@ class PipelineOrchestrator:
         return result
 
 
+    @stage("commit_io")
     def _commit_chapter(self, chapter_num, task_card, synopsis, world_state,
                         result, score, sm, apply_world_state=False):
-        """Submit chapter: checkpoint, events, end_state, session_tree."""
+        """Publish text, memory, world state and continuity ledgers as one recoverable unit."""
+        paths = [self.root / name for name in (
+            "runtime/checkpoint.json", "runtime/state_machine.json", "runtime/session_tree.json",
+            "runtime/chapter_status.json", "runtime/event_ledger.jsonl", "runtime/chapter_end_states.jsonl",
+            "runtime/fact_changes.jsonl", "memory/short_term/recent_chapters.json",
+            "memory/long_term/chapter_index.json", "memory/long_term/beat_history.json",
+            "memory/world_state/characters.json", "memory/world_state/power_system.json",
+            "memory/world_state/factions.json", "memory/world_state/pending/pending_changes.json")]
+        for base in ("chapters", "runtime/backups/chapters"):
+            for kind, suffix in (("novel", "txt"), ("synopsis", "txt"), ("outline", "json")):
+                paths.append(self.root / base / kind / f"chapter_{chapter_num}.{suffix}")
+        original = {name: copy.deepcopy(getattr(self.simulator, name))
+                    for name in ("characters", "factions", "power_system")}
+        original_tree = copy.deepcopy(self.session_tree)
+        original_phase, original_log = sm.current_phase, copy.deepcopy(sm.state_log)
+        databases = {self.root / "runtime/state.db": self.simulator.db.conn}
         try:
-            # 提取关键词用于索引
-            keywords = self._extract_keywords(task_card, synopsis)
-            self.memory.update_chapter_index(chapter_num, keywords)
-            self.memory.add_recent_chapter(chapter_num, {
-                "goal": task_card.get("core_goal", ""),
-                "summary": synopsis.get("synopsis", ""),
-                "word_count": len(self._novel_string()),
-            })
-
-            # 正式提交状态变更（已通过发布门，安全落库）
-            pending_changes = synopsis.get("state_changes", [])
-            source = getattr(self, "_current_synopsis_source", "director")
-            if pending_changes:
-                if apply_world_state:
-                    self.simulator.apply_pending_changes(pending_changes, chapter=chapter_num, source=source)
+            with publication_transaction(self.root, chapter_num, paths, databases):
+                if self.checkpoint_mgr.verify_published(chapter_num):
+                    result.update(success=True, published=True, skipped_committed=True)
+                    return result
+                if chapter_num > 1 and not self.checkpoint_mgr.verify_published(chapter_num - 1):
+                    raise RuntimeError("previous chapter has not been published with verified hashes")
+                pending_changes = synopsis.get("state_changes", [])
+                if pending_changes and apply_world_state:
+                    self.simulator.apply_pending_changes(
+                        pending_changes, chapter=chapter_num,
+                        source=getattr(self, "_current_synopsis_source", "director"))
                     self.memory.commit_pending_changes(pending_changes)
-                else:
-                    # Deferred path: record fact_changes with status=deferred
-                    for _i, _chg in enumerate(pending_changes):
-                        try:
-                            record_change(
-                                self.root,
-                                chapter=chapter_num,
-                                change_type=_chg.get("type", "unknown"),
-                                target=str(_chg.get("target", "")),
-                                old_value=_chg.get("old_value"),
-                                new_value=_chg.get("new_value"),
-                                source=source,
-                                gate_result="deferred",
-                                status="deferred",
-                            )
-                        except Exception as _fc_defer:
-                            logger.warning(f"fact_changes deferred write failed (non-fatal): {_fc_defer}")
-                    logger.warning(
-                        f"Chapter {chapter_num} 世界状态变更已暂缓"
-                        f"(score={result.get('score')} < min_ch)，未应用到世界模拟器，留待人工复核/返工。"
-                    )
-                    self._flag_for_human(chapter_num, result.get("score", 0), "world-state deferred: below min_ch")
-
-            checkpoint = sm.commit_chapter(
-                chapter_num=chapter_num,
-                novel_content=self._novel_string(),
-                synopsis_content=json.dumps(synopsis, ensure_ascii=False),
-                outline_content=json.dumps(task_card, ensure_ascii=False),
-                world_state_snapshot=world_state,
-            )
-            # Mark chapter as committed in status tracking
-            set_status(self.root, chapter_num, COMMITTED, score=score)
-            # CC P0：仅在原子提交成功后追加跨章事件台账（HALT/隔离章不写，失败不回滚已提交章节）。
-            try:
-                _n_ev = append_chapter_events(self.root, chapter_num, task_card)
-                logger.info(f"Chapter {chapter_num}: appended {_n_ev} event-ledger entries")
-            except Exception as _le:
-                logger.error(f"event ledger append failed for chapter {chapter_num}: {_le}")
-            # CC round-7 P0-3：持久化章末精确停点，供下一章 director 开场锚点
-            try:
-                append_end_state(self.root, chapter_num, task_card)
-            except Exception as _ee:
-                logger.warning(f"end_state append failed (non-fatal) for ch{chapter_num}: {_ee}")
-
-            # Save commit snapshot in SessionTree
-            try:
-                import hashlib
-                content_bytes = (self._novel_string() + json.dumps(synopsis) + json.dumps(task_card)).encode("utf-8")
-                content_hash = hashlib.sha256(content_bytes).hexdigest()[:16]
-                post_world_state = {
-                    "characters": self.simulator.characters,
-                    "factions": self.simulator.factions,
-                    "power_system": self.simulator.power_system,
+                elif pending_changes:
+                    for change in pending_changes:
+                        record_change(
+                            self.root, chapter=chapter_num,
+                            change_type=change.get("type", "unknown"),
+                            target=str(change.get("target", "")),
+                            old_value=change.get("old_value"), new_value=change.get("new_value"),
+                            source=getattr(self, "_current_synopsis_source", "director"),
+                            gate_result="deferred", status="deferred")
+                self.memory.update_chapter_index(chapter_num, self._extract_keywords(task_card, synopsis))
+                self.memory.add_recent_chapter(chapter_num, {
+                    "goal": task_card.get("core_goal", ""), "summary": synopsis.get("synopsis", ""),
+                    "word_count": len(self._novel_string())})
+                post_world_state = self.simulator.build_world_state_for_chapter(chapter_num)
+                # Generation context filters future actors; persistence must retain them.
+                post_world_state["characters"] = {
+                    **self.simulator.characters.get("characters", {}),
+                    **post_world_state.get("characters", {}),
                 }
+                sm.commit_chapter(
+                    chapter_num=chapter_num, novel_content=self._novel_string(),
+                    synopsis_content=json.dumps(synopsis, ensure_ascii=False),
+                    outline_content=json.dumps(task_card, ensure_ascii=False),
+                    world_state_snapshot=post_world_state)
+                append_chapter_events(self.root, chapter_num, task_card)
+                append_end_state(self.root, chapter_num, task_card)
                 self.session_tree.add_commit(
                     chapter_num=chapter_num,
-                    content_hash=content_hash,
-                    world_state_snapshot=post_world_state,
-                    score=result.get("score", score),
-                    branch_name="main"
-                )
-                self._save_session_tree()
-                logger.info(f"Chapter {chapter_num} node committed to SessionTree.")
-            except Exception as e:
-                logger.error(f"Failed to commit chapter to SessionTree: {e}")
-
-            # success 标记已在质检阶段如实写入，此处不再覆盖，避免掩盖弱章
-            logger.info(f"Chapter {chapter_num} COMMITTED (success={result.get('success')})")
-            # P0 冻结目标：成功发布后清理冻结缓存，下一章重新生成
+                    content_hash=hashlib.sha256(self._novel_string().encode("utf-8")).hexdigest()[:16],
+                    world_state_snapshot={"characters": self.simulator.characters,
+                                          "factions": self.simulator.factions,
+                                          "power_system": self.simulator.power_system},
+                    score=score, branch_name="main")
+                self.session_tree.prune_snapshots(branch_name="main", keep=100)
+                atomic_write(self.session_tree_path, json.dumps(self.session_tree.to_dict(), ensure_ascii=False))
+                set_status(self.root, chapter_num, COMMITTED, score=score)
+                if (not self.checkpoint_mgr.verify_published(chapter_num)
+                        or get_status(self.root, chapter_num) != COMMITTED):
+                    raise RuntimeError("published chapter failed checkpoint/status verification")
+            result.update(success=True, published=True)
             self._frozen_task_cards.pop(chapter_num, None)
             self._frozen_synopsis.pop(chapter_num, None)
-        except Exception as e:
-            result["errors"].append(f"COMMIT: {e}")
-            sm.handle_failure("commit_error", str(e))
-            # Mark chapter as HALTED on commit failure
+        except Exception as exc:
+            for name, value in original.items():
+                setattr(self.simulator, name, value)
+            self.session_tree = original_tree
+            sm.current_phase, sm.state_log = original_phase, original_log
+            result.update(success=False, published=False, commit_failed=True)
+            result.setdefault("errors", []).append(f"COMMIT: {exc}")
+            sm.handle_failure("commit_error", str(exc))
             set_status(self.root, chapter_num, HALTED, reason="commit_error")
-            return result
+        return result
 
 
     def _decide_publish(self, chapter_num, task_card, synopsis, world_state,
@@ -1518,6 +1539,7 @@ class PipelineOrchestrator:
 
     # ====== Stage Methods (extracted from generate_single_chapter) ======
 
+    @stage("world_sim")
     def _stage_world_sim(self, chapter_num: int) -> dict:
         """阶段1：世界模拟器预计算。"""
         self.state_machine.transition(ChapterPhase.WORLD_SIM)
@@ -1526,6 +1548,7 @@ class PipelineOrchestrator:
         logger.info(f"World simulation done for chapter {chapter_num}")
         return world_state
 
+    @stage("director")
     def _stage_directing(self, chapter_num: int, world_state: dict,
                          bypass_cache: bool | None = None) -> dict:
         """阶段2：章节导演生成任务卡（校验失败自动重试）。
@@ -1536,7 +1559,7 @@ class PipelineOrchestrator:
         """
         self.state_machine.transition(ChapterPhase.DIRECTING)
         max_attempts = 3
-        last_errors: list = []
+        last_errors: list = list(getattr(self, "_planning_feedback", {}).pop(chapter_num, []))
         # CC round-7 Q6：质量 HALT 重试绕过 director 缓存换规划；infra 重试仍走缓存。
         _bypass = (
             bool(bypass_cache)
@@ -1669,7 +1692,7 @@ class PipelineOrchestrator:
 
         for attempt in range(max_attempts):
             task_card = None
-            if attempt == 0 and not last_errors and not _bypass:
+            if attempt == 0:
                 try:
                     _dmodel = model_fingerprint(self.root, "director")
                     _director_cache_key = content_key(
@@ -1677,8 +1700,9 @@ class PipelineOrchestrator:
                          "fixed_context": self._director_fixed_context,
                          "recent_events": recent_event_block(self.root, chapter_num),
                          "end_anchor": end_state_anchor_block(self.root, chapter_num)},
-                        version=PROMPT_VERSIONS["director"], model=_dmodel)
-                    task_card = self._phase_cache.get(chapter_num, "director", _director_cache_key)
+                        version=PROMPT_VERSIONS["director"] + ":density_contract_v10_craft_recovery", model=_dmodel)
+                    if not last_errors and not _bypass:
+                        task_card = self._phase_cache.get(chapter_num, "director", _director_cache_key)
                     if task_card is not None:
                         _director_cache_hit = True
                         logger.info(f"Director cache hit for chapter {chapter_num}")
@@ -1754,10 +1778,11 @@ class PipelineOrchestrator:
             logger.warning(f"Task card validation failed (attempt {attempt + 1}/{max_attempts}): {errors}")
         raise ValueError(f"Task card validation failed: {last_errors}")
 
+    @stage("synopsis")
     def _stage_synopsis(self, task_card: dict) -> dict:
         """阶段3：缩写生成。合并模式下直接复用导演任务卡中的 synopsis，跳过独立 LLM 调用。"""
         self.state_machine.transition(ChapterPhase.SYNOPSIS)
-        merge = self.config.get("pipeline", {}).get("merge_synopsis_into_directing", False)
+        merge = self.config.get("pipeline", {}).get("merge_synopsis_into_directing", True)
         if merge:
             raw = task_card.get("synopsis")
             if isinstance(raw, str) and len(raw.strip()) >= 50:
@@ -1810,6 +1835,7 @@ class PipelineOrchestrator:
             logger.warning(f"ch{chapter_num} resolved foreshadow query failed: {_rf}")
             return set()
 
+    @stage("deterministic_gates")
     def _deterministic_quality_gate(self, text: str, task_card: dict, scene_texts: dict | None = None) -> dict:
         """确定性校验（重复/截断硬；长度仅记soft）。
 
@@ -2067,6 +2093,7 @@ class PipelineOrchestrator:
                   for d in load_authoritative_scenes(self.root, chapter_num)]
         return scenes
 
+    @stage("scene_validation")
     def _validate_and_regen_scenes(
         self,
         scenes: list,
@@ -2156,6 +2183,12 @@ class PipelineOrchestrator:
                 if _passed and not _all_issues:
                     ok = True
                     break
+                if (len(cur.scene_text or "") >= max(int(target * 0.15), 150)
+                        and _all_issues
+                        and all(str(issue).startswith("length_too_short") for issue in _all_issues)):
+                    # Coherent short prose goes to bounded expansion; final gates still enforce length.
+                    ok = True
+                    break
                 last_issues = _all_issues
                 logger.warning(f"Scene {cur.scene_id} validation failed (attempt {_attempt+1}/2): {_all_issues}, regenerating")
                 directives = self._scene_issues_to_directives(_all_issues, target, _need_beats)
@@ -2207,7 +2240,8 @@ class PipelineOrchestrator:
             # 定向重生一次（每场景最多 +1 次调用），不把上千字缺口甩给有界扩写；新稿不更长
             # 则保留旧稿，下游扩写/长度门兜底。
             _len_floor21 = int(target * 0.7)
-            if ok and getattr(cur, 'structured', False) and len(cur.scene_text or '') < _len_floor21:
+            if (ok and getattr(cur, 'structured', False) and len(cur.scene_text or '') < _len_floor21
+                    and (self.config.get("pipeline") or {}).get("regenerate_short_scenes", False)):
                 try:
                     _ld21 = (
                         f"上一稿仅 {len(cur.scene_text or '')} 字，远低于本场景 {target} 字硬性下限"
@@ -2297,7 +2331,7 @@ class PipelineOrchestrator:
                 replan="scene_near_empty_cluster",
             )
         if _unrecoverable_ids:
-            self._flag_for_human(
+            self._record_quality_failure(
                 chapter_num, 0,
                 f"known-defect scene(s) {_unrecoverable_ids}: near-empty after rescue, "
                 "assembled anyway; please spot-read")
@@ -2390,6 +2424,7 @@ class PipelineOrchestrator:
         """Turn terse validator diagnostics into constructive, model-facing repair directives."""
         import re as _re
         out = []
+        beat_chars = max(1, (target + max(1, need_beats) - 1) // max(1, need_beats))
         for it in issues:
             if it.startswith("length_too_short"):
                 m = _re.search(r"length_too_short:\s*(\d+)\s*<\s*(\d+)", it)
@@ -2397,7 +2432,7 @@ class PipelineOrchestrator:
                 out.append(
                     f"上一稿正文仅约{actual}字（硬下限{floor}字、目标{target}字），篇幅不足。"
                     f"本次 scene_text 必须写满至少{floor}个中文字并逼近{target}字：把每个 beat 逐一演足"
-                    "（每拍约150-250字，动作、环境、感官细节、对话与即时心理交替展开），"
+                    f"（每拍约{beat_chars}字，动作、环境、感官细节、对话与即时心理交替展开），"
                     "严禁概述、跳步或一笔带过；不得改变既定事件、人物与场景边界。"
                 )
             elif it.startswith("beats_covered_insufficient"):
@@ -2475,6 +2510,7 @@ class PipelineOrchestrator:
                 out.append(f"修正上一稿的问题：{it}")
         return out
 
+    @stage("scene_regeneration")
     def _regen_scene_for_id(
         self,
         task_card: dict,
@@ -2624,6 +2660,7 @@ class PipelineOrchestrator:
             _p3 = ""
         return _accept(_p3, "L3_beat_split") if _p3 else None
 
+    @stage("write")
     def _stage_write(self, task_card: dict, synopsis: dict) -> str:
         """阶段4：正文生成 + 润色（带确定性校验与成品净化）。
 
@@ -2700,21 +2737,23 @@ class PipelineOrchestrator:
                         if _idx < len(_scene_targets):
                             return _scene_targets[_idx]
                         return _chapter_target // max(1, len(_scenes_list))
-                    from concurrent.futures import ThreadPoolExecutor as _TPE, as_completed as _asc
-                    _expand_conc = int(getattr(self.outline_router, "concurrency", 4) or 4)
+                    from concurrent.futures import as_completed as _asc
+                    _TPE = ContextExecutor
+                    _expand_conc = int(getattr(self.refine_router, "concurrency", 4) or 4)
                     # CC round-9 Q4-3：有界扩写按场景并发（原为串行）；连贯极短先到 0.6 目标，首轮仍偏短且在增长再补一轮。
                     # CC round-26（r34 实测 4798/8000 偏短硬伤）：flash 常在 0.6~0.85 倍目标交付，
                     # 旧 0.6 门槛会让这些场跳过扩写，4 场累计仅约 4800~6000 字。把扩写门槛提到
                     # 0.85×目标（对齐 chapter min_ratio），两轮内把每场抬到接近目标，保证整章≈8000。
+                    _generation_guardrails = generation_constraints(self.root, task_card)
                     for _ea in range(2):
                         _todo = [(_i, _s) for _i, _s in enumerate(_scenes_list)
-                                 if _s.scene_id in _new_ids
-                                 and len(_s.scene_text) < int(0.85 * _target_for(_i))]
+                                 if len(_s.scene_text) < int(0.85 * _target_for(_i))]
                         if not _todo:
                             break
                         def _expand_one(_item):
                             _i, _s = _item
                             _st = _target_for(_i)
+                            _blueprint = next((bp for bp in bps if int(bp.get("scene_num", 0) or 0) == _s.scene_id), {})
                             _p = (
                                 "请在【不改变任何情节、beats、出场人物与事件顺序】的前提下，扩写下面这一场小说正文，"
                                 f"把篇幅自然补到约{_st}字。扩写只能做信息增量，严禁注水：\n"
@@ -2726,6 +2765,8 @@ class PipelineOrchestrator:
                                 "3)若本场有对白，补一句说话的语气、停顿或伴随小动作。\n"
                                 "新增字数必须与新增的具体名词/动词数量成正比；直接输出扩写后的完整场景正文，"
                                 "不要解释、不要分条、不要保留任何标记。\n\n"
+                                f"{_generation_guardrails}\n"
+                                f"【冻结的本场蓝图，不得增加事件】{json.dumps(_blueprint, ensure_ascii=False)}\n\n"
                                 f"{_s.scene_text}")
                             _ex = call_llm(_p, system_prompt="你是资深网文责编，只做“具体信息增量”式扩写：补感官、补动作分解、补对白语气；绝不加形容词渲染、近义复句、抽象氛围或任何新事件", output_json=False, client=self.refine_router)
                             return _i, _s, (_ex or "")
@@ -2739,6 +2780,11 @@ class PipelineOrchestrator:
                                     logger.warning(f"Scene expansion failed: {_ee}")
                                     continue
                                 if _ex and len(str(_ex)) > len(_s.scene_text):
+                                    _, _candidate_issues = validate_scene_text(str(_ex), _target_for(_i))
+                                    _unsafe = [issue for issue in _candidate_issues if not issue.startswith("length_too_short")]
+                                    if _unsafe or not is_chinese_clean(str(_ex)):
+                                        logger.warning("Scene %s expansion rejected: %s", _s.scene_id, _unsafe or ["latin_leak"])
+                                        continue
                                     _diff = len(str(_ex)) - len(_s.scene_text)
                                     _s.scene_text = str(_ex)
                                     _grew += 1
@@ -2750,13 +2796,20 @@ class PipelineOrchestrator:
                     # CC round-9 Q4-1：达字数且过门场景跳过 polish（零风险省时）；可用 pipeline.skip_polish_on_target=false 关闭。
                     _skip_polish = bool((self.config.get("pipeline", {}) or {}).get("skip_polish_on_target", True))
                     if _skip_polish:
-                        _polish_ids = {_s.scene_id for _i, _s in enumerate(_scenes_list)
-                                       if _s.scene_id in _new_ids and len(_s.scene_text) < _target_for(_i)}
+                        _selection = select_polish_scenes(
+                            _scenes_list, task_card, self.root,
+                            targets={s.scene_id: _target_for(i) for i, s in enumerate(_scenes_list)},
+                            forbidden=self._forbidden_violations)
+                        _polish_ids = set(_selection)
+                        logger.info("Selective polish reasons: %s", _selection)
                         if _polish_ids != _new_ids:
-                            logger.info(f"Skip polish for on-target scenes; polish {sorted(_polish_ids)} of {sorted(_new_ids)}")
+                            logger.info(f"Selective polish; polish {sorted(_polish_ids)} of {sorted(_new_ids)}")
                     else:
                         _polish_ids = _new_ids
-                    _polished, _flags = self.writer.polish_scenes(_scenes_list, task_card, client=self.polish_router, only_ids=_polish_ids)
+                        _selection = {}
+                    _polished, _flags = self.writer.polish_scenes(
+                        _scenes_list, task_card, client=self.polish_router,
+                        only_ids=_polish_ids, issues_by_id=_selection)
                     self.writer.last_scenes = _polished
                     _scenes_list = _polished
                     self._write_polish_flags(chapter_num, _scenes_list, _flags)
@@ -2840,9 +2893,22 @@ class PipelineOrchestrator:
             # CC round-16 P0-2：相邻场景边界近逐字重演（同义改写交 reviewer/E-loop）
             purified = self._run_boundary_reprise_gate(_bn, task_card, _scenes_list, purified)
             self.current_novel = purified
+            # Repair measured sentence boundaries before deterministic fallback can cut inside words.
+            if not (self.config.get("llm") or {}).get("use_mock"):
+                revised, accepted = self._repair_review_punctuation(_bn, purified, _scenes_list)
+                if accepted:
+                    purified = revised
             # CC round-16 P0-1：成稿标点健康门（流水句仅插标点修复/整段重生兜底）
             purified = self._run_punctuation_health_gate(_bn, task_card, _scenes_list, purified)
             self.current_novel = purified
+        if _scenes_list and not (self.config.get("llm") or {}).get("use_mock"):
+            try:
+                for scene in _scenes_list:
+                    append_scene(self.root, chapter_num, {
+                        "scene_id": scene.scene_id, "scene_text": scene.scene_text,
+                        "hook": scene.hook, "beats": list(scene.beats or [])})
+            except Exception as exc:
+                logger.warning(f"Final scene journal sync failed ch{chapter_num}: {exc}")
         # 确定性硬校验：命中则在日志中标记，后续在提交前强制拦截
         gate = self._deterministic_quality_gate(purified, task_card)
         if not gate["passed"]:
@@ -2890,42 +2956,55 @@ class PipelineOrchestrator:
     # Gate delegation: all gate logic moved to pipeline/gates.py
     # Using proper instance methods to preserve automatic self-binding
 
+    @stage("run_continuity_gate")
     def _run_continuity_gate(self, *a, **k):
         return _gates._run_continuity_gate(self, *a, **k)
 
+    @stage("run_scope_gate")
     def _run_scope_gate(self, *a, **k):
         return _gates._run_scope_gate(self, *a, **k)
 
+    @stage("run_density_gate")
     def _run_density_gate(self, *a, **k):
         return _gates._run_density_gate(self, *a, **k)
 
+    @stage("run_scene_progression_gate")
     def _run_scene_progression_gate(self, *a, **k):
         return _gates._run_scene_progression_gate(self, *a, **k)
 
+    @stage("run_cross_scene_repeat_gate")
     def _run_cross_scene_repeat_gate(self, *a, **k):
         return _gates._run_cross_scene_repeat_gate(self, *a, **k)
 
+    @stage("run_latin_leak_gate")
     def _run_latin_leak_gate(self, *a, **k):
         return _gates._run_latin_leak_gate(self, *a, **k)
 
+    @stage("run_pov_interiority_gate")
     def _run_pov_interiority_gate(self, *a, **k):
         return _gates._run_pov_interiority_gate(self, *a, **k)
 
+    @stage("run_constraint_compliance_gate")
     def _run_constraint_compliance_gate(self, *a, **k):
         return _gates._run_constraint_compliance_gate(self, *a, **k)
 
+    @stage("run_punctuation_health_gate")
     def _run_punctuation_health_gate(self, *a, **k):
         return _gates._run_punctuation_health_gate(self, *a, **k)
 
+    @stage("run_final_precommit_gate")
     def _run_final_precommit_gate(self, *a, **k):
         return _gates._run_final_precommit_gate(self, *a, **k)
 
+    @stage("run_boundary_reprise_gate")
     def _run_boundary_reprise_gate(self, *a, **k):
         return _gates._run_boundary_reprise_gate(self, *a, **k)
 
+    @stage("run_boundary_gate")
     def _run_boundary_gate(self, *a, **k):
         return _gates._run_boundary_gate(self, *a, **k)
 
+    @stage("apply_length_floor")
     def _apply_length_floor(self, *a, **k):
         return _gates._apply_length_floor(self, *a, **k)
 
@@ -2962,12 +3041,41 @@ class PipelineOrchestrator:
             logger.warning(f"finalize skipped ch{chapter_num}: {_pe}")
             return _cur
 
+    @stage("review")
     def _stage_review(self, chapter_num: int, task_card: dict, synopsis: dict,
                       novel_text: str, world_state: dict) -> dict:
         """阶段5：审查评分。"""
         # 修复流中会以 REVIEW 状态再次调用本方法，避免无效的 REVIEW->REVIEW 转换报错
         if self.state_machine.current_phase != ChapterPhase.REVIEW:
             self.state_machine.transition(ChapterPhase.REVIEW)
+        _on_demand = (self.config.get("pipeline") or {}).get("review_policy", "on_demand") == "on_demand"
+        if _on_demand:
+            _det = self._deterministic_quality_gate(novel_text, task_card)
+            if not is_chinese_clean(novel_text):
+                _det["issues"].append("[非中文] 正文含拉丁字母")
+            if task_card.get("scene_blueprints") and len(novel_text) < int(self._policy["chapter_target_chars"] * 0.6):
+                _det["issues"].append("[长度] 正文不足目标字数的60%")
+            for _hit in self._forbidden_violations(novel_text, ""):
+                if _forbidden_violation_is_blocking(self._policy, _hit):
+                    _det["issues"].append(f"[禁词] {_hit.get('name', '')}")
+            _det["passed"] = not _det["issues"]
+            self._last_deterministic_issues = _det["issues"]
+            if not _det["passed"]:
+                _current_scenes = [s for s in (getattr(self.writer, "last_scenes", []) or [])
+                                   if s.scene_text and s.scene_text in novel_text]
+                _scene_reasons = select_polish_scenes(
+                    _current_scenes, task_card, self.root,
+                    forbidden=self._forbidden_violations)
+                _issues = [{"dimension": "deterministic", "severity": "high",
+                            "description": "; ".join(reasons), "scene_ids": [sid],
+                            "suggested_fix": "; ".join(reasons)}
+                           for sid, reasons in _scene_reasons.items()]
+                _issues.extend({"dimension": "deterministic", "severity": "high",
+                                "description": issue, "scene_ids": []}
+                               for issue in _det["issues"])
+                return {"review": {"issues": _issues, "normalized_score": 0,
+                                   "deterministic_only": True},
+                        "score": 0, "verdict": "fix", "review_unstable": False}
         # CC round-8 P0-3：每次评审入口复位“极不稳定”标记
         self._review_highly_unstable = False
         # CC round-26：单章评审 LLM 调用硬上限（首评/三评/单离群补票/修复后复评合计）。
@@ -2978,11 +3086,11 @@ class PipelineOrchestrator:
             self._review_call_chapter = chapter_num
             self._review_call_count = 0
         # CC P0: 成稿文本不变则复用评审结果（跨进程 infra retry 不二次计费/打分）；
-        # 定点重生/重写后文本改变，hash 自动变化而 miss。同进程修复循环内的再评审
-        # (本章已读过一次) 绕过缓存读，保留“编辑→再评审”的既有收敛语义。
+        # 按需模式下同稿在同进程也命中缓存；编辑后 hash 改变，重新评审。
+        # 旧策略保留首次读取限制。
         review = None
         _rk = None
-        _allow_read = chapter_num not in self._review_read_chapters
+        _allow_read = _on_demand or chapter_num not in self._review_read_chapters
         self._review_read_chapters.add(chapter_num)
         _was_cache_hit = False
         if _allow_read:
@@ -2990,8 +3098,11 @@ class PipelineOrchestrator:
                 _rv_model = model_fingerprint(self.root, "review")
                 _rk = content_key(
                     {"novel_text": novel_text, "task_card": task_card,
-                     "synopsis": synopsis, "world_state": world_state},
-                    version=PROMPT_VERSIONS["review"], model=_rv_model)
+                     "synopsis": synopsis, "world_state": world_state,
+                     "review_contract": review_context_fingerprint(self.root, task_card),
+                     **({"review_policy": self.config.get("pipeline") or {},
+                         "quality_policy": self._policy} if _on_demand else {})},
+                    version=PROMPT_VERSIONS["review"] + (":on_demand_v4_review_context" if _on_demand else ""), model=_rv_model)
                 review = self._phase_cache.get(chapter_num, "review", _rk)
                 if review is not None:
                     _was_cache_hit = True
@@ -3047,7 +3158,16 @@ class PipelineOrchestrator:
                 logger.warning(f"deterministic signals build failed-open: {_e24sig}")
                 _signals24 = None
 
+        _review_budget_round_started = False
+
         def _one_review24():
+            nonlocal _review_budget_round_started
+            _execution = current_execution(self)
+            if _execution is not None:
+                if not _review_budget_round_started:
+                    _execution.budget.review()
+                    _review_budget_round_started = True
+                _execution.budget.review(vote=True)
             self._review_call_count = int(getattr(self, "_review_call_count", 0)) + 1
             rv = self.reviewer.review_chapter(
                 chapter_num=chapter_num, task_card=task_card, synopsis=synopsis,
@@ -3058,6 +3178,14 @@ class PipelineOrchestrator:
                 review_hybrid.hybridize_review(rv, _signals24)
             return rv
 
+        if _on_demand:
+            _outcome = review_on_demand(
+                review, _one_review24, self.reviewer.grade_review, self._policy,
+                self.config.get("pipeline") or {})
+            self._last_review_score = _outcome["score"]
+            if not _was_cache_hit and _rk:
+                self._phase_cache.set(chapter_num, "review", _rk, _outcome["review"])
+            return _outcome
         if review is None:
             review = _one_review24()
         score = review.get("normalized_score", review.get("total_score", 0))
@@ -3352,6 +3480,134 @@ class PipelineOrchestrator:
         return {"review": review, "score": score, "verdict": verdict,
                 "review_unstable": bool(getattr(self, "_review_highly_unstable", False))}
 
+    @stage("punctuation_revision")
+    def _repair_review_punctuation(self, chapter_num, text, scenes=None):
+        def revise(items):
+            return call_llm(
+                PUNCTUATION_INSTRUCTION
+                + json.dumps(items, ensure_ascii=False),
+                system_prompt="你是中文标点编辑，只修改句读，不改变原文字词。",
+                client=self.refine_router, output_json=True, max_tokens=12000, temperature=0.1)
+        edits = []
+        try:
+            revised, accepted = revise_long_sentences(text, revise, on_edit=lambda old, new: edits.append((old, new)))
+        except BudgetExceeded:
+            raise
+        except Exception as exc:
+            logger.warning("Punctuation-only revision failed: %s", type(exc).__name__)
+            return text, 0
+        if accepted:
+            self.current_novel = revised
+            draft = getattr(self, "_draft_novel", text) or text
+            for old, new in edits:
+                if draft.count(old) == 1:
+                    draft = draft.replace(old, new, 1)
+            self._draft_novel = draft
+            for scene in scenes if scenes is not None else (getattr(self.writer, "last_scenes", []) or []):
+                for old, new in edits:
+                    if scene.scene_text.count(old) == 1:
+                        scene.scene_text = scene.scene_text.replace(old, new, 1)
+            for row in load_authoritative_scenes(self.root, chapter_num):
+                original = row.get("scene_text", "")
+                updated = original
+                for old, new in edits:
+                    if updated.count(old) == 1:
+                        updated = updated.replace(old, new, 1)
+                if updated != original:
+                    append_scene(self.root, chapter_num, dict(row, scene_text=updated))
+            logger.info("Chapter %s accepted %s punctuation-only sentence edits", chapter_num, accepted)
+        return revised, accepted
+
+    def _auto_repair_quality(self, chapter_num, task_card, synopsis, world_state, result):
+        """Repair changed manuscripts under the existing chapter budget; never shop for scores."""
+        limit = int((self.config.get("pipeline") or {}).get("max_chapter_fix_rounds", 2))
+        if not 0 <= limit <= 10:
+            raise ValueError("max_chapter_fix_rounds must be between 0 and 10")
+        history = result.setdefault("quality_repairs", [])
+        reaction_budget = 1
+        seen = set()
+        best_candidate = None
+        accepted = False
+        localized_used = False
+        try:
+            for attempt in range(limit + 1):
+                current = self._novel_string()
+                digest = hashlib.sha256(current.encode("utf-8")).hexdigest()
+                if digest in seen:
+                    return dict(best_candidate["stage"] if best_candidate else staged, auto_quality_passed=False)
+                seen.add(digest)
+                punctuation_edits = 0
+                if not (self.config.get("llm") or {}).get("use_mock"):
+                    current, punctuation_edits = self._repair_review_punctuation(chapter_num, current)
+                    digest = hashlib.sha256(current.encode("utf-8")).hexdigest()
+                    seen.add(digest)
+                self._finalize_current_novel(chapter_num)
+                current = self._novel_string()
+                digest = hashlib.sha256(current.encode("utf-8")).hexdigest()
+                seen.add(digest)
+                staged = self._stage_review(chapter_num, task_card, synopsis, current, world_state)
+                det = self._deterministic_quality_gate(current, task_card)
+                blocking = any(_review_issue_is_blocking(self._policy, issue)[0]
+                               for issue in staged["review"].get("issues", []))
+                passed = (not staged.get("review_unstable") and not staged["review"].get("deterministic_only")
+                          and staged["score"] >= self._policy["publication_line"]
+                          and det["passed"] and not blocking)
+                history.append({"round": attempt, "text_hash": digest, "score": staged["score"],
+                                "punctuation_edits": punctuation_edits,
+                                "review_unstable": bool(staged.get("review_unstable")),
+                                "hard_issues": list(det["issues"]),
+                                "review_issues": copy.deepcopy(staged["review"].get("issues") or []),
+                                "review_votes": list(staged["review"].get("review_votes") or []), "passed": passed})
+                result["score"] = staged["score"]
+                if det["passed"] and not staged["review"].get("deterministic_only"):
+                    rank = (not staged.get("review_unstable", False), not blocking, staged["score"])
+                    if best_candidate is None or rank > best_candidate["rank"]:
+                        best_candidate = {"rank": rank, "stage": copy.deepcopy(staged), "text": current,
+                                          "draft": getattr(self, "_draft_novel", current) or current,
+                                          "journal": snapshot_journal(self.root, chapter_num),
+                                          "scenes": copy.deepcopy(getattr(self.writer, "last_scenes", []))}
+                if passed:
+                    accepted = True
+                    return dict(staged, auto_quality_passed=True, verdict="pass")
+                if attempt == limit:
+                    break
+                if not localized_used and det["passed"] and not staged["review"].get("deterministic_only"):
+                    localized_used = True
+                    localized = self._repair_review_spans(chapter_num, task_card, staged["review"])
+                    if localized is not None:
+                        self.current_novel, self._draft_novel = localized
+                        continue
+                self._last_deterministic_issues = det["issues"]
+                draft = getattr(self, "_draft_novel", current) or current
+                best = _gates.BestCandidateState(best_score=staged["score"], best_novel=current,
+                                                 best_draft=draft,
+                                                 best_journal_snapshot=snapshot_journal(self.root, chapter_num))
+                _, _, _, reaction_budget, _ = self._dispatch_remediation(
+                    chapter_num, task_card, synopsis, current, draft, best, reaction_budget,
+                    self._frozen_task_cards.get(chapter_num, task_card), staged, world_state)
+                if self._novel_string() == current:
+                    repaired = self._rewrite_weak_dimensions(current, staged["review"])
+                    if isinstance(repaired, str) and repaired.strip() and repaired != current:
+                        self.current_novel = repaired
+                        self._draft_novel = repaired
+                        self._sync_journal_from_draft(chapter_num, repaired)
+                # Dispatch owns the authoritative text, including whole-chapter rewrites.
+                # An unchanged text stops on the next iteration without another paid review.
+            return dict(best_candidate["stage"] if best_candidate else staged, auto_quality_passed=False)
+        finally:
+            if not accepted and best_candidate is not None:
+                retained = self._novel_string() != best_candidate["text"]
+                self.current_novel = best_candidate["text"]
+                self._draft_novel = best_candidate["draft"]
+                self.writer.last_scenes = best_candidate["scenes"]
+                self._last_review_score = best_candidate["stage"]["score"]
+                if not restore_journal(self.root, chapter_num, best_candidate["journal"]):
+                    raise OSError("could not restore best reviewed chapter journal")
+                result["score"] = best_candidate["stage"]["score"]
+                result["best_candidate_retained"] = retained
+
+
+    @stage("word_count")
     def _enforce_word_count(self, novel, target_min, target_max):
         cur = len(novel)
         # 提取章末 hook（若有）以便保留
@@ -3443,6 +3699,7 @@ class PipelineOrchestrator:
             logger.info(f"Structured chapter below soft min ({cur} < {target_min}); accept scene-floor length, no whole-chapter continuation")
         return novel
 
+    @stage("mandatory_beats")
     def _enforce_mandatory_beats(self, chapter_num: int, task_card: dict,
                                    synopsis_text: str = '') -> dict:
         """R16c/R17: 必填伏笔强制闭环。
@@ -3537,6 +3794,8 @@ class PipelineOrchestrator:
                     ], sid)
                     if not ok and miss_descs:
                         _soft_misses_by_scene[sid] = miss_descs
+                    else:
+                        _soft_misses_by_scene.pop(sid, None)
 
                 # scene_num=None 的 confirmation：任一场覆盖即满足；全缺则定向目标场
                 if _none_conf_misses:
@@ -3581,6 +3840,10 @@ class PipelineOrchestrator:
                     _soft_used = int(getattr(self, "_soft_regen_used", {}).get(_key, 0) or 0)
                     if _soft_used >= 1:
                         continue
+                    _execution = current_execution(self)
+                    if _execution and not _execution.budget.can_scene(sid):
+                        logger.info(f"ch{chapter_num} soft scene{sid}: no remaining scene attempts, keep note")
+                        continue
                     _bp = bps_by_sid.get(sid, {})
                     _dir = build_mandatory_beat_directive(misses)
                     logger.info(
@@ -3594,6 +3857,10 @@ class PipelineOrchestrator:
                         )
                         if _ns is not None:
                             _nt = getattr(_ns, "scene_text", "") or ""
+                            _previous = scene_by_id.get(sid, "") or ""
+                            if _nt and (not is_chinese_clean(_nt) or len(_nt) < len(_previous) * 0.85):
+                                logger.warning(f"ch{chapter_num} optional scene{sid} repair rejected: language/length regression; keep original")
+                                continue
                             if _nt:
                                 append_scene(self.root, chapter_num, {
                                     "scene_id": sid, "scene_text": _nt,
@@ -3830,14 +4097,33 @@ class PipelineOrchestrator:
                         target_nums.add(n)
         if not target_nums:
             return None
-        # 仅处理 1-2 个场景的局部问题，避免全章重写；纯全局性问题（无场景归因）不在此处理
-        if len(target_nums) > 2:
+        ch = int(chapter_num or (task_card.get("chapter_num", 0) or 0))
+        budget = getattr(self, "_scene_regen_used", None)
+        if budget is None:
+            budget = {}
+            self._scene_regen_used = budget
+        SCENE_REGEN_MAX = 2
+        target_nums = {sid for sid in target_nums if budget.get((ch, sid), 0) < SCENE_REGEN_MAX}
+        if not target_nums:
             return None
+        if len(target_nums) > 2:
+            severity = {"critical": 4, "blocking": 4, "high": 3, "medium": 2, "low": 1}
+            ranks = {sid: [0, 0] for sid in target_nums}
+            for issue in review.get("issues") or []:
+                weight = severity.get(str(issue.get("severity", "")).lower(), 0)
+                for raw_sid in issue.get("scene_ids") or []:
+                    sid = _as_int(raw_sid)
+                    if sid in ranks:
+                        ranks[sid][0] = max(ranks[sid][0], weight)
+                        ranks[sid][1] += weight
+            target_nums = set(sorted(target_nums, key=lambda sid: (
+                -ranks[sid][0], budget.get((ch, sid), 0), -ranks[sid][1], sid))[:2])
         # CC round-23 P0-2：节奏/留存/情节类低分 -> E-loop 必须"补具体事件"而非润色措辞。
         # CC round-25 P0-2：hook（钩子张力）/innovation（去套路）/style/cliff（场末悬崖感）已从
         # 逐场补事件中移除，改由整章一次性文学性重写处理——补事件既不对症文字问题、还扰动情节。
-        _density_dims = {"pacing", "retention", "plot"}
+        _density_dims = {"pacing", "retention", "reader_retention"}
         _density_sids = set()
+        _global_density_issue = False
         # CC round-25 修正（r30 实测降分）：若低分原因是"信息重复/台词重叠/拖沓"，正确修法是
         # 删减合并而非新增事件；记录这些场，fallback 指令改为去重（避免越'补'越拖、分数反降）。
         _rep_re = __import__("re").compile(r"重复|重叠|拖沓|冗余|雷同|啰嗦|反复|赘述")
@@ -3845,12 +4131,17 @@ class PipelineOrchestrator:
         for iss in (review.get("issues") or []):
             _dimv = str(iss.get("dimension", "")).lower()
             _txtv = f"{iss.get('description', '')} {iss.get('suggested_fix', '')}"
+            _is_density_issue = (_dimv in _density_dims or (
+                _dimv in {"plot", "plot_consistency"}
+                and re.search("推进|单薄|空洞|密度|新状态|新事件", _txtv)))
+            if _is_density_issue and not iss.get("scene_ids"):
+                _global_density_issue = True
             for _x in (iss.get("scene_ids") or []):
                 try:
                     _xn = int(_x)
                 except (TypeError, ValueError):
                     continue
-                if _dimv in _density_dims:
+                if _is_density_issue:
                     _density_sids.add(_xn)
                     if _rep_re.search(_txtv):
                         _rep_sids.add(_xn)
@@ -3860,7 +4151,7 @@ class PipelineOrchestrator:
             _metrics = getattr(self, "_scene_progression_metrics", {}) or {}
             for _sid in sorted(target_nums):
                 # 有明确密度问题场景归因时只补那些场；否则（全局性节奏薄弱）所有目标场都补
-                if _density_sids and _sid not in _density_sids:
+                if _sid not in _density_sids and not _global_density_issue:
                     continue
                 _m = _metrics.get(_sid, {}) or {}
                 _miss = _m.get("missing_new_state") or []
@@ -3903,12 +4194,6 @@ class PipelineOrchestrator:
                 logger.warning(f"Scene {sn} not in chapter {ch} partials; skipping patch (falls through to rewrite path)")
                 return None
         synopsis_text = synopsis.get("synopsis", "") if isinstance(synopsis, dict) else str(synopsis or "")
-        # 单场景定点重生预算：每个 (章,场景) 最多 2 次（CC E 包），耗尽则不再重生，交由终态判定（隔离转人工，不硬凑）
-        budget = getattr(self, "_scene_regen_used", None)
-        if budget is None:
-            budget = {}
-            self._scene_regen_used = budget
-        SCENE_REGEN_MAX = 2
         regenerated = False
         patched_ids: set[int] = set()
         patched_outs: dict[int, tuple] = {}
@@ -3921,24 +4206,62 @@ class PipelineOrchestrator:
                 logger.warning(f"Scene {sn} chapter {ch} exhausted targeted regen budget ({SCENE_REGEN_MAX}); leave to terminal decision, no padding")
                 continue
             directive = "\n".join(f"- {ln}" for ln in scene_dirs.get(sn, [])) or ""
-            # CC round-18 P0-2：修订不得让场景缩水——删冗余后须补等量新正文，净字数保持±15%
             _orig_len = len(journal.get(sn, "") or "")
+            _target = self._bpt(bp)
+            _floor = int(_target * self._policy["min_ratio"])
+            _ceiling = int(_target * self._policy["max_ratio"])
+            _minimum = _floor if _target and _orig_len > _ceiling else max(_floor, int(_orig_len * 0.85))
             directive += (
-                "\n- 字数保持（硬性）：删除冗余/重复后必须在本场景内补写等量的新正文"
-                "（感官细节/环境描写/角色反应，不得新增情节事件），使修订后本场景字数"
-                f"不显著低于原稿（原稿约{_orig_len}字，净变化控制在±15%以内，目标不短于约"
-                f"{int(_orig_len * 0.85)}字）；严禁只删不补、严禁因修订让场景大幅缩短。"
-            )
+                f"\n- 原稿约{_orig_len}字，修订后不得少于{_minimum}字。"
+                "原稿篇幅合格时尽量保持；偏短时补足蓝图内的有效动作与对白，过长时删减重复。"
+                "不得为了保持短稿的±15%而继续低于场景地板；不得注水或新增蓝图外事件。")
+            directive += (
+                "\n## 待修场景原稿\n仅修改上述点名问题，保留未点名的人物、道具、事件及先后关系；返回完整场景正文。\n"
+                + str(journal.get(sn, "") or ""))
             directive = directive.strip() or None
+            budget[(ch, sn)] = used + 1
             try:
-                new_scene_out = self.writer.generate_scene(task_card, bp, synopsis_text, "", "", fix_directive=directive)
+                neighbors = []
+                earlier = [sid for sid in journal if sid < sn]
+                later = [sid for sid in journal if sid > sn]
+                if earlier:
+                    neighbors.append("前一场结尾（已发生，须承接，不得重演）：\n" + str(journal[max(earlier)])[-1200:])
+                if later:
+                    neighbors.append("后一场开头（仅用于衔接，禁止提前演出）：\n" + str(journal[min(later)])[:800])
+                new_scene_out = self.writer.generate_scene(
+                    task_card, bp, synopsis_text, "\n\n".join(neighbors), "", fix_directive=directive)
                 # B2：generate_scene 返回 SceneOutput；热插拔缝合的是纯叙事 scene_text
                 new_scene = new_scene_out.scene_text if hasattr(new_scene_out, "scene_text") else new_scene_out
+            except BudgetExceeded:
+                raise
             except Exception as e:
                 logger.warning(f"Incremental patch scene {sn} generation failed: {e}")
-                return None
-            budget[(ch, sn)] = used + 1
-            journal[sn] = new_scene.strip() if isinstance(new_scene, str) else new_scene
+                continue
+            if (isinstance(new_scene, str) and _minimum // 2 <= len(new_scene) < _minimum
+                    and is_chinese_clean(new_scene)):
+                try:
+                    expanded = call_llm(
+                        f"修订稿仍偏短，请把下面这一个场景补足到约{_target}字、至少{_minimum}字。"
+                        "只补本场已经规划的具体动作、对白与反应，保持已修复的问题、事件顺序和人物不变；"
+                        "禁止靠重复氛围凑数，禁止提前完成后续场景。只输出完整场景正文。\n"
+                        + generation_constraints(self.root, task_card)
+                        + "\n冻结蓝图：" + json.dumps(bp, ensure_ascii=False)
+                        + "\n衔接上下文：" + "\n".join(neighbors)
+                        + "\n审稿修复要求：" + "\n".join(scene_dirs.get(sn, []))
+                        + "\n本场修订稿：\n" + new_scene,
+                        system_prompt="你是小说修订编辑，补足本场有效叙事，不重演、不改变事件。",
+                        output_json=False, client=self.refine_router, temperature=0.3,
+                        max_tokens=min(8192, max(4096, _target * 2 + 1024)))
+                    if isinstance(expanded, str) and len(expanded) >= _minimum and is_chinese_clean(expanded):
+                        new_scene = expanded
+                except BudgetExceeded:
+                    raise
+                except Exception as exc:
+                    logger.warning("Scene %s repair expansion failed: %s", sn, type(exc).__name__)
+            if not isinstance(new_scene, str) or len(new_scene.strip()) < _minimum or not is_chinese_clean(new_scene):
+                logger.warning("Scene %s repair rejected: insufficient length or language contamination; retain original", sn)
+                continue
+            journal[sn] = new_scene.strip()
             regenerated = True
             patched_ids.add(sn)
             patched_outs[sn] = (new_scene_out, new_scene)
@@ -3995,7 +4318,7 @@ class PipelineOrchestrator:
             result['hard_block_reason'] = (
                 f'mandatory foreshadow beats unresolved after fix-loop iter={iteration}: '
                 f'{list(_iter_mand.get("missing_fs_ids", []))}')
-            self._flag_for_human(
+            self._record_quality_failure(
                 chapter_num, 0,
                 f'mandatory foreshadow beats unresolved after fix loop; isolate to draft/failed')
             return current, current_draft, best_state, _reaction_fix_budget, 'hard_block'
@@ -4079,7 +4402,7 @@ class PipelineOrchestrator:
             result["gray_band_release"] = True
             result["gray_band_score"] = s
             _flag_reason = f"gray-band release {s}: deterministic gates passed, no high issue, please spot-read" + ("; reaction consistency 未消解（已尝试定点修订）" if (_react_hits and _reaction_fix_budget == 0) else "")
-            self._flag_for_human(chapter_num, s, _flag_reason)
+            self._record_quality_failure(chapter_num, s, _flag_reason)
             return current, current_draft, best_state, _reaction_fix_budget, 'gray_band', staged
         elif _reaction_pending:
             logger.warning(f"Score {s} in gray band but reaction pending fix → continue")
@@ -4089,6 +4412,7 @@ class PipelineOrchestrator:
         # Return None to signal: continue to remediation dispatch
         return current, current_draft, best_state, _reaction_fix_budget, None, staged
 
+    @stage("fix")
     def _dispatch_remediation(
         self, chapter_num: int, task_card: dict, synopsis: dict,
         current: str, current_draft: str,
@@ -4113,6 +4437,7 @@ class PipelineOrchestrator:
         except Exception:
             _review_for_patch = staged["review"]
             _lit_weak25 = lambda _r: False  # noqa: E731
+        patch_snapshot = snapshot_journal(self.root, chapter_num)
         patched_draft = self._patch_weak_scenes(current_draft, _review_for_patch, task_card, synopsis,
                                               chapter_num=chapter_num)
         _cc25_fixed = False  # CC25：本轮结构补丁或文学性重写任一落地即统一重评审
@@ -4139,6 +4464,8 @@ class PipelineOrchestrator:
                 logger.error(
                     f"ch{chapter_num} fix pre-filter FATAL: {_pe} -> REJECT patch")
                 patched_draft = None
+            if patched_draft is None:
+                restore_journal(self.root, chapter_num, patch_snapshot)
             # 强制字数（用冻结目标）
             total = sum(self._bpt(bp) for bp in (frozen.get("scene_blueprints") or []))
             if total > 0:
@@ -4157,7 +4484,7 @@ class PipelineOrchestrator:
             # 更新 gate
             gate_after = self._deterministic_quality_gate(current, frozen)
             self._last_deterministic_issues = gate_after["issues"]
-            _cc25_fixed = True
+            _cc25_fixed = patched_draft is not None
         # CC33: det 硬项全文级定点修复（称谓/canon 残留/泄漏/命名矛盾/跨场危机/
         # 伏笔极性——无 scene_ids 无法走 patch 的质量类与规则类 det 硬项共用此通道）
         _det_hard_now = [x for x in (getattr(self, "_last_deterministic_issues", []) or [])
@@ -4233,6 +4560,7 @@ class PipelineOrchestrator:
         _lsr_done = int(getattr(self, "_low_score_rewrites_used", 0))
         _s_after = float(staged.get("score") or best_state.best_score)
         if (_lsr_enabled and _lsr_done < _lsr_max
+                and not (staged.get("review") or {}).get("deterministic_only")
                 and not _cc25_fixed
                 and isinstance(best_state.best_score, (int, float))
                 and (best_state.best_score < _lsr_floor or _s_after < _lsr_floor)):
@@ -4350,7 +4678,7 @@ class PipelineOrchestrator:
             return
         if not existing:
             return
-        parts = [p.strip() for p in re.split(r"\n?\s*※\s*\n?", draft_text or "") if p.strip()]
+        parts = [p.strip() for p in re.split(r"\n?\s*[※★]\s*\n?", draft_text or "") if p.strip()]
         ids = sorted(d["scene_id"] for d in existing)
         if len(parts) != len(ids):
             logger.warning(f"Journal write-back skipped: draft parts {len(parts)} vs "
@@ -4370,7 +4698,7 @@ class PipelineOrchestrator:
         det 硬项（字符串，无 scene_ids）无法走 _patch_weak_scenes 的场景级路径；
         此处构造针对性的全文级修复指令，一次 LLM 调用产出锚点替换编辑
         （复用 literary_pass 的解析/应用），应用后重跑 det gate，门过才采纳
-        （journal 不动）。返回 (purified, draft_with_markers) 或 None。
+        并同步 journal。返回 (purified, draft_with_markers) 或 None。
         """
         try:
             if (self.config.get("llm") or {}).get("use_mock"):
@@ -4430,8 +4758,9 @@ class PipelineOrchestrator:
             f"{_fix_req33}\n"
             "输出 JSON：{\"edits\":[{\"scene_id\":N,\"op\":\"replace_span\","
             "anchor\":\"原文短语\",\"replacement\":\"新文本（至少8字，以句号结尾）\"}]}。\n"
-            "只做必要修改，不要重写整章。")
-        user33 = f"场景文本：\n{_body33}\n\n修复要求：\n{prompt33}"
+            "anchor 必须逐字摘录完整原句（包括原句末尾标点），replacement 也必须是完整句，"
+            "不得把句号插入半句中，禁止括号式编辑说明。只做必要修改，不要重写整章。")
+        user33 = f"场景文本：\n{_body33}\n\n修复要求：\n{prompt33}\n" + repair_constraints(self.root, task_card)
         try:
             resp33 = self.polish_router.chat_completion(
                 [{"role": "system",
@@ -4471,6 +4800,10 @@ class PipelineOrchestrator:
                 f"det fulltext fix ch{chapter_num} rejected: deterministic gates fail "
                 f"{gate33.get('issues')} (journal untouched)")
             return None
+        for row in _auth33:
+            sid = int(row["scene_id"])
+            if new33[sid] != texts33[sid]:
+                append_scene(self.root, chapter_num, dict(row, scene_text=new33[sid]))
         logger.info(
             f"det fulltext fix ch{chapter_num}: applied {len(edits33)} edits, "
             f"gate passed ({gate33.get('issues', [])[:3]})")
@@ -4502,6 +4835,7 @@ class PipelineOrchestrator:
         ordered = sorted(texts)
         prompt = _lp25.build_literary_prompt(
             [(sid, texts[sid]) for sid in ordered], issues, chapter_num)
+        prompt += "\n" + repair_constraints(self.root, task_card)
         try:
             resp = self.polish_router.chat_completion(
                 [{"role": "system", "content": _lp25.SYSTEM_PROMPT},
@@ -4556,6 +4890,61 @@ class PipelineOrchestrator:
         logger.warning(f"CC25 literary pass ch{chapter_num} applied {applied} edits: {notes}")
         return cand, rebuilt
 
+    @stage("review_span_repair")
+    def _repair_review_spans(self, chapter_num, task_card, review):
+        """Repair a few attributed paragraphs after scene regeneration yields no usable text."""
+        if (self.config.get("llm") or {}).get("use_mock") or not review.get("issues"):
+            return None
+        from novel_engine.agents import literary_pass
+        rows = load_authoritative_scenes(self.root, chapter_num)
+        texts = {int(row["scene_id"]): row.get("scene_text", "") for row in rows}
+        if not texts:
+            return None
+        spans = build_repair_spans(texts)
+        if not spans:
+            return None
+        prompt = (
+            "请仅修复审稿点名的问题段落，保留全部未点名正文，不重写整章。"
+            "最多3处锚点替换，替换原段为相近篇幅的完整成稿，净字数变化合计不超过300字。"
+            "重复氛围应替换成既定事件内的具体动作、对话与有效信息，不是删成梗概；"
+            "不得新增角色、超前事件或改变世界设定。保持正常散文段落，不写诗歌式分行。"
+            "程序已将原文划分为不可变编号片段，只能用 span_id 选择片段，禁止自己决定替换范围。"
+            "每处 replacement 必须完整覆盖选中片段的全部内容，保持原片段字数的85%至115%，"
+            "不得把上百字片段缩成几十字概要；以句末标点结尾。"
+            '只输出JSON {"edits":[{"span_id":0,"replacement":"完整替换片段。"}]}。\n'
+            + repair_constraints(self.root, task_card)
+            + "\n审稿意见：" + json.dumps(review.get("issues"), ensure_ascii=False)
+            + "\n按原顺序给出的可修改片段（chars 是原文实际字数）：\n"
+            + json.dumps(spans, ensure_ascii=False))
+        try:
+            raw = call_llm(prompt, system_prompt="你是严谨的小说修订编辑，按意见只修具体段落，输出严格JSON。",
+                           client=self.refine_router, output_json=True, max_tokens=8192, temperature=0.2)
+        except BudgetExceeded:
+            raise
+        except Exception as exc:
+            logger.warning("Chapter %s paragraph repair failed: %s", chapter_num, type(exc).__name__)
+            return None
+        revised, count, notes = literary_pass.apply_literary_edits(texts, resolve_span_edits(raw, spans))
+        if not count:
+            logger.info("Chapter %s paragraph repair rejected: %s", chapter_num, notes)
+            return None
+        draft = "\n\n※\n\n".join(revised[sid] for sid in sorted(revised))
+        candidate = purify_novel_for_publish(draft, chapter_num=chapter_num)
+        minimum = int(self._policy["chapter_target_chars"] * self._policy["min_ratio"])
+        if len(candidate) < minimum or not is_chinese_clean(candidate):
+            return None
+        if not self._deterministic_quality_gate(candidate, task_card)["passed"]:
+            return None
+        for row in rows:
+            sid = int(row["scene_id"])
+            if revised[sid] != texts[sid]:
+                append_scene(self.root, chapter_num, dict(row, scene_text=revised[sid]))
+        for scene in getattr(self.writer, "last_scenes", []) or []:
+            if scene.scene_id in revised:
+                scene.scene_text = revised[scene.scene_id]
+        logger.info("Chapter %s accepted %s paragraph repairs; requires new quality review", chapter_num, count)
+        return candidate, draft
+
     def _rewrite_weak_dimensions(self, novel, review):
         from novel_engine.agents.reviewer_agent import DIM_MAX
         scores = review.get("scores") or {}
@@ -4568,12 +4957,24 @@ class PipelineOrchestrator:
         prompt = (
             "你是一位资深小说润色编辑。请基于审查意见改写以下章节，"
             "重点修复偏弱维度，保持其余情节、人物与伏笔不变。\n"
-            "【长度约束】修复时保持或缩短正文长度，严禁无条件增加内容；若原文字数已超标（>目标*1.35），请精简、合并段落而非扩充。\n\n"
+            f"【长度约束】章节目标{self._policy['chapter_target_chars']}字，修订后应在"
+            f"{int(self._policy['chapter_target_chars'] * self._policy['min_ratio'])}至"
+            f"{int(self._policy['chapter_target_chars'] * self._policy['max_ratio'])}字之间。"
+            "仅补足欠缺的事件与有效细节，删除重复；严禁凑字数。保留原有场景分隔符。\n\n"
             f"偏弱维度（需重点提升）: {weak}\n\n"
             f"审查意见:\n{issue_text}\n\n"
             f"原文章节:\n{novel}"
         )
-        return call_llm(prompt, system_prompt="你是资深小说润色编辑，擅长根据审查意见精准改写章节（保持或缩短，不增字）", output_json=False, client=self.refine_router)
+        chapter = getattr(self.state_machine, "current_chapter", 0)
+        card = self._frozen_task_cards.get(chapter, {})
+        prompt += "\n\n" + repair_constraints(self.root, card)
+        candidate = call_llm(prompt, system_prompt="你是资深小说修订编辑，按审查意见修复章节，遵守人物、伏笔、时间线与字数约束", output_json=False, client=self.refine_router, temperature=0.3, max_tokens=20000)
+        minimum = int(self._policy["chapter_target_chars"] * self._policy["min_ratio"])
+        if (not isinstance(candidate, str) or len(candidate) < minimum
+                or not is_chinese_clean(candidate)):
+            logger.warning("Chapter %s revision rejected before adoption: length or language contract failed", chapter)
+            return None
+        return candidate
 
     def _low_score_rewrite(self, chapter_num: int, task_card: dict, synopsis: dict,
                            world_state: dict) -> bool:
@@ -4583,6 +4984,12 @@ class PipelineOrchestrator:
         publication_line（88）——低分重写只需把稿子拉回"可修复"区间，
         后续继续交给 fix loop；只有仍低于 fix_threshold 才视为无改善。
         """
+        original_novel = self.current_novel
+        original_draft = getattr(self, "_draft_novel", None)
+        original_scenes = copy.deepcopy(getattr(self.writer, "last_scenes", []))
+        original_score = getattr(self, "_last_review_score", None)
+        journal_snapshot = snapshot_journal(self.root, chapter_num)
+        adopted = False
         try:
             self._rollback_world_to(chapter_num - 1)
             novel = self.writer.generate_full_chapter(
@@ -4606,6 +5013,9 @@ class PipelineOrchestrator:
                     return False
             except Exception as _e_l:
                 logger.warning(f"ch{chapter_num} low-score rewrite latin check skipped: {_e_l}")
+            if len(self._novel_string(novel)) < int(self._policy["chapter_target_chars"] * self._policy["min_ratio"]):
+                logger.warning("Chapter %s low-score rewrite rejected before paid review: insufficient length", chapter_num)
+                return False
             self.current_novel = novel
             novel = self._finalize_current_novel(chapter_num)
             _st = self._stage_review(chapter_num, task_card, synopsis, novel, world_state)
@@ -4615,12 +5025,25 @@ class PipelineOrchestrator:
             logger.warning(
                 f"ch{chapter_num} low-score rewrite -> score={_new_score} "
                 f"verdict={_st['verdict']} (floor={_floor})")
-            if isinstance(_new_score, (int, float)) and _new_score >= _floor:
+            if (isinstance(_new_score, (int, float)) and _new_score >= _floor
+                    and not _st.get("review_unstable") and not _st["review"].get("deterministic_only")
+                    and self._deterministic_quality_gate(novel, task_card)["passed"]):
                 self.current_novel = novel
+                self._draft_novel = novel
                 self._low_score_rewritten_score = _new_score
+                adopted = True
                 return True
+        except BudgetExceeded:
+            raise
         except Exception as e:
             logger.warning(f"ch{chapter_num} low-score rewrite failed: {e}")
+        finally:
+            if not adopted:
+                self.current_novel = original_novel
+                self._draft_novel = original_draft
+                self.writer.last_scenes = original_scenes
+                self._last_review_score = original_score
+                restore_journal(self.root, chapter_num, journal_snapshot)
         return False
 
     def _rollback_world_to(self, prev_chapter: int):
@@ -4681,14 +5104,27 @@ class PipelineOrchestrator:
         self.generate_single_chapter(chapter_num)
         return self.current_novel
 
-    def _flag_for_human(self, chapter_num, score, reason):
-        import json
-        from pathlib import Path
-        p = Path(__file__).parent.parent / "audit" / "needs_human_review.json"
-        p.parent.mkdir(parents=True, exist_ok=True)
-        data = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {"queue": []}
-        data.setdefault("queue", []).append({"chapter": chapter_num, "score": score, "reason": reason})
-        p.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    def _save_quality_failure(self, chapter_num, result, reason):
+        result.update(success=False, published=False, pending_human_review=False,
+                      quality_repair_exhausted=True)
+        draft = self.root / "chapters" / "draft" / f"chapter_{chapter_num}.txt"
+        atomic_write(draft, self._novel_string())
+        result["draft_path"] = str(draft)
+        diagnostic = self.root / "audit" / "quality_repairs" / f"chapter_{chapter_num}.json"
+        atomic_write(diagnostic, json.dumps({"chapter": chapter_num, "reason": reason,
+                    "score": result.get("score"), "repairs": result.get("quality_repairs", [])},
+                    ensure_ascii=False, indent=2))
+        result["quality_diagnostic_path"] = str(diagnostic)
+        self.state_machine.mark_failed(reason)
+        set_status(self.root, chapter_num, HALTED, reason=reason)
+        self._record_quality_failure(chapter_num, result.get("score"), reason)
+
+    def _record_quality_failure(self, chapter_num, score, reason):
+        path = self.root / "audit" / "quality_failures.jsonl"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("a", encoding="utf-8") as handle:
+            handle.write(json.dumps({"chapter": chapter_num, "score": score, "reason": reason,
+                                     "timestamp": datetime.now(timezone.utc).isoformat()}, ensure_ascii=False) + "\n")
 
     def _run_continuity_audit(self, chapter_num):
         try:
@@ -4756,11 +5192,15 @@ class PipelineOrchestrator:
 
         return list(set(keywords))
 
+    @chapter_run
     def _run_with_retry(self, chapter_num):
         MAX_CHAPTER_RETRIES = int(self.config.get("pipeline", {}).get("max_review_retries", 3))
         last_exc = None
         replan_used = False
         for attempt in range(MAX_CHAPTER_RETRIES + 1):
+            _execution = current_execution(self)
+            if _execution:
+                _execution.budget.check()
             self._attempt_index = attempt
             try:
                 result = self.generate_single_chapter(chapter_num)
@@ -4771,7 +5211,10 @@ class PipelineOrchestrator:
             # CC round-7 P0-2：质量类整章重采不在进程内用同一任务卡反复重试，直接交 runner/看门狗
             # CC round-19/20/21：终检硬阻断 / 时序 gap / 质量留 gap 同样是确定性终局隔离，
             # runner 会 gap-continue；绝不在进程内整章重排重试（否则每章多烧一整遍 LLM）。
-            if result.get("final_gate_blocked") or result.get("quality_gap_continue"):
+            if (result.get("budget_exhausted") or result.get("quality_repair_exhausted")
+                    or result.get("predecessor_blocked") or result.get("commit_failed")):
+                return result
+            if result.get("final_gate_blocked") or (result.get("quality_gap_continue") and not result.get("quality_replan")):
                 logger.warning(
                     f"Chapter {chapter_num} terminal quality gap "
                     f"(final_gate={bool(result.get('final_gate_blocked'))}, "
@@ -4784,6 +5227,26 @@ class PipelineOrchestrator:
                 # 限 1 次，仍失败才返回（不再继续烧 retry 配额）。
                 if not replan_used:
                     replan_used = True
+                    archive = self.root / "runtime" / "replans" / f"chapter_{chapter_num}_{uuid.uuid4().hex}"
+                    archive.mkdir(parents=True)
+                    feedback = list(result.get("errors") or []) or [str(result.get("replan_reason") or "quality validation failed")]
+                    atomic_write(archive / "planning.json", json.dumps({
+                        "task_card": self._frozen_task_cards.get(chapter_num),
+                        "synopsis": self._frozen_synopsis.get(chapter_num), "feedback": feedback},
+                        ensure_ascii=False, indent=2))
+                    if not hasattr(self, "_planning_feedback"):
+                        self._planning_feedback = {}
+                    self._planning_feedback[chapter_num] = feedback
+                    self._boundary_hard = []
+                    self._reprise_hard = []
+                    self._last_deterministic_issues = []
+                    journal = journal_path(self.root, chapter_num)
+                    if journal.exists():
+                        journal.replace(archive / journal.name)
+                    self._frozen_task_cards.pop(chapter_num, None)
+                    self._frozen_synopsis.pop(chapter_num, None)
+                    self.writer.last_scenes = []
+                    previous_bypass = os.environ.get("NOVEL_DIRECTOR_BYPASS_CACHE_CHAPTER")
                     os.environ["NOVEL_DIRECTOR_BYPASS_CACHE_CHAPTER"] = str(chapter_num)
                     logger.warning(
                         f"Chapter {chapter_num} in-process replan (limit 1) "
@@ -4795,8 +5258,14 @@ class PipelineOrchestrator:
                         logger.error(f"Chapter {chapter_num} in-process replan raised: {e2}\n{_tb2.format_exc()}")
                         result = {"chapter": chapter_num, "success": False,
                                   "errors": [f"REPLAN: {e2}"]}
+                    finally:
+                        if previous_bypass is None:
+                            os.environ.pop("NOVEL_DIRECTOR_BYPASS_CACHE_CHAPTER", None)
+                        else:
+                            os.environ["NOVEL_DIRECTOR_BYPASS_CACHE_CHAPTER"] = previous_bypass
                     # 重排后统一出口：成功/通过即返回；仍质量重排或失败也返回（限 1 次）
                     if result.get("quality_replan"):
+                        self._save_quality_failure(chapter_num, result, "planning replan exhausted")
                         logger.warning(
                             f"Chapter {chapter_num} still quality-replan after in-process replan → return")
                         return result
@@ -4840,9 +5309,10 @@ class PipelineOrchestrator:
         order. NOTE: the orchestrator shares per-chapter mutable state, so raise
         max_parallel_chapters only if you accept the (guarded) concurrency trade-off.
         """
-        from concurrent.futures import ThreadPoolExecutor, as_completed
+        from concurrent.futures import as_completed
+        ThreadPoolExecutor = ContextExecutor
         para = max(1, int(self.config.get("model_router", {}).get("max_parallel_chapters", 1)))
-        if para <= 1:
+        if para <= 1 or (self.config.get("pipeline") or {}).get("sequential_commits", True):
             results = []
             for ch in range(start_chapter, total_chapters + 1):
                 res = chapter_fn(ch)
@@ -5207,6 +5677,13 @@ class PipelineOrchestrator:
 
     def close(self):
         """Close all StateDB connections and release resources."""
+        routers = [self.scene_router, self.polish_router, self.outline_router, self.review_router,
+                   self.refine_router, self.director.llm, self.synopsis_agent.llm,
+                   getattr(self.writer, "pro_client", None)]
+        for router in {id(router): router for router in routers if router is not None}.values():
+            close = getattr(router, "close", None)
+            if callable(close):
+                close()
         for name, get_conn in [
             ("self.db", lambda: self.db),
             ("self.simulator.db", lambda: self.simulator.db),

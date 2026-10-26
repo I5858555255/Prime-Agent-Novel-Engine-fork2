@@ -216,6 +216,7 @@ def build_scene_prompt(
     _scene_min = max(int(_scene_tgt * 0.7), 1200)
     _scene_paras = max(4, round(_scene_tgt / 350))
     _beat_count = len([b for b in scene_blueprint.get("beats", []) if b])
+    _beat_chars = max(1, (_scene_tgt + max(1, _beat_count) - 1) // max(1, _beat_count))
 
     # Previous scene anchor (deterministic task-card preview, not actual text)
     sorted_bps = sorted(all_blueprints, key=lambda b: int(b.get("scene_num", 0) or 0))
@@ -242,8 +243,20 @@ def build_scene_prompt(
         bp_num = int(bp.get("scene_num", 0) or 0)
         if bp_num != scene_num:
             goal = bp.get("goal", "")
-            if goal:
-                forbidden_lines.append(f"- 不得提前发生场景{bp_num}的核心目标：{goal}")
+            beats = "；".join(str(beat) for beat in (bp.get("beats") or []) if beat)
+            if bp_num > scene_num:
+                consequences = bp.get("irreversible_state_delta") or (bp.get("scene_progression_contract") or {}).get("irreversible_change", "")
+                events = json.dumps(bp.get("concrete_events") or [], ensure_ascii=False)
+                forbidden_lines.append(f"- 后续场景{bp_num}尚未发生，不得提前执行：{goal}；具体事件点：{beats}；首次发生的具体动作：{events}；尚未成立的结果状态：{consequences}")
+            else:
+                forbidden_lines.append(f"- 前序场景{bp_num}仅作已发生信息承接，不得重演：{goal}；具体事件点：{beats}")
+    known_characters = {str(c) for bp in sorted_bps if int(bp.get("scene_num", 0) or 0) <= scene_num
+                        for c in bp.get("characters") or []}
+    future_characters = {str(c) for bp in sorted_bps if int(bp.get("scene_num", 0) or 0) > scene_num
+                         for c in bp.get("characters") or []} - known_characters
+    if future_characters:
+        forbidden_lines.append("- 后续才登场的人物此刻不能入场或切换到其视角，即使不具名也不能提前安排动作："
+                               + "、".join(sorted(future_characters)))
     forbidden_block = "\n".join(forbidden_lines) if forbidden_lines else ""
 
     # CC round-8 P0-1：章内时序因果锁（故事时间序号 + 禁止提前演后果的实体状态）
@@ -363,9 +376,10 @@ def build_scene_prompt(
         if _ila22(_ag22):
             _interiority_block = (
                 "\n## 主角内心独白硬限制（CC round-22，违反将被确定性门截断或定点重生）\n"
-                f"本章主角能动性等级为 {_ag22}（婴儿/重伤/被囚类，无成人思考能力）。心理活动只能是不超过50字的"
+                f"本章主角能动性等级为 {_ag22}（婴儿/重伤/被囚类，无成人思考能力）。仅主角的心理活动只能是不超过50字的"
                 "碎片化感官印象/生理反应/模糊情绪（暖、冷、怕、安心）；严禁成人式抽象、连贯论证独白，"
-                "严禁出现 " + "、".join(_fab22) + " 等抽象概念或前世身份术语。\n"
+                "严禁出现 " + "、".join(_fab22) + " 等抽象概念或前世身份术语。"
+                "上述限制不适用于蓝图中的普通成人配角；其可有符合设定与当场认知的目的、判断和对话，不得替主角揭示未来身份。\n"
             )
     except Exception:
         _interiority_block = ""
@@ -381,6 +395,9 @@ def build_scene_prompt(
 {anchor_text}
 ## 本场景蓝图
 {json.dumps(slim_scene_blueprint(scene_blueprint), ensure_ascii=False, indent=2)}
+
+## 本场景必填伏笔与锚点（必须在正文自然呈现，不得照抄指令）
+{json.dumps([beat for beat in (task_card.get('must_cover_beats') or []) if isinstance(beat, dict) and (beat.get('scene_num') == scene_num or (beat.get('scene_num') is None and is_last_scene and beat.get('category') != 'foreshadow'))], ensure_ascii=False)}
 
 ## 本场景必须涵盖的事件点（beats）
 {chr(10).join(f'- {b}' for b in scene_blueprint.get('beats', []) if b)}
@@ -401,11 +418,11 @@ def build_scene_prompt(
 节奏控制：场景内部要有张力起伏（冲突酝酿→爆发→余波），避免平铺直叙；对话与动作交替推进。
 创新亮点：多用生动具体的细节和新鲜比喻，可安排小节内的意外转折，避免套路化表达。
 目标字数：{_scene_tgt}字；scene_text 正文硬性不少于 {_scene_min} 个中文字（约 {_scene_paras} 个自然段）。
-- 必须把本场景每个 beat 逐一演足（每拍约150-250字，动作、环境、感官细节、对话与即时心理交替展开），严禁概述、跳步或一笔带过
+- 必须把本场景每个 beat 逐一演足（每拍约{_beat_chars}字，全部 beat 的叙事篇幅合计约{_scene_tgt}字；动作、环境、感官细节、对话与即时心理交替展开），严禁概述、跳步或一笔带过
 - scene_text 只允许成稿正文本身：严禁包含 JSON 键名/引号结构、换行缩进的代码样式或 ``` 围栏
 ## 写作纪律（CC round-29，硬性，违反将判注水/术语超规格并返工）
-- 同一意象/感官细节/氛围词全章最多出现 1 次，禁止反复渲染同一氛围（如"逆流""粘稠""垂落"只准写一次）
-- 单句不超过 40 字，超过必须用逗号断句成短句；段落间避免流水式连读
+- 同一感官细节与氛围过程不得反复展开；必要的人物、地点、环境名词可以正常指代，但不能换词重演同一过程。事件完成后推进其后果，不得重置到发生前再演一遍。
+- 每个完整句少于40个中文字，超长时用句号拆成完整短句；逗号不算句末。正常分段，禁止逐词分行或只堆叠零碎感官词。
 - 术语克制：主角/配角未知的事物一律用"异动、标记、纹路、旧物"等模糊词；禁止使用"符箓、阵纹、法阵、功法、灵力"等超规格修炼术语（除非任务卡明确允许）
 - 每场景叙事重心必须落在动作/对白/新发现上；纯心理独白与环境描写合计占比不超过 30%，且心理描写须推进判断或决断，不做氛围注水
 {closing_block}

@@ -16,7 +16,9 @@ from typing import Optional
 
 from novel_engine.core.llm_client import LLMClient
 from novel_engine.core.quality_policy import load_quality_policy, derive_scene_targets, is_blocking
-from novel_engine.agents.world_simulator import WorldSimulator
+from novel_engine.quality.timeline_gate import detect_timeline_jump
+from novel_engine.quality.generation_constraints import scene_time_conflicts
+from novel_engine.agents.world_simulator import WorldSimulator, character_is_available
 from novel_engine.core.memory_manager import MemoryManager
 from novel_engine.engine.db import StateDB
 
@@ -402,8 +404,14 @@ def _render_outline_mandate(context: dict) -> str:
         '此任务优先级高于近期章节惯性、卷大纲泛述、角色圣经默认行为。四个场景必须共同把这一核心事件演出来——',
         '不得重演前情，不得提前演相邻章事件。',
         '任务中的专有名词（人名/地名/物件）必须按大纲具名原样登场，禁止用"族老/里正/几位老人/村民们/那个人"等泛称替换或省略。',
-        '至少一个场景直接正面演绎该核心事件（如：召集并主持村议、众人表决、拍板留下禁忌说法），其余场景围绕其起因/经过/余波展开。',
+        '至少一个场景直接正面演绎该核心事件，其余场景分别承担不同的起因、行动阻力、后果或信息变化，不能换措辞重复同一异象。',
     ]
+    next_task = str(context.get('next_chapter_task') or '').strip()
+    if next_task:
+        lines.append(f'下一章尚未发生的核心任务：{next_task}。本章不得把这些行动拆成自己的场景，也不得提前完成其结果。')
+    future = context.get('world_state', {}).get('future_characters', {})
+    if future:
+        lines.append('尚未登场的人物（禁止提前出场、匿名代演或参与状态变化）：' + json.dumps(future, ensure_ascii=False))
     if adjacent:
         lines.append(f'相邻章边界（上一章已发生/下一章才发生，本章不得重演或提前透支）：{adjacent}')
     if override:
@@ -426,30 +434,30 @@ class ChapterDirector:
         "每个字段严格守字数上限，不得展开描写。\n"
         "- narrative_time：<6字\n"
         "- location：<10字\n"
-        "- characters：短ID数组，2-3个\n"
+        "- characters：列全本场实际在场人物；已建档主要人物用权威ID，未建档普通配角用具体身份；允许单人，不得借用下一章才登场的人物凑数\n"
         "- goal：<20字\n"
         "- conflict：<20字\n"
         "- emotion：<8字\n"
         "- beats：3条，每条<14字\n"
-        "示例（单场，其余3场同理）：\n"
-        '{"scene_num": 1, "narrative_time": "清晨", "location": "村口古树", "characters": ["林远"], '
-        '"goal": "打探邻村魔物踪迹", "conflict": "村民讳莫如深不肯说", "emotion": "疑惑隐忧", '
-        '"beats": ["出发探路", "询问村民被拒", "察觉异常跟踪"]}\n'
-        "严格照示例极简程度输出JSON，不要解释。"
+        "所有人物ID、地点、事件和时间必须来自本章上下文，不得照搬其它故事示例。\n"
+        "输出顶层对象仅含scene_blueprints数组，每项包含上述全部字段，不要解释。"
     )
 
-    # Craft专用 system：只讲7个craft字段如何填，不重复骨架规则。字段字数严格压限。
+    # Craft专用 system：说明craft字段与开场密度契约如何填，不重复骨架规则。字段字数严格压限。
     _CRAFT_SYSTEM = (
         '你是章节导演，任务是在已有4场骨架上补充craft字段。\n'
-        '保持场景数量不变（scene_num=1,2,3,4），仅追加以下7个字段：\n'
-        '- concrete_events：固定2条，每条{"event":"≤12字","observable_action":"≤12字"}，必须是可观察的外部事件（人物动作/对话/物件变化），禁止纯心理/氛围类\n'
-        '- named_interactions：只保留有实质互动的（无则[]），{"characters":["角色名","角色名"],"interaction_type":"争执/对话/冲突","brief":"≤20字"}，每场至少1个具名对手戏角色，禁止无对手独角戏\n'
+        '保持场景数量不变（scene_num=1,2,3,4），仅追加以下字段：\n'
+        '- concrete_events：每场2-4条，分别对应不同因果步骤，每条{"event":"≤12字","observable_action":"≤12字"}，必须是可观察的外部事件（人物动作/对话/物件变化），禁止纯心理/氛围类\n'
+        '- named_interactions：只保留有实质互动的（无则[]），{"characters":["角色名","角色名"],"interaction_type":"争执/对话/冲突","brief":"≤20字"}；多人场必须落实已有角色互动，单人场用动作与外部变化，不得新增对手凑数\n'
         '- info_reveal_points：2-3条{"type":"伏笔埋设","content":"≤12字","anchor_terms":["名词1","名词2"]}\n'
+        '- external_event：≤20字，可被旁人观察到的本场动作或事件，禁止纯心理或氛围\n'
+        '- irreversible_state_delta：≤20字，本场已经发生且可验证的状态变化\n'
+        '- world_anomaly_signal：≤20字，普通人也可见的外部物理异象；无则空字符串，不得捏造新设定\n'
         '- protagonist_interiority：≤20字\n'
         '- scene_constraints：有强制约束时列出，无则[]\n'
         '- scene_progression_contract：{"new_state_or_entity":["≤2个具体新状态或新信息"],"irreversible_change":"≤12字，必须是可以验证的改变（不是空泛的"关系变化"）"}\n'
         '- scene_craft_elements：{"info_reversal_point":{"present":false,"content":""}}\n'
-        '【发展场反饱和规则】每个非高潮场景必须：①有具体外部事件（非内心/氛围）；②有具名对手角色发生实际对话或冲突；③有一个不可逆的新状态/新信息推进章钩子；④禁止同场或跨场重复同一微循环（如"夜啼-安抚-喂食"反复铺陈）；⑤静态氛围/心理独白占比设上限，必须让位给外部推进。\n'
+        '【发展场反饱和规则】每个非高潮场景必须：①有具体外部事件（非内心/氛围）；②多人场有蓝图内具名角色互动，单人场不得编造对手；③有一个不可逆的新状态/新信息推进章钩子；④禁止同场或跨场重复同一微循环（如"夜啼-安抚-喂食"反复铺陈）；⑤静态氛围/心理独白占比设上限，必须让位给外部推进。\n'
         '严格照示例风格输出，每个字段尽量精简，不要解释。'
     )
 
@@ -462,10 +470,10 @@ class ChapterDirector:
         '- conflicts：{"internal":"内心冲突<20字","external":"外部冲突<20字"}\n'
         '- emotion_curve：{"start":"起始","middle":"中间","climax":"高潮","end":"结尾钩子"}，每值<8字\n'
         '- chapter_hook：<30字\n'
-        '- foreshadow_actions：[{"foreshadow_id":"F001","action":"具体指令<20字","intensity":"隐晦提示|明显异样|接近揭露前兆"}]\n'
+        '- foreshadow_actions：[{"foreshadow_id":"给定的伏笔ID","action":"具体指令<20字","intensity":"隐晦提示|明显异样|接近揭露前兆"}]\n'
         '- chapter_events：[{"event_type":"类型","one_line_summary":"一句话20-40字","participants":["人物"],"location":"地点","narrative_time":"时间","consequence_state":"结果状态<20字"}]\n'
         '- state_changes：[{"type":"character_realm","target":"目标ID","new_value":"新值","chapter":章节号}]\n'
-        '- foreshadow_execution：[{"foreshadow_id":"F001","executed":true/false,"note":"如何执行<20字"}]\n'
+        '- foreshadow_execution：[{"foreshadow_id":"给定的伏笔ID","executed":true/false,"note":"如何执行<20字"}]\n'
         '- end_state：{"narrative_position":"最后一帧画面<30字","location":"末场地点","completed_actions":["已演完动作"],"pending_actions":["下一章接续动作<2个"],"time_marker":"夜/当日"}\n'
         '- timeline_anchor：{"chapter_start_marker":"开场时间","max_time_progression":"最大时间跨度<20字","forbidden_markers":["禁止越界词<3个"]}\n'
         '严格照上述格式输出JSON，不得增删字段。'
@@ -1029,10 +1037,12 @@ class ChapterDirector:
 
         # T3: 解析细纲逐章任务，作为本章硬约束
         _chapter_outline_task = ''
+        _next_chapter_task = ''
         _adjacent_tasks = ''
         if self._outline_loaded and volume_outline:
             _ch_tasks = parse_chapter_tasks(volume_outline)
             _chapter_outline_task = _ch_tasks.get(chapter_num, '')
+            _next_chapter_task = _ch_tasks.get(chapter_num + 1, '')
             # 相邻章任务（用于防重演/防透支）
             _adj_tasks_parts = []
             for _delta in (-1, 1):
@@ -1071,6 +1081,7 @@ class ChapterDirector:
             'forbidden_list': self._extract_forbidden_list(author_intent),
             # T3: 细纲逐章任务（最高优先级硬约束）
             'chapter_outline_task': _chapter_outline_task,
+            'next_chapter_task': _next_chapter_task,
             'adjacent_tasks': _adjacent_tasks,
             'outline_override_hint': _outline_override_hint,
             # 设定贯通：终局锚点临近回收提示（bible/ending_bible.md 配套）
@@ -1106,9 +1117,13 @@ class ChapterDirector:
         else:
             self._connect_wall_count = 0
 
-    def _merge_task_cards(self, skeleton: list, meta: dict, chapter_num: int) -> dict:
+    def _merge_task_cards(self, skeleton: list, meta: dict, chapter_num: int, context: dict | None = None) -> dict:
         card = dict(meta)
+        card['chapter_num'] = chapter_num
         card['scene_blueprints'] = skeleton
+        if context and (context.get('chapter_outline_task') or context.get('next_chapter_task')):
+            card['outline_boundary'] = {'current_task': context.get('chapter_outline_task', ''),
+                                        'next_task': context.get('next_chapter_task', '')}
         return card
 
     def _call_with_meta(self, prompt: str, max_tokens: int, system_prompt: str = None) -> tuple:
@@ -1134,11 +1149,19 @@ class ChapterDirector:
                               extra_feedback: list[str] | None = None) -> list:
         """Call 1: generate 4-scene skeleton. max_tokens=1500. Enforces exactly 4 scenes."""
         self._check_budget(chapter_num)
-        # Light skeleton: only basic fields to fit 4 scenes within 1500 tokens.
+        # The planner must know the same length contract later imposed on prose.
+        target = int(load_quality_policy(self.root)["chapter_target_chars"])
+        per_scene = derive_scene_targets(target, 4)
+        cast = {cid: char.get("name", cid) for cid, char in
+                (context.get("world_state", {}).get("characters") or {}).items()}
         prompt = (
             f'请为第 {chapter_num} 章生成4个场景的骨架。必须正好4个场景，不得多不得少。\n\n'
             f'## 上下文\n'
             f"- 章节号：{chapter_num}\n"
+            f"- 全章目标{target}字；四场正文目标分别为{per_scene}字。必须规划足以支撑这些篇幅的有效行动，而不是写作后靠氛围补长。\n"
+            "- 每场beats是先后发生、互相推进的微事件，不是同一感官/异象的三个说法。不要把整场篇幅交给一次短过渡、一声哭或反复昏醒。\n"
+            "- 低能动性主角不能用大段内心戏撑篇幅：由本章事件涉及的普通旁观者、当事人的目的、分歧、尝试和后果承载推进。列入实际出场配角，不能让承担恐慌、应对等行动的人物在characters中消失；不得将未来主要角色化名为群众提前登场。\n"
+            f"- 主要人物权威ID与姓名：{json.dumps(cast, ensure_ascii=False)}；无名群众可用具体身份，不得杜撰主要人物ID。\n"
             f"- 相关剧情节点：{json.dumps(context['relevant_plot_nodes'], ensure_ascii=False, indent=2)[:1200]}\n"
             f"- 本章中纲（章级意图）：{context.get('mid_outline_hint') or '（本范围暂无 approved 中纲条目，按相关节点+卷大纲+细纲自由发挥）'}\n"
             f"- 活跃约束：{context['constraints'][:600]}\n"
@@ -1162,6 +1185,9 @@ class ChapterDirector:
             '  ]\n'
             '}'
         )
+        if extra_feedback:
+            prompt += "\n\n## 上一轮校验反馈（本轮必须修正）\n" + "\n".join(
+                f"- {item}" for item in extra_feedback)
         feedback_count = 0
         length_reduce_done = False
         while True:
@@ -1195,6 +1221,8 @@ class ChapterDirector:
                     f'约束：{context["constraints"][:400]}。大纲：{context.get("volume_outline", "")[:400]}。{prior_events_block}'
                     f'{_render_outline_mandate(context)}'
                 )
+                if extra_feedback:
+                    prompt += '\n校验反馈：' + '；'.join(extra_feedback)
                 continue
             if feedback_count >= 1:
                 raise RuntimeError(
@@ -1208,7 +1236,7 @@ class ChapterDirector:
 
     def _call_scene_craft(self, chapter_num: int, context: dict, prior_events_block: str,
                            skeleton: list, time_fix_instructions: list[str] | None = None) -> list:
-        """Call 2: add craft fields to existing scenes. max_tokens=2000. Matches by scene_num.
+        """Call 2: add craft fields to existing scenes. max_tokens=3000. Matches by scene_num.
 
         time_fix_instructions: 上一版场景叙事时间倒置或超出章级跨度的具体错误
         （detect_task_card_scene_time_inversion / 章内跨日检查的输出），注入 prompt 作为确定性
@@ -1230,6 +1258,7 @@ class ChapterDirector:
                   "回溯处理；若不属于回溯，必须重排场景顺序使叙事时间随 scene_num 单调"
                   "递增。禁止仅修改 narrative_time 文本而不改变场景顺序关系。\n"
             )
+        opening_hint = ('第1章前两个场景中至少一场必须有非空 world_anomaly_signal，明确普通村民可观察的物理异象，不得用内心感受替代。\n' if chapter_num == 1 else '')
         prompt = (
             f'基于以下场景骨架，补充每个场景的重字段。必须保持场景数量不变。\n\n'
             f'## 场景骨架\n{scenes_json}\n\n'
@@ -1237,14 +1266,19 @@ class ChapterDirector:
             f'{self._TEACH_BOUNDARY_HINT}'
             f'{_render_outline_mandate(context)}\n\n'
             f'{_time_fix_blk}\n'
+            + ('时间修正输出契约：每个 scene_blueprints 元素必须同时返回 narrative_time 字段，'
+               '填入修正后的具体故事时段；不得只重发 craft 字段而漏掉时间修正。\n' if time_fix_instructions else '')
+            + f'{opening_hint}'
             '## 输出 JSON（只含 scene_blueprints 数组，追加以下字段到每个场景）：\n'
             '{\n'
             '  "scene_blueprints": [\n'
             '    {"scene_num": 1, "concrete_events": [{"event":"谁做了什么(≤12字)","observable_action":"可观察(≤12字)"}],'
             ' "named_interactions": [{"characters":["角色名"],"interaction_type":"争执/对话/冲突","brief":"实质互动(≤20字)"}],'
             ' "info_reveal_points": [{"type":"伏笔埋设","content":"内容(≤12字)","anchor_terms":["名词1","名词2"]}],'
+            ' "external_event": "外部动作(≤20字)", "irreversible_state_delta": "实际状态变化(≤20字)",'
+            ' "world_anomaly_signal": "可观察异象(无则空)",'
             ' "protagonist_interiority": "内心(≤20字)", "scene_constraints": [],'
-            ' "scene_progression_contract": {"new_state_or_entity":["新变化"],"irreversible_change":"不可逆(≤12字)"},"'
+            ' "scene_progression_contract": {"new_state_or_entity":["新变化"],"irreversible_change":"不可逆(≤12字)"},'
             ' "scene_craft_elements": {"info_reversal_point":{"present":false,"content":""}}'
             '\n    }, ...（保持原场景数量不变）\n'
             '  ]\n'
@@ -1255,7 +1289,7 @@ class ChapterDirector:
         while True:
             self._check_budget(chapter_num)
             result, finish_reason, usage = self._call_with_meta(
-                prompt, max_tokens=2000, system_prompt=self._CRAFT_SYSTEM)
+                prompt, max_tokens=3000, system_prompt=self._CRAFT_SYSTEM)
             if isinstance(result, dict):
                 craft_bps = result.get('scene_blueprints', [])
             else:
@@ -1272,7 +1306,7 @@ class ChapterDirector:
             if finish_reason == 'length':
                 if length_reduce_done:
                     raise RuntimeError(
-                        f'Call 2 ch{chapter_num}: finish=length after reduction, 2000 tokens still truncates. '
+                        f'Call 2 ch{chapter_num}: finish=length after reduction, 3000 tokens still truncates. '
                         f'Produced {len(craft_bps)} scenes.'
                     )
                 length_reduce_done = True
@@ -1282,12 +1316,16 @@ class ChapterDirector:
                     f'基于以下场景骨架，补充craft字段。必须保持4个场景不变。\n'
                     f'每场骨架：{json.dumps(skeleton, ensure_ascii=False)[:2000]}\n'
                     f'{_render_outline_mandate(context)}\n'
+                    f'{_time_fix_blk}\n'
                     f'要求：concrete_events固定2条(每条event≤12字、action≤12字)；'
                     f'named_interactions只保留有实质互动的(无则[])；info_reveal_points 2-3条(content≤12字)；'
+                    f'external_event≤20字(可观察动作)；irreversible_state_delta≤20字(实际变化)；'
+                    f'world_anomaly_signal≤20字(普通人可见异象，无则空；第1章前两场至少一场非空)；'
                     f'protagonist_interiority≤20字；scene_constraints[]；'
                     f'scene_progression_contract(new_state≤2个变化,irreversible≤12字)；'
                     f'scene_craft_elements固定格式。\n'
-                    f'严格照此输出JSON，不得展开。'
+                    '顶层必须是JSON对象 {"scene_blueprints":[...]}，数组正好4项，scene_num=1,2,3,4；不得使用scenes或数字作为顶层键。'
+                    '严格照此输出JSON，不得展开。'
                 )
                 prompt = tight_prompt
                 continue
@@ -1315,15 +1353,40 @@ class ChapterDirector:
                                 skeleton: list) -> dict:
         """Call 3: generate chapter-level metadata. max_tokens=1200."""
         self._check_budget(chapter_num)
+        scheduled = []
+        allowed_ids = []
+        for fs in context.get('foreshadows') or []:
+            allowed_ids.append(fs.get('id'))
+            if fs.get('plant_chapter') == chapter_num:
+                scheduled.append({'foreshadow_id': fs.get('id'), 'action': fs.get('plant_context', '')})
+            for clue in fs.get('clue_plan') or []:
+                if clue.get('chapter') == chapter_num:
+                    scheduled.append({'foreshadow_id': fs.get('id'), 'action': clue.get('method', ''),
+                                      'intensity': clue.get('intensity', '')})
+        characters = {cid: {key: char.get(key) for key in ('name', 'realm', 'location') if key in char}
+                      for cid, char in (context.get('world_state', {}).get('characters') or {}).items()}
         scenes_preview = json.dumps(
             [{'scene_num': s.get('scene_num'), 'goal': s.get('goal', '')[:60],
-              'location': s.get('location', '')[:40]} for s in skeleton],
+              'location': s.get('location', '')[:40], 'characters': s.get('characters') or [],
+              'concrete_events': s.get('concrete_events') or [],
+              'narrative_time': s.get('narrative_time', ''),
+              'latest_permissible_moment': s.get('latest_permissible_moment', '')} for s in skeleton],
             ensure_ascii=False, indent=2)
         prompt = (
             f'基于以下{len(skeleton)}个场景，生成章级元数据。\n\n'
             f'## 场景概要\n{scenes_preview}\n\n'
             '## 上下文\n'
             f"- 章节号：{chapter_num}\n"
+            f"- 权威伏笔ID（不得杜撰或重新编号）：{json.dumps(allowed_ids, ensure_ascii=False)}\n"
+            f"- 本章计划埋设/提示：{json.dumps(scheduled, ensure_ascii=False)}\n"
+            "- 伏笔动作必须保持给定ID的原意，仅演出本章计划；没有计划则输出空数组，不得套用示例编号。\n"
+            f"- 当前人物ID与状态：{json.dumps(characters, ensure_ascii=False)}\n"
+            "- state_changes.target 必须为上述人物ID；仅记录正文确实产生的变化，未变化输出空数组。\n"
+            "- chapter_events 必须忠实概括对应场景的具体动作与执行者，participants 使用人物ID对应的真实姓名；不得把所有动作都写成主角执行，婴儿不能行走、寻人或抱起自己。\n"
+            "- chapter_events.narrative_time 必须与对应场景的 narrative_time 一致，不得自行改到清晨/上午。\n"
+            "- chapter_hook 必须在本章允许的事件中留下一个具体未解问题或反常变化，不要只写进屋、关门等日常收束动作。\n"
+            "- 时间锚必须遵守作者硬约束并与全部场景叙事时间一致；forbidden_markers 只填越界时间词，"
+            "不得填人物、地点或本章必演事件；无禁写时间词时用空数组。\n"
             f"- 活跃约束：{context['constraints'][:400]}\n"
             f"- 本卷作者意图：{context.get('author_intent', '')[:1000]}\n"
             f"- 本卷禁止事项：{json.dumps(context.get('forbidden_list') or [], ensure_ascii=False)}\n"
@@ -1339,10 +1402,10 @@ class ChapterDirector:
             '  "conflicts": {"internal": "内心冲突", "external": "外部冲突"},\n'
             '  "emotion_curve": {"start": "起始", "middle": "中间", "climax": "高潮", "end": "结尾钩子"},\n'
             '  "chapter_hook": "章末钩子描述",\n'
-            '  "foreshadow_actions": [{"foreshadow_id": "F001", "action": "具体指令", "intensity": "隐晦提示/明显异样/接近揭露前兆"}],\n'
+            '  "foreshadow_actions": [{"foreshadow_id": "给定的伏笔ID", "action": "具体指令", "intensity": "隐晦提示/明显异样/接近揭露前兆"}],\n'
             '  "chapter_events": [{"event_type":"类型","one_line_summary":"一句话20-40字","participants":["人物"],"location":"地点","narrative_time":"时间","consequence_state":"结果状态"}],\n'
             '  "state_changes": [{"type":"character_realm","target":"目标ID","new_value":"新值","chapter":' + str(chapter_num) + '}],\n'
-            '  "foreshadow_execution": [{"foreshadow_id": "F001", "executed": true, "note": "如何执行"}],\n'
+            '  "foreshadow_execution": [{"foreshadow_id": "给定的伏笔ID", "executed": true, "note": "如何执行"}],\n'
             '  "end_state": {"narrative_position": "最后一帧画面", "location": "末场地点", "completed_actions": ["已演完动作"], "pending_actions": ["下一章接续动作"], "time_marker": "夜/当日"},\n'
             '  "timeline_anchor": {"chapter_start_marker": "开场时间", "max_time_progression": "最大时间跨度", "forbidden_markers": ["禁止越界词"]}\n'
             '}'
@@ -1383,7 +1446,8 @@ class ChapterDirector:
             # 校验失败时回退到 LLM 生成。
             template_errors = self.validate_task_card(template_card, chapter_num)
             if not template_errors:
-                return template_card
+                context, _ = self._build_shared_context(chapter_num, dynamic_context)
+                return self._merge_task_cards(template_card.get('scene_blueprints') or [], template_card, chapter_num, context)
             logger.info(f"Template task card invalid ({template_errors[0]}), falling back to LLM")
 
         # P0 拆分：用 _build_shared_context 提取上下文，三次小调用合并
@@ -1401,7 +1465,7 @@ class ChapterDirector:
         logger.info(f'Director call 3/3 (metadata) for chapter {chapter_num}')
         meta = self._call_chapter_metadata(chapter_num, context, prior_events_block, skeleton)
 
-        task_card = self._merge_task_cards(skeleton, meta, chapter_num)
+        task_card = self._merge_task_cards(skeleton, meta, chapter_num, context)
         task_card = _normalize_placeholder_characters(task_card)
         # C3 R4：多场任务卡注入 must_cover opening_anchor beats（软生成）
         task_card = _inject_must_cover_opening_anchors(task_card)
@@ -1422,7 +1486,7 @@ class ChapterDirector:
                 logger.info(f'Re-sending call 2 (craft) for ch{chapter_num}: {craft_missing[:2]}')
                 try:
                     skeleton = self._call_scene_craft(chapter_num, context, prior_events_block, skeleton)
-                    task_card = self._merge_task_cards(skeleton, meta, chapter_num)
+                    task_card = self._merge_task_cards(skeleton, meta, chapter_num, context)
                     task_card = _normalize_placeholder_characters(task_card)
                 except Exception as e2:
                     logger.error(f'Retry call 2 failed: {e2}')
@@ -1432,7 +1496,7 @@ class ChapterDirector:
                 logger.info(f'Re-sending call 3 (metadata) for ch{chapter_num}: {chapter_missing[:2]}')
                 try:
                     meta2 = self._call_chapter_metadata(chapter_num, context, prior_events_block, skeleton)
-                    task_card = self._merge_task_cards(skeleton, meta2, chapter_num)
+                    task_card = self._merge_task_cards(skeleton, meta2, chapter_num, context)
                     task_card = _normalize_placeholder_characters(task_card)
                 except Exception as e2:
                     logger.error(f'Retry call 3 failed: {e2}')
@@ -1446,7 +1510,8 @@ class ChapterDirector:
                     skeleton = self._call_scene_craft(
                         chapter_num, context, prior_events_block, skeleton,
                         time_fix_instructions=time_inv)
-                    task_card = self._merge_task_cards(skeleton, meta, chapter_num)
+                    meta = self._call_chapter_metadata(chapter_num, context, prior_events_block, skeleton)
+                    task_card = self._merge_task_cards(skeleton, meta, chapter_num, context)
                     task_card = _normalize_placeholder_characters(task_card)
                 except Exception as e2:
                     logger.error(f'Retry call 2 (timefix) failed: {e2}')
@@ -1487,7 +1552,7 @@ class ChapterDirector:
         logger.info(f'Director call 3/3 (metadata) for chapter {chapter_num}')
         meta = self._call_chapter_metadata(chapter_num, context, prior_events_block, skeleton)
 
-        task_card = self._merge_task_cards(skeleton, meta, chapter_num)
+        task_card = self._merge_task_cards(skeleton, meta, chapter_num, context)
         task_card = _normalize_placeholder_characters(task_card)
         # C3 R4：多场任务卡注入 must_cover opening_anchor beats（软生成）
         task_card = _inject_must_cover_opening_anchors(task_card)
@@ -1507,7 +1572,7 @@ class ChapterDirector:
                 logger.info(f'Re-sending call 2 (craft) for ch{chapter_num}')
                 try:
                     skeleton = self._call_scene_craft(chapter_num, context, prior_events_block, skeleton)
-                    task_card = self._merge_task_cards(skeleton, meta, chapter_num)
+                    task_card = self._merge_task_cards(skeleton, meta, chapter_num, context)
                     task_card = _normalize_placeholder_characters(task_card)
                 except Exception as e2:
                     logger.error(f'Retry call 2 failed: {e2}')
@@ -1517,7 +1582,7 @@ class ChapterDirector:
                 logger.info(f'Re-sending call 3 (metadata) for ch{chapter_num}')
                 try:
                     meta2 = self._call_chapter_metadata(chapter_num, context, prior_events_block, skeleton)
-                    task_card = self._merge_task_cards(skeleton, meta2, chapter_num)
+                    task_card = self._merge_task_cards(skeleton, meta2, chapter_num, context)
                     task_card = _normalize_placeholder_characters(task_card)
                 except Exception as e2:
                     logger.error(f'Retry call 3 failed: {e2}')
@@ -1529,7 +1594,8 @@ class ChapterDirector:
                     skeleton = self._call_scene_craft(
                         chapter_num, context, prior_events_block, skeleton,
                         time_fix_instructions=time_inv)
-                    task_card = self._merge_task_cards(skeleton, meta, chapter_num)
+                    meta = self._call_chapter_metadata(chapter_num, context, prior_events_block, skeleton)
+                    task_card = self._merge_task_cards(skeleton, meta, chapter_num, context)
                     task_card = _normalize_placeholder_characters(task_card)
                 except Exception as e2:
                     logger.error(f'Retry call 2 (timefix) failed: {e2}')
@@ -1567,6 +1633,20 @@ class ChapterDirector:
                 errors.append(f"缺少必填字段: {field}")
 
         scenes = task_card.get("scene_blueprints", [])
+        canonical = getattr(getattr(self, "simulator", None), "characters", {}).get("characters", {})
+        unavailable = {
+            alias: (cid, data) for cid, data in canonical.items()
+            if not character_is_available(data, chapter_num)
+            for alias in (cid, data.get("name", cid))
+        }
+        planned = [(f"场景{s.get('scene_num')}", actor)
+                   for s in scenes for actor in s.get("characters", [])]
+        planned.extend(("状态变化", change.get("target"))
+                       for change in task_card.get("state_changes", []))
+        for source, actor in planned:
+            if isinstance(actor, str) and actor in unavailable:
+                cid, data = unavailable[actor]
+                errors.append(f"{source}人物{cid}({data.get('name', cid)})尚未登场：首次登场第{data['first_appearance']}章，本章第{chapter_num}章")
         # 生产路径强制4场（冲突密集可5）；非strict允许2-6
         if strict:
             if len(scenes) != 4:
@@ -1585,6 +1665,12 @@ class ChapterDirector:
 
         # CC round-30：章内场景叙事时间顺序倒置检测（ch141 场景1午后→2上午/傍晚→3午后→4黄昏）
         errors.extend(detect_task_card_scene_time_inversion(scenes))
+        errors.extend(scene_time_conflicts(self.root, dict(task_card, chapter_num=chapter_num)))
+        for scene in scenes:
+            issue = detect_timeline_jump(str(scene.get("narrative_time") or ""),
+                                         task_card.get("timeline_anchor"), chapter_num)
+            if issue:
+                errors.append(f"超出章级跨度：场景{scene.get('scene_num')}叙事时间与章级锚点冲突：{issue}")
 
         # CC round-30/31：章内跨日检查。放宽规则（ch151 双模型复现后修正）：
         #   - span 自身允许跨日（如"约24小时/深夜至次日黄昏"）→ 全放行；

@@ -219,7 +219,10 @@
           "concurrency": 4,
           "stream": true,
           "idle_timeout_s": 100,
-          "total_timeout_s": 650
+          "total_timeout_s": 650,
+          "extra_body": {
+            "reasoning_effort": "none"
+          }
         },
         "review": {
           "models": [
@@ -229,7 +232,10 @@
           "stream": true,
           "temperature": 0,
           "idle_timeout_s": 100,
-          "total_timeout_s": 220
+          "total_timeout_s": 220,
+          "extra_body": {
+            "reasoning_effort": "none"
+          }
         },
         "refine": {
           "models": [
@@ -239,7 +245,10 @@
           "concurrency": 4,
           "stream": true,
           "idle_timeout_s": 100,
-          "total_timeout_s": 650
+          "total_timeout_s": 650,
+          "extra_body": {
+            "reasoning_effort": "none"
+          }
         }
       }
     },
@@ -296,7 +305,10 @@
           "concurrency": 4,
           "stream": true,
           "idle_timeout_s": 100,
-          "total_timeout_s": 650
+          "total_timeout_s": 650,
+          "extra_body": {
+            "reasoning_effort": "none"
+          }
         },
         "review": {
           "models": [
@@ -306,7 +318,10 @@
           "stream": true,
           "temperature": 0,
           "idle_timeout_s": 100,
-          "total_timeout_s": 220
+          "total_timeout_s": 220,
+          "extra_body": {
+            "reasoning_effort": "none"
+          }
         },
         "refine": {
           "models": [
@@ -316,7 +331,10 @@
           "concurrency": 4,
           "stream": true,
           "idle_timeout_s": 100,
-          "total_timeout_s": 650
+          "total_timeout_s": 650,
+          "extra_body": {
+            "reasoning_effort": "none"
+          }
         }
       }
     }

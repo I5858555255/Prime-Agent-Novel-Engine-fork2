@@ -1,4 +1,4 @@
-﻿# ── 场景正文生成：四套实义词不相交句池（来自 sandbox_gen2）──────────────────
+# ── 场景正文生成：四套实义词不相交句池（来自 sandbox_gen2）──────────────────
 OPEN = ["夜色如墨，朔风卷过旷原，陆烬独自赶路。",
         "晨雾未散，渡头小镇的茶寮刚挑起青帘。",
         "密林深处忽有异响，三道黑影自树后扑出。",
@@ -121,6 +121,13 @@ def _scene_text(scene_num: int, target: int = 1000) -> str:
 测试与验证 Novel-Engine 核心功能：确保 SQL 精确状态检索、Session 树分支与回滚、增量缝合 Patcher 全部运行完美！
 """
 import unittest
+from unittest.mock import Mock
+from tempfile import TemporaryDirectory
+from types import SimpleNamespace
+from novel_engine.agents.scene_schema import SceneOutput
+from novel_engine.core.state_machine import ChapterPhase
+from novel_engine.tests.test_commit_path import _make_orch
+from novel_engine.pipeline.chapter_journal import append_scene
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
@@ -591,65 +598,50 @@ class TestNovelEngine(unittest.TestCase):
         self.assertIn("韩玄在藏经阁翻阅古籍", updated_full_text)  # 保证场景2完好无损！
 
     def test_pipeline_incremental_patcher(self):
-        """测试流水线中集成 IncrementalPatcher 的局部热插拔修复逻辑。"""
-        import tempfile
-        import shutil
-        from pathlib import Path
-        import logging
-        logging.basicConfig(level=logging.INFO)
-
-        try:
-            from novel_engine.core.llm_client import LLMClient
-            from novel_engine.pipeline.pipeline_orchestrator import PipelineOrchestrator
-        except ImportError:
-            from novel_engine.core.llm_client import LLMClient
-            from novel_engine.pipeline.pipeline_orchestrator import PipelineOrchestrator
-
-        tmpdir = tempfile.mkdtemp()
-        try:
-            # Create dummy folders to mimic "小说工程"
-            root_path = Path(tmpdir)
-            for d in ["config", "config/simulation", "memory/world_state", "config/foreshadow", "config/planning", "planning", "bible", "runtime"]:
-                (root_path / d).mkdir(parents=True, exist_ok=True)
-
-            # Copy or write essential files
-            (root_path / "config" / "runtime_config.json").write_text('{"llm": {"use_mock": true}}', encoding="utf-8")
-            (root_path / "config" / "simulation" / "rules.json").write_text('{}', encoding="utf-8")
-            (root_path / "config" / "simulation" / "constraints.json").write_text('{}', encoding="utf-8")
-            (root_path / "memory/world_state/characters.json").write_text('{"characters": {}}', encoding="utf-8")
-            (root_path / "memory/world_state/factions.json").write_text('{"factions": {}}', encoding="utf-8")
-            (root_path / "memory/world_state/power_system.json").write_text('{"current_power_balance": {}}', encoding="utf-8")
-            (root_path / "config" / "foreshadow" / "registry.json").write_text('{"foreshadows": []}', encoding="utf-8")
-            (root_path / "config" / "planning" / "volumes.json").write_text('{"volumes": [{"id": "V01", "chapter_range": [1, 100]}]}', encoding="utf-8")
-            (root_path / "config" / "planning" / "plot_graph.json").write_text('{"nodes": []}', encoding="utf-8")
-            (root_path / "bible" / "world_bible.md").write_text('', encoding="utf-8")
-            (root_path / "bible" / "character_bible.md").write_text('', encoding="utf-8")
-            (root_path / "bible" / "style_bible.md").write_text('', encoding="utf-8")
-            (root_path / "bible" / "author_intent.md").write_text('', encoding="utf-8")
-            (root_path / "planning" / "吸氧证道_V2_1_完整大纲.md").write_text('', encoding="utf-8")
-
-            # Setup LLMClient with MockLLMForFix
-            mock_llm_internal = MockLLMForFix()
-            llm_client = LLMClient(use_mock=True)
-            llm_client._mock = mock_llm_internal
-
-            orchestrator = PipelineOrchestrator(project_root=tmpdir, llm_client=llm_client)
-            result = orchestrator.generate_single_chapter(1)
-
-            # 验证流程完成并应用了局部修复
-            self.assertTrue(result["success"])
-            self.assertEqual(result["chapter"], 1)
-            # B2 zero-scaffolding：成品只含纯叙事，断言叙事正文存在且无脚手架标记残留
-            novel_text = orchestrator.current_novel
-            self.assertIn("夜色如墨", novel_text)
-            for marker in ("【", "】", "※", "章末钩子"):
-                self.assertNotIn(marker, novel_text)
-            orchestrator.close()
-        finally:
+        """A scene-attributed repair reaches publication without replacing its neighbor."""
+        with TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            orch = _make_orch(root)
+            orch.config["llm"]["use_mock"] = False
+            orch._repair_review_spans = Mock(return_value=None)
+            card = {"chapter_num": 1, "core_goal": "检查线索后离开", "scene_blueprints": [
+                {"scene_num": 1, "goal": "检查线索", "word_count_target": 1000},
+                {"scene_num": 2, "goal": "收好证据", "word_count_target": 1000}]}
+            first = "夜色如墨，他放下灯盏。" + "他沿着墙边逐一检查石缝。" * 100
+            second = "她收好纸笺，转身关上院门。" * 100
+            revised = first + "他对照纸上的记号，终于确认了来路。"
+            orch._frozen_task_cards = {1: card}
+            orch._stage_directing = lambda *args, **kwargs: card
+            def write(*args):
+                orch.state_machine.transition(ChapterPhase.WRITE_SCENE)
+                orch.writer.last_scenes = [SceneOutput(1, first, ""), SceneOutput(2, second, "")]
+                for scene in orch.writer.last_scenes:
+                    append_scene(root, 1, {"scene_id": scene.scene_id, "scene_text": scene.scene_text})
+                return first + "\n\n" + second
+            orch._stage_write = write
+            orch._enforce_word_count = lambda text, *args: text
+            orch.writer.generate_scene = Mock(return_value=SceneOutput(1, revised, ""))
+            reviews = iter([
+                {"score": 80, "verdict": "fix", "review": {"issues": [{"dimension": "character_consistency",
+                  "severity": "medium", "scene_ids": [1], "description": "线索确认动作不足"}]}},
+                {"score": 95, "verdict": "pass", "review": {"issues": []}}])
+            def review(*args):
+                if orch.state_machine.current_phase != ChapterPhase.REVIEW:
+                    orch.state_machine.transition(ChapterPhase.REVIEW)
+                return next(reviews)
+            orch._stage_review = review
             try:
-                shutil.rmtree(tmpdir, ignore_errors=True)
-            except Exception:
-                pass
+                result = orch.generate_single_chapter(1)
+                self.assertTrue(result["success"], result)
+                self.assertTrue(orch.checkpoint_mgr.verify_published(1))
+                orch.writer.generate_scene.assert_called_once()
+                novel = (root / "chapters/novel/chapter_1.txt").read_text()
+                self.assertIn("终于确认了来路", novel)
+                self.assertIn(second, novel)
+                for marker in ("【", "】", "※", "章末钩子"):
+                    self.assertNotIn(marker, novel)
+            finally:
+                orch.close()
 
 
 class _EmptyContentClient:
@@ -690,8 +682,8 @@ def test_call_llm_via_provider():
 def test_provider_config_loads():
     import json
     from pathlib import Path
-    cfg = json.loads(Path("novel_engine/config/runtime_config.json").read_text(encoding="utf-8"))
-    providers = json.loads(Path("novel_engine/config/llm_providers.json").read_text(encoding="utf-8"))
+    cfg = json.loads((Path(__file__).resolve().parents[1] / "config/runtime_config.json").read_text(encoding="utf-8"))
+    providers = json.loads((Path(__file__).resolve().parents[1] / "config/llm_providers.json").read_text(encoding="utf-8"))
     active = providers["active_profile"]
     active_profile = providers["profiles"][active]
     # runtime provider must match the active llm_providers profile (model-agnostic)
@@ -730,10 +722,10 @@ def test_grade_review_uses_publication_line():
     from novel_engine.agents.reviewer_agent import ReviewerAgent
     import json
     from pathlib import Path
-    cfg = json.loads(Path("novel_engine/config/runtime_config.json").read_text(encoding="utf-8"))
+    cfg = json.loads((Path(__file__).resolve().parents[1] / "config/runtime_config.json").read_text(encoding="utf-8"))
     line = cfg["quality"]["publication_line"]
     fix_t = cfg["quality"]["fix_threshold"]
-    a = ReviewerAgent.__new__(ReviewerAgent)
+    a = ReviewerAgent(llm_client=object())
     assert a.grade_review({"total_score": line}) == "pass"
     assert a.grade_review({"total_score": line - 1}) == "fix"
     assert a.grade_review({"total_score": fix_t - 1}) == "fail"
@@ -760,13 +752,13 @@ def test_agents_prompt_keywords():
     assert "节奏" in PacingAdvisor().pre_write_constraints("某章大纲")
 
 
-def test_flag_for_human_appends():
+def test_quality_failure_is_recorded_in_project_without_human_queue(tmp_path):
     from novel_engine.pipeline.pipeline_orchestrator import PipelineOrchestrator
-    PipelineOrchestrator._flag_for_human(object(), 7, 70, "below line")
-    import json
-    data = json.load(open("novel_engine/audit/needs_human_review.json", encoding="utf-8"))
-    assert any(r["chapter"] == 7 for r in data["queue"])
-
+    owner = SimpleNamespace(root=tmp_path)
+    PipelineOrchestrator._record_quality_failure(owner, 7, 70, "below line")
+    record = json.loads((tmp_path / "audit/quality_failures.jsonl").read_text())
+    assert record["chapter"] == 7 and record["score"] == 70
+    assert not (tmp_path / "audit/needs_human_review.json").exists()
 
 
 

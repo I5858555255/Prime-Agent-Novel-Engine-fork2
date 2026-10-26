@@ -22,7 +22,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from novel_engine.core.llm_client import reset_call_log
+from novel_engine.core.llm_client import reset_call_log, MockLLMClient
 from novel_engine.core.llm_failover import FailoverLLMClient
 from novel_engine.core.checkpoint import CheckpointManager
 from novel_engine.pipeline.pipeline_orchestrator import PipelineOrchestrator
@@ -34,6 +34,7 @@ from novel_engine.pipeline.reset_state import (
     verify_recovery_policy,
 )
 from novel_engine.core.state_machine import ChapterPhase
+from novel_engine.pipeline.init_state import ensure_initial_state
 from novel_engine.pipeline.chapter_status import (
     get_status, set_status, COMMITTED, HALTED,
     last_committed, write_halt_reason, clear_halt_reason, load_halt_reason,
@@ -148,7 +149,7 @@ def is_chapter_committed(project_root, chapter: int) -> bool:
     its committed files exist and match their checkpoint hashes. A half-written
     chapter never verifies, so resume safely regenerates it."""
     try:
-        return bool(CheckpointManager(Path(project_root)).verify_integrity(int(chapter)))
+        return bool(CheckpointManager(Path(project_root)).verify_published(int(chapter)))
     except (OSError, ValueError, TypeError):
         return False
 
@@ -345,6 +346,22 @@ def _emit_halt_report(
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def _create_production_orchestrator(project_root, use_real):
+    if use_real:
+        cfg = json.loads((project_root / "config/runtime_config.json").read_text(encoding="utf-8"))
+        reset_call_log()
+        if (cfg.get("pipeline") or {}).get("phase_routing", True):
+            return PipelineOrchestrator(project_root)
+        primary_env = cfg.get("llm", {}).get("api_key_env", "AGNES_API_KEY")
+        fallback_env = cfg.get("fallback_llm", {}).get("api_key_env", primary_env)
+        client = FailoverLLMClient.from_config_dict(
+            cfg, primary_section="llm", fallback_section="fallback_llm",
+            primary_key_env=primary_env, fallback_key_env=fallback_env, log_prefix="[gen]")
+    else:
+        client = MockLLMClient()
+    return PipelineOrchestrator(project_root, llm_client=client)
+
+
 def run_production(num_chapters: int = 0, use_real: bool = True,
                    start_from: int = 1, resume_checkpoint: int = 0):
     """运行全量生产并返回结果。num_chapters=0 时从 runtime_config.json 读取。"""
@@ -387,27 +404,12 @@ def run_production(num_chapters: int = 0, use_real: bool = True,
     # 仅真正全新运行（CLI 与文件均无进度）时重置状态；恢复模式跳过重置
     if plan["fresh"]:
         reset_runtime_state(project_root)
+        ensure_initial_state(project_root)
     else:
         logger.info(f"Resuming from chapter {effective_resume}, skipping runtime reset")
 
-    if use_real:
-        cfg = json.loads((project_root / "config" / "runtime_config.json").read_text(encoding="utf-8"))
-        # API key 的环境变量名从各 section 的 api_key_env 读取（由 LLM 选择器统一维护），
-        # 不再硬编码任何单一供应商 key；缺省回退 AGNES_API_KEY。
-        _pri_env = cfg.get("llm", {}).get("api_key_env", "AGNES_API_KEY")
-        _fb_env = cfg.get("fallback_llm", {}).get("api_key_env", _pri_env)
-        client = FailoverLLMClient.from_config_dict(
-            cfg, primary_section="llm", fallback_section="fallback_llm",
-            primary_key_env=_pri_env, fallback_key_env=_fb_env,
-            log_prefix="[gen]")
-        reset_call_log()  # Clear any stale call log
-        logger.info("OK Using real API with generation failover (llm -> fallback_llm)")
-    else:
-        from novel_engine.core.llm_client import MockLLMClient
-        client = MockLLMClient()
-        logger.info("OK Using mock LLM client")
-
-    orchestrator = PipelineOrchestrator(str(project_root), llm_client=client)
+    orchestrator = _create_production_orchestrator(project_root, use_real)
+    pipeline_options = (orchestrator.config.get("pipeline") or {})
 
     # 加载预算配置
     budget_cfg = json.loads((project_root / "config" / "cost_sandbox.json").read_text(encoding="utf-8"))
@@ -454,21 +456,22 @@ def run_production(num_chapters: int = 0, use_real: bool = True,
         logger.info(f"{'='*60}")
 
         try:
-            # F.6: 清理本章残留失败产物，使重试如同从未运行
-            _failed_dir = project_root / "chapters" / "draft" / "failed" / f"chapter_{i}"
-            if _failed_dir.exists():
-                try:
-                    shutil.rmtree(_failed_dir)
-                except OSError:
-                    pass
-            for _stale in (
-                project_root / "chapters" / "draft" / f"chapter_{i}_partial.jsonl",
-                project_root / "chapters" / "state" / f"chapter_{i}_polish.json",
-            ):
-                try:
-                    _stale.unlink()
-                except OSError:
-                    pass
+            if plan["fresh"]:
+                # F.6: 清理本章残留失败产物，使重试如同从未运行
+                _failed_dir = project_root / "chapters" / "draft" / "failed" / f"chapter_{i}"
+                if _failed_dir.exists():
+                    try:
+                        shutil.rmtree(_failed_dir)
+                    except OSError:
+                        pass
+                for _stale in (
+                    project_root / "chapters" / "draft" / f"chapter_{i}_partial.jsonl",
+                    project_root / "chapters" / "state" / f"chapter_{i}_polish.json",
+                ):
+                    try:
+                        _stale.unlink()
+                    except OSError:
+                        pass
 
             result = orchestrator._run_with_retry(i)
             results.append(result)
@@ -600,7 +603,8 @@ def run_production(num_chapters: int = 0, use_real: bool = True,
                 #    这是唯一保留的真正整批停止点。
                 if result.get("quality_replan"):
                     _SOFT_REPLAN = {"density_block", "scene_near_empty_cluster"}
-                    _FRESH_PLAN_RETRIES = 2
+                    _FRESH_PLAN_RETRIES = int(pipeline_options.get(
+                        "external_replan_retries", 0 if pipeline_options.get("sequential_commits", True) else 2))
                     _replan_reason = result.get("replan_reason") or "scene_near_empty_cluster"
 
                     def _clean_replan_residual(_i):
@@ -797,8 +801,8 @@ def run_production(num_chapters: int = 0, use_real: bool = True,
 
     # 最终验证
     integrity_ok = True
-    for i in range(1, passed + 1):
-        if not orchestrator.checkpoint_mgr.verify_integrity(i):
+    for i in sorted(done_chapters):
+        if not orchestrator.checkpoint_mgr.verify_published(i):
             logger.warning(f"Checkpoint integrity FAILED for chapter {i}")
             integrity_ok = False
 
@@ -892,6 +896,7 @@ def run_production(num_chapters: int = 0, use_real: bool = True,
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     logger.info(f"Report saved to {report_path}")
 
+    orchestrator.close()
     return report
 
 

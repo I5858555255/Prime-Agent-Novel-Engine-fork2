@@ -1,5 +1,6 @@
 import time
 import threading
+from .execution import budget_sleep
 
 class RateLimitError(Exception):
     pass
@@ -21,7 +22,7 @@ class ModelRateLimiter:
             self._requests = 0.0
             self._tokens = 0.0
 
-    def acquire(self, est_tokens: int):
+    def acquire(self, est_tokens: int, budget=None):
         # A single request whose estimate exceeds the whole window can never be
         # admitted (the predicate stays false even after the window resets), which
         # previously hung an unattended run forever. Clamp the estimate: the real
@@ -32,6 +33,8 @@ class ModelRateLimiter:
         waited_windows = 0
         last_win = self._win_start
         while True:
+            if budget is not None:
+                budget.check()
             with self._lock:
                 now = time.monotonic()
                 self._refill(now)
@@ -50,7 +53,9 @@ class ModelRateLimiter:
                     self._tokens += est
                     return
                 wait = max(0.1, self._minute - (now - self._win_start))
-            time.sleep(wait)
+            if budget is not None and wait >= budget.remaining():
+                budget._stop("chapter deadline cannot accommodate rate limiter")
+            budget_sleep(wait)
 
     def report_429(self):
         with self._lock:

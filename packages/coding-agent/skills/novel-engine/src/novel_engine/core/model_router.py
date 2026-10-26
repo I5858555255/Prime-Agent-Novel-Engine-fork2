@@ -18,9 +18,11 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional, Union
 
+from .execution import current_execution, budget_sleep, BudgetExceeded, route_attempt
 from .llm_client import LLMClient, TimeoutSpec
 from .errors import ConfigFatalError, TransientLLMError, PermanentLLMError
 from .rate_limiter import ModelRateLimiter, RateLimitError
+from novel_engine.quality.generation_constraints import generation_constraints
 
 logger = logging.getLogger(__name__)
 
@@ -213,7 +215,7 @@ class ModelRouter:
         # TimeoutSpec
         self.timeout = TimeoutSpec.from_phase_cfg(phase_cfg, phase)
         # max_retries 由 phase_cfg 或 profile 级决定
-        self.max_retries = int(phase_cfg.get("max_retries") or profile.get("max_retries", 2))
+        self.max_retries = int(phase_cfg.get("max_retries", profile.get("max_retries", 2)))
 
         # 构建 LLMClient 池
         self._clients: dict[str, LLMClient] = {}
@@ -280,6 +282,17 @@ class ModelRouter:
         - PermanentLLMError: 400
         - ConfigFatalError: 401/403/缺 key/profile 缺失
         """
+        execution = current_execution(self)
+        if execution and self.phase in {"scenes", "polish", "refine"}:
+            cards = getattr(execution.owner, "_frozen_task_cards", {})
+            card = cards.get(execution.chapter) if isinstance(cards, dict) else None
+            if card and not any("## 本章生成约束" in str(message.get("content", "")) for message in messages):
+                guardrails = generation_constraints(execution.owner.root, card)
+                messages = [dict(message) for message in messages]
+                if messages and messages[0].get("role") == "system" and isinstance(messages[0].get("content"), str):
+                    messages[0]["content"] += "\n\n" + guardrails
+                else:
+                    messages.insert(0, {"role": "system", "content": guardrails})
         est = int(max_tokens or 2000)
         candidates = list(self.models) or ["agnes-2.5-flash"]
         last_err: Optional[Exception] = None
@@ -298,7 +311,10 @@ class ModelRouter:
         effective_retries = min(effective_retries, 3)  # 上限 3
         total_attempts = max(1, len(candidates)) * max(1, effective_retries + 1)
 
+        execution = current_execution(self)
         for attempt in range(total_attempts):
+            if execution:
+                execution.budget.check()
             model_idx = attempt // (effective_retries + 1)
             model = candidates[model_idx % len(candidates)]
             client = self.providers.get(model)
@@ -321,20 +337,27 @@ class ModelRouter:
                 # 速率限制
                 lim = self.limiters.get(model)
                 if lim:
-                    lim.acquire(est)
+                    if execution:
+                        with execution.span("rate_limiter", kind="queue"):
+                            lim.acquire(est, budget=execution.budget)
+                    else:
+                        lim.acquire(est)
 
                 kwargs: dict = {}
                 # 传入 TimeoutSpec 给 LLMClient（用于流式空闲/总超时检测）
                 kwargs["timeout_spec"] = call_timeout
 
-                result = client.chat_completion(
-                    messages,
-                    temperature=temperature,
-                    max_tokens=max_tokens,
-                    extra_body=merged_extra if merged_extra else None,
-                    timeout=effective_total,
-                    **kwargs,
-                )
+                with route_attempt(attempt):
+                    result = client.chat_completion(
+                        messages,
+                        retry_on_error=retry_on_error,
+                        max_retries=1,
+                        temperature=temperature,
+                        max_tokens=max_tokens,
+                        extra_body=merged_extra if merged_extra else None,
+                        timeout=effective_total,
+                        **kwargs,
+                    )
 
                 if lim:
                     lim.report_success()
@@ -375,10 +398,13 @@ class ModelRouter:
                         f"ModelRouter phase={self.phase} backing off {sleep_time:.1f}s "
                         f"before retry {retry_count + 1}/{effective_retries} on {model}"
                     )
-                    time.sleep(sleep_time)
+                    budget_sleep(sleep_time, execution)
                     continue
                 # 本模型重试耗尽，换下一个候选
                 continue
+
+            except BudgetExceeded:
+                raise
 
             except PermanentLLMError as e:
                 logger.error(
@@ -416,7 +442,7 @@ class ModelRouter:
                     continue
                 if not retry_on_error or attempt >= len(candidates) * effective_retries:
                     raise
-                time.sleep(1)
+                budget_sleep(1, execution)
 
         # 全部候选耗尽
         if last_err is not None:

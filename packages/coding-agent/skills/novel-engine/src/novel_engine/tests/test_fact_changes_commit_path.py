@@ -44,6 +44,7 @@ def _setup_orch(tmp_path: Path):
         encoding="utf-8")
     
     orch = PipelineOrchestrator(project_root=str(tmp_path))
+    orch.current_novel = "通过发布门的测试正文。"
     orch._scene_regen_used = {}
     orch._frozen_task_cards = {1: {
         "chapter_num": 1, "core_goal": "test",
@@ -57,7 +58,7 @@ def _setup_orch(tmp_path: Path):
 
 def test_deferred_path_records_fact_changes(tmp_path: Path) -> None:
     """When apply_world_state=False, fact_changes records status=deferred."""
-    from novel_engine.core.state_machine import StateMachine
+    from novel_engine.core.state_machine import StateMachine, ChapterPhase
     
     orch = _setup_orch(tmp_path)
     
@@ -68,6 +69,8 @@ def test_deferred_path_records_fact_changes(tmp_path: Path) -> None:
     task_card = orch._frozen_task_cards[1]
     
     sm = StateMachine(project_root=str(tmp_path))
+    sm.current_chapter = 1
+    sm.current_phase = ChapterPhase.REVIEW
     
     # Call _commit_chapter directly with apply_world_state=False
     # Need to provide a valid result dict with 'errors' key
@@ -95,7 +98,7 @@ def test_deferred_path_records_fact_changes(tmp_path: Path) -> None:
 
 def test_applied_path_records_facts(tmp_path: Path) -> None:
     """When apply_world_state=True, fact_changes records status=applied."""
-    from novel_engine.core.state_machine import StateMachine
+    from novel_engine.core.state_machine import StateMachine, ChapterPhase
     
     orch = _setup_orch(tmp_path)
     orch._current_synopsis_source = "director"
@@ -107,6 +110,8 @@ def test_applied_path_records_facts(tmp_path: Path) -> None:
     task_card = orch._frozen_task_cards[1]
     
     sm = StateMachine(project_root=str(tmp_path))
+    sm.current_chapter = 1
+    sm.current_phase = ChapterPhase.REVIEW
     result = {"success": True, "score": 92.0, "errors": []}
     
     orch._commit_chapter(
@@ -134,7 +139,7 @@ def test_applied_path_records_facts(tmp_path: Path) -> None:
 
 def test_deferred_path_no_changes(tmp_path: Path) -> None:
     """When no state_changes, no fact_changes records should be created."""
-    from novel_engine.core.state_machine import StateMachine
+    from novel_engine.core.state_machine import StateMachine, ChapterPhase
     
     orch = _setup_orch(tmp_path)
     
@@ -145,6 +150,8 @@ def test_deferred_path_no_changes(tmp_path: Path) -> None:
     task_card = orch._frozen_task_cards[1]
     
     sm = StateMachine(project_root=str(tmp_path))
+    sm.current_chapter = 1
+    sm.current_phase = ChapterPhase.REVIEW
     result = {"success": False, "score": 45.0, "errors": []}
     
     orch._commit_chapter(

@@ -312,3 +312,20 @@ def test_streaming_top_level_finish_reason():
     spec = TimeoutSpec(stream=True, idle_s=10, total_s=1000)
     result = client.chat_completion([], timeout_spec=spec)
     assert result["finish_reason"] == "length"
+
+
+@pytest.mark.parametrize("status", [400, 401, 403, 429, 500])
+def test_unread_stream_error_retains_http_classification(status):
+    from novel_engine.core.llm_client import RateLimitError
+    class Body(httpx.SyncByteStream):
+        def __iter__(self):
+            yield b'{"error":"service failure"}'
+    response = httpx.Response(status, stream=Body(), headers={"Retry-After": "2"},
+                              request=httpx.Request("POST", "http://127.0.0.1:9999/v1/chat/completions"))
+    client = _make_client([response])
+    expected = {400: PermanentLLMError, 401: ConfigFatalError, 403: ConfigFatalError,
+                429: RateLimitError, 500: TransientLLMError}[status]
+    with pytest.raises(expected, match=f"HTTP {status}"):
+        client._stream_chat(client._stream_client(), {}, TimeoutSpec(), 100)
+    assert response.is_stream_consumed
+    client.close()

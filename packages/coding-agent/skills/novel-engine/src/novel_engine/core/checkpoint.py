@@ -6,10 +6,10 @@ import os
 import json
 import hashlib
 import logging
-import os
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import Optional
+from .publication_transaction import atomic_write, publication_transaction, recover_publications, publication_lock
 
 logger = logging.getLogger(__name__)
 
@@ -46,6 +46,7 @@ class CheckpointManager:
     def __init__(self, project_root: str | Path = None):
         self.root = Path(project_root or Path(__file__).parent.parent)
         self.checkpoint_path = self.root / CHECKPOINT_FILE
+        recover_publications(self.root)
 
     def load(self) -> dict:
         """加载checkpoint文件。"""
@@ -56,9 +57,7 @@ class CheckpointManager:
 
     def save(self, data: dict):
         """保存checkpoint文件（原子写入）。"""
-        tmp_path = self.checkpoint_path.with_suffix(".json.tmp")
-        tmp_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-        tmp_path.replace(self.checkpoint_path)
+        atomic_write(self.checkpoint_path, json.dumps(data, ensure_ascii=False, indent=2))
 
     def create_checkpoint(
         self,
@@ -145,7 +144,7 @@ class CheckpointManager:
     def get_checkpoint_by_chapter(self, chapter: int) -> Optional[dict]:
         """按章节号查找checkpoint。"""
         cp_data = self.load()
-        for cp in cp_data.get("checkpoints", []):
+        for cp in reversed(cp_data.get("checkpoints", [])):
             if cp["chapter"] == chapter:
                 return cp
         return None
@@ -196,6 +195,12 @@ class CheckpointManager:
             return False
 
         return True
+
+    def verify_published(self, chapter: int) -> bool:
+        with publication_lock(self.root):
+            cp = self.get_checkpoint_by_chapter(chapter)
+            return bool(cp and cp.get("complete") and cp.get("mode") != "force_best_draft"
+                        and self.verify_integrity(chapter))
 
     def restore_from_checkpoint(self, chapter: int) -> bool:
         """
@@ -303,45 +308,19 @@ def create_commit_transaction(
     if not outline_content.strip():
         raise ValueError(f"章节 {chapter} 任务卡为空")
 
-    # 备份文件写入 runtime/backups/，供恢复使用
-    backup_dir = root / "runtime" / "backups"
-    try:
-        novel_backup = novel_chapter_path(backup_dir, chapter)
-        synopsis_backup = backup_dir / "chapters" / "synopsis" / f"chapter_{chapter}.txt"
-        outline_backup = backup_dir / "chapters" / "outline" / f"chapter_{chapter}.json"
-        novel_backup.parent.mkdir(parents=True, exist_ok=True)
-        synopsis_backup.parent.mkdir(parents=True, exist_ok=True)
-        outline_backup.parent.mkdir(parents=True, exist_ok=True)
-        novel_backup.write_text(novel_content, encoding="utf-8")
-        synopsis_backup.write_text(synopsis_content, encoding="utf-8")
-        outline_backup.write_text(outline_content, encoding="utf-8")
-    except Exception as e:
-        logger.error(f"写入备份失败: {e}")
-        raise
-    # 正式写入章节文件
-    novel_path = novel_chapter_path(root, chapter)
-    synopsis_path = root / "chapters" / "synopsis" / f"chapter_{chapter}.txt"
-    outline_path = root / "chapters" / "outline" / f"chapter_{chapter}.json"
-    try:
-        novel_path.parent.mkdir(parents=True, exist_ok=True)
-        synopsis_path.parent.mkdir(parents=True, exist_ok=True)
-        outline_path.parent.mkdir(parents=True, exist_ok=True)
-        novel_path.write_text(novel_content, encoding="utf-8")
-        synopsis_path.write_text(synopsis_content, encoding="utf-8")
-        outline_path.write_text(outline_content, encoding="utf-8")
-        logger.info(f"章节 {chapter} 文件已写入: {novel_path}, {synopsis_path}, {outline_path}")
-    except Exception as e:
-        logger.error(f"写入章节文件失败: {e}")
-        raise
-
-    # 创建checkpoint
-    checkpoint = manager.create_checkpoint(
-        chapter=chapter,
-        novel_content=novel_content,
-        synopsis_content=synopsis_content,
-        outline_content=outline_content,
-        world_state_snapshot=world_state_snapshot,
-    )
-
+    paths = {
+        root / base / kind / f"chapter_{chapter}.{suffix}": content
+        for base in ("chapters", "runtime/backups/chapters")
+        for kind, suffix, content in (("novel", "txt", novel_content),
+                                     ("synopsis", "txt", synopsis_content),
+                                     ("outline", "json", outline_content))
+    }
+    with publication_transaction(root, chapter, [*paths, manager.checkpoint_path]):
+        for path, content in paths.items():
+            atomic_write(path, content)
+        checkpoint = manager.create_checkpoint(
+            chapter=chapter, novel_content=novel_content,
+            synopsis_content=synopsis_content, outline_content=outline_content,
+            world_state_snapshot=world_state_snapshot)
     logger.info(f"Commit successful for chapter {chapter}")
     return checkpoint

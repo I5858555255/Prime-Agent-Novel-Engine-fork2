@@ -151,6 +151,15 @@ def _is_spatial_marker(marker: str) -> bool:
     return False
 
 
+def _non_temporal_adult_mention(text: str, start: int, end: int) -> bool:
+    before = re.split(r"[。！？\n]", text[:start])[-1][-24:]
+    if re.search(r"活[不到至过满]{0,3}[^。！？]{0,8}成年$", before + "成年"):
+        return True
+    if re.match(r"(?:壮汉|男子|男人|男性|女子|女人|女性|汉子|人)", text[end:]):
+        return not re.search(r"(?:长成|长大成|变成|成为|已是|已经是|已成)[^，。！？]{0,6}$", before)
+    return False
+
+
 def detect_timeline_jump(
     scene_text: str,
     timeline_anchor: dict | None = None,
@@ -184,14 +193,12 @@ def detect_timeline_jump(
                 continue
             # CC round-26e：寿命/命运表述（或许活不到成年/活到成年已是难事）不是
             # 时间跳跃——陈老根担心婴儿夭折的当前心理，非成年之后的顺向成长叙述
-            if m == "成年" and re.search(r"活[不到至过满]{0,3}[^。！？]{0,8}成年", masked_text):
-                continue
-            # CC round-12 R1：回溯性时间词 —— 仅在重演 cue 同句才判
-            if m in _BACK_REF_MARKERS:
-                pos = masked_text.find(m)
-                if not _has_reposition_cue_in_sentence(masked_text, pos):
-                    continue  # 仅字面提及，不判硬伤
-            return f"[时间线越界] 命中导演禁写时间标记\"{m}\""
+            for occurrence in re.finditer(re.escape(m), masked_text):
+                if m == "成年" and _non_temporal_adult_mention(masked_text, occurrence.start(), occurrence.end()):
+                    continue
+                if m in _BACK_REF_MARKERS and not _has_reposition_cue_in_sentence(masked_text, occurrence.start()):
+                    continue
+                return f"[时间线越界] 命中导演禁写时间标记\"{m}\""
 
     # (2) Generic patterns only inside a sub-year legal span.
     span = anchor.get("max_time_progression")
@@ -201,10 +208,9 @@ def detect_timeline_jump(
         sub_year = bool(span) and not allows_year_span(span)
     if sub_year:
         for rx in _GENERIC_RE:
-            m = rx.search(text)
-            if m:
+            for m in rx.finditer(text):
                 # CC round-26e：寿命/命运表述（活不到成年/活到成年）非时间跳跃，跳过
-                if m.group(0) == "成年" and re.search(r"活[不到至过满]{0,3}[^。！？]{0,8}成年", text):
+                if m.group(0) == "成年" and _non_temporal_adult_mention(text, m.start(), m.end()):
                     continue
                 return f"[时间线越界] 本章时间跨度限于\"{span or '开篇短时段'}\"，却出现越界叙述\"{m.group(0)}\""
     return None

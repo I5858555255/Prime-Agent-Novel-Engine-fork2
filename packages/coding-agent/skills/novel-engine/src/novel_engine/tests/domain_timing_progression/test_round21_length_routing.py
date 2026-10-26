@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 """CC round-21 offline tests：单场景目标下限 + 不提交章分数主导路由。"""
+import threading
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from types import SimpleNamespace
+
 from novel_engine.core.quality_policy import derive_scene_targets
 from novel_engine.quality.noncommit_routing import route_noncommitted
 
@@ -59,6 +64,13 @@ def _orch_with_stub_gen(returned):
     from novel_engine.pipeline.pipeline_orchestrator import PipelineOrchestrator
     orch = PipelineOrchestrator.__new__(PipelineOrchestrator)
     orch.config = {"pipeline": {"max_review_retries": 3}}
+    orch._test_directory = TemporaryDirectory()
+    orch.root = Path(orch._test_directory.name)
+    orch._execution_lock = threading.RLock()
+    orch._frozen_task_cards = {}
+    orch._frozen_synopsis = {}
+    orch.writer = SimpleNamespace(last_scenes=[])
+    orch._save_quality_failure = lambda ch, result, reason: result.update(quality_repair_exhausted=True)
     calls = {"n": 0}
 
     def _gen(ch):
@@ -77,10 +89,11 @@ def test_final_gate_blocked_returns_without_replan_retry():
     assert calls["n"] == 1  # 绝不整章重排重试
 
 
-def test_quality_gap_continue_returns_without_replan_retry():
+def test_quality_gap_receives_one_bounded_replan():
     orch, calls = _orch_with_stub_gen(
         {"success": False, "quality_replan": True, "quality_gap_continue": True,
          "gap_kind": "continuity"})
     r = orch._run_with_retry(1)
     assert r["quality_gap_continue"] is True
-    assert calls["n"] == 1
+    assert r["quality_repair_exhausted"] is True
+    assert calls["n"] == 2

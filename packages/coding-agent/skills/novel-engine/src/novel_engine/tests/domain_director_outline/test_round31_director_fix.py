@@ -55,12 +55,12 @@ def test_director_output_no_synopsis(tmp_path):
 
 
 def test_director_max_tokens_updated():
-    """Director call_llm uses max_tokens=1500 for skeleton, 2000 for craft, 1200 for metadata."""
+    """Director uses bounded output budgets for skeleton, craft and metadata."""
     import inspect
     src = inspect.getsource(ChapterDirector._call_scene_skeleton)
     assert "max_tokens=1500" in src
     src2 = inspect.getsource(ChapterDirector._call_scene_craft)
-    assert "max_tokens=2000" in src2
+    assert "max_tokens=3000" in src2
     src3 = inspect.getsource(ChapterDirector._call_chapter_metadata)
     assert "max_tokens=1200" in src3
 

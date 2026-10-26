@@ -13,7 +13,7 @@ CHARACTER_DEFS = {
     "C001": {
         "name": "陆烬",
         "realm": "凡人体质",
-        "location": "验证营地",
+        "location": "雾隐村外迷雾边缘",
         "description": "地球孤儿李淳神魂跨界重生，雾隐村弃婴，陈老根养子。性格谨慎、隐忍、算计缜密。线粒体源自地球，可吸收暴走活化氧；后修《太上养魂经》。成长弧光：孤儿→凡人武者→修仙者→人道之主，主动退场传承。",
         "ability": "线粒体源自地球，可吸收暴走活化氧；后修《太上养魂经》",
         "arc": "孤儿→凡人武者→修仙者→人道之主，主动退场传承",
@@ -158,10 +158,26 @@ def init_characters(root: Path) -> dict:
         db_dir = root / "runtime"
         db_dir.mkdir(parents=True, exist_ok=True)
         db = StateDB(db_path=str(db_dir / "state.db"), project_root=root)
-        db.import_from_json()
+        try:
+            db.import_from_json()
+        finally:
+            db.close()
     except Exception as _e:
         print(f"WARNING: failed to sync StateDB on init: {_e}")
     return characters
+
+
+def ensure_initial_state(root: Path) -> bool:
+    """Seed only a fresh/empty project; never replace an existing world state."""
+    path = root / "memory/world_state/characters.json"
+    if path.exists():
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(data, dict) or not isinstance(data.get("characters", {}), dict):
+            raise ValueError("invalid character world state; refusing to replace it")
+        if data.get("characters"):
+            return False
+    init_characters(root)
+    return True
 
 
 if __name__ == "__main__":

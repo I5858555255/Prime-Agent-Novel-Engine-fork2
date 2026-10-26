@@ -62,10 +62,16 @@ def _make_orch(tmp_path: Path):
     orch._stage_world_sim = lambda cn: {}
     orch._stage_directing = lambda cn, ws, bypass_cache=None: _FIXTURE_CARD
     orch._stage_synopsis = lambda tc: {"synopsis": "test synopsis"}
-    orch._stage_write = lambda tc, syn: _LONG_TEXT
+    from novel_engine.core.state_machine import ChapterPhase
+
+    def write_stage(tc, syn):
+        orch.state_machine.transition(ChapterPhase.WRITE_SCENE)
+        return _LONG_TEXT
+
+    orch._stage_write = write_stage
     orch._ensure_chinese = lambda n: n
     orch._finalize_current_novel = lambda cn: None
-    orch._stage_review = lambda cn, tc, syn, cur, ws=None: {
+    review_result = lambda cn, tc, syn, cur, ws=None: {
         "review": {
             "chapter_num": cn,
             "scores": {
@@ -82,6 +88,11 @@ def _make_orch(tmp_path: Path):
         "verdict": "pass",
         "review_unstable": False,
     }
+    def review_stage(cn, tc, syn, cur, ws=None):
+        orch.state_machine.transition(ChapterPhase.REVIEW)
+        return review_result(cn, tc, syn, cur, ws)
+
+    orch._stage_review = review_stage
     orch._deterministic_quality_gate = lambda text, tc, scene_texts=None: {
         "passed": True, "issues": [],
     }

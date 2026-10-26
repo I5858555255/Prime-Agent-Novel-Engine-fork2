@@ -102,11 +102,11 @@ def test_round1_gain_survives_round2_patch(tmp_path, monkeypatch):
     round1_calls = {"n": 0}
 
     class _SceneOutR1:
-        scene_text = "新场景三内容Round1：祠堂灯火通明旧事重提。"
+        scene_text = "新场景三内容第一轮：祠堂灯火通明旧事重提。"
 
     monkeypatch.setattr(
         orch.writer, "generate_scene",
-        lambda *a, **k: (_SceneOutR1() if round1_calls["n"] == 0 else type('X', (), {"scene_text": "fallback"})())
+        lambda *a, **k: (_SceneOutR1() if round1_calls["n"] == 0 else type('X', (), {"scene_text": "第二场修订正文：集市灯火渐暗，众人散去。"})())
     )
     task_card = {"chapter_num": 1, "scene_blueprints": [
         {"scene_num": 1, "goal": "登场"},
@@ -118,14 +118,14 @@ def test_round1_gain_survives_round2_patch(tmp_path, monkeypatch):
     review1 = {"fix_scope": "场景3", "issues": []}
     result1 = orch._patch_weak_scenes(drafted, review1, task_card, {"synopsis": ""})
     assert result1 is not None
-    assert "新场景三内容Round1" in result1
+    assert "新场景三内容第一轮" in result1
 
     # Round 2: patch scene 2 (round-1 gain for scene 3 must survive)
     round1_calls["n"] = 1
     review2 = {"fix_scope": "场景2", "issues": []}
     result2 = orch._patch_weak_scenes(result1, review2, task_card, {"synopsis": ""})
     assert result2 is not None
-    assert "新场景三内容Round1" in result2
+    assert "新场景三内容第一轮" in result2
     assert "旧场景三内容" not in result2
 
 

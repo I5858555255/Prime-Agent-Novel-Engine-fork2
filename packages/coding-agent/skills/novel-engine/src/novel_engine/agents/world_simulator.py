@@ -14,6 +14,10 @@ from novel_engine.pipeline.change_validation import validate_changes
 logger = logging.getLogger(__name__)
 
 
+def character_is_available(character: dict, chapter: int) -> bool:
+    return int(character.get("first_appearance") or 0) <= chapter
+
+
 class WorldSimulator:
     """世界模拟器：根据规则和约束计算章节级别的world_state变更。"""
 
@@ -115,12 +119,13 @@ class WorldSimulator:
     def build_world_state_for_chapter(self, chapter_num: int) -> dict:
         """
         构建指定章节的世界状态快照。
-        包含所有角色的当前状态、势力状态、时间线事件。
+        只向生成上下文提供已登场角色；完整角色库保持不变。
         """
         state = {
             "chapter": chapter_num,
             "timestamp": None,
             "characters": {},
+            "future_characters": {},
             "factions": {},
             "power_balance": {},
             "constraints_active": [],
@@ -128,6 +133,12 @@ class WorldSimulator:
 
         # 角色状态
         for char_id, char_data in self.characters.get("characters", {}).items():
+            if not character_is_available(char_data, chapter_num):
+                state["future_characters"][char_id] = {
+                    "name": char_data.get("name", char_id),
+                    "first_appearance": char_data["first_appearance"],
+                }
+                continue
             progression = self.simulate_character_progression(char_id, chapter_num)
             plot_lock_info = self.check_plot_lock(char_id, chapter_num)
 
@@ -289,6 +300,9 @@ class WorldSimulator:
         """生成当前章节的约束摘要文本，供 director 使用。"""
         lines = []
         for char_id in self.constraints:
+            character = getattr(self, "characters", {}).get("characters", {}).get(char_id, {})
+            if not character_is_available(character, chapter_num):
+                continue
             lock = self.check_realm_lock(char_id, chapter_num)
             if lock:
                 name = lock.get("name", char_id)

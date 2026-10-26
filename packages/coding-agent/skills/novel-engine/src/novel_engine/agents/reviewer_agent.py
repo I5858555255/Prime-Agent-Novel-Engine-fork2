@@ -7,10 +7,19 @@
 import json
 import logging
 import re
+import math
+import hashlib
+import uuid
 from pathlib import Path
 from typing import Optional
 
 from novel_engine.core.llm_client import LLMClient, call_llm
+from novel_engine.core.execution import current_execution
+from novel_engine.core.publication_transaction import atomic_write
+from novel_engine.core.quality_policy import load_quality_policy
+from novel_engine.quality.generation_constraints import generation_constraints
+from novel_engine.pipeline.chapter_journal import load_authoritative_scenes
+from novel_engine.quality.punctuation_health import detect_long_sentences, check_text_punctuation, LONG_SENTENCE_HARD
 
 logger = logging.getLogger(__name__)
 
@@ -29,6 +38,41 @@ DIM_MAX = {
     "reader_retention": 7,   # 读者留存意愿：读后是否想继续
     "cliffhensity": 5,       # 爽点/悬念密度：单位章节爽点/悬念数量
 }
+
+
+def build_scene_boundaries(text, scenes):
+    """Locate unchanged scene words in the actual review text; never guess by chapter length."""
+    offsets = [i for i, char in enumerate(text) if char.isalnum()]
+    content = "".join(text[i] for i in offsets)
+    result = []
+    previous_end = 0
+    for scene in scenes:
+        words = "".join(c for c in scene.get("scene_text", "") if c.isalnum())
+        if len(words) < 8 or content.count(words) != 1:
+            return []
+        start = content.index(words)
+        end = start + len(words)
+        if start < previous_end:
+            return []
+        lo, hi = offsets[start], offsets[end - 1] + 1
+        result.append({"scene_id": scene["scene_id"], "start": lo, "end": hi,
+                       "opening": text[lo:min(hi, lo + 60)], "ending": text[max(lo, hi - 60):hi]})
+        previous_end = end
+    return result
+
+
+def review_context_fingerprint(root, task_card):
+    bible = Path(root) / "bible"
+    files = {name: (bible / name).read_text(encoding="utf-8") if (bible / name).exists() else None
+             for name in ("author_intent.md", "character_bible.md", "style_bible.md")}
+    payload = {"system": ReviewerAgent.SYSTEM_PROMPT, "bible": files,
+               "constraints": generation_constraints(root, task_card)}
+    return hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
+
+
+class ReviewResponseError(ValueError):
+    """An incomplete scoring response must not become a low literary score."""
+
 
 
 def _to_float(value, default=0.0):
@@ -99,7 +143,18 @@ def _normalize_review(review: dict) -> dict:
     - max_total: 维度满分之和（由 DIM_MAX 常量计算）
     - raw_total: 原始总分（夹取前）
     """
-    raw = review.get("scores") or {}
+    raw = review.get("scores")
+    if not isinstance(raw, dict):
+        raise ReviewResponseError("scores must contain all nine dimensions")
+    for name, maximum in DIM_MAX.items():
+        if name not in raw or isinstance(raw[name], bool):
+            raise ReviewResponseError(f"missing or invalid dimension: {name}")
+        try:
+            value = float(raw[name])
+        except (TypeError, ValueError):
+            raise ReviewResponseError(f"invalid numeric dimension: {name}") from None
+        if not math.isfinite(value) or not 0 <= value <= maximum:
+            raise ReviewResponseError(f"dimension outside finite range: {name}")
     # 计算维度满分之和（禁止魔数）
     max_total = sum(DIM_MAX.values())
     # 计算原始总分（夹取前，用于 backward compat）
@@ -111,9 +166,8 @@ def _normalize_review(review: dict) -> dict:
     review["scores"] = norm
     review["total_score"] = int(round(total))
     # 向后兼容：旧记录缺 normalized_score 时现场重算
-    if "normalized_score" not in review:
-        review["normalized_score"] = round(total / max_total * 100, 1) if max_total else 0.0
-        review.setdefault("_computed_normalized", True)
+    review["normalized_score"] = round(total / max_total * 100, 1) if max_total else 0.0
+    review["_computed_normalized"] = True
     review["score_schema"] = "v2"
     review["max_total"] = max_total
     review["raw_total"] = int(round(raw_total))
@@ -205,41 +259,29 @@ CC round-18 额外硬约束（婴儿卷 ch1-9，违反直接扣 5 分并记录�
 - suggested_fix 必须是可执行的重写指令（例：“删除与场景2重复的雾中围观描写，只保留推进情节的新信息”），不要泛泛而谈。
 
 重要说明：
-- 每个维度按各自满分独立打分，不要自报 total_score
-- 系统会自动计算归一化分数（raw_total / max_total * 100）
-- 示例仅为格式参考，各维分数之和不必等于 total_score
+- 九个维度必须齐全，按各自满分独立给出有限数值；不得自报总分或归一化分数。
+- 每项扣分必须有原文依据，issue 给出 evidence 原文短引文和依据的设定/任务条款。
+- 同一事实不得先扣维度分再从总分重复扣除；每维最低0分。
+- 设定中的长期履历与未来解锁内容不代表本章已经发生；以当前章边界、状态和允许例外为准。
+- 标点事实以实测结果和逐字证据核对；短句分段本身不等于诗歌体或残句。
+- 只返回实际评审对象，不要返回下面的Schema。""" + "\n" + json.dumps({
+        "type": "object", "required": ["chapter_num", "scores", "issues"],
+        "properties": {
+            "chapter_num": {"type": "integer"},
+            "scores": {"type": "object", "required": list(DIM_MAX),
+                       "properties": {name: {"type": "number", "minimum": 0, "maximum": maximum}
+                                      for name, maximum in DIM_MAX.items()}},
+            "issues": {"type": "array", "items": {"type": "object", "properties": {
+                "dimension": {"enum": list(DIM_MAX)}, "severity": {"enum": ["high", "medium", "low"]},
+                "scene_ids": {"type": "array", "items": {"type": "integer"}},
+                "description": {"type": "string"}, "evidence": {"type": "string"},
+                "suggested_fix": {"type": "string"}}}},
+            "praise": {"type": "string"}, "fix_scope": {"type": "string"}}}, ensure_ascii=False)
 
-输出必须是 JSON：
-{
-  "chapter_num": 1,
-  "scores": {
-    "plot_consistency": 20,
-    "character_consistency": 15,
-    "foreshadow_execution": 18,
-    "style_match": 12,
-    "pacing": 8,
-    "innovation": 7,
-    "hook_strength": 6,
-    "reader_retention": 5,
-    "cliffhensity": 4
-  },
-  "verdict": "fix",
-  "issues": [
-    {
-      "dimension": "pacing",
-      "severity": "high|medium|low",
-      "scene_ids": [3],
-      "description": "场景3与场景2复述同一事件，雾中围观/火把/红眼被反复渲染，情节原地踏步",
-      "suggested_fix": "删除与场景2重复的围观与氛围描写，只保留报官争议等新信息，把场景3推进到陈老根出场"
-    }
-  ],
-  "praise": "值得保留的优点",
-  "fix_scope": "若 verdict=fix，说明需要重新生成的段落范围"
-}"""
-
-    def __init__(self, llm_client: Optional[LLMClient] = None, provider_config=None):
+    def __init__(self, llm_client: Optional[LLMClient] = None, provider_config=None, project_root=None):
         self.llm = llm_client or LLMClient()
         self.provider_config = provider_config
+        self.root = Path(project_root) if project_root is not None else Path(__file__).parent.parent
 
     def _build_setting_block(self, chapter_num: int) -> str:
         """设定对照块：当前卷 forbidden 列表 + character_bible 全文 + style_bible 全文。
@@ -252,9 +294,7 @@ CC round-18 额外硬约束（婴儿卷 ch1-9，违反直接扣 5 分并记录�
         阶段的 forbidden 列表（`- "..."` 列表项）。定位失败时 forbidden 置空，
         不阻断评审。
         """
-        from pathlib import Path
-        import re
-        _bible_dir = Path(__file__).parent.parent / "bible"
+        _bible_dir = self.root / "bible"
         try:
             _ai_text = (_bible_dir / "author_intent.md").read_text(encoding="utf-8")
             _cb_text = (_bible_dir / "character_bible.md").read_text(encoding="utf-8")
@@ -276,10 +316,17 @@ CC round-18 额外硬约束（婴儿卷 ch1-9，违反直接扣 5 分并记录�
                 break
         _forbidden: list[str] = []
         if _cur_block:
+            collecting = False
             for _line in _cur_block.splitlines():
                 _ls = _line.strip()
-                if _ls.startswith("-"):
-                    _forbidden.append(_ls.lstrip("- ").strip().strip('"'))
+                if _ls == "forbidden:":
+                    collecting = True
+                    continue
+                if collecting:
+                    if _ls.startswith("- "):
+                        _forbidden.append(_ls[2:].strip().strip('"'))
+                    elif _ls and not _ls.startswith("#"):
+                        collecting = False
         _fb_line = "；".join(_forbidden) if _forbidden else "（本阶段无显式 forbidden 条款）"
         return (
             "## 设定对照块（必读，以下为当前卷真实设定内容，评分必须以对照块为准）\n"
@@ -303,17 +350,15 @@ CC round-18 额外硬约束（婴儿卷 ch1-9，违反直接扣 5 分并记录�
         作为 plot/pacing/innovation/retention/cliffhanger 打分的客观参照校准；不改变
         评分维度与 120 分体系。为 None 时行为与历史完全一致。
         """
-        # P2-B2: 采样覆盖全文（头/中/尾各 2500 字，避免 6000 截断毁结构）
-        def _sample(text: str, head: int = 2500, mid: int = 2500, tail: int = 2500) -> str:
-            if len(text) <= head + mid + tail:
-                return text
-            h = text[:head]
-            m_start = max(0, len(text)//2 - mid//2)
-            m = text[m_start:m_start+mid]
-            t = text[-tail:]
-            return f"{h}\n\n...[中部省略 {len(text)-head-mid-tail} 字]...\n\n{m}\n\n...[中部省略]...\n\n{t}"
-
-        sampled = _sample(novel_text)
+        long_sentences = detect_long_sentences(novel_text)
+        unpunctuated = check_text_punctuation(novel_text)
+        punctuation_evidence = {
+            "long_sentence_threshold_cn_chars": LONG_SENTENCE_HARD,
+            "long_sentence_count": len(long_sentences),
+            "unhealthy_paragraph_count": len(unpunctuated),
+            "long_sentence_examples": long_sentences[:3],
+            "unhealthy_paragraph_examples": unpunctuated[:2],
+        }
 
         # CC round-24 P0-1(a)：确定性锚点数据表（不是自然语言描述）。
         anchor_block = ""
@@ -339,22 +384,38 @@ CC round-18 额外硬约束（婴儿卷 ch1-9，违反直接扣 5 分并记录�
                 )
 
         setting_block = self._build_setting_block(chapter_num)
+        boundaries = build_scene_boundaries(novel_text, load_authoritative_scenes(self.root, chapter_num))
 
         prompt = f"""请审查第 {chapter_num} 章。
 
 ## 任务卡
 {json.dumps(task_card, ensure_ascii=False, indent=2)}
 
+## 已核验的场景边界（字符偏移从0开始；opening/ending用于定位，不能按全文长度猜场景号）
+{json.dumps(boundaries, ensure_ascii=False)}
+未能精确匹配时边界为空，此时无法确证场景编号的问题使用 scene_ids=[]，不得捏造场景号。
+
 ## 缩写
 {synopsis.get('synopsis', '')}
 
-## 正文（采样覆盖全文 头/中/尾）
-{sampled}
+## 正文（完整章节，未抽样删节）
+{novel_text}
+
+## 标点实测证据（旁白以句末为界、引号内对白豁免，与规则门口径一致）
+{json.dumps(punctuation_evidence, ensure_ascii=False)}
+请逐字核对原文再提出标点问题，不得把多个已有句号的句子拼成一个长句，或将有逗号/句号的段落称为整段无标点。
+实测数据仅校准标点事实，不代表文风合格；用词、叙事语气与节奏仍独立评审。
 
 ## 世界状态
 {json.dumps(world_state, ensure_ascii=False, indent=2)[:2000]}
 
 {setting_block}
+
+{generation_constraints(self.root, dict(task_card, chapter_num=chapter_num))}
+
+## 当前阶段人物判断
+以任务卡的 protagonist_agency_level 和本场限制作为当前能力状态，人物卡中的后期经历与成年性格不得视为当前已经实现。
+婴儿/失能状态不应被要求展示成人算计或连贯论证；仍须检查超龄认知、无效重复及不符合本阶段的行为，并给出原文依据。
 
 ## 审查要求
 1. 检查正文是否完成了任务卡中所有 scene_blueprints 的 goal
@@ -364,41 +425,48 @@ CC round-18 额外硬约束（婴儿卷 ch1-9，违反直接扣 5 分并记录�
 4. 检查人物行为是否符合 character_bible（对照上方人物设定全文）
 5. 检查文风是否符合 style_bible（对照上方文风设定全文）{anchor_block}"""
 
-        try:
+        for attempt in range(2):
+            if attempt:
+                execution = current_execution(self.llm)
+                if execution is not None:
+                    execution.budget.review(vote=True)
             review = _coerce_review_object(call_llm(
-                prompt=prompt,
-                system_prompt=self.SYSTEM_PROMPT,
-                client=self.llm,
-                output_json=True,
-                provider_config=self.provider_config,
-            ))
-            review = _normalize_review(review)
-            logger.info(f"Review completed for chapter {chapter_num}: score={review.get('total_score')}")
+                prompt=prompt, system_prompt=self.SYSTEM_PROMPT, client=self.llm,
+                output_json=True, provider_config=self.provider_config, temperature=0))
+            audit = {"chapter": chapter_num, "format_attempt": attempt,
+                     "input_hash": hashlib.sha256((self.SYSTEM_PROMPT + prompt).encode()).hexdigest(),
+                     "text_hash": hashlib.sha256(novel_text.encode()).hexdigest(),
+                     "scene_boundaries": boundaries,
+                     "raw_scores": dict(review["scores"]) if isinstance(review.get("scores"), dict) else review.get("scores"), "issues": review.get("issues", [])}
+            try:
+                review = _normalize_review(review)
+            except ReviewResponseError as exc:
+                audit["technical_error"] = str(exc)
+                self._save_review_audit(audit)
+                if attempt:
+                    raise
+                prompt += ("\n上次响应格式无效：" + str(exc)
+                           + "。请补齐全部九维，数值须在各维有限范围内，不改变审查尺度，不自报总分。")
+                continue
+            audit["normalized_score"] = review["normalized_score"]
+            self._save_review_audit(audit)
+            logger.info("Review completed for chapter %s: score=%s", chapter_num, review["total_score"])
             return review
-        except Exception as e:
-            logger.error(f"Review failed for chapter {chapter_num}: {e}")
-            raise
+
+    def _save_review_audit(self, audit):
+        directory = self.root / "audit" / "reviews"
+        try:
+            atomic_write(directory / f"chapter_{audit['chapter']}_{uuid.uuid4().hex}.json",
+                         json.dumps(audit, ensure_ascii=False, indent=2))
+        except OSError as exc:
+            logger.warning("Review audit could not be saved: %s", type(exc).__name__)
 
     def grade_review(self, review: dict) -> str:
-        import json
-        from pathlib import Path
-        from novel_engine.core.quality_policy import load_quality_policy
-        try:
-            cfg = json.loads((Path(__file__).parent.parent / "config" /
-                              "runtime_config.json").read_text(encoding="utf-8"))
-        except Exception:
-            cfg = {}
-        # 单一策略源：分级线读 quality_policy
-        policy = load_quality_policy(Path(__file__).parent.parent)
-        line = int(policy.get("publication_line",
-                              cfg.get("quality", {}).get("publication_line", 88)))
-        fix_t = int(policy.get("fix_threshold",
-                               cfg.get("quality", {}).get("fix_threshold", 60)))
-        # v2 优先使用 normalized_score（百分位），旧记录回退到 total_score
-        score = review.get("normalized_score") if review.get("normalized_score") is not None else review.get("total_score", 0)
-        if score >= line:
+        policy = load_quality_policy(self.root)
+        score = review.get("normalized_score", review.get("total_score", 0))
+        if score >= policy["publication_line"]:
             return "pass"
-        elif score >= fix_t:
+        if score >= policy["fix_threshold"]:
             return "fix"
         return "fail"
 

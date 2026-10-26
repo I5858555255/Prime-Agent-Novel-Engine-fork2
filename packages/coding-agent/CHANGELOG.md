@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+- Fixed Novel-Engine director truncation recovery losing its JSON schema and routing planning failures to manual review.
+- Fixed Novel-Engine timeline checks rejecting adult supporting characters and budget exits discarding repair diagnostics.
+- Fixed Novel-Engine review score validation, project-specific quality context, conflicting prose and length instructions, and characters appearing before their scheduled debut.
+- Replaced Novel-Engine quality-review handoffs with bounded automatic repair and rechecking; preserve failed drafts and diagnostics without relaxing publication gates or restarting exhausted budgets.
+
+- Fixed Novel-Engine fresh-state initialization, scene/event actor and time consistency, full-text quality evidence, and rejected repairs overwriting valid manuscripts.
+- Made Novel-Engine publication recoverable across file, memory and SQLite failures; require verified predecessor commits, exclude draft checkpoints from publication, archive stale scenes on replanning, and reuse HTTP connections.
+- Reduced Novel-Engine pipeline calls with merged synopses, deterministic scene polish selection, cached on-demand reviews, shared chapter attempt budgets, and stage latency reports.
+
 - Added a configurable copy action to login dialogs so raw sign-in URLs can be copied without selecting wrapped text ([#643](https://github.com/PrimeIntellect-ai/prime-agent/issues/643)).
 - Added privacy-safe pseudonymous product analytics for onboarding, command use, execution modes, run outcomes, TTFT, latency, usage, tools, retries, and compactions, with disclosure and opt-out controls ([ENG-4682](https://linear.app/primeintellect/issue/ENG-4682/add-privacy-safe-posthog-analytics-to-prime-agent)).
 - Changed sent agent messages in the IPython cell UI to show only the message text with a `╰─` gutter when expanded, matching received messages, and hid the raw `agent_message.send` receipt dictionary.

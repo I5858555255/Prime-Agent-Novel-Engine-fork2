@@ -7,9 +7,11 @@ import json
 import logging
 import re
 import threading
+from dataclasses import replace
 from pathlib import Path
 from typing import Optional
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import as_completed
+from novel_engine.core.execution import ContextExecutor as ThreadPoolExecutor, scene_generation, budget_sleep, stage
 
 from novel_engine.core.llm_client import LLMClient, call_llm
 from novel_engine.core.quality_policy import load_quality_policy, derive_scene_targets
@@ -18,6 +20,7 @@ from novel_engine.agents.scene_schema import (
     detect_scene_overlap,
 )
 from novel_engine.core.errors import SceneUnrecoverableError
+from novel_engine.quality.generation_constraints import generation_constraints
 
 logger = logging.getLogger(__name__)
 def _get_root():
@@ -140,18 +143,18 @@ class WriterAgent:
     SCENE_SYSTEM_PROMPT = """你是一位专业的网络小说作家（凡人流写实，参考《凡人修仙传》《仙逆》笔法）。你的任务是根据场景蓝图生成高质量的正文段落。
 
 写作要求：
-1. 第三人称有限视角（以**陆烬**为主视角），视角深度随年龄动态变化（婴儿期仅感官，无推理）
+1. 第三人称有限视角，以本场蓝图指定的在场人物为视点；主角在场时优先跟随主角，视角深度随年龄动态变化（婴儿期仅感官，无推理）；主角不在场时不得强行插入其内心。
 2. 半文半白，通俗易懂但有古风韵味；每段最多一个比喻，比喻必须服务信息
 3. 对话符合角色身份
 4. 战斗描写简洁有力，重意境轻招式罗列
 5. 心理描写克制内敛，通过动作和环境折射
-6. 环境描写服务于情绪，不单独铺陈超过200字；穿越/通道/传送等过渡场景为功能场景，单场景正文不超过800字，禁止纯感官铺陈堆叠
+6. 环境描写服务于情绪，不单独铺陈超过200字；穿越/通道/传送等过渡只占完成该动作所需篇幅，其余篇幅按冻结蓝图的具体事件、动作后果与信息变化展开；整场字数统一服从蓝图目标，不得循环感官或反复昏醒凑字数。
 7. 全章总字数目标与每个场景的目标字数以用户指令中给出的”目标字数”为准，各场景目标之和应≈全章目标，严禁写短
 8. 遵守 scene_blueprints 中的 goal/conflict/emotion
-9. 若任务卡中有 foreshadow_actions，必须在本场景中执行
+9. 仅执行绑定本场或由本场事件触发的 foreshadow_actions；其它场景的伏笔只作只读上下文，禁止提前演出或重复执行
 10. 严禁套话堆砌（”死水石子/古井/未出鞘/达摩克利斯/如野草疯长”等出现即扣分）
 11. 【句长纪律】以中短句为主、一句一义：凡超过约40字的句子主动断成两句或三句，不得用逗号串起三个以上分句形成流水句；同义氛围词不得堆叠，每个氛围词只出现一次
-12. 【发展场反饱和】非高潮场景必须包含：①一个具体外部事件（可观察的动作/对话，不纯内心）；②一个具名对手戏角色并发生实际互动；③一个不可逆的新状态或新信息推进下一章钩子；静态氛围/心理独白占比不得超过全场景30%
+12. 【发展场反饱和】非高潮场景必须包含：①一个具体外部事件（可观察的动作/对话，不纯内心）；②蓝图有多个在场人物时，落实其中已规划的具名互动；单人场景不得为了对手戏虚构人物或成人式自问自答；③一个不可逆的新状态或新信息推进下一章钩子；静态氛围/心理独白占比不得超过全场景30%
 
 禁忌：
 - 禁止现代词汇、西典词汇
@@ -161,7 +164,7 @@ class WriterAgent:
 - 【语言硬约束】正文必须 100% 中文：严格禁止出现任何英文字母、英文单词、英文句子或拉丁字符（连一个英文单词也不允许）；人名地名功法名一律使用中文或约定译名，不得用英文原文；若发现自己写出了英文，必须立即改用中文重写该句
 - 必须按照 scene_blueprints 顺序生成，不得打乱
 - 必须完整呈现所有场景，不得截断
-- 严格执行 foreshadow_actions 中的所有伏笔指令
+- 全章必须覆盖 foreshadow_actions；单场严格遵守场景绑定与事件触发条件，不得把全章伏笔在每场重复演出
 - 禁止人物台词风格与设定不符
 - 禁止场景内容重复；若多个场景属于同一时刻的同一事件（如发现婴儿/某人介入），只允许一个场景详细展开，其余场景必须推进时间线或展开新事件，严禁换视角重述已发生内容
 - 严禁超龄认知（婴儿期出现”棋局/十年后”等未来知识直接判失败）
@@ -169,7 +172,7 @@ class WriterAgent:
 
 输出契约：
 - 输出必须为严格 JSON（结构见用户指令中的”结构化输出契约”），scene_text 为纯叙事正文
-- 严禁输出散文体或任何脚手架标记（【】/※/（）/章末钩子字样）"""
+- JSON 对象之外禁止输出裸文本；scene_text 内必须是连贯、正常分段的小说正文，不写逐词分行或意识流札记，不包含任何脚手架标记（【】/※/章末钩子字样）"""
 
     def __init__(self, llm_client: Optional[LLMClient] = None, project_root: str | Path = None):
         self.llm = llm_client or LLMClient()
@@ -232,7 +235,7 @@ class WriterAgent:
         self, key: str, names: list[str], fallback_chars: int = 600) -> str:
         """按实体名定位 bible 相关段落；定位失败退回固定截断兜底。
 
-        names 为空或无有效名时直接走 fallback；命中行保留并拼接（上限
+        names 为空或无有效名时直接走 fallback；按命中的标题保留相邻属性段落（上限
         fallback_chars*2，避免超长段落撑爆 prompt）。
         """
         text = (self._bible_cache.get(key, "") or "").strip()
@@ -241,12 +244,33 @@ class WriterAgent:
         _needles = [n for n in names if n and len(str(n).strip()) >= 2]
         if not _needles:
             return text[:fallback_chars]
-        _needles = [str(n) for n in _needles]
+        _needles = list(dict.fromkeys(str(n) for n in _needles))
         lines = text.splitlines()
-        hit_lines = [ln for ln in lines if any(n in ln for n in _needles)]
-        if not hit_lines:
-            return text[:fallback_chars]
-        return "\n".join(hit_lines)[:fallback_chars * 2]
+        limit = fallback_chars * 2
+        snippets = []
+        seen = set()
+        for name in _needles:
+            headings = [i for i, line in enumerate(lines) if line.lstrip().startswith("#") and name in line]
+            hits = headings or [i for i, line in enumerate(lines) if name in line]
+            if not hits:
+                continue
+            start = hits[0]
+            heading = lines[start].lstrip()
+            level = len(heading) - len(heading.lstrip("#"))
+            end = min(len(lines), start + 4)
+            if level:
+                end = start + 1
+                while end < len(lines):
+                    next_heading = lines[end].lstrip()
+                    next_level = len(next_heading) - len(next_heading.lstrip("#"))
+                    if next_level and next_level <= level:
+                        break
+                    end += 1
+            if start not in seen:
+                snippets.append("\n".join(lines[start:end]))
+                seen.add(start)
+        per_entity = max(1, limit // max(1, len(snippets)))
+        return "\n\n".join(part[:per_entity] for part in snippets)[:limit] if snippets else text[:fallback_chars]
 
     def _bible_snippet(self, chapter_num: int = 0,
                        character_names: list[str] | None = None,
@@ -266,12 +290,12 @@ class WriterAgent:
             if forbidden:
                 parts.append(
                     f"【本卷禁止事项（务必遵守）】{('；'.join(forbidden))}")
-        world = self._locate_bible_by_names("world", locations)
-        if world.strip():
-            parts.append(f"【世界观】{world.strip()}")
         char = self._locate_bible_by_names("character", characters)
         if char.strip():
-            parts.append(f"【人物卡】{char.strip()}")
+            parts.append(f"【人物卡】仅使用本章已解锁信息，不得提前描写未来成长与秘密。\n{char.strip()}")
+        world = self._locate_bible_by_names("world", locations)
+        if world.strip():
+            parts.append(f"【世界观】仅作一致性约束，不得提前揭示本章未解锁机制。\n{world.strip()}")
         text = "\n\n".join(parts)
         return text[:max_chars]
 
@@ -368,7 +392,7 @@ class WriterAgent:
         d = self._fb_pause_until - _t30.monotonic()
         if d > 0:
             logger.warning(f"CC30 waiting out degrade cooldown {d:.0f}s")
-            _t30.sleep(d)
+            budget_sleep(d, self._chapter_execution if hasattr(self, "_chapter_execution") else None)
 
     def begin_chapter_failover(self, task_card: dict, scenes: list, force_whole: bool = False):
         # 先把【上一章】最终 pro 计划计入跨章预算（重生阶段发生在初稿之后，故延后到此处结算）
@@ -434,13 +458,14 @@ class WriterAgent:
         if action and action.get("cooldown_seconds"):
             logger.warning(f"CC30 degrade cooldown {action['cooldown_seconds']}s "
                            f"level={action.get('level')} scene{scene_num}")
-            _t30.sleep(int(action["cooldown_seconds"]))
+            budget_sleep(int(action["cooldown_seconds"]), getattr(self, "_chapter_execution", None))
 
     def _fb_report_waste(self):
         if self._failover_enabled and self._fb is not None:
             import time as _t30
             self._fb.report_parse_waste(now=_t30.monotonic())
 
+    @scene_generation
     def generate_scene(
         self,
         task_card: dict,
@@ -473,7 +498,7 @@ class WriterAgent:
         _char_names: list[str] = []
         _loc_names: list[str] = []
         try:
-            for _bp in (task_card.get("scene_blueprints") or []):
+            for _bp in [scene_blueprint]:
                 _p = _bp.get("participants") or _bp.get("characters") or []
                 if isinstance(_p, list):
                     _char_names.extend(str(x) for x in _p if x)
@@ -489,13 +514,17 @@ class WriterAgent:
         bible_section = f"\n\n## 人物/世界观显式设定（逐章注入，防 OOC/漂移）\n{bible_block}\n" if bible_block else ""
         perspective_block = ""
         if chapter_num <= 5:
-            perspective_block = f"\n\n## 视角与时间线锚点\n- 当前时间：第 {chapter_num} 章（主角为新生儿/婴儿期，年龄≈0岁）\n- 严禁任何成人式全知内心独白、未来知识（\"棋局\"\"十年后\"等）与超龄推理；仅保留感官、本能与外部观察\n- 内心独白强度：0（无）\n"
+            perspective_block = f"\n\n## 视角与时间线锚点\n- 当前时间：第 {chapter_num} 章（主角为新生儿/婴儿期，年龄≈0岁）\n- 严禁任何成人式全知内心独白、未来知识（\"棋局\"\"十年后\"等）与超龄推理；仅保留感官、本能与外部观察\n- 内心独白强度：0（无）；此年龄限制仅针对主角，成年配角可作符合其设定的日常观察和判断，不得借此提前揭露身份或能力\n"
         elif chapter_num <= 20:
             perspective_block = f"\n\n## 视角与时间线锚点\n- 当前时间：第 {chapter_num} 章（幼年期）\n- 心理描写需符合年龄，避免超龄谋略独白\n"
         else:
             perspective_block = f"\n\n## 视角与时间线锚点\n- 当前时间：第 {chapter_num} 章\n- 按当前年龄与状态描写心理，禁止时间线穿帮\n"
 
-        full_prompt = f"{prompt}{bible_section}{perspective_block}"
+        overview = (
+            f"\n## 全章缩写（只读上下文，不得提前演出其它场景）\n{chapter_synopsis or task_card.get('core_goal', '')}\n"
+            "## 全章伏笔计划（仅在本场事件触发时自然呈现，禁止跨场重复或提前揭示）\n"
+            f"{json.dumps(task_card.get('foreshadow_actions') or [], ensure_ascii=False)}\n")
+        full_prompt = f"{prompt}{overview}\n{generation_constraints(self.root, task_card)}{bible_section}{perspective_block}"
         if pacing_constraints:
             full_prompt += f"\n\n## 节奏硬性约束\n{pacing_constraints}\n"
         if previous_context:
@@ -628,6 +657,7 @@ class WriterAgent:
             lines.append(f"- 必须演到本场不可逆变化：{str(ic).strip()}")
         return lines
 
+    @scene_generation
     def focused_rewrite_scene(self, task_card: dict, scene_blueprint: dict, target_chars: int) -> str:
         """Level 2：同任务卡单场"聚焦重写"（只给本场 beats+推进契约+技法，不带整章上下文）。
 
@@ -678,6 +708,7 @@ class WriterAgent:
         logger.warning(f"L2 focused rewrite scene {sn} still near-empty ({len(prose)} chars) -> Level 3")
         return ""
 
+    @scene_generation
     def beat_split_rewrite_scene(self, task_card: dict, scene_blueprint: dict, target_chars: int) -> str:
         """Level 3：单 beat 拆分重写——每个 beat 一次短请求(150-300字)，顺序拼接。
 
@@ -778,6 +809,7 @@ class WriterAgent:
             ) if len(group_contents) >= 3 else "\n\n".join(c.scene_text for _, c in group_contents)
         return group_contents
 
+    @stage("scene.wall")
     def generate_scenes(self, task_card: dict, synopsis: dict, pacing_constraints: str = "",
                         temperature_override: Optional[float] = None) -> list[SceneOutput]:
         """
@@ -803,7 +835,7 @@ class WriterAgent:
         # Runner-owned persistence (D1): Writer produces memory objects only.
         # The orchestrator journals validated scenes via chapter_journal.append_scene.
         # 场景并发：独立场景组并行，组内无需上下文依赖（同任务卡，已通过 beat 去重）
-        from concurrent.futures import ThreadPoolExecutor, as_completed
+        from concurrent.futures import as_completed
         self.begin_chapter_failover(task_card, scenes)
         _base_workers = max(1, min(len(scenes), 4))
         max_workers = self._fb.concurrency(4) if (self._failover_enabled and self._fb is not None) else _base_workers
@@ -811,7 +843,7 @@ class WriterAgent:
         # 预先计算 beat 去重提示（基于任务卡，非运行时）
         covered_beats = [f"场景{bp.get('scene_num')}({bp.get('location','')}:{bp.get('goal','')[:18]})" for bp in sorted(scenes, key=lambda x: x.get("scene_num", 0))]
         def _do_one(bp):
-            beat_hint = f"\n已覆盖情节（避免重复）：{'; '.join(covered_beats)}\n" if len(covered_beats) > 1 else ""
+            beat_hint = f"\n全章场景分工（规划上下文，仅写本场，后续尚未发生）：{'; '.join(covered_beats)}\n" if len(covered_beats) > 1 else ""
             if _recent_beats:
                 beat_hint += f"\n已用剧情节点（不可复用）：{'; '.join(_recent_beats)}\n"
             combined_pacing = (pacing_constraints or "") + beat_hint
@@ -993,6 +1025,7 @@ class WriterAgent:
                     warnings.append(f"Seam overlap between scene {i} and {i+1}: {overlap_len} chars")
         return warnings
 
+    @stage("polish.wall")
     def polish_chapter(self, chapter_text: str, task_card: dict, llm_client=None) -> str:
         """章节润色：统一过渡与语气。
 
@@ -1033,7 +1066,8 @@ class WriterAgent:
         logger.warning("polish_chapter: all attempts degenerate, falling back to original text")
         return chapter_text
 
-    def polish_scenes(self, scenes: list, task_card: dict, client=None, only_ids: set[int] | None = None) -> tuple:
+    @stage("polish.wall")
+    def polish_scenes(self, scenes: list, task_card: dict, client=None, only_ids: set[int] | None = None, issues_by_id: dict | None = None) -> tuple:
         """结构化场景级并发润色。
 
         以 SceneOutput 为边界，每个场景一次纯文本流式调用，
@@ -1051,6 +1085,10 @@ class WriterAgent:
         client = client or self.llm
         # 取并发度：ModelRouter 有 concurrency 属性，否则默认 4
         concurrency = getattr(client, "concurrency", 4) if hasattr(client, "concurrency") else 4
+
+        guardrails = generation_constraints(self.root, task_card)
+        policy = load_quality_policy(self.root)
+        blueprints = {int(bp.get("scene_num", 0) or 0): bp for bp in task_card.get("scene_blueprints", [])}
 
         def _do_one(idx: int, scene: "SceneOutput") -> tuple[int, "SceneOutput", bool]:
             """Polish 单个场景，返回 (index, polished_scene, success)。"""
@@ -1075,9 +1113,14 @@ class WriterAgent:
                 "请润色并修正以下场景正文，保持人设、伏笔与节奏一致，"
                 "正常使用中文标点（每个完整句不超过约40字、每2-4个分句用逗号分隔、对话用引号，严禁整段无标点的流水句），仅返回润色后的场景正文，不要解释。\n\n"
                 f"【任务卡】{task_card.get('title', '')}\n"
+                f"本场原稿{len(orig_text)}字，润色应保留全部有效情节与 beat，净字数控制在原稿的90%–110%。"
+                "删除重复表达后须在原情节内补等量有效动作、对话或具体细节，禁止用概述压缩正文。\n"
+                f"本次必须修复的问题：{json.dumps((issues_by_id or {}).get(scene.scene_id, []), ensure_ascii=False)}\n"
+                f"{guardrails}\n"
+                f"冻结的本场蓝图：{json.dumps(next((bp for bp in task_card.get('scene_blueprints', []) if int(bp.get('scene_num', 0) or 0) == scene.scene_id), {}), ensure_ascii=False)}\n"
                 f"{prev_anchor}\n{next_anchor}\n"
-                "【正文】\n{scene_text}"
-            ).format(scene_text=orig_text)
+                f"【正文】\n{orig_text}"
+            )
 
             max_tokens = self._polish_max_tokens(len(orig_text))
             try:
@@ -1101,11 +1144,22 @@ class WriterAgent:
                     return (idx, scene, False)
                 orig_len = len(orig_text)
                 resp_len = len(resp)
-                if resp_len < orig_len * 0.5 or resp_len > orig_len * 1.5:
+                target = blueprints.get(scene.scene_id, {}).get("word_count_target", 0)
+                if isinstance(target, (list, tuple)):
+                    target = target[0] if target else 0
+                try:
+                    floor = int(float(target) * policy["min_ratio"])
+                    ceiling = int(float(target) * policy["max_ratio"])
+                except (TypeError, ValueError):
+                    floor = ceiling = 0
+                minimum = int(orig_len * 0.9)
+                if floor:
+                    minimum = min(orig_len, floor) if orig_len > ceiling else max(minimum, min(orig_len, floor))
+                if resp_len < minimum or resp_len > orig_len * 1.5:
                     logger.warning(f"Scene {scene.scene_id} polish length out of range ({resp_len} vs {orig_len}), keep original")
                     return (idx, scene, False)
                 # 创建新 SceneOutput，保留原 hook 和 beats
-                new_scene = SceneOutput(scene.scene_id, resp.strip(), scene.hook, list(scene.beats))
+                new_scene = replace(scene, scene_text=resp.strip(), finish_reason="stop")
                 return (idx, new_scene, True)
             except Exception as exc:
                 logger.warning(f"Scene {scene.scene_id} polish failed ({exc}), keep original")

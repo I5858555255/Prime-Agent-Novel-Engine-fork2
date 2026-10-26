@@ -10,6 +10,7 @@ import json
 import re
 import pathlib
 from typing import Optional
+from novel_engine.core.publication_transaction import atomic_write
 
 # runtime 目录与 checkpoint.json 同级（src/novel_engine/runtime/）
 RUNTIME_DIR = pathlib.Path(__file__).resolve().parents[1] / "runtime"
@@ -25,12 +26,13 @@ _TIME_PATTERNS = [
 ]
 
 
-def load_anchors() -> list:
+def load_anchors(root=None) -> list:
     """读取全部锚点（按 chapter_id 升序）。文件不存在返回 []。"""
-    if not ANCHORS_PATH.exists():
+    path = pathlib.Path(root) / "runtime/timeline_anchors.json" if root is not None else ANCHORS_PATH
+    if not path.exists():
         return []
     try:
-        data = json.loads(ANCHORS_PATH.read_text(encoding="utf-8"))
+        data = json.loads(path.read_text(encoding="utf-8"))
         if isinstance(data, list):
             return sorted(data, key=lambda r: r.get("chapter_id", 0))
     except (json.JSONDecodeError, OSError):
@@ -38,20 +40,20 @@ def load_anchors() -> list:
     return []
 
 
-def save_anchor(record: dict) -> None:
+def save_anchor(record: dict, root=None) -> None:
     """upsert 锚点（按 chapter_id 覆盖）。"""
-    anchors = [r for r in load_anchors() if r.get("chapter_id") != record.get("chapter_id")]
+    anchors = [r for r in load_anchors(root) if r.get("chapter_id") != record.get("chapter_id")]
     anchors.append(record)
-    RUNTIME_DIR.mkdir(parents=True, exist_ok=True)
-    ANCHORS_PATH.write_text(
+    path = pathlib.Path(root) / "runtime/timeline_anchors.json" if root is not None else ANCHORS_PATH
+    path.parent.mkdir(parents=True, exist_ok=True)
+    atomic_write(path,
         json.dumps(sorted(anchors, key=lambda r: r.get("chapter_id", 0)), ensure_ascii=False, indent=2),
-        encoding="utf-8",
     )
 
 
-def get_prev_anchor(chapter_id: int) -> Optional[dict]:
+def get_prev_anchor(chapter_id: int, root=None) -> Optional[dict]:
     """返回 chapter_id 的上一章锚点（chapter_id-1），无则 None。"""
-    anchors = load_anchors()
+    anchors = load_anchors(root)
     for r in anchors:
         if r.get("chapter_id") == chapter_id - 1:
             return r
@@ -102,7 +104,7 @@ def extract_time_expressions(text: str) -> list:
     return found
 
 
-def check_body_against_anchors(chapter_id: int, body_text: str) -> list:
+def check_body_against_anchors(chapter_id: int, body_text: str, root=None) -> list:
     """正文显式时间表述与锚点表的矛盾检查（发布前调用）。
 
     规则（确定性，成本低）：
@@ -110,7 +112,7 @@ def check_body_against_anchors(chapter_id: int, body_text: str) -> list:
     2. 本章锚点 character_age_snapshot 有值，且正文出现与之冲突的年龄表述（如锚点 0 岁但正文"十年"）→ 矛盾
     返回矛盾描述列表（空 = 无矛盾）。
     """
-    anchors = {r.get("chapter_id"): r for r in load_anchors()}
+    anchors = {r.get("chapter_id"): r for r in load_anchors(root)}
     rec = anchors.get(chapter_id)
     if rec is None:
         return []

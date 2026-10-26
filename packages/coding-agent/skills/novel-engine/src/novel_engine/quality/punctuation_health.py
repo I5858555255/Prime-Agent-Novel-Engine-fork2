@@ -13,6 +13,8 @@ from __future__ import annotations
 
 import re
 
+from jieba import tokenize
+
 # 句读标点（逗号也算，流水句主要缺的就是句内停顿）
 _PAUSE_CHARS = "。！？!?...，,；;：:、"
 # 成对引号（中英文）
@@ -532,6 +534,7 @@ def repair_paragraph_long_runs(paragraph: str,
         return p, 0
     n = len(p)
     inserts: list[tuple[int, str]] = []
+    word_boundaries = {end for _, _, end in tokenize(p)}
     inside = False
     run_last = 0
     seg_last = 0
@@ -560,7 +563,7 @@ def repair_paragraph_long_runs(paragraph: str,
             continue
         gap_run = i - run_last
         gap_seg = i - seg_last
-        if gap_run >= hard_run:
+        if gap_run >= hard_run and i in word_boundaries:
             inserts.append((i, "。\n"))
             run_last = seg_last = i
             i += 1

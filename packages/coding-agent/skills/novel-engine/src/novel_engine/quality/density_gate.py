@@ -58,7 +58,14 @@ def arc_for_chapter(chapter_num: int, root: str | Path | None) -> str | None:
     if root is None:
         return None
     try:
-        active = scope_gate._active_cfg(chapter_num, root)  # noqa: SLF001
+        configs = []
+        for path in sorted((Path(root) / "config/leak_terms").glob("*.json")):
+            if path.name == "concept_unlocks.json":
+                continue
+            value = json.loads(path.read_text(encoding="utf-8"))
+            if isinstance(value, dict):
+                configs.append(value)
+        active = scope_gate._active_cfg(configs, chapter_num)  # noqa: SLF001
         if active:
             return str(active.get("arc") or "").strip() or None
     except Exception:  # noqa: BLE001

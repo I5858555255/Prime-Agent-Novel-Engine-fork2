@@ -1,6 +1,6 @@
-import time
 import logging
 from novel_engine.core.llm_client import LLMClient
+from novel_engine.core.execution import BudgetExceeded, budget_sleep, current_execution
 
 logger = logging.getLogger(__name__)
 
@@ -37,6 +37,8 @@ class FailoverLLMClient:
                 retry_on_error=retry_on_error, max_retries=max_retries, extra_body=extra_body)
             self._consecutive_errors = 0
             return result
+        except BudgetExceeded:
+            raise
         except Exception as e:
             self._consecutive_errors += 1
             logger.warning(f"{self.log_prefix} LLM error ({self._consecutive_errors}/{self.trigger}): {e}")
@@ -45,7 +47,7 @@ class FailoverLLMClient:
                 self._using_fallback = True
                 self._consecutive_errors = 0
                 backoff = min(self.max_backoff, 2 ** (self.trigger + 1))
-                time.sleep(backoff)
+                budget_sleep(backoff, current_execution(target))
                 return self.fallback.chat_completion(
                     messages, temperature=temperature, max_tokens=max_tokens,
                     retry_on_error=retry_on_error, max_retries=max_retries, extra_body=extra_body)
