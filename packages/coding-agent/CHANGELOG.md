@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+- Added resumable Novel-Engine condensed production for 3,800 chapters with a 16-million-Han expansion budget, logical review, automatic repair and standalone external-LLM expansion packages.
 - Fixed Novel-Engine director truncation recovery losing its JSON schema and routing planning failures to manual review.
 - Fixed Novel-Engine timeline checks rejecting adult supporting characters and budget exits discarding repair diagnostics.
 - Fixed Novel-Engine review score validation, project-specific quality context, conflicting prose and length instructions, and characters appearing before their scheduled debut.

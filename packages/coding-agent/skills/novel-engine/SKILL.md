@@ -5,6 +5,23 @@ description: Generate, review, and self-heal long-form web-novel chapters with a
 
 # Novel-Engine Skill
 
+## Condensed manuscript production
+
+For the 3,800-chapter / 16-million-Han project, use the independent condensed mode documented in
+[简写生产与外部扩写](docs/简写生产与外部扩写.md). This mode produces narrative briefs and self-contained external-LLM
+expansion packages. It uses logical and information-coverage review rather than prose scores or the old 10,000-character gate.
+The existing prose pipeline remains available. Never count an exported expansion prompt as an expanded or published prose chapter.
+
+From this package directory, with dependencies installed:
+
+```bash
+PYTHONPATH=src python -m novel_engine.condensed run --output /workspace/novel-condensed-3800 --end 3800
+PYTHONPATH=src python -m novel_engine.condensed status --output /workspace/novel-condensed-3800
+```
+
+Agent API: `await novel_engine.generate_condensed_chapter(1, output_root="/workspace/novel-condensed-3800")`.
+API credentials use the existing provider profile and injected environment variables. Do not embed credentials in exported packages.
+
 Novel-Engine is an AI-powered pipeline and state machine designed for writing, refining, and validating full-length web novels. Based on the Prime-Agent底座, it utilizes a multi-agent assembly line pattern to generate robust chapter-by-chapter narratives with high consistency, quality control, and auto-rollback safety.
 
 ## Architecture & Features

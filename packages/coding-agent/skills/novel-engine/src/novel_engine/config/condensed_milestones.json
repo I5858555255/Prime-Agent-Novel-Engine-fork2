@@ -1,0 +1,508 @@
+{
+  "schema": 1,
+  "source": "config/planning/plot_graph.json",
+  "policy": "仅用于简写模式；明确decision_rules与author_intent优先于旧图；保留49个节点编号、事件意图和依赖，修正乱码、禁修炼冲突和倒置日期。旧文件不改。",
+  "nodes": [
+    {
+      "id": "N001",
+      "chapter_target": 1,
+      "description": "神魂跨界，陆烬以婴儿形态降生雾隐村外迷雾边缘，异象引发村民恐慌",
+      "depends_on": [],
+      "foreshadow_links": [
+        "F004"
+      ]
+    },
+    {
+      "id": "N002",
+      "chapter_target": 2,
+      "description": "陈老根抱婴归家，取名'陆烬'，村中议论纷纷",
+      "depends_on": [
+        "N001"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N003",
+      "chapter_target": 5,
+      "description": "陆烬幼年体弱多病，极对浊气异常敏感，首次体质伏笔",
+      "depends_on": [
+        "N002"
+      ],
+      "foreshadow_links": [
+        "F004"
+      ]
+    },
+    {
+      "id": "N004",
+      "chapter_target": 9,
+      "description": "陈老根本人练习呼吸法，陆烬最多旁观；不得传授、承诺传授或让陆烬出现气感。",
+      "depends_on": [
+        "N002"
+      ],
+      "foreshadow_links": [
+        "F002"
+      ]
+    },
+    {
+      "id": "N005",
+      "chapter_target": 17,
+      "description": "陆烬在迷雾边界拾得奇异枯枝，陈老根收起并含糊告诫远离，不主动揭穿关联。",
+      "depends_on": [
+        "N003"
+      ],
+      "foreshadow_links": [
+        "F004"
+      ]
+    },
+    {
+      "id": "N006",
+      "chapter_target": 43,
+      "description": "陈老根练习呼吸法时，迷雾方向出现可观察的异动；陆烬只旁观，不得体内运转呼吸法。",
+      "depends_on": [
+        "N004"
+      ],
+      "foreshadow_links": [
+        "F004"
+      ]
+    },
+    {
+      "id": "N007",
+      "chapter_target": 50,
+      "description": "阶段收束：迷雾异动被村人察觉加剧，陆烬立誓要弄清自己的来历",
+      "depends_on": [
+        "N005",
+        "N006"
+      ],
+      "foreshadow_links": [
+        "F004"
+      ]
+    },
+    {
+      "id": "N008",
+      "chapter_target": 60,
+      "description": "陆烬旁观陈老根以深藏的凡人武艺平息骚乱，不提前确认修士力量。",
+      "depends_on": [
+        "N007"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N009",
+      "chapter_target": 68,
+      "description": "宵小趁夜潜入雾隐村，陈老根与陆烬合力抵御，陆烬首次实战",
+      "depends_on": [
+        "N008"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N010",
+      "chapter_target": 74,
+      "description": "陆烬通过水源、病人分布和村民见闻，找到瘟疫与受污染环境相关的线索，不掌握禁区机制。",
+      "depends_on": [
+        "N009"
+      ],
+      "foreshadow_links": [
+        "F004"
+      ]
+    },
+    {
+      "id": "N011",
+      "chapter_target": 79,
+      "description": "有长老提议将陆烬送往迷雾禁区'验证'其身份，陈老根强烈反对引发冲突",
+      "depends_on": [
+        "N010"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N012",
+      "chapter_target": 90,
+      "description": "巡查队武官对陆烬体质产生兴趣，离去前留下县城武馆招收弟子的线索",
+      "depends_on": [
+        "N011"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N013",
+      "chapter_target": 98,
+      "description": "陆烬途中救助受伤旅人，建立可追踪的人脉。",
+      "depends_on": [
+        "N012"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N014",
+      "chapter_target": 100,
+      "description": "阶段收束：陆烬正式踏入大乾皇朝体系，雾隐村生活落幕",
+      "depends_on": [
+        "N012",
+        "N013"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N015",
+      "chapter_target": 316,
+      "description": "陆烬首次亲眼目睹修士手段，确认'不属于凡人的力量'真实存在，决心寻路而入",
+      "depends_on": [
+        "N014"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N016",
+      "chapter_target": 489,
+      "description": "陆烬回雾隐村，沈无涯以采购药材之名出现，交付修真界对迷雾禁区的传闻卷",
+      "depends_on": [
+        "N015"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N017",
+      "chapter_target": 567,
+      "description": "陆烬察觉皇室交易条件优厚得反常，只形成疑问，不坐实乾武帝赎罪动机。",
+      "depends_on": [
+        "N015"
+      ],
+      "foreshadow_links": [
+        "F001"
+      ]
+    },
+    {
+      "id": "N018",
+      "chapter_target": 621,
+      "description": "秘使嘱托留意人皇鼎碎片相关古籍，以旧书商为联络暗语。",
+      "depends_on": [
+        "N017"
+      ],
+      "foreshadow_links": [
+        "F001"
+      ]
+    },
+    {
+      "id": "N019",
+      "chapter_target": 652,
+      "description": "陆烬因缘际会接触云隐坊市，确认仙门测试机会",
+      "depends_on": [
+        "N018"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N020",
+      "chapter_target": 702,
+      "description": "陆烬听到摄魂阁暗中收买神魂特异者的传闻，不掌握组织全貌。",
+      "depends_on": [
+        "N019"
+      ],
+      "foreshadow_links": [
+        "F003"
+      ]
+    },
+    {
+      "id": "N021",
+      "chapter_target": 687,
+      "description": "沈知微为陆烬解围，上官烈的心结埋下。",
+      "depends_on": [
+        "N019"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N022",
+      "chapter_target": 780,
+      "description": "陆烬以信誉担保完成黑市送信任务，全程无战斗。",
+      "depends_on": [
+        "N021"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N023",
+      "chapter_target": 786,
+      "description": "陆烬刻下债符作为担保，留下摄魂阁后续追踪线索。",
+      "depends_on": [
+        "N022"
+      ],
+      "foreshadow_links": [
+        "F003"
+      ]
+    },
+    {
+      "id": "N024",
+      "chapter_target": 848,
+      "description": "陆烬看到以魂为引、假托飞升的残破笔记，仅接触不完整概念。",
+      "depends_on": [
+        "N020"
+      ],
+      "foreshadow_links": [
+        "F003"
+      ]
+    },
+    {
+      "id": "N025",
+      "chapter_target": 988,
+      "description": "陆烬筑基突破，正式获得《太上养魂经》残卷",
+      "depends_on": [
+        "N023",
+        "N024"
+      ],
+      "foreshadow_links": [
+        "F002"
+      ]
+    },
+    {
+      "id": "N026",
+      "chapter_target": 989,
+      "description": "苏问魂进一步揭示摄魂阁造神或造门的动机；此前918章按ending窗口只提供不完整线索，不提前揭露组织全貌。",
+      "depends_on": [
+        "N025"
+      ],
+      "foreshadow_links": [
+        "F003"
+      ],
+      "original_chapter": 918,
+      "resolution": "旧图依赖倒置且卷区间不符；置于前置事件与当前卷起点之后，保留事件和依赖。"
+    },
+    {
+      "id": "N027",
+      "chapter_target": 1128,
+      "description": "陆烬与荒尾信任建立完成三步验证，荒尾说出妖族世代的预言",
+      "depends_on": [
+        "N025"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N028",
+      "chapter_target": 1130,
+      "description": "陆烬在远古仙妖大战遗迹感应到比残留意志更古老的余韵。",
+      "depends_on": [
+        "N027"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N029",
+      "chapter_target": 1290,
+      "description": "陆烬用人皇古玉护盾抵抗血冥教长老，付出具体身体代价并意识到风险。",
+      "depends_on": [
+        "N018"
+      ],
+      "foreshadow_links": [
+        "F001"
+      ]
+    },
+    {
+      "id": "N030",
+      "chapter_target": 1422,
+      "description": "金丹突破，首次直面仙门刻意隐瞒凡人修仙的真相一角",
+      "depends_on": [
+        "N026",
+        "N029"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N031",
+      "chapter_target": 1423,
+      "description": "陆烬在皇室藏书中看到'天之上有域，域之上有界'，不解其意但记下",
+      "depends_on": [
+        "N030"
+      ],
+      "foreshadow_links": [],
+      "original_chapter": 1380,
+      "resolution": "旧图依赖倒置且卷区间不符；置于前置事件与当前卷起点之后，保留事件和依赖。"
+    },
+    {
+      "id": "N032",
+      "chapter_target": 1580,
+      "description": "沈知微质疑渐进改革路线，陆烬提出以人道建立新秩序；分歧不等于决裂。",
+      "depends_on": [
+        "N031"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N033",
+      "chapter_target": 1843,
+      "description": "陆烬确认人道是独立于成仙之外的大道。",
+      "depends_on": [
+        "N032"
+      ],
+      "foreshadow_links": [
+        "F001"
+      ]
+    },
+    {
+      "id": "N034",
+      "chapter_target": 2011,
+      "description": "心魔幻境中的李淳质疑借壳而活，引出双重身份冲突。",
+      "depends_on": [
+        "N033"
+      ],
+      "foreshadow_links": [
+        "F004"
+      ]
+    },
+    {
+      "id": "N035",
+      "chapter_target": 2157,
+      "description": "陆烬承认李淳与陆烬共存，认可成长路径的完整性，化解心魔，不否定任一身份。",
+      "depends_on": [
+        "N034"
+      ],
+      "foreshadow_links": [
+        "F004"
+      ]
+    },
+    {
+      "id": "N036",
+      "chapter_target": 2200,
+      "description": "陆烬突破化神，主动直面天道布局。",
+      "depends_on": [
+        "N035"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N037",
+      "chapter_target": 2413,
+      "description": "经过疑惑、追查，陆烬获得伪回音机制铁证：平安信出自同一人的模板抄写。",
+      "depends_on": [
+        "N036"
+      ],
+      "foreshadow_links": [
+        "F007"
+      ]
+    },
+    {
+      "id": "N038",
+      "chapter_target": 2478,
+      "description": "陆烬布置古玉结界与三才护魂阵，通过魂芯锚定远程进入墟界行动，保留肉身保护，不违背神魂不离体规则。",
+      "depends_on": [
+        "N037"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N039",
+      "chapter_target": 2600,
+      "description": "陆烬发现墟界深处存在远古人皇体系的遗迹入口",
+      "depends_on": [
+        "N038"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N040",
+      "chapter_target": 2601,
+      "description": "上官鸿坦白体内藏有太初议会时代残脉，仙庭旧部暂缓提取。",
+      "depends_on": [
+        "N039"
+      ],
+      "foreshadow_links": [
+        "F006"
+      ],
+      "original_chapter": 2499,
+      "resolution": "旧图依赖倒置且卷区间不符；置于前置事件与当前卷起点之后，保留事件和依赖。"
+    },
+    {
+      "id": "N041",
+      "chapter_target": 2738,
+      "description": "铁面执政官揭示传国玉玺与共守派核心封装体的关联；皇室血脉关联保持推测尺度。",
+      "depends_on": [
+        "N040"
+      ],
+      "foreshadow_links": [
+        "F006"
+      ]
+    },
+    {
+      "id": "N042",
+      "chapter_target": 2803,
+      "description": "柳踏歌发现求和派联络员异常，陆烬持续观察、定向投放，不提前抓捕。",
+      "depends_on": [
+        "N041"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N043",
+      "chapter_target": 3000,
+      "description": "陆烬确认自己是人道体系当代唯一完整继承可能。",
+      "depends_on": [
+        "N042"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N044",
+      "chapter_target": 3025,
+      "description": "乾武帝与陆烬就鼎碎片纪念碑方案达成共识，由皇室主动献出、乾武帝亲自奠基。",
+      "depends_on": [
+        "N043"
+      ],
+      "foreshadow_links": [
+        "F001"
+      ]
+    },
+    {
+      "id": "N045",
+      "chapter_target": 3324,
+      "description": "太初议会反对派文献揭示原核为七极环绕、一元居中的八元结构，暂不完成门芯真相闭环。",
+      "depends_on": [
+        "N044"
+      ],
+      "foreshadow_links": [
+        "F005"
+      ]
+    },
+    {
+      "id": "N046",
+      "chapter_target": 3400,
+      "description": "陆烬以人道之力击破仙门对'成仙资格'的垄断叙事",
+      "depends_on": [
+        "N045"
+      ],
+      "foreshadow_links": []
+    },
+    {
+      "id": "N047",
+      "chapter_target": 3401,
+      "description": "陆烬认识到原核体系还需要控制节奏的协调机制，提出法则反馈与自由市场双轨机制。",
+      "depends_on": [
+        "N046"
+      ],
+      "foreshadow_links": [],
+      "original_chapter": 3397,
+      "resolution": "旧图依赖倒置且卷区间不符；置于前置事件与当前卷起点之后，保留事件和依赖。"
+    },
+    {
+      "id": "N048",
+      "chapter_target": 3438,
+      "description": "守夜人提供门芯脱落的完整证据，陆烬定位地脉并回收门芯，完成八组件闭环。",
+      "depends_on": [
+        "N047"
+      ],
+      "foreshadow_links": [
+        "F005"
+      ]
+    },
+    {
+      "id": "N049",
+      "chapter_target": 3800,
+      "description": "陆烬以人道重定仙天秩序，完成传承仪式后主动退场",
+      "depends_on": [
+        "N048"
+      ],
+      "foreshadow_links": [
+        "F005"
+      ]
+    }
+  ]
+}

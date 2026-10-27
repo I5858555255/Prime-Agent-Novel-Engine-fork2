@@ -5,6 +5,9 @@ description = "Novel-Engine skill package for Prime-Agent"
 authors = ["Jules <jules@prime-agent.ai>"]
 readme = "SKILL.md"
 
+[tool.poetry.scripts]
+novel-condensed = "novel_engine.condensed.runner:main"
+
 [tool.poetry.dependencies]
 python = "^3.12"
 httpx = "^0.28.1"

@@ -39,3 +39,7 @@ try:
     ]
 except Exception:  # pragma: no cover - keep package importable even if agent API fails
     pass
+
+from novel_engine.condensed.api import condensed_status, generate_condensed_chapter
+
+__all__.extend(["generate_condensed_chapter", "condensed_status"])
