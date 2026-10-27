@@ -1,6 +1,6 @@
 ---
 name: novel-engine
-description: Generate, review, and self-heal long-form web-novel chapters with a deterministic world-state pipeline (StateDB, code-level state queries — no vector RAG). Use when asked to write or continue a novel, produce a specific chapter, compare chapter branches, or run the novel-engine generation pipeline. The novel project data (bible, planning, config) lives alongside this skill under src/novel_engine/.
+description: Generate evidence-checked condensed novel chapters and portable external-LLM expansion packages for the 3,800-chapter project. Use when asked to continue the novel, produce condensed chapters, export expansion prompts, or run continuous generation. The original prose pipeline remains available for explicit prose requests. Project canon lives under src/novel_engine/.
 ---
 
 # Novel-Engine Skill
@@ -11,6 +11,9 @@ For the 3,800-chapter / 16-million-Han project, use the independent condensed mo
 [简写生产与外部扩写](docs/简写生产与外部扩写.md). This mode produces narrative briefs and self-contained external-LLM
 expansion packages. It uses logical and information-coverage review rather than prose scores or the old 10,000-character gate.
 The existing prose pipeline remains available. Never count an exported expansion prompt as an expanded or published prose chapter.
+
+Use condensed generation by default for this project. `generate_chapter` and the old production/dashboard paths produce prose;
+use those only when the user explicitly requests prose mode. Condensed generation uses `generate_condensed_chapter` or `scripts/condensed.py`.
 
 From this package directory, with dependencies installed:
 
