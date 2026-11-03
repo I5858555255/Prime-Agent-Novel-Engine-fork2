@@ -13,6 +13,7 @@ import time
 from dataclasses import asdict
 from pathlib import Path
 
+from novel_engine.core.env_bootstrap import load_project_env
 from novel_engine.core.execution import AttemptBudget, Execution
 from novel_engine.core.model_router import ModelRouter
 from novel_engine.core.publication_transaction import atomic_write, publication_lock
@@ -454,8 +455,17 @@ class CondensedPipeline:
 
 
 def main(argv=None):
+    # Windows: block the task/session Ctrl+C that otherwise interrupts the
+    # blocking LLM socket connect mid-stream (KeyboardInterrupt at connect).
+    import signal as _signal
+    if hasattr(_signal, "SIGINT"):
+        try:
+            _signal.signal(_signal.SIGINT, _signal.SIG_IGN)
+        except (ValueError, OSError):
+            pass
+
     parser = argparse.ArgumentParser(description="Generate independently reviewed condensed chapters and external LLM packages")
-    parser.add_argument("command", choices=("run", "status", "export", "archive", "verify", "compile", "invalidate", "extend-budget"))
+    parser.add_argument("command", choices=("run", "status", "export", "archive", "verify", "compile", "invalidate", "extend-budget", "accept-check"))
     parser.add_argument("--source", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--end", type=int, default=3800)
@@ -466,9 +476,11 @@ def main(argv=None):
     parser.add_argument("--operation")
     parser.add_argument("--extra-calls", type=int, default=0)
     parser.add_argument("--extra-seconds", type=int, default=0)
+    parser.add_argument("--prose", type=Path, help="model-generated prose file for accept-check")
     parser.add_argument("--refresh-uncommitted-canon", action="store_true",
                         help="adopt corrected canon only before any chapter commits; retain all request budgets")
     args = parser.parse_args(argv)
+    load_project_env()
     args.output.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(filename=args.output / "production.log", level=logging.INFO,
                         format="%(asctime)s %(levelname)s %(name)s %(message)s")
@@ -541,6 +553,16 @@ def main(argv=None):
         elif args.command == "extend-budget":
             with publication_lock(pipeline.root, "condensed_generation"):
                 pipeline.store.extend_budget(args.operation, args.extra_calls, args.extra_seconds, args.reason)
+        elif args.command == "accept-check":
+            from novel_engine.condensed.accept_check import run as accept_run
+            if not args.prose:
+                raise ValueError("accept-check requires --prose <file>")
+            pkg = args.output / "expansion" / f"chapter_{args.from_chapter:04d}" if args.from_chapter else None
+            if pkg is None:
+                raise ValueError("accept-check requires --from-chapter N (package = expansion/chapter_NNNN)")
+            report = accept_run(pkg, args.prose, pkg / "accept_report.json")
+            print(dumps(report), flush=True)
+            exit_code = 0 if report["pass"] else 1
         print(dumps(pipeline.status()), flush=True)
         atomic_write(args.output / "status.json", dumps(pipeline.status()))
     finally:
