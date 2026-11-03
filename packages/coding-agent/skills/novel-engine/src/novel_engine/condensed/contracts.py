@@ -71,6 +71,13 @@ def strings(value):
     return isinstance(value, list) and bool(value) and all(nonempty(item) for item in value)
 
 
+def strings_optional(value):
+    """Optional string list: None or [] is legal; non-empty requires all non-empty strings."""
+    if value is None or value == []:
+        return True
+    return strings(value)
+
+
 def validate_plan(plan, start, end, config, milestones=()):
     errors = []
     entries = plan.get("chapters")
@@ -211,7 +218,7 @@ def validate_chapter(chapter, plan, state, previous_day, known_cast=()):
                 errors.append("事件链编号重复")
             beats[beat["id"]] = beat
             refs = beat.get("event_ids")
-            if not strings(refs) or not set(refs).issubset(event_ids):
+            if not strings_optional(refs) or not set(refs).issubset(event_ids):
                 errors.append(f"场景{sid}事件引用无效")
             else:
                 coverage.update(refs)

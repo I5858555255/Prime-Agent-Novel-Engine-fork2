@@ -388,14 +388,14 @@ class CondensedPipeline:
                 normalize_timeline(value, day, prior_phase, plan=plan)
                 return render_brief(value)
             contract = DRAFT.format(context=dumps(context))
-            for planning_attempt in range(2):
+            for planning_attempt in range(3):
                 try:
                     payload, review = self._checked(f"chapter_{chapter}", contract, context,
                                                     lambda value: validate_chapter(value, plan, state, day, self.store.recent_cast()) + validate_timeline(value, day), "章节简写",
                                                     prepare)
                     break
                 except QualityFailure:
-                    if planning_attempt:
+                    if planning_attempt == 2:
                         raise
                     saved = json.loads((self.root / "drafts" / f"chapter_{chapter}.json").read_text(encoding="utf-8"))
                     if not any(isinstance(issue, dict) and issue.get("check") for issue in saved["issues"]):
@@ -486,7 +486,10 @@ def main(argv=None):
     args.output.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(filename=args.output / "production.log", level=logging.INFO,
                         format="%(asctime)s %(levelname)s %(name)s %(message)s")
-    pipeline = CondensedPipeline(args.source, args.output, refresh_uncommitted_canon=args.refresh_uncommitted_canon)
+    if args.command in ("run", "status", "export", "archive", "verify", "compile", "invalidate", "extend-budget"):
+        pipeline = CondensedPipeline(args.source, args.output, refresh_uncommitted_canon=args.refresh_uncommitted_canon)
+    else:
+        pipeline = None
     exit_code = 0
     try:
         if args.command == "run":
@@ -598,13 +601,15 @@ def main(argv=None):
                 raise ValueError(f"missing program report {program}; run accept-check first")
             manifest = mark_verified(pkg, program, args.llm_report)
             print(dumps({"chapter": manifest["chapter"], "verification": manifest["verification"]}), flush=True)
-        print(dumps(pipeline.status()), flush=True)
-        atomic_write(args.output / "status.json", dumps(pipeline.status()))
+        if pipeline is not None:
+            print(dumps(pipeline.status()), flush=True)
+            atomic_write(args.output / "status.json", dumps(pipeline.status()))
     finally:
-        worker = pipeline.store.metadata("worker")
-        if args.command == "run" and worker and worker.get("state") == "running":
-            pipeline.worker_state("interrupted", pipeline.store.head() + 1)
-        pipeline.close()
+        if pipeline is not None:
+            worker = pipeline.store.metadata("worker")
+            if args.command == "run" and worker and worker.get("state") == "running":
+                pipeline.worker_state("interrupted", pipeline.store.head() + 1)
+            pipeline.close()
     return exit_code
 
 

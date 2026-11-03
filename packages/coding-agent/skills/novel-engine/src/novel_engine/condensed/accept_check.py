@@ -26,7 +26,19 @@ HAN = re.compile(r"[\u3007\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\U00020000-\U00
 # and cultivation practice terms become legitimate, so those words stop being
 # blocking; only hard spoilers remain).
 STAGE1_MAX_CHAPTER = 316
-STAGE1_FORBIDDEN = ["气感", "体内暖意", "引气", "吐纳", "灵力运转", "周天", "丹田"]
+# Stage-1 forbidden terms: cultivation body-feel, pseudo-scientific mechanism
+# leaks, setting terms that cross the cognition boundary, and modern/foreign
+# vocabulary that breaks the pre-modern village voice.
+STAGE1_FORBIDDEN = [
+    "气感", "体内暖意", "引气", "吐纳", "灵力运转", "周天", "丹田",
+    # pseudo-scientific mechanism phrases (infant/protagonist can't "mark" or "reflect" like a system)
+    "感官阈值", "标记为", "安全域", "条件反射", "监控网", "阈值",
+    "微扰", "滞涩感", "神经反射",
+    # setting leaks that cross the C001/C002 cognition boundary in stage 1
+    "神魂残留", "浊气", "门芯", "沉睡之物", "异界神魂", "阴阳裂隙", "沉碳界法则",
+    # modern/foreign vocabulary that breaks the village voice
+    "invisible", "双轨监控", "环境感知器", "人设",
+]
 STAGE2_FORBIDDEN = [
     "人皇鼎碎片完整真相", "仙庭旧部身份", "摄魂阁人造飞升",
     "李淳前世全貌", "太上养魂经完整传承", "血冥教逆炼心魔",

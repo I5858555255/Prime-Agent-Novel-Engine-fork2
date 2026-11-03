@@ -28,9 +28,22 @@ CONTINUE_TEMPLATE = """你是本小说的正文续写者。以下是已完成部
 - 遵守全部资料规则（认知边界、对话意图、场景间连续性、伏笔尺度）。
 - 只输出续写的新增正文段落，不要重复已完成部分，不要添加任何标签或说明。
 - 续写结束后，落在章节简写的终点状态。
-
+{forbidden_terms}
 {materials}
 """
+
+
+def _forbidden_terms_block(chapter: int) -> str:
+    from .accept_check import stage_forbidden_terms
+    terms = stage_forbidden_terms(chapter)
+    if not terms:
+        return ""
+    return (
+        "\n【认知边界禁词】本章正文中不得出现以下术语（违反即验收阻断）：\n"
+        + "\n".join(f"- {t}" for t in terms)
+        + "\n如需描述相关现象，改用中性观察语言（如呼吸节奏、气息起伏、生理反应），"
+          "不得引用修炼机制名词。正文中不得出现“主线第N天”等元数据标签。\n"
+    )
 
 
 def _llm(base_url: str, api_key: str, model: str, messages: list[dict],
@@ -61,7 +74,8 @@ def expand_until_range(package: Path, base_url: str, api_key: str, model: str,
     else:
         raw = _llm(base_url, api_key, model,
                    [{"role": "system",
-                     "content": "你是专业小说正文扩写者。严格遵守所有资料规则。只输出纯正文，不加任何标签或说明。"},
+                     "content": "你是专业小说正文扩写者。严格遵守所有资料规则。只输出纯正文，不加任何标签或说明。"
+                                + _forbidden_terms_block(manifest.get("chapter", 0))},
                     {"role": "user", "content": prompt_text}],
                    max_tokens=10000, temperature=0.85)
 
@@ -82,6 +96,7 @@ def expand_until_range(package: Path, base_url: str, api_key: str, model: str,
         remaining = min(hi, target) - han
         cont_prompt = CONTINUE_TEMPLATE.format(existing=prose, target=target,
                                                current=han, remaining=remaining,
+                                               forbidden_terms=_forbidden_terms_block(manifest.get("chapter", 0)),
                                                materials=materials)
         continuation = _llm(base_url, api_key, model,
                             [{"role": "system", "content": "你是小说正文续写者。只输出新增正文，不重复已有内容。"},
