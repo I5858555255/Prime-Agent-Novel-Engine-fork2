@@ -122,7 +122,8 @@ def export_chapter(store, number, canon, config):
                 "expanded_target_han": plan["expanded_han"], "expanded_range": [config.expanded_min, config.expanded_max],
                 "condensed_han": han_count(narrative), "review": record["review"],
                 "external_dependencies": [], "external_expansion_verified": False,
-                "optional_tools": {"count_han.py": "Python3标准库，无项目依赖"},
+                "optional_tools": {"count_han.py": "Python3标准库，无项目依赖",
+                                    "accept_check.py": "程序验收器，纯标准库；python accept_check.py <pkg> <正文文件> [--out 报告.json]"},
                 "approved_style_sample_provided": False,
                 "files": {name: hashlib.sha256(content.encode()).hexdigest() for name, content in files.items()}}
     atomic_write(directory / "manifest.json", dumps(manifest))

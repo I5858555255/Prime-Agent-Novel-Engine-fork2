@@ -465,7 +465,7 @@ def main(argv=None):
             pass
 
     parser = argparse.ArgumentParser(description="Generate independently reviewed condensed chapters and external LLM packages")
-    parser.add_argument("command", choices=("run", "status", "export", "archive", "verify", "compile", "invalidate", "extend-budget", "accept-check"))
+    parser.add_argument("command", choices=("run", "status", "export", "archive", "verify", "compile", "invalidate", "extend-budget", "accept-check", "mark-verified", "expand", "dual-check"))
     parser.add_argument("--source", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--end", type=int, default=3800)
@@ -477,6 +477,8 @@ def main(argv=None):
     parser.add_argument("--extra-calls", type=int, default=0)
     parser.add_argument("--extra-seconds", type=int, default=0)
     parser.add_argument("--prose", type=Path, help="model-generated prose file for accept-check")
+    parser.add_argument("--llm-report", type=Path, help="optional LLM acceptance report for mark-verified")
+    parser.add_argument("--max-rounds", type=int, default=5, help="max continue-rounds for expand")
     parser.add_argument("--refresh-uncommitted-canon", action="store_true",
                         help="adopt corrected canon only before any chapter commits; retain all request budgets")
     args = parser.parse_args(argv)
@@ -563,6 +565,39 @@ def main(argv=None):
             report = accept_run(pkg, args.prose, pkg / "accept_report.json")
             print(dumps(report), flush=True)
             exit_code = 0 if report["pass"] else 1
+        elif args.command == "dual-check":
+            from novel_engine.condensed.dual_check import dual_check as dual_run
+            if args.from_chapter is None or args.prose is None:
+                raise ValueError("dual-check requires --from-chapter N and --prose F")
+            pkg = args.output / "expansion" / f"chapter_{args.from_chapter:04d}"
+            merged = dual_run(pkg, args.prose, out_path=pkg / "dual_check_report.json")
+            print(dumps(merged), flush=True)
+            exit_code = 0 if merged["verdict"] == "PASS" else 1
+        elif args.command == "expand":
+            from novel_engine.condensed.expand_run import expand_until_range
+            from novel_engine.condensed.providers import load_provider
+            import os
+            if args.from_chapter is None:
+                raise ValueError("expand requires --from-chapter N")
+            pkg = args.output / "expansion" / f"chapter_{args.from_chapter:04d}"
+            base_url, key_env, model = load_provider("polish")
+            key = os.environ.get(key_env, "")
+            if not key:
+                raise ValueError(f"missing env var {key_env}")
+            summary = expand_until_range(pkg, base_url=base_url, api_key=key, model=model,
+                                         initial_draft=args.prose, max_rounds=args.max_rounds)
+            print(dumps(summary), flush=True)
+            exit_code = 0 if summary["pass"] else 1
+        elif args.command == "mark-verified":
+            from novel_engine.condensed.mark_verified import mark_verified
+            if args.from_chapter is None:
+                raise ValueError("mark-verified requires --from-chapter N")
+            pkg = args.output / "expansion" / f"chapter_{args.from_chapter:04d}"
+            program = pkg / "accept_report.json"
+            if not program.exists():
+                raise ValueError(f"missing program report {program}; run accept-check first")
+            manifest = mark_verified(pkg, program, args.llm_report)
+            print(dumps({"chapter": manifest["chapter"], "verification": manifest["verification"]}), flush=True)
         print(dumps(pipeline.status()), flush=True)
         atomic_write(args.output / "status.json", dumps(pipeline.status()))
     finally:

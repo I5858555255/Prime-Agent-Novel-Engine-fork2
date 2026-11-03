@@ -12,7 +12,31 @@ import re
 import sys
 from pathlib import Path
 
+try:
+    from novel_engine.core.env_bootstrap import load_project_env
+except ImportError:  # running standalone from inside a package directory
+    def load_project_env() -> None:
+        pass
+
 HAN = re.compile(r"[\u3007\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\U00020000-\U0002fa1f\U00030000-\U000323af]")
+
+# Cognition-boundary forbidden terms by stage. Stage boundaries follow
+# character_bible.md C001: stage 1 = chapters 1-316 (no cultivation body-feel),
+# stage 2 = 317+ (after N015 ch316 the protagonist confirms the power exists
+# and cultivation practice terms become legitimate, so those words stop being
+# blocking; only hard spoilers remain).
+STAGE1_MAX_CHAPTER = 316
+STAGE1_FORBIDDEN = ["气感", "体内暖意", "引气", "吐纳", "灵力运转", "周天", "丹田"]
+STAGE2_FORBIDDEN = [
+    "人皇鼎碎片完整真相", "仙庭旧部身份", "摄魂阁人造飞升",
+    "李淳前世全貌", "太上养魂经完整传承", "血冥教逆炼心魔",
+    "乾武帝赎罪动机坐实", "墟界坐标",
+]
+
+
+def stage_forbidden_terms(chapter: int) -> list[str]:
+    return STAGE1_FORBIDDEN if chapter <= STAGE1_MAX_CHAPTER else STAGE2_FORBIDDEN
+
 
 # Metadata-leak patterns: scene ids, tags, budget labels that must not appear in prose.
 METADATA_PATTERNS = [
@@ -78,11 +102,16 @@ def check_prose(prose: str, card: dict, manifest: dict) -> dict:
             entry = {"check": "metadata_leak", "detail": f"'{label}' x{len(hits)}", "samples": hits[:3]}
             (blocking if severity == "blocking" else warnings).append(entry)
 
-    # 3. Cognition-boundary forbidden words (stage-1: no cultivation body-feel terms)
-    stage1_terms = ["气感", "体内暖意", "引气", "吐纳", "灵力运转", "周天", "丹田"]
-    hits = [t for t in stage1_terms if t in prose]
+    # 3. Cognition-boundary forbidden terms (stage-dependent). Stage 1
+    #    (ch<=316): no cultivation body-feel terms at all. Stage 2: body-feel
+    #    terms are legitimate; only late-game spoilers are blocking.
+    chapter = manifest.get("chapter", 0)
+    forbidden = stage_forbidden_terms(chapter)
+    hits = [t for t in forbidden if t in prose]
     if hits:
-        blocking.append({"check": "cognition_boundary", "detail": f"stage-1 forbidden body-feel terms: {hits}"})
+        blocking.append({"check": "cognition_boundary",
+                         "detail": f"stage-forbidden terms (ch{chapter}): {hits}",
+                         "stage": 1 if chapter <= STAGE1_MAX_CHAPTER else 2})
 
     # 5. Beat coverage heuristic: each beat's core action phrase must be echoed
     #    somewhere in the prose. CJK is not space-delimited, so use the longest
@@ -121,6 +150,7 @@ def run(package_dir: Path, prose_path: Path, out_path: Path | None = None) -> di
 
 
 def main(argv=None) -> int:
+    load_project_env()
     parser = argparse.ArgumentParser(description="Programmatic acceptance check for expanded prose")
     parser.add_argument("package", type=Path, help="expansion package directory, e.g. expansion/chapter_0001")
     parser.add_argument("prose", type=Path, help="UTF-8 file containing the model-generated prose")
