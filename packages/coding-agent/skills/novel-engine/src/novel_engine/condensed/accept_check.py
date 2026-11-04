@@ -34,6 +34,9 @@ STAGE1_FORBIDDEN = [
     # pseudo-scientific mechanism phrases (infant/protagonist can't "mark" or "reflect" like a system)
     "感官阈值", "标记为", "安全域", "条件反射", "监控网", "阈值",
     "微扰", "滞涩感", "神经反射",
+    # data-science vocabulary: the C002 observer stays vague; no tables,
+    # variables, or precise-feedback language
+    "变量", "表格", "精准反馈", "共振", "频率", "数据化", "建模",
     # setting leaks that cross the C001/C002 cognition boundary in stage 1
     "神魂残留", "浊气", "门芯", "沉睡之物", "异界神魂", "阴阳裂隙", "沉碳界法则",
     # modern/foreign vocabulary that breaks the village voice
