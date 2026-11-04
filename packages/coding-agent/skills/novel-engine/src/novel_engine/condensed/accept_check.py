@@ -38,6 +38,9 @@ STAGE1_FORBIDDEN = [
     "神魂残留", "浊气", "门芯", "沉睡之物", "异界神魂", "阴阳裂隙", "沉碳界法则",
     # modern/foreign vocabulary that breaks the village voice
     "invisible", "双轨监控", "环境感知器", "人设",
+    # author-layer mechanism terms: legitimate in beat.cause (author evidence),
+    # forbidden in beat.action/outcome (perception layer) and in prose.
+    "神魂", "阴阳裂隙", "沉碳界法则", "沉碳界", "异界神魂",
 ]
 STAGE2_FORBIDDEN = [
     "人皇鼎碎片完整真相", "仙庭旧部身份", "摄魂阁人造飞升",
@@ -47,7 +50,27 @@ STAGE2_FORBIDDEN = [
 
 
 def stage_forbidden_terms(chapter: int) -> list[str]:
-    return STAGE1_FORBIDDEN if chapter <= STAGE1_MAX_CHAPTER else STAGE2_FORBIDDEN
+    """Blocking terms for prose acceptance at this chapter.
+
+    Stage 1 (ch <= STAGE1_MAX_CHAPTER): the full list. Stage 2 keeps only
+    late-game spoilers and modern/foreign vocabulary; body-feel and
+    pseudo-scientific terms become legitimate after N015.
+    """
+    if chapter <= STAGE1_MAX_CHAPTER:
+        return list(dict.fromkeys(STAGE1_FORBIDDEN))
+    return [t for t in STAGE1_FORBIDDEN if t in STAGE2_FORBIDDEN]
+
+
+def perception_forbidden_terms(chapter: int) -> list[str]:
+    """Terms forbidden in beat action/outcome (perception layer) and in prose.
+
+    cause may legitimately keep author-layer mechanism terms as causal
+    evidence; action/outcome must stay in what the character can perceive.
+    Stage 2: no additional perception-layer blocking beyond hard spoilers.
+    """
+    if chapter <= STAGE1_MAX_CHAPTER:
+        return list(dict.fromkeys(STAGE1_FORBIDDEN))
+    return list(STAGE2_FORBIDDEN)
 
 
 # Metadata-leak patterns: scene ids, tags, budget labels that must not appear in prose.
@@ -138,6 +161,16 @@ def check_prose(prose: str, card: dict, manifest: dict) -> dict:
     if missing:
         warnings.append({"check": "beat_coverage",
                          "detail": f"beats whose key action phrase is absent: {missing}"})
+
+    # 6. POV drift: if the card declares multiple POV characters, warn the
+    #    reviewer to verify each interior-monologue passage matches its scene
+    #    card POV. (Heuristic: count declared POVs; the LLM acceptance layer
+    #    handles the semantic check.)
+    pocs = list({s.get("pov") for s in card.get("scenes", []) if s.get("pov")})
+    if len(pocs) > 1:
+        warnings.append({"check": "pov_drift",
+                         "detail": f"card declares {len(pocs)} POV characters {pocs}; "
+                                    "verify each interior-monologue passage matches its scene POV"})
 
     return {"blocking": blocking, "warnings": warnings, "info": info, "han": han}
 

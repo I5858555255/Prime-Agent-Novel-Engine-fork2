@@ -179,6 +179,12 @@ def validate_chapter(chapter, plan, state, previous_day, known_cast=()):
     day = chapter.get("story_day")
     if isinstance(day, bool) or not isinstance(day, int) or day < previous_day:
         errors.append("故事时间必须为不倒退的整数天；确有成长需标记实际经过天数")
+    # Title must not contain stage-forbidden terms (e.g. ch9 title "吐纳").
+    title = chapter.get("title", "")
+    from .accept_check import stage_forbidden_terms
+    forbidden_in_title = [t for t in stage_forbidden_terms(chapter.get("chapter", 1)) if t in title]
+    if forbidden_in_title:
+        errors.append(f"标题含认知边界禁词：{forbidden_in_title}")
     scenes = chapter.get("scenes")
     if not isinstance(scenes, list) or not 2 <= len(scenes) <= 6:
         return errors + ["需要2至6个完整场景"]
@@ -222,6 +228,14 @@ def validate_chapter(chapter, plan, state, previous_day, known_cast=()):
                 errors.append(f"场景{sid}事件引用无效")
             else:
                 coverage.update(refs)
+            # Perception-layer beats must not contain forbidden terms.
+            # cause may keep author-layer mechanism terms as causal evidence;
+            # action/outcome must stay in what the character can perceive.
+            from .accept_check import perception_forbidden_terms
+            perc_text = beat["action"] + beat["outcome"]
+            perc_hits = [t for t in perception_forbidden_terms(chapter.get("chapter", 1)) if t in perc_text]
+            if perc_hits:
+                errors.append(f"事件{beat['id']}感知层字段含禁词{perc_hits}，action/outcome须用中性观察语言")
     if coverage != event_ids:
         errors.append("章节任务中的必要事件未完整覆盖")
     for event in plan["events"]:
