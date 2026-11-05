@@ -182,7 +182,7 @@ def validate_chapter(chapter, plan, state, previous_day, known_cast=()):
     # Title must not contain stage-forbidden terms (e.g. ch9 title "吐纳").
     title = chapter.get("title", "")
     from .accept_check import stage_forbidden_terms
-    forbidden_in_title = [t for t in stage_forbidden_terms(chapter.get("chapter", 1)) if t in title]
+    forbidden_in_title = [t for t in stage_forbidden_terms(chapter.get("chapter", 1), subject=title) if t in title]
     if forbidden_in_title:
         errors.append(f"标题含认知边界禁词：{forbidden_in_title}")
     scenes = chapter.get("scenes")
@@ -216,7 +216,7 @@ def validate_chapter(chapter, plan, state, previous_day, known_cast=()):
         # mechanism/data terms in it leak downstream into the prose.
         from .accept_check import perception_forbidden_terms
         guidance = scene.get("expansion_guidance", "")
-        g_hits = [t for t in perception_forbidden_terms(chapter.get("chapter", 1)) if t in guidance]
+        g_hits = [t for t in perception_forbidden_terms(chapter.get("chapter", 1), subject=guidance) if t in guidance]
         if g_hits:
             errors.append(f"场景{sid}扩写指引含禁词{g_hits}，须用中性观察语言重写指引")
         items = scene.get("beats")
@@ -239,7 +239,7 @@ def validate_chapter(chapter, plan, state, previous_day, known_cast=()):
             # cause may keep author-layer mechanism terms as causal evidence;
             # action/outcome must stay in what the character can perceive.
             perc_text = beat["action"] + beat["outcome"]
-            perc_hits = [t for t in perception_forbidden_terms(chapter.get("chapter", 1)) if t in perc_text]
+            perc_hits = [t for t in perception_forbidden_terms(chapter.get("chapter", 1), subject=perc_text) if t in perc_text]
             if perc_hits:
                 errors.append(f"事件{beat['id']}感知层字段含禁词{perc_hits}，action/outcome须用中性观察语言")
     if coverage != event_ids:

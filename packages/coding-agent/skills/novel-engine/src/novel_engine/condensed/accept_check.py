@@ -59,28 +59,38 @@ STAGE2_FORBIDDEN = [
 ]
 
 
-def stage_forbidden_terms(chapter: int) -> list[str]:
+def stage_forbidden_terms(chapter: int, subject: str | None = None) -> list[str]:
     """Blocking terms for prose acceptance at this chapter.
 
-    Stage 1 (ch <= STAGE1_MAX_CHAPTER): the full list. Stage 2 keeps only
-    late-game spoilers and modern/foreign vocabulary; body-feel and
-    pseudo-scientific terms become legitimate after N015.
+    Authority = concept_unlocks.json (the same data source the full-mode
+    scope_gate uses), not a hand-maintained list:
+
+    - Every term claimed by a still-LOCKED concept is forbidden at
+      `chapter`, regardless of the static lists.
+    - Terms claimed by an UNLOCKED concept are released (e.g. 炼气 is
+      legitimate from ch317, 仙门 from ch653, 筑基 for 陆烬 from ch988).
+    - The static STAGE1/STAGE2 lists remain as a fallback for vocabulary
+      no concept claims (pseudo-scientific/data/modern words) plus the
+      hard late-game spoilers.
     """
-    if chapter <= STAGE1_MAX_CHAPTER:
-        return list(dict.fromkeys(STAGE1_FORBIDDEN))
-    return [t for t in STAGE1_FORBIDDEN if t in STAGE2_FORBIDDEN]
+    from .concept_terms import forbidden_for_chapter
+    base = (list(STAGE1_FORBIDDEN) if chapter <= STAGE1_MAX_CHAPTER else list(STAGE2_FORBIDDEN))
+    dynamic = forbidden_for_chapter(chapter, base, subject)
+    return list(dict.fromkeys(dynamic))
 
 
-def perception_forbidden_terms(chapter: int) -> list[str]:
+def perception_forbidden_terms(chapter: int, subject: str | None = None) -> list[str]:
     """Terms forbidden in beat action/outcome (perception layer) and in prose.
 
     cause may legitimately keep author-layer mechanism terms as causal
     evidence; action/outcome must stay in what the character can perceive.
-    Stage 2: no additional perception-layer blocking beyond hard spoilers.
+    Driven by concept_unlocks.json: locked-concept terms are forbidden at
+    this chapter; unlocked-concept terms are released. The `subject` text
+    (the beat itself) is used for character-restricted concepts.
     """
-    if chapter <= STAGE1_MAX_CHAPTER:
-        return list(dict.fromkeys(STAGE1_FORBIDDEN))
-    return list(STAGE2_FORBIDDEN)
+    from .concept_terms import forbidden_for_chapter
+    base = (list(STAGE1_FORBIDDEN) if chapter <= STAGE1_MAX_CHAPTER else list(STAGE2_FORBIDDEN))
+    return forbidden_for_chapter(chapter, base, subject)
 
 
 # Metadata-leak patterns: scene ids, tags, budget labels that must not appear in prose.
@@ -147,11 +157,13 @@ def check_prose(prose: str, card: dict, manifest: dict) -> dict:
             entry = {"check": "metadata_leak", "detail": f"'{label}' x{len(hits)}", "samples": hits[:3]}
             (blocking if severity == "blocking" else warnings).append(entry)
 
-    # 3. Cognition-boundary forbidden terms (stage-dependent). Stage 1
-    #    (ch<=316): no cultivation body-feel terms at all. Stage 2: body-feel
-    #    terms are legitimate; only late-game spoilers are blocking.
+    # 3. Cognition-boundary forbidden terms, driven by concept_unlocks.json
+    #    (authoritative data source, shared with the full-mode scope_gate)
+    #    plus the static fallback lists. Locked-concept terms are forbidden
+    #    at this chapter; unlocked-concept terms are released. The prose
+    #    itself is the subject for character-restricted concepts.
     chapter = manifest.get("chapter", 0)
-    forbidden = stage_forbidden_terms(chapter)
+    forbidden = stage_forbidden_terms(chapter, subject=prose)
     hits = [t for t in forbidden if t in prose]
     if hits:
         blocking.append({"check": "cognition_boundary",
