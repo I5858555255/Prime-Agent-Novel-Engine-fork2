@@ -177,6 +177,18 @@ def check_prose(prose: str, card: dict, manifest: dict) -> dict:
                          "detail": f"card declares {len(pocs)} POV characters {pocs}; "
                                     "verify each interior-monologue passage matches its scene POV"})
 
+    # 7. Infant POV self-analysis: block self-awareness / logical-synthesis
+    #    phrases that are impossible for a month-age < 3 character.
+    INFANT_SELF_AWARENESS = [
+        "他意识到", "她意识到", "他明白", "她明白", "他清楚自己", "她清楚自己",
+        "这意味着", "这说明", "他记得那个", "他清楚这是", "他明白自己", "他意识到自己",
+    ]
+    self_hits = [p for p in INFANT_SELF_AWARENESS if p in prose]
+    if self_hits:
+        blocking.append({"check": "infant_self_awareness",
+                         "detail": f"infant POV self-analysis phrases: {self_hits}",
+                         "samples": self_hits[:3]})
+
     return {"blocking": blocking, "warnings": warnings, "info": info, "han": han}
 
 
