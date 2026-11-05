@@ -212,6 +212,13 @@ def validate_chapter(chapter, plan, state, previous_day, known_cast=()):
             errors.append(f"场景{sid}扩写预算必须至少300汉字")
         else:
             total += words
+        # Expansion guidance feeds the expansion LLM as source material;
+        # mechanism/data terms in it leak downstream into the prose.
+        from .accept_check import perception_forbidden_terms
+        guidance = scene.get("expansion_guidance", "")
+        g_hits = [t for t in perception_forbidden_terms(chapter.get("chapter", 1)) if t in guidance]
+        if g_hits:
+            errors.append(f"场景{sid}扩写指引含禁词{g_hits}，须用中性观察语言重写指引")
         items = scene.get("beats")
         if not isinstance(items, list) or not items:
             errors.append(f"场景{sid}缺少具体事件链")
@@ -231,7 +238,6 @@ def validate_chapter(chapter, plan, state, previous_day, known_cast=()):
             # Perception-layer beats must not contain forbidden terms.
             # cause may keep author-layer mechanism terms as causal evidence;
             # action/outcome must stay in what the character can perceive.
-            from .accept_check import perception_forbidden_terms
             perc_text = beat["action"] + beat["outcome"]
             perc_hits = [t for t in perception_forbidden_terms(chapter.get("chapter", 1)) if t in perc_text]
             if perc_hits:

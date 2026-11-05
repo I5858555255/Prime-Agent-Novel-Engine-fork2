@@ -33,19 +33,24 @@ STAGE1_FORBIDDEN = [
     "气感", "体内暖意", "引气", "吐纳", "灵力运转", "周天", "丹田",
     # pseudo-scientific mechanism phrases (infant/protagonist can't "mark" or "reflect" like a system)
     "感官阈值", "标记为", "安全域", "条件反射", "监控网", "阈值",
-    "微扰", "滞涩感", "神经反射",
+    "微扰", "滞涩感", "凝滞感", "扰动", "神经反射",
     # data-science vocabulary: the C002 observer stays vague; no tables,
     # variables, or precise-feedback language
-    "变量", "表格", "精准反馈", "共振", "频率", "数据化", "建模",
+    "变量", "表格", "精准反馈", "共振", "频率", "数据化", "建模", "数据",
+    # mechanism/body terms that cross the C001/C002 cognition boundary
+    "气机", "余波", "排异", "同频", "调息", "潮气", "浊气",
     # C002 forbidden to name the fog-forbidden-zone entity in stage 1
     "巨大存在",
     # setting leaks that cross the C001/C002 cognition boundary in stage 1
-    "神魂残留", "浊气", "门芯", "沉睡之物", "异界神魂", "阴阳裂隙", "沉碳界法则",
+    "神魂残留", "门芯", "沉睡之物", "异界神魂", "阴阳裂隙", "沉碳界法则",
     # modern/foreign vocabulary that breaks the village voice
     "invisible", "双轨监控", "环境感知器", "人设",
     # author-layer mechanism terms: legitimate in beat.cause (author evidence),
     # forbidden in beat.action/outcome (perception layer) and in prose.
     "神魂", "阴阳裂隙", "沉碳界法则", "沉碳界", "异界神魂",
+    # self-awareness / logical-synthesis phrases forbidden in perception fields
+    # and in prose at month-age < 3
+    "意识到", "这意味着", "这说明", "清楚自己", "明白自己", "意识到自己",
 ]
 STAGE2_FORBIDDEN = [
     "人皇鼎碎片完整真相", "仙庭旧部身份", "摄魂阁人造飞升",
@@ -181,7 +186,8 @@ def check_prose(prose: str, card: dict, manifest: dict) -> dict:
     #    phrases that are impossible for a month-age < 3 character.
     INFANT_SELF_AWARENESS = [
         "他意识到", "她意识到", "他明白", "她明白", "他清楚自己", "她清楚自己",
-        "这意味着", "这说明", "他记得那个", "他清楚这是", "他明白自己", "他意识到自己",
+        "他明白自己", "她明白自己", "他意识到自己", "她意识到自己",
+        "这意味着", "这说明", "他记得那个", "她记得那个", "他清楚这是", "她清楚这是",
     ]
     self_hits = [p for p in INFANT_SELF_AWARENESS if p in prose]
     if self_hits:
