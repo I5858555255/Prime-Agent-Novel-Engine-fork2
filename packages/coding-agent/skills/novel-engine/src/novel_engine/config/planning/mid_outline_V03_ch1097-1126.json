@@ -1,0 +1,313 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      1097,
+      1126
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-28T10:39:41+00:00",
+    "batch_size": 6,
+    "status": "approved"
+  },
+  "entries": {
+    "1097": {
+      "chapter": 1097,
+      "core_event": "太虚仙门内院考核结果公布，陆烬因出身低微在资源分配中遭遇隐性歧视",
+      "characters": [
+        "C003",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1098": {
+      "chapter": 1098,
+      "core_event": "陆烬通过观察发现测试规则中存在针对旁支与外门弟子的隐藏门槛",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1099": {
+      "chapter": 1099,
+      "core_event": "《太上养魂经》入门残卷显现，实则暗藏灵魂封印机制被识破",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1100": {
+      "chapter": 1100,
+      "core_event": "摄魂阁密探潜入内院，对神魂特异的陆烬进行初步试探与标记",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1101": {
+      "chapter": 1101,
+      "core_event": "各脉弟子合作破局，但鄙视链导致陆烬在关键资源争夺中被孤立",
+      "characters": [
+        "C003",
+        "C004",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1102": {
+      "chapter": 1102,
+      "core_event": "陆烬利用残卷缺陷反制陷阱，暂时摆脱摄魂阁监视并进入更深秘境",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1103": {
+      "chapter": 1103,
+      "core_event": "陆烬在太虚仙门外闲逛，误入一条废弃的矿洞通道，发现墙壁上刻有模糊的摄魂阁徽记",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1104": {
+      "chapter": 1104,
+      "core_event": "摄魂阁暗探发现陆烬进入矿洞，试图灭口但未成功，陆烬凭直觉躲入石缝中目睹交易",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1105": {
+      "chapter": 1105,
+      "core_event": "陆烬在慌乱中咬破嘴唇，伤口处的血液与矿洞残留的古老禁制发生微弱反应，引动矿内异象",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1106": {
+      "chapter": 1106,
+      "core_event": "仙门巡逻队发现矿洞异象，封矿布防，陆烬被迫滞留并在附近废墟中捡到一块刻有阵图的兽骨",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1107": {
+      "chapter": 1107,
+      "core_event": "陆烬研究兽骨阵图，发现其与皇室秘藏中的鹿台阵图残卷（F001）风格相似，产生认知冲突",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1108": {
+      "chapter": 1108,
+      "core_event": "陆烬离开矿区返回住处，途中遇到一名眼神空洞的神魂特异者，对方无意识地对陆烬的异常神魂波动产生共鸣",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1109": {
+      "chapter": 1109,
+      "core_event": "太虚仙门内部各脉资源分配不公引发低阶弟子冲突，陆烬旁观",
+      "characters": [
+        "C001",
+        "C005",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1110": {
+      "chapter": 1110,
+      "core_event": "《太上养魂经》残卷中隐藏的养魂法门被高阶长老察觉异常",
+      "characters": [
+        "C005",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1111": {
+      "chapter": 1111,
+      "core_event": "摄魂阁探子在仙门边缘试探，陆烬因神魂特异被间接感知到波动",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1112": {
+      "chapter": 1112,
+      "core_event": "仙门考核中出身歧视导致陆烬遭遇不公评判，展现规则僵化",
+      "characters": [
+        "C001",
+        "C005",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1113": {
+      "chapter": 1113,
+      "core_event": "陆烬与荒尾建立信任的第二步验证，涉及妖族古老预言残章",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1114": {
+      "chapter": 1114,
+      "core_event": "太虚仙门高层会议讨论摄魂阁异动，陆烬在旁听到组织寻子线索",
+      "characters": [
+        "C001",
+        "C005",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1115": {
+      "chapter": 1115,
+      "core_event": "陆烬在宗门演武场目睹高灵根弟子对低灵根者行使特权，引发旁听弟子对等级制度质疑",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1116": {
+      "chapter": 1116,
+      "core_event": "陆烬被分配至杂役峰进行基础劳作，因动作协调性极强引起负责巡查的低阶弟子额外关注",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1117": {
+      "chapter": 1117,
+      "core_event": "陆烬在清理宗门废丹炉时，发现炉底残留着一枚刻有不明符文的黑玉珠，暂时藏于袖中",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1118": {
+      "chapter": 1118,
+      "core_event": "陆烬在夜间通过神魂感知隐约察觉黑玉珠内的微缩阵图信息，其神魂异常敏感导致感知范围远超常人",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1119": {
+      "chapter": 1119,
+      "core_event": "陆烬向陈老根询问关于黑玉珠中阵图碎片的来历，陈老根透露宗门高层对“异常神魂”存在秘密考察机制",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1120": {
+      "chapter": 1120,
+      "core_event": "陆烬尝试在安全距离外以神魂共鸣激活黑玉珠，未引起外部察觉，但在遗迹边缘感应到一丝与自身神魂属性不同的古老回响",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1121": {
+      "chapter": 1121,
+      "core_event": "陆烬跟随荒尾深入雾隐村外围迷雾，遭遇初阶妖兽伏击，荒尾展示妖族基础御敌手段",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1122": {
+      "chapter": 1122,
+      "core_event": "陆烬在仙门演武场旁观高阶层弟子试法，目睹资源分配不公引发的细微裂痕",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1123": {
+      "chapter": 1123,
+      "core_event": "二人搜寻遗迹入口，发现上古阵法残片，陆烬下意识靠近时产生轻微空间扭曲感",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1124": {
+      "chapter": 1124,
+      "core_event": "荒尾验证陆烬对异动的反应，发现其感知阈值异常但无法确定是否属于神魂特异",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1125": {
+      "chapter": 1125,
+      "core_event": "摄魂阁暗探潜入仙门外围试探神魂特异者，被陈老根察觉并温和驱离",
+      "characters": [
+        "C001",
+        "C002",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1126": {
+      "chapter": 1126,
+      "core_event": "荒尾决定带陆烬进入遗迹深处，约定若遇危险陆烬需保持静默观察，建立初步协作规则",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

@@ -1,0 +1,305 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      1157,
+      1186
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-29T04:53:17+00:00",
+    "batch_size": 6,
+    "status": "approved"
+  },
+  "entries": {
+    "1157": {
+      "chapter": 1157,
+      "core_event": "陆烬于宗门试炼场旁旁观高阶法阵推演，初触天地法则碎片",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1158": {
+      "chapter": 1158,
+      "core_event": "同门天骄因出身鄙视陆烬，陆烬以基础符箓巧妙化解挑衅",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1159": {
+      "chapter": 1159,
+      "core_event": "陆烬在藏经阁发现《太上养魂经》残卷提及神魂跨界之秘",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1160": {
+      "chapter": 1160,
+      "core_event": "陆烬尝试理解残卷中关于神魂双重性的隐喻，内心产生疑惑",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1161": {
+      "chapter": 1161,
+      "core_event": "摄魂阁暗探潜入宗门外围，监视神魂特异者，未直接接触陆烬",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1162": {
+      "chapter": 1162,
+      "core_event": "陆烬夜间梦游至禁地边缘，感应到远古遗迹的一丝微弱余韵",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1163": {
+      "chapter": 1163,
+      "core_event": "太虚仙门内门弟子在演武场比试，陆烬旁观时感应到不同脉系对资源分配的不公",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1164": {
+      "chapter": 1164,
+      "core_event": "陆烬因出身凡人被同辈讥讽，陈老根旧事被翻出，陆烬压抑怒气未发作",
+      "characters": [
+        "C001",
+        "C002",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1165": {
+      "chapter": 1165,
+      "core_event": "太虚仙门长老提及《太上养魂经》为残卷，暗示高阶功法被高层垄断",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1166": {
+      "chapter": 1166,
+      "core_event": "摄魂阁暗探在仙门交易区收买神魂特异者，陆烬察觉异样但未暴露",
+      "characters": [
+        "C001",
+        "C006",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1167": {
+      "chapter": 1167,
+      "core_event": "陆烬在仙门藏书阁查阅典籍，发现各脉鄙视链背后的资源争夺记录",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1168": {
+      "chapter": 1168,
+      "core_event": "陆烬在仙门演武场旁观高阶阵法推演，被摄魂阁探子暗中观察神魂波动",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1169": {
+      "chapter": 1169,
+      "core_event": "陈老根在集市听到关于雾隐村外迷雾边缘新现的古老遗迹传闻",
+      "characters": [
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1170": {
+      "chapter": 1170,
+      "core_event": "陆烬在遗迹外围无意触碰残破石柱，感应到一丝极古老的余韵",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1171": {
+      "chapter": 1171,
+      "core_event": "陈老根察觉陆烬精神波动异常，决定暂留原地观察并警惕周围修士动向",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1172": {
+      "chapter": 1172,
+      "core_event": "有仙门落选弟子在遗迹附近搜寻机缘，对陈老根父子产生好奇与试探",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1173": {
+      "chapter": 1173,
+      "core_event": "陆烬展现出对迷雾中异物的本能亲近，引来一名自称寻找神魂特异者的散修关注",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1174": {
+      "chapter": 1174,
+      "core_event": "陈老根为保护陆烬，利用呼吸法残篇技巧制造幻象混淆对方，趁机撤退",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1175": {
+      "chapter": 1175,
+      "core_event": "陆烬在太虚仙门外围集市听到关于摄魂阁收买神魂特异者的传闻",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1176": {
+      "chapter": 1176,
+      "core_event": "陆烬参与入门考核，因表现平庸被外门弟子轻视，内心隐忍不发",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1177": {
+      "chapter": 1177,
+      "core_event": "陈老根旧识在仙门内提及曾见有人高价收购异常神魂孩童，暗示势力存在",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1178": {
+      "chapter": 1178,
+      "core_event": "陆烬在藏书阁借阅基础丹书时，注意到某古籍边缘夹有皇室秘藏的七窍碑残页碎片",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1179": {
+      "chapter": 1179,
+      "core_event": "陆烬夜间静修时发现迷雾边缘有一缕极古老气息，引发轻微神魂震荡",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1180": {
+      "chapter": 1180,
+      "core_event": "太虚仙门各脉年轻弟子联合排挤陆烬，陆烬以冷静态度应对，赢得部分中立者关注",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1181": {
+      "chapter": 1181,
+      "core_event": "陆烬在太虚仙门外围执行低阶采药任务，因出身被同门暗中阻挠",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1182": {
+      "chapter": 1182,
+      "core_event": "陆烬意外撞见内门弟子私底下交换资源，暴露仙门内部鄙视链",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1183": {
+      "chapter": 1183,
+      "core_event": "陆烬在废弃矿洞寻找稀有草药，误触上古封印残留的微弱余韵",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1184": {
+      "chapter": 1184,
+      "core_event": "陆烬回到住处复盘修炼瓶颈，陈老根传来书信提示外界势力异动",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1185": {
+      "chapter": 1185,
+      "core_event": "一名神秘商人进入仙门市场，以高价收购具有神魂波动的矿石",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1186": {
+      "chapter": 1186,
+      "core_event": "陆烬察觉神秘商人的异常，决定暗中跟踪并记录其行为模式",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

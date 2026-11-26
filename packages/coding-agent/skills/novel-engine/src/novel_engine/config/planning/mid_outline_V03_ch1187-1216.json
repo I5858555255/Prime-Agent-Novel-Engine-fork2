@@ -1,0 +1,310 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      1187,
+      1216
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-29T14:58:14+00:00",
+    "batch_size": 6,
+    "status": "approved"
+  },
+  "entries": {
+    "1187": {
+      "chapter": 1187,
+      "core_event": "陆烬在太虚外门杂役处整理丹房，偶遇负责监督的低阶真传弟子阿良，阿良对其眼神中透出的平静感到异样",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1188": {
+      "chapter": 1188,
+      "core_event": "外门弟子月考临近，阿良提醒陆烬注意灵根测试环节，透露测试台对非世家子弟存在隐性加成偏差",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1189": {
+      "chapter": 1189,
+      "core_event": "陆烬参与第一次正式灵根抽取测试，结果显示为罕见的“玄杂灵根”，引起周围弟子轻视与个别真传弟子的侧目",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1190": {
+      "chapter": 1190,
+      "core_event": "测试后陆烬被分配至低阶药田，阿良私下告知其《太上养魂经》入门残法的获取线索与门派内部资源分配潜规则",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1191": {
+      "chapter": 1191,
+      "core_event": "陆烬在药田劳作时，隐约感觉到体内某种古老残魂的微颤，但尚未形成清晰意识，周围同门对此反应漠然",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1192": {
+      "chapter": 1192,
+      "core_event": "陆烬利用空闲研读阿良所赠残法口诀，发现其中暗藏针对神魂稳固的隐语，初步建立修行认知框架",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1193": {
+      "chapter": 1193,
+      "core_event": "太虚仙门内门考核前夜，陆烬观察高阶弟子在演武场切磋时神识波动",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1194": {
+      "chapter": 1194,
+      "core_event": "陆烬在藏经阁外听到关于摄魂阁收买神魂特异者的传闻，感到不安",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1195": {
+      "chapter": 1195,
+      "core_event": "陆烬尝试以凡人视角解读《太上养魂经》残法中的静坐意象，被长老点化不可强求",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1196": {
+      "chapter": 1196,
+      "core_event": "仙门各脉弟子联合演练阵法，陆烬察觉阵法中隐含的资源分配不公规则",
+      "characters": [
+        "C001",
+        "C005",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1197": {
+      "chapter": 1197,
+      "core_event": "陆烬与陈老根短暂团聚，陈老根展示新练的呼吸法，陆烬仅旁观未动念",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1198": {
+      "chapter": 1198,
+      "core_event": "陆烬在独处时感应到体内神魂深处一抹古老余韵，疑惑其来源",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1199": {
+      "chapter": 1199,
+      "core_event": "陆烬在云台观闲庭信步，观察高阶弟子对低阶弟子的资源分配差异",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1200": {
+      "chapter": 1200,
+      "core_event": "外门管事暗中克扣下品丹药，被路过的陆烬无意间目睹其账簿漏洞",
+      "characters": [
+        "C001",
+        "C007",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1201": {
+      "chapter": 1201,
+      "core_event": "陆烬尝试将发现的漏洞告知同门，却因出身低微被嘲笑并遭到孤立",
+      "characters": [
+        "C001",
+        "C007",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1202": {
+      "chapter": 1202,
+      "core_event": "内门长老巡视，陆烬目睹其无视底层弟子诉求，仅表彰有背景的高材生",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1203": {
+      "chapter": 1203,
+      "core_event": "陆烬在古籍中查到《太上养魂经》残卷记载，发现其入门功法被刻意简化",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1204": {
+      "chapter": 1204,
+      "core_event": "神秘黑袍人夜访藏书楼，对陆烬产生好奇，暗示其神魂特质异常",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1205": {
+      "chapter": 1205,
+      "core_event": "太虚仙门杂役分配陆烬至藏经阁外围扫院，同阶弟子对其出身投来轻蔑目光",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1206": {
+      "chapter": 1206,
+      "core_event": "藏经阁老仆透露陆烬神魂波动异常，暗示其体质在仙门中属罕见孤例",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1207": {
+      "chapter": 1207,
+      "core_event": "陆烬在夜间清扫时，感应到藏经阁深处封印阵法传来微弱且古老的共鸣",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1208": {
+      "chapter": 1208,
+      "core_event": "外门大比预选名单公布，陆烬因无灵根记录被划入末等，需通过附加神魂测试",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1209": {
+      "chapter": 1209,
+      "core_event": "神魂测试中陆烬表现平平，但测魂器出现短暂凝滞，引起监考长老疑惑",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1210": {
+      "chapter": 1210,
+      "core_event": "陆烬因测试异常被单独留下问话，长老警告其不得对外透露测试结果",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1211": {
+      "chapter": 1211,
+      "core_event": "陆烬随队抵达太虚仙门外围，目睹各脉弟子对杂役出身者的傲慢与资源壁垒",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1212": {
+      "chapter": 1212,
+      "core_event": "测试初筛，陆烬因神魂微弱表象被归入末等，遭遇同门冷眼与排挤",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1213": {
+      "chapter": 1213,
+      "core_event": "陈老根旧部在仙门外围暗中传递消息，提及外界对神魂异动的非官方议论",
+      "characters": [
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1214": {
+      "chapter": 1214,
+      "core_event": "陆烬夜间独坐，感应到一股来自上层的细微窥探视线，心生警觉",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1215": {
+      "chapter": 1215,
+      "core_event": "陆烬在基础劳作中偶然触碰到一块残破碑页，引发轻微神魂共振，被高阶执事察觉",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1216": {
+      "chapter": 1216,
+      "core_event": "执事以'天赋异常'为由将陆烬单独看管，切断其与其他杂役的联系，孤立测试开始",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

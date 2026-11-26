@@ -1,0 +1,313 @@
+{
+  "meta": {
+    "vid": "V05",
+    "range": [
+      1817,
+      1846
+    ],
+    "node_chapters_in_range": [
+      1843
+    ],
+    "generated_at": "2026-11-08T21:49:04+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "last_run": true,
+      "result": "29/29 approved (ch1843 node chapter skipped by generator)",
+      "note": "14 boundary_notes rewritten to declarative; ch1818/ch1832 core_events fixed (A-route/concept hard); ch1844 anchor fixed; V05 forbidden 2/2 covered; concept_unlocks warning non-blocking"
+    }
+  },
+  "entries": {
+    "1817": {
+      "chapter": 1817,
+      "core_event": "陆烬研读鹿台阵图残卷，发现图中标注的人道气机运行路线与仙门功法截然不同",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1818": {
+      "chapter": 1818,
+      "core_event": "陆烬在屋内擦拭古玉残片时手感微凉，陈老根在院里独自练功收势，气色比前几日更稳，两人隔墙对望未说话",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1819": {
+      "chapter": 1819,
+      "core_event": "摄魂阁探子潜入雾隐村外围，搜寻神魂特异者，陆烬因残物遮蔽气息未被察觉",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1820": {
+      "chapter": 1820,
+      "core_event": "陆烬将七窍碑残页与鹿台阵图叠加对照，拼凑出第一层人道修炼的轮廓",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms 分阶段拼凑推进，仅陈老根整理残物线索，陆烬旁观，不一次性揭晓三件残物全部功用。",
+      "status": "approved"
+    },
+    "1821": {
+      "chapter": 1821,
+      "core_event": "人皇旧部后人现身，指出陆烬所持残物被仙门压制千年的真相，引发改革路线之争",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1822": {
+      "chapter": 1822,
+      "core_event": "陆烬尝试以人道法门引导气机，虽无静坐吐纳但神魂异象外泄，惊动太初议会余脉",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "铺垫：f003_shehun_ascension 与 f009_soul_duality 延伸线推进，只写神魂波动被暗处察觉的暗示，不坐实神魂外泄程度。",
+      "status": "approved"
+    },
+    "1823": {
+      "chapter": 1823,
+      "core_event": "陆烬在尘封卷宗中发现皇权受仙门压制的早期记载",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1824": {
+      "chapter": 1824,
+      "core_event": "激进派试图利用残物制造事端以推翻渐进改革",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1825": {
+      "chapter": 1825,
+      "core_event": "陆烬拼凑出鹿台阵图的一角，揭示部分人道修炼秘密",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1826": {
+      "chapter": 1826,
+      "core_event": "摄魂阁使者潜入凡间，暗中搜寻神魂特异者",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "铺垫：f003_shehun_ascension 埋设线延续，不直接回收，外部察觉仅停留在间接暗示层。",
+      "status": "approved"
+    },
+    "1827": {
+      "chapter": 1827,
+      "core_event": "陆烬与陈老根讨论呼吸法残篇，隐含人道独立于仙门",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1828": {
+      "chapter": 1828,
+      "core_event": "皇朝内部关于人道体系性质的争论白热化",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1829": {
+      "chapter": 1829,
+      "core_event": "朝中旧臣辩论皇权改制方案，陆烬旁观记录各方论据细节",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1830": {
+      "chapter": 1830,
+      "core_event": "陆烬在皇家秘库整理残卷，初次触碰七窍碑残页感知微弱异动",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms 阶段拼凑推进，只露单件残物局部特征，不越三件残物分阶段限制。",
+      "status": "approved"
+    },
+    "1831": {
+      "chapter": 1831,
+      "core_event": "摄魂阁暗子渗透宫禁，收买看守意图接近神魂特异者陆烬",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "铺垫：f003_shehun_ascension/f009_soul_duality 埋设节点前奏，仅间接察觉，不直接回收，不触发 f009。",
+      "status": "approved"
+    },
+    "1832": {
+      "chapter": 1832,
+      "core_event": "陈老根向陆烬口述旧时修炼经验，陆烬只在一旁记录要点，未做任何练习动作，二人约定日后再说",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1833": {
+      "chapter": 1833,
+      "core_event": "陆烬利用鹿台阵图残卷推演人道体系结构，发现其独立于仙门逻辑",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms 阶段拼凑与 N033 认知伏线暗示，严守三件残物分阶段揭示限制。",
+      "status": "approved"
+    },
+    "1834": {
+      "chapter": 1834,
+      "core_event": "朝野激进派发动小范围异动，陆烬暗中协助平息并标记关键人物",
+      "characters": [
+        "C001",
+        "C004",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1835": {
+      "chapter": 1835,
+      "core_event": "皇室秘藏中七窍碑残页显现新纹路，暗示人道修炼独立于仙门体系",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms 碎片功能局部揭示，不提前暴露人道独立核心设定，仅留悬念。",
+      "status": "approved"
+    },
+    "1836": {
+      "chapter": 1836,
+      "core_event": "陆烬与陈老根解读鹿台阵图残卷，发现其与仙门功法结构存在本质差异",
+      "characters": [
+        "C001",
+        "C002",
+        "C004"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms 残物拼凑阶段推进，防止一次性揭晓三件残物全部功用，只留单件线索。",
+      "status": "approved"
+    },
+    "1837": {
+      "chapter": 1837,
+      "core_event": "摄魂阁探子暗查雾隐村，试图识别陆烬神魂跨界特征",
+      "characters": [
+        "C005",
+        "C006"
+      ],
+      "boundary_note": "铺垫：f003_shehun_ascension/f009_soul_duality 回收节点前奏，敌方察觉仅到试探层，不坐实核心逻辑。",
+      "status": "approved"
+    },
+    "1838": {
+      "chapter": 1838,
+      "core_event": "人皇体系旧迹在边境出现异动，激进派试图通过残物发动人道改革",
+      "characters": [
+        "C007",
+        "C008"
+      ],
+      "boundary_note": "铺垫：激进路线冲突推进，不涉及太初议会完整历史，分离方案只露半页级暗示。",
+      "status": "approved"
+    },
+    "1839": {
+      "chapter": 1839,
+      "core_event": "陆烬在静观中模糊感应到‘人道大道’的轮廓，但未形成明确认知",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "铺垫：ch1843 高潮前奏，g004 等伏笔只写边缘异动，不提前回收，不触发跨卷设定。",
+      "status": "approved"
+    },
+    "1840": {
+      "chapter": 1840,
+      "core_event": "三方势力在鹿台遗址对峙，围绕残物归属与人道定义展开激烈辩论",
+      "characters": [
+        "C001",
+        "C003",
+        "C005",
+        "C007"
+      ],
+      "boundary_note": "铺垫：卷高潮前奏，人道非仙门替代品的结论不揭晓，只写争议与反证。",
+      "status": "approved"
+    },
+    "1841": {
+      "chapter": 1841,
+      "core_event": "陆烬整理‘人道’认知，与陈老根探讨凡人寿数限制，陈老根习练呼吸法强身，陆烬在旁观察并记录神魂特质变化",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1842": {
+      "chapter": 1842,
+      "core_event": "守夜人现身迷雾边缘，向陆烬揭露‘门之影’身份，暗示跨界神魂的特殊性，陆烬首次听闻摄魂阁对神魂特异者的关注",
+      "characters": [
+        "C001",
+        "C002",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 埋设前不提前揭示守夜人身份，f009_soul_duality 外部势力察觉仅到先遣级暗示。",
+      "status": "approved"
+    },
+    "1844": {
+      "chapter": 1844,
+      "core_event": "陆烬在迷雾边缘的远古遗迹感应到比所有残留意志更古老的余韵，对雾核的感应进一步加深",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 关键推进仅写更古老余韵的感应，分阶段拼凑残物功用限制内，不一次性揭晓。",
+      "status": "approved"
+    },
+    "1845": {
+      "chapter": 1845,
+      "core_event": "陆烬回归人间，向陈老根阐述‘人道’独立于成仙之外的理论雏形，陈老根结合呼吸法实践佐证凡人寿数可延展，二人达成初步共识",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1846": {
+      "chapter": 1846,
+      "core_event": "陆烬试图将‘人道’理论具象化，遭遇皇权象征背后的仙门压制痕迹，发现七窍碑残页中隐藏的非仙门文字，陆烬记录这一发现作为下一卷起点",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

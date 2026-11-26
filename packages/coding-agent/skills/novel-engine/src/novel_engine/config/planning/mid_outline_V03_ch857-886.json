@@ -1,0 +1,327 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      857,
+      886
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-25T13:33:01+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "last_run": true
+    }
+  },
+  "entries": {
+    "857": {
+      "chapter": 857,
+      "core_event": "陆烬在仙门集市发现高价回收神魂异象的铺子，引起太虚门内弟子侧目",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "858": {
+      "chapter": 858,
+      "core_event": "太虚真传弟子当众测试陆烬，发现其神魂波动异常但表象符合凡品标准",
+      "characters": [
+        "C001",
+        "C007",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "859": {
+      "chapter": 859,
+      "core_event": "陆烬因测试结果偏差被分至外门杂役区，遭遇资源分配不公的初期排挤",
+      "characters": [
+        "C001",
+        "C007",
+        "C008",
+        "C009"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "860": {
+      "chapter": 860,
+      "core_event": "杂役区中陆烬遇到同样出身卑微的同伴，双方试探性交换生存经验",
+      "characters": [
+        "C001",
+        "C009",
+        "C010"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "861": {
+      "chapter": 861,
+      "core_event": "陈老根旧识在杂役区现身，警告陆烬关于神魂特异性的潜在危险",
+      "characters": [
+        "C001",
+        "C002",
+        "C010"
+      ],
+      "boundary_note": "需人工确认：涉及f009_soul_duality埋设后的外部势力间接察觉风险，需确认是否触发禁止事项中'完全掌握'的边界",
+      "status": "approved"
+    },
+    "862": {
+      "chapter": 862,
+      "core_event": "陆烬在夜间尝试理解《太上养魂经》残篇，发现其中隐藏的非入门层级暗示",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "863": {
+      "chapter": 863,
+      "core_event": "陆烬在太虚仙门外门考核中因出身被高阶弟子轻视，暗中观察资源分配不公",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "864": {
+      "chapter": 864,
+      "core_event": "陆烬发现《太上养魂经》入门残法缺失关键步骤，向陈老根询问未果",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "865": {
+      "chapter": 865,
+      "core_event": "摄魂阁细作在宗门集市试探神魂特异者，陆烬察觉异常但对方未暴露身份",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "866": {
+      "chapter": 866,
+      "core_event": "陆烬在修炼残法时出现神魂微弱波动，被同脉师兄察觉并产生怀疑",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "需人工确认：接近f009_soul_duality埋设边界，虽未到702章但涉及特殊性间接察觉，需确认是否提前泄露",
+      "status": "approved"
+    },
+    "867": {
+      "chapter": 867,
+      "core_event": "陆烬整理《太上养魂经》残页，发现其中隐含非人类修仙者的笔迹特征",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "868": {
+      "chapter": 868,
+      "core_event": "外门弟子大比前，陆烬被分配至资源匮乏的下位洞府，引发对出身歧视的进一步思考",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "869": {
+      "chapter": 869,
+      "core_event": "陆烬在太虚仙门藏经阁底层整理旧卷，发现《太上养魂经》缺篇的目录索引，引发执事长老盘查",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "870": {
+      "chapter": 870,
+      "core_event": "同门师弟因出身寒微被剥夺外门试炼资格，陆烬旁观，凸显仙门资源分配的隐性歧视规则",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "871": {
+      "chapter": 871,
+      "core_event": "陆烬尝试理解呼吸法与神魂感知的细微联系，仅产生疑惑，未出现修炼动作",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "872": {
+      "chapter": 872,
+      "core_event": "太虚仙门各脉弟子进行合作任务考核，陆家残党后裔陆烬遭遇其他脉弟子的冷遇与暗中监视",
+      "characters": [
+        "C001",
+        "C006",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "873": {
+      "chapter": 873,
+      "core_event": "陆烬在深夜独自复盘白日被蔑视的经历，内心独白聚焦于生存策略而非力量渴望",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "874": {
+      "chapter": 874,
+      "core_event": "外门长老突然宣布调整《太上养魂经》传阅规则，陆烬被列入观察名单，气氛紧张",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "875": {
+      "chapter": 875,
+      "core_event": "陆烬在太虚仙门外门演武场遭遇同门针对，资源分配不均的表象初步显露",
+      "characters": [
+        "C001",
+        "C007",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "876": {
+      "chapter": 876,
+      "core_event": "掌教弟子公开羞辱出身凡尘的陆烬，加剧仙门各脉间的鄙视链与资源歧视",
+      "characters": [
+        "C001",
+        "C003",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "877": {
+      "chapter": 877,
+      "core_event": "陆烬在藏书阁研读《太上养魂经》残卷，发现其中隐晦的养魂秘法被刻意遮蔽",
+      "characters": [
+        "C001",
+        "C004",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "878": {
+      "chapter": 878,
+      "core_event": "外门长老私下试探陆烬神魂状况，陆烬以寻常神魂表现掩盖双魂特殊性，规避外部查探",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "879": {
+      "chapter": 879,
+      "core_event": "陆烬目睹一名外门弟子因神魂异常被强行带走，首次模糊感知到摄魂阁在仙门的隐秘行动",
+      "characters": [
+        "C001",
+        "C005",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "880": {
+      "chapter": 880,
+      "core_event": "陆烬利用门派考核机制中的漏洞，暗中获取一份关于神魂异动的密档，线索指向幕后组织",
+      "characters": [
+        "C001",
+        "C004",
+        "C007"
+      ],
+      "boundary_note": "需人工确认：接近f003/f009埋设边界（ch702）与ch848节点，且涉及gaining神魂异动信息，需确认是否违反“全貌揭露”禁止项",
+      "status": "approved"
+    },
+    "881": {
+      "chapter": 881,
+      "core_event": "陆烬在太虚仙门外院清理杂务，目睹各脉弟子对底层外门的傲慢态度",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "882": {
+      "chapter": 882,
+      "core_event": "陆烬在太虚仙门丹堂旁听到长老争执神魂资质，间接提及摄魂阁收买特异者的传闻",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "需人工确认：触及f003_shehun_ascension（植于702章）与f009_soul_duality（植于702章）的模糊线索边界，虽未达到702章的直接揭露程度，但涉及“摄魂阁”与“神魂特异”关键词，需确认是否提前泄露过多组织目的或全貌。",
+      "status": "approved"
+    },
+    "883": {
+      "chapter": 883,
+      "core_event": "仙门执事考核开始，陆烬因出身平凡被刻意分配至最末位的测灵仪前",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "884": {
+      "chapter": 884,
+      "core_event": "测灵结果异常微弱，引发外门弟子嘲笑，陆烬在压力下强行稳住心神",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "885": {
+      "chapter": 885,
+      "core_event": "一位清冷长老（C006）暗中关注陆烬，对其“神魂稳定度”产生兴趣，记录暗语",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "需人工确认：该长老身份是否关联摄魂阁（f003/f009边界），避免直接揭露组织全貌",
+      "status": "approved"
+    },
+    "886": {
+      "chapter": 886,
+      "core_event": "陆烬被通知进入内门预备营，陈老根赠送旧物作为护身符，暗示凡人视角的彻底告别",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

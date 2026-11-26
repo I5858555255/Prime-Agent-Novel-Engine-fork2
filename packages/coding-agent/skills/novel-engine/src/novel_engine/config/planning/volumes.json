@@ -1,4 +1,6 @@
 {
+  "_comment": "卷纲（单一权威源，换书去绑定核心）：id/title/chapter_range/theme/core_conflicts/climax_chapter 供引擎读；可选 outline_file（顶层）、outline_marker/intent_marker（每卷）让 chapter_director 按卷解析大纲/作者意图时只读这里、不再硬编码卷名与章号。换书时改本文件 + 各 bible/planning json 即可，代码零改动。",
+  "outline_file": "吸氧证道_V2_1_完整大纲.md",
   "volumes": [
     {
       "id": "V01",

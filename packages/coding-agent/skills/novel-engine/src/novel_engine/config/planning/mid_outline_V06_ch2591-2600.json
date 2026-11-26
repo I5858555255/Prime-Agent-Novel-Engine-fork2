@@ -1,0 +1,105 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      2591,
+      2600
+    ],
+    "node_chapters_in_range": [
+      2600
+    ],
+    "generated_at": "2026-11-12T09:50:08+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "9/9 approved",
+      "note": "V07 尾段(2591-2600); ch2600 节点章被生成器跳过(9非10); 5章 boundary_note 改陈述式(R23 护体红线, f001 皇室宝物边界, 卷高潮前奏); 锚点补齐; R22/R23 判例已生效"
+    }
+  },
+  "entries": {
+    "2591": {
+      "chapter": 2591,
+      "core_event": "陆烬梳理两界天道数据，发现迷雾禁区异变频率与肉身护阵波动存在隐秘共振",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：肉身保护机制（古玉结界+三才护魂阵）细节挖掘推进，严守 R23（护体之外漏洞不可忽略）约束，不暗示机制失效，细节描写仅在护体覆盖范围内，不构成外部漏洞风险。",
+      "status": "approved"
+    },
+    "2592": {
+      "chapter": 2592,
+      "core_event": "陈老根提及皇室秘藏中的古玉碎片，陆烬对照体内玉璧感应到微弱排斥反应",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms（F001，resolve@3035）核心宝物属性线索推进，严守边界不提前泄露皇室误读属性实质，仅写到谜团层。",
+      "status": "approved"
+    },
+    "2593": {
+      "chapter": 2593,
+      "core_event": "陆烬深入分析护魂阵防御盲区，发现仅在神魂撕裂瞬间存在纳秒级防护缺口",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：肉身保护机制（古玉结界+三才护魂阵）细节推进，严守 R23 红线，不构成'忽略机制外漏洞'违规，发现描写仅在护体覆盖范围内，不暗示外部漏洞实质。",
+      "status": "approved"
+    },
+    "2594": {
+      "chapter": 2594,
+      "core_event": "李淳介入对话，试图通过身份共鸣稳定陆烬情绪，却意外触发护阵二次过载",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2595": {
+      "chapter": 2595,
+      "core_event": "陆烬利用过载产生的能量逆流，定位到古玉结界内部残留的一抹非天道本源波动",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：古玉结界内部机制波动推进，严守 R23 边界，不暗示潜在外部漏洞，波动描写仅在护体覆盖范围内。",
+      "status": "approved"
+    },
+    "2596": {
+      "chapter": 2596,
+      "core_event": "陆烬记录数据后选择暂时封存此发现，转向关注ch2600前的墟界动向以规避风险",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2597": {
+      "chapter": 2597,
+      "core_event": "陆烬在探索中遭遇古玉结界微弱震荡，发现外部势力正在试探防护极限",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2598": {
+      "chapter": 2598,
+      "core_event": "李淳与陆烬身份撕裂引发心魔初现，双方在迷雾边缘发生激烈神识碰撞",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2599": {
+      "chapter": 2599,
+      "core_event": "陆烬通过解析心魔残留，短暂窥见沉沦界高层对天道布局的局部意图",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：卷高潮前奏（阴阳双界核心冲突揭示）推进，严守 R23（护体之外漏洞不可忽略）约束，未违反肉身保护机制漏洞忽略禁令，冲突揭示仅在护体覆盖范围内。",
+      "status": "approved"
+    }
+  }
+}

@@ -1,0 +1,307 @@
+{
+  "meta": {
+    "vid": "V02",
+    "range": [
+      677,
+      706
+    ],
+    "node_chapters_in_range": [
+      687,
+      702
+    ],
+    "generated_at": "2026-10-18T01:31:45+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "last_run": true
+    }
+  },
+  "entries": {
+    "677": {
+      "chapter": 677,
+      "core_event": "陆烬在云隐坊市闲逛时误入偏僻街区，被自称“游方郎中”的陌生人以测脉为名搭话试探",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "678": {
+      "chapter": 678,
+      "core_event": "陆烬察觉异常逃离，陈老根（若随行）或陆烬自行通过观察发现对方袖口有摄魂阁特有的灰色印记线索",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：ch687 N021 前不得完全揭露摄魂阁全貌，此处仅留 F003/F009 模糊线索",
+      "status": "approved"
+    },
+    "679": {
+      "chapter": 679,
+      "core_event": "陆烬为躲避追踪深入坊市深处，遇到正在处理一桩“神魂异变”案件的沈知微（C006 身份暗示）",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "680": {
+      "chapter": 680,
+      "core_event": "沈知微发现陆烬气息特殊但未深究，转而询问其近况，陆烬隐瞒两界神魂来源",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "需人工确认：确保未直接揭露陆烬两界神魂被完全掌握，符合 F009 模糊边界",
+      "status": "approved"
+    },
+    "681": {
+      "chapter": 681,
+      "core_event": "陆烬回到住处整理情报，陈老根检查陆烬身体状况，确认无即时危险但需警惕",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "682": {
+      "chapter": 682,
+      "core_event": "上官烈（C007）登场或消息传来，暗示其与摄魂阁寻找目标有关，为 ch687 做铺垫",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "需人工确认：上官烈心结及与摄魂阁关联需符合 N021 前置逻辑，不提前引爆",
+      "status": "approved"
+    },
+    "683": {
+      "chapter": 683,
+      "core_event": "沈知微抵达云隐坊市外围，以散修身份安顿，暗中观察坊市内仙门测试流程的漏洞",
+      "characters": [
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "684": {
+      "chapter": 684,
+      "core_event": "陆烬随沈知微深入坊市，因两界神魂产生的微弱异象被一名仙门外围执事察觉并标记为可疑",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "685": {
+      "chapter": 685,
+      "core_event": "沈知微利用江湖势力关系掩护陆烬，避开仙门监控视线，带其暂避于坊市暗巷中的安全屋",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "686": {
+      "chapter": 686,
+      "core_event": "安全屋内沈知微与陆烬交谈，提及江湖势力洗牌对仙门代理人的影响，上官烈听闻风声首次现身外围",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "688": {
+      "chapter": 688,
+      "core_event": "沈知微出手压制仙门执事的追踪印记，陆烬短暂昏迷，上官烈暗中观察沈知微手段，心生疑虑",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "689": {
+      "chapter": 689,
+      "core_event": "沈知微为陆烬解开神魂异象反噬的轻微影响，上官烈留下警告，仙门测试名额争夺进入白热化",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "690": {
+      "chapter": 690,
+      "core_event": "陆烬随行观察沈知微与上官烈在坊市的周旋，察觉暗流涌动",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "691": {
+      "chapter": 691,
+      "core_event": "陈老根为应对近日异常，私下强化呼吸法演练，陆烬在旁目睹效果",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "692": {
+      "chapter": 692,
+      "core_event": "上官烈试探陆烬神魂反应，陆烬因婴儿形态本能退缩，上官烈心结稍解",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": "需人工确认：f009_soul_duality埋设点@702，本章上官烈“试探”是否构成外部势力“间接察觉”神魂特殊性",
+      "status": "approved"
+    },
+    "693": {
+      "chapter": 693,
+      "core_event": "沈知微设局引开追踪者，陆烬与陈老根借机转移至安全屋",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "694": {
+      "chapter": 694,
+      "core_event": "坊市传闻皇室残物争夺加剧，陈老根警告陆烬勿露痕迹",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "695": {
+      "chapter": 695,
+      "core_event": "各方势力在坊市外围暗中角力，陆烬暂避风头，局势暂时平静",
+      "characters": [
+        "C001",
+        "C002",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "696": {
+      "chapter": 696,
+      "core_event": "沈知微留书告别后远行，陆烬独居客栈时听闻江湖暗流涌动，上官烈暗中派员监控陆烬动向",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "697": {
+      "chapter": 697,
+      "core_event": "上官烈部下在集市试探陆烬反应，陆烬因婴儿心智未察觉危险，仅因陈老根遗留护身符暂时安全",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "698": {
+      "chapter": 698,
+      "core_event": "陈老根赶回途中遭遇暴雨，为避雨进入废弃土地庙，意外捡到刻有古老文字的半块残瓦",
+      "characters": [
+        "C002",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "699": {
+      "chapter": 699,
+      "core_event": "陈老根携残瓦返回，陆烬对残瓦上的纹路产生莫名亲近感，陈老根察觉异样开始警惕外界视线",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "700": {
+      "chapter": 700,
+      "core_event": "仙门代理人潜入村落外围侦查，发现陆烬所在区域有微弱灵机波动，记录在案准备上报",
+      "characters": [
+        "C006",
+        "C004"
+      ],
+      "boundary_note": "需人工确认：接近f003_shehun_ascension/f009_soul_duality埋设点(702)，需确认是否提前泄露神魂特异性或摄魂阁线索",
+      "status": "approved"
+    },
+    "701": {
+      "chapter": 701,
+      "core_event": "陆烬在熟睡中本能地抗拒了外部探视神识的轻触，醒来后精神略显疲惫，陈老根发现其瞳孔微缩",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：接近f009_soul_duality(702)埋设点，涉及神魂特殊性被外部察觉，需人工确认边界",
+      "status": "approved"
+    },
+    "703": {
+      "chapter": 703,
+      "core_event": "陆烬因摄魂阁传闻受扰，上官烈暗中调查其神魂异动",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "704": {
+      "chapter": 704,
+      "core_event": "上官烈将查得的模糊线索上报朝廷，皇室对陆烬关注度升级",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "705": {
+      "chapter": 705,
+      "core_event": "沈知微察觉朝堂风向变化，安排陆烬暂避于云隐坊市外围",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "706": {
+      "chapter": 706,
+      "core_event": "陆烬在坊市边缘目睹仙门候选人验证流程，心生向往",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

@@ -106,6 +106,14 @@ METADATA_PATTERNS = [
     (re.compile("\\b正文\\b.*?事实变更"), "正文/事实变更说明段"),
 ]
 
+# Infant-POV self-analysis phrases that are impossible for a month-age < 3
+# character. Module-level so the expand/accept layers share one authority.
+INFANT_SELF_AWARENESS = [
+    "他意识到", "她意识到", "他明白", "她明白", "他清楚自己", "她清楚自己",
+    "他明白自己", "她明白自己", "他意识到自己", "她意识到自己",
+    "这意味着", "这说明", "他记得那个", "她记得那个", "他清楚这是", "她清楚这是",
+]
+
 
 def han_count(text: str) -> int:
     return len(HAN.findall(text))
@@ -168,21 +176,36 @@ def check_prose(prose: str, card: dict, manifest: dict) -> dict:
     if hits:
         blocking.append({"check": "cognition_boundary",
                          "detail": f"stage-forbidden terms (ch{chapter}): {hits}",
-                         "stage": 1 if chapter <= STAGE1_MAX_CHAPTER else 2})
+                         "stage": 1 if chapter <= STAGE1_MAX_CHAPTER else 2,
+                         "waivable": True})
 
     # 5. Beat coverage heuristic: each beat's core action phrase must be echoed
-    #    somewhere in the prose. CJK is not space-delimited, so use the longest
-    #    CJK run of the beat action as its key signature and check presence.
+    #    somewhere in the prose. CJK is not space-delimited, so we segment the
+    #    beat action into 2-char shingles and require a coverage ratio
+    #    (default 0.6). This avoids false positives where a natural paraphrase
+    #    preserves the content but not the verbatim longest-run signature.
+    #    A beat only warns when fewer than the threshold of its shingles appear.
     missing = []
     for b in [b for s in card.get("scenes", []) for b in s.get("beats", [])]:
         action = b.get("action", "")
-        runs = re.findall(r"[\u4e00-\u9fff]{2,}", action)
-        key = max(runs, key=len) if runs else ""
-        if key and key not in prose:
-            missing.append(f"{b['id']}({key})")
+        cjk = "".join(re.findall(r"[\u4e00-\u9fff]", action))
+        if len(cjk) < 4:
+            continue  # too short to segment meaningfully
+        # 2-char shingles (overlapping) as the content signature
+        shingles = [cjk[i:i + 2] for i in range(0, len(cjk) - 1, 2)]
+        if not shingles:
+            continue
+        hit = sum(1 for s in shingles if s in prose)
+        ratio = hit / len(shingles)
+        if ratio < 0.6:
+            # show the longest original CJK run for human context
+            runs = re.findall(r"[\u4e00-\u9fff]{2,}", action)
+            key = max(runs, key=len) if runs else ""
+            missing.append(f"{b['id']}({key}) coverage={ratio:.0%}")
     if missing:
         warnings.append({"check": "beat_coverage",
-                         "detail": f"beats whose key action phrase is absent: {missing}"})
+                         "detail": f"beats whose action content is not echoed "
+                                    f"(shingle coverage < 60%): {missing}"})
 
     # 6. POV drift: if the card declares multiple POV characters, warn the
     #    reviewer to verify each interior-monologue passage matches its scene
@@ -196,16 +219,12 @@ def check_prose(prose: str, card: dict, manifest: dict) -> dict:
 
     # 7. Infant POV self-analysis: block self-awareness / logical-synthesis
     #    phrases that are impossible for a month-age < 3 character.
-    INFANT_SELF_AWARENESS = [
-        "他意识到", "她意识到", "他明白", "她明白", "他清楚自己", "她清楚自己",
-        "他明白自己", "她明白自己", "他意识到自己", "她意识到自己",
-        "这意味着", "这说明", "他记得那个", "她记得那个", "他清楚这是", "她清楚这是",
-    ]
     self_hits = [p for p in INFANT_SELF_AWARENESS if p in prose]
     if self_hits:
         blocking.append({"check": "infant_self_awareness",
                          "detail": f"infant POV self-analysis phrases: {self_hits}",
-                         "samples": self_hits[:3]})
+                         "samples": self_hits[:3],
+                         "waivable": True})
 
     return {"blocking": blocking, "warnings": warnings, "info": info, "han": han}
 

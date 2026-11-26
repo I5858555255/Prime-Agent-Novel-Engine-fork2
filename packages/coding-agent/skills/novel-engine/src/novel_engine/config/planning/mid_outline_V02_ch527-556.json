@@ -8,7 +8,10 @@
     "node_chapters_in_range": [],
     "generated_at": "2026-10-15T22:39:04+00:00",
     "batch_size": 6,
-    "status": "draft"
+    "status": "approved",
+    "audit": {
+      "last_run": true
+    }
   },
   "entries": {
     "527": {

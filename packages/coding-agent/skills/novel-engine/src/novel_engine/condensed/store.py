@@ -139,6 +139,17 @@ class Store:
                     activity.append({"chapter": number, **change})
         registry = [{"name": name, "first_chapter": first, "last_chapter": last}
                     for name, first, last in self.db.execute("SELECT name,first_chapter,last_chapter FROM characters ORDER BY name")]
+        if cast:
+            cast_names = sorted(set(cast))
+            placeholders = ",".join("?" for _ in cast_names)
+            registry = [{"name": name, "first_chapter": first, "last_chapter": last, "introduction": intro}
+                        for name, first, last, intro in self.db.execute(
+                            f"SELECT name,first_chapter,last_chapter,introduction FROM characters WHERE name IN ({placeholders}) ORDER BY name",
+                            cast_names)]
+            context_cast = {"names": cast_names, "recent": sorted(self.recent_cast())}
+        else:
+            context_cast = {"names": [name for name, _, _ in self.db.execute("SELECT name,first_chapter,last_chapter FROM characters")],
+                            "recent": []}
         related, introductions = [], []
         if cast:
             names = sorted(set(cast))
@@ -162,7 +173,7 @@ class Store:
                 related.append({"chapter": number, "ending": value["ending"],
                                 "events": [beat for scene in value["scenes"] for beat in scene["beats"]]})
         return {"recent_chapters": recent_chapters, "facts": facts, "foreshadow_activity_30": activity,
-                "character_registry": registry, "introductions": introductions, "related_history": related}
+                "character_registry": registry, "cast": context_cast, "introductions": introductions, "related_history": related}
 
     def commit(self, payload, review):
         chapter = payload["chapter"]
@@ -194,7 +205,8 @@ class Store:
                 self.db.execute("INSERT OR REPLACE INTO facts VALUES(?,?,?,?)",
                                 (change["entity"], change["key"], dumps(change["after"]), chapter))
             for node_id in payload.get("plan", {}).get("milestone_ids", []):
-                self.db.execute("INSERT INTO facts VALUES(?,?,?,?)", ("milestones", node_id, dumps(f"completed chapter {chapter}"), chapter))
+                self.db.execute("INSERT OR REPLACE INTO facts VALUES(?,?,?,?)",
+                                 ("milestones", node_id, dumps(f"completed chapter {chapter}"), chapter))
             self._index_chapter(chapter, payload)
         return hashed
 
@@ -255,15 +267,27 @@ class Store:
             self.db.execute("INSERT OR REPLACE INTO allowances VALUES(?,?,?,?)",
                             (name, calls + extra_calls, seconds + extra_seconds, reason))
 
+    def reset_operation_budget(self, name):
+        """Zero a single operation's durable LLM-call counter.
+
+        Used when resuming a halted chapter: the previous attempt consumed
+        calls without committing anything, so the spent budget is refunded to
+        give the fresh attempt full allowance.
+        """
+        with self.db:
+            self.db.execute("UPDATE operations SET calls=0, wall=0 WHERE id=?", (name,))
+            self.db.execute("DELETE FROM allowances WHERE id=?", (name,))
+
     def invalidate_from(self, chapter, reason):
         # This operator action archives the original database before any removal.
         if not reason.strip() or not 1 <= chapter <= self.head():
             raise ValueError("invalidation requires an existing chapter and a reason")
-        archive = self.root / "invalidated" / uuid.uuid4().hex
-        archive.mkdir(parents=True)
+        archive = self.root / "invalidated" / f"ch{chapter:04d}"
+        if not archive.exists():
+            archive.mkdir(parents=True)
+        atomic_write(archive / "reason.json", dumps({"from_chapter": chapter, "reason": reason}))
         with sqlite3.connect(archive / "manuscript_before.sqlite3") as snapshot:
             self.db.backup(snapshot)
-        atomic_write(archive / "reason.json", dumps({"from_chapter": chapter, "reason": reason}))
         with self.db:
             self.db.execute("DELETE FROM chapters WHERE number>=?", (chapter,))
             self.db.execute("DELETE FROM exports WHERE number>=?", (chapter,))
@@ -278,11 +302,22 @@ class Store:
                     self.db.execute("INSERT OR REPLACE INTO facts VALUES(?,?,?,?)",
                                     (change["entity"], change["key"], dumps(change["after"]), number))
                 for node in payload["plan"].get("milestone_ids", []):
-                    self.db.execute("INSERT INTO facts VALUES(?,?,?,?)", ("milestones", node, dumps(f"completed chapter {number}"), number))
+                    self.db.execute("INSERT OR REPLACE INTO facts VALUES(?,?,?,?)",
+                                     ("milestones", node, dumps(f"completed chapter {number}"), number))
                 self._index_chapter(number, payload)
         for directory in (self.root / "expansion").glob("chapter_*"):
             if int(directory.name.split("_")[-1]) >= chapter:
                 target = archive / "expansion" / directory.name
                 target.parent.mkdir(parents=True, exist_ok=True)
                 directory.rename(target)
+        # Reset the durable LLM-call budgets for the invalidated chapter so the
+        # next attempt has full allowance. A halted chapter that never committed
+        # should not keep its spent budget; otherwise re-runs immediately raise
+        # "chapter LLM-call budget exhausted" without generating anything.
+        # Only the chapter_<N> operation itself (plans are shared and re-validated
+        # cheaply, so they keep their counters).
+        with self.db:
+            self.db.execute(
+                "UPDATE operations SET calls=0, wall=0 WHERE id=?", (f"chapter_{chapter}",))
+            self.db.execute("DELETE FROM allowances WHERE id=?", (f"chapter_{chapter}",))
         return archive

@@ -222,7 +222,8 @@
           "total_timeout_s": 650,
           "extra_body": {
             "reasoning_effort": "none"
-          }
+          },
+          "temperature": 0.3
         },
         "review": {
           "models": [
@@ -308,7 +309,8 @@
           "total_timeout_s": 650,
           "extra_body": {
             "reasoning_effort": "none"
-          }
+          },
+          "temperature": 0.3
         },
         "review": {
           "models": [

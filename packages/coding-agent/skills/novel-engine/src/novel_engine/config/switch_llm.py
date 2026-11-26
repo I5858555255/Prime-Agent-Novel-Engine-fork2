@@ -84,97 +84,6 @@ def cmd_list() -> None:
         print()
 
 
-def _runtime_config_path() -> Path:
-    """runtime_config.json sits next to llm_providers.json; follows CONFIG_PATH."""
-    return CONFIG_PATH.parent / "runtime_config.json"
-
-
-def sync_runtime_config(name: str, profile: dict) -> str:
-    """把 runtime_config.json 的生成端点与所选 provider profile 保持一致。
-
-    同步 llm / fallback_llm / provider（若该 profile 提供 review 模型也同步 review）。
-    当同级不存在 runtime_config.json 时静默跳过（隔离测试目录）。返回说明字符串。
-    """
-    rc_path = _runtime_config_path()
-    if not rc_path.exists():
-        return ""
-    rc = json.loads(rc_path.read_text(encoding="utf-8"))
-    phases = profile.get("phases") or {}
-    gen_phase = phases.get("scenes") or phases.get("director") or {}
-    gen_models = gen_phase.get("models") or []
-    model = gen_models[0] if gen_models else ""
-    base_url = profile.get("base_url", "")
-    key_env = profile.get("api_key_env", "")
-    common = {"model": model, "api_base": base_url, "api_key_env": key_env}
-
-    llm = dict(rc.get("llm", {}))
-    llm.update({"provider": "openai", **common})
-    rc["llm"] = llm
-    fb = dict(rc.get("fallback_llm", {}))
-    # fallback 只随 agnes 系 profile 同步；切到其它供应商时保持既有回退
-    # （AGNES_API_KEY 常驻 .env，siliconflow 故障时回退到 agnes，测试断言此不变量）。
-    if "agnes" in name:
-        fb.update(common)
-    elif not fb.get("api_base"):
-        fb.update(common)
-    rc["fallback_llm"] = fb
-
-    # family 优先取 profile 显式声明；缺省再按名字推导（修正早期 "silicon"->"qwen" 的误映射）
-    family = profile.get("family") or (
-        "agnes" if "agnes" in name else
-        "siliconflow" if "silicon" in name else
-        "qwen" if "qwen" in name else
-        rc.get("provider", {}).get("family", "openai")
-    )
-    prov = dict(rc.get("provider", {}))
-    prov.update({"family": family, "api_base": base_url, "model": model,
-                 "reasoning_fallback": family != "agnes"})
-    rc["provider"] = prov
-
-    # 同步遗留 model_router 相位模型，避免任何读者继续用到旧供应商模型名
-    if phases:
-        def _phase_models(_ph):
-            _ms = (phases.get(_ph) or {}).get("models") or []
-            return list(_ms) if _ms else ([model] if model else [])
-        mr = dict(rc.get("model_router") or {})
-        mrp = dict(mr.get("phases") or {})
-        for _dst, _src in (("scenes", "scenes"), ("polish", "polish"),
-                           ("synopsis", "synopsis"), ("director", "director"),
-                           ("review", "review"), ("planning", "outline")):
-            _v = _phase_models(_src)
-            if _v:
-                mrp[_dst] = _v
-        mr["phases"] = mrp
-        lim = dict(mr.get("limits") or {})
-        if model and model not in lim:
-            lim[model] = {"rpm": 20, "tpm": 200000}
-        mr["limits"] = lim
-        rc["model_router"] = mr
-
-    rev_models = (phases.get("review") or {}).get("models") or []
-    if rev_models:
-        rl = dict(rc.get("review_llm", {}))
-        rl.update({"model": rev_models[0], "api_base": base_url, "api_key_env": key_env})
-        rc["review_llm"] = rl
-        rp = dict(rc.get("review_provider", {}))
-        rp["family"] = family
-        rc["review_provider"] = rp
-
-    fd, tmp = tempfile.mkstemp(suffix=".json", dir=rc_path.parent)
-    try:
-        with os.fdopen(fd, "w", encoding="utf-8") as f:
-            json.dump(rc, f, ensure_ascii=False, indent=2)
-            f.write("\n")
-        os.replace(tmp, rc_path)
-    except Exception:
-        try:
-            os.unlink(tmp)
-        except OSError:
-            pass
-        raise
-    return f"  runtime_config.json synced -> {family} {model} @ {base_url}"
-
-
 def cmd_switch(name: str) -> None:
     cfg = _load()
     profiles = cfg.get("profiles") or {}
@@ -191,9 +100,6 @@ def cmd_switch(name: str) -> None:
     cfg["active_profile"] = name
     _save(cfg)
     print(f"Switched to profile '{name}'")
-    _sync_note = sync_runtime_config(name, profile)
-    if _sync_note:
-        print(_sync_note)
     key_env = profile.get("api_key_env", "")
     # Key availability check: look in ENG/.env file directly
     _eng_dir = CONFIG_PATH.parent.parent

@@ -1,0 +1,313 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      1607,
+      1636
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-04T06:25:09+00:00",
+    "batch_size": 6,
+    "status": "approved"
+  },
+  "entries": {
+    "1607": {
+      "chapter": 1607,
+      "core_event": "陆烬在仙门杂役区偶遇一名神色阴冷的黑衣修士，对方暗中观察其神魂波动",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1608": {
+      "chapter": 1608,
+      "core_event": "太虚仙门内门弟子以出身门第为由，公开质疑陆烬等寒门学员的留校资格",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1609": {
+      "chapter": 1609,
+      "core_event": "陆烬因资源分配不公事件受到压制，陈老根遗留的呼吸法残篇在危急时刻引发奇异护体效果",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1610": {
+      "chapter": 1610,
+      "core_event": "仙门执法堂介入调查资源歧视事件，陆烬首次见识到仙门规则表下的隐秘运作逻辑",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1611": {
+      "chapter": 1611,
+      "core_event": "神秘买家试图收买陆烬，称其为“神魂特异者”，交易因陆烬拒绝而终止",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1612": {
+      "chapter": 1612,
+      "core_event": "陆烬整理近期遭遇，感知到自身神魂与常人不同，决定深入探查仙门典籍",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1613": {
+      "chapter": 1613,
+      "core_event": "陆烬经过仙门藏书阁时，阁中一枚残破玉简泛出微光（非陆烬主动引发），被巡值执事留意到，执事略生疑惑",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "purpose": "外部视角：执事留意异象，为后续神魂特异伏笔铺垫（修订：去除陆烬运转气流表述，规避 A 路线 #8 修炼样式动作禁区）",
+      "status": "approved"
+    },
+    "1614": {
+      "chapter": 1614,
+      "core_event": "执事上报内门，陆烬因无法解释气血波动来源被暂时禁足",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1615": {
+      "chapter": 1615,
+      "core_event": "陈老根通过密信告知陆烬，此波动源自《太上养魂经》残法的隐性副作用",
+      "characters": [
+        "C001",
+        "C002",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1616": {
+      "chapter": 1616,
+      "core_event": "陆烬试图压制波动，导致神魂撕裂感加剧，引发轻微异象",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1617": {
+      "chapter": 1617,
+      "core_event": "内门长老介入调查，陆烬需自证清白，卷入同脉子弟间的资源争夺舆论漩涡",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1618": {
+      "chapter": 1618,
+      "core_event": "陆烬在宗门大比前夕被迫接受‘神魂纯度’测试，结果判定为特异",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1619": {
+      "chapter": 1619,
+      "core_event": "陈老根向陆烬演示呼吸法收势，陆烬旁观并记下口诀细节",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1620": {
+      "chapter": 1620,
+      "core_event": "陆烬整理呼吸法笔记，发现其中隐含神魂稳固的辅助作用",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1621": {
+      "chapter": 1621,
+      "core_event": "村民议论近日村外迷雾异动，提及曾有神秘人探询特异体质孩童",
+      "characters": [
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1622": {
+      "chapter": 1622,
+      "core_event": "陆烬尝试将呼吸法用于静心，感到神魂略有凝实但未达修炼状态",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1623": {
+      "chapter": 1623,
+      "core_event": "陈老根警告陆烬不可私自尝试引气，强调强身与修炼的界限",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1624": {
+      "chapter": 1624,
+      "core_event": "迷雾边缘出现微弱余韵波动，陆烬感应到古老气息但无法理解",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1625": {
+      "chapter": 1625,
+      "core_event": "太虚仙门外门考核现场，考官故意设置对出身寒微者不利的规则门槛",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1626": {
+      "chapter": 1626,
+      "core_event": "陆烬察觉考核中隐藏的资源分配逻辑，暗中记录各脉弟子表现差异",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1627": {
+      "chapter": 1627,
+      "core_event": "《太上养魂经》残卷在测试中显现奇异反馈，考官态度瞬间转为警惕",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1628": {
+      "chapter": 1628,
+      "core_event": "摄魂阁眼线在仙门角落现身，以交换情报为由向陆烬抛出试探性话术",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1629": {
+      "chapter": 1629,
+      "core_event": "陆烬两界神魂波动微弱泄露，引起旁观长老短暂疑惑但未深究",
+      "characters": [
+        "C001",
+        "C002",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1630": {
+      "chapter": 1630,
+      "core_event": "考核结束，陆烬获得内门资格但被标记为‘不稳定变量’，埋下后续追踪隐患",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1631": {
+      "chapter": 1631,
+      "core_event": "陆烬在太虚仙门内堂目睹高阶弟子因出身被长老冷嘲，资源分配明显不公",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1632": {
+      "chapter": 1632,
+      "core_event": "摄魂阁暗探潜入太虚外围，试图接近神魂特异的陆烬，被识破未果",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1633": {
+      "chapter": 1633,
+      "core_event": "陆烬与不同脉门弟子合作演练阵法，暴露出各脉间隐蔽的鄙视链与推诿",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1634": {
+      "chapter": 1634,
+      "core_event": "陈老根在陆烬面前演示呼吸法残篇（仅陈老根习练），残篇气息引发陆烬身旁烛火异动，被路过长老暗中记录",
+      "characters": [
+        "C001",
+        "C002",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved",
+      "purpose": "修订：正文误写为陆烬实操吐纳引气（A路线#8禁区），core_event 改为陈老根习练+陆烬旁观，规避陆烬修炼样式动作"
+    },
+    "1635": {
+      "chapter": 1635,
+      "core_event": "太虚仙门测试中，陆烬凭借《太上养魂经》残法表象通过初筛，引起部分长老的兴趣",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1636": {
+      "chapter": 1636,
+      "core_event": "陆烬在测试后收到来自外界的神秘传讯，暗示有更高势力关注其神魂特质",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

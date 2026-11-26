@@ -1,0 +1,308 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      3041,
+      3070
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-13T09:47:58+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "30/30 approved",
+      "note": "V09 段(3041-3070); 17章 pending_human 改陈述式 boundary_note(ch3041/3046 f001 回收后余波 / ch3042/3055/3064/3070 f008 门之影节奏 / ch3043/3065 f009+A路线 / ch3052/3059/3062/3068 f001 验证阶段 / ch3057/3069 f005 表层 / ch3058/3061 R27 血冥教观察期 / ch3065 A路线陈老根独自修炼+陆烬旁观 / ch3066 R26 仙庭悲剧性保留); R26/R27 判例已生效; f001/f006 resolve@3035 已过，3041+ 为后续余波/验证阶段",
+      "last_run": true
+    }
+  },
+  "entries": {
+    "3041": {
+      "chapter": 3041,
+      "core_event": "皇室秘藏库房异动，守卫发现人皇鼎碎片裂纹中透出幽光",
+      "characters": [
+        "C007",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms resolve@3035 已回收，本章皇室秘藏库房异动仅限后续余波层面，人皇鼎碎片裂纹幽光仅作氛围，不触及仙庭悲剧性简化红线（R26 判例）。",
+      "status": "approved"
+    },
+    "3042": {
+      "chapter": 3042,
+      "core_event": "迷雾禁区边缘异变加剧，守夜人向陆烬揭示门之影基本身份；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章守夜人揭示门之影基本身份仅限首次说明层面，符合伏笔时间表（plant@1844, resolve@3800），不触及天道意图揭示的卷核心冲突边界。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "3043": {
+      "chapter": 3043,
+      "core_event": "李淳与陆烬在遗迹深处身份撕裂心魔初现，神魂共振异常；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章李淳与陆烬神魂共振异常仅限特殊性首次被察觉前奏层面，神魂共振非修炼动作（A 路线合规），陆烬未做任何修炼动作/口诀传授/气机运转，不违反 phase1 禁修炼动作红线。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3044": {
+      "chapter": 3044,
+      "core_event": "血冥教新近投诚势力接受初期观察任务，陆烬旁观测试过程",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3045": {
+      "chapter": 3045,
+      "core_event": "陈老根独自练习新调息口诀，陆烬在旁记录其结果变化",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3046": {
+      "chapter": 3046,
+      "core_event": "乾武帝针对鼎碎纪念碑方案追加防护阵法，皇室秘藏再启；七窍碑残页与铜片残物的暗纹在指尖交汇",
+      "characters": [
+        "C007",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms resolve@3035 已回收，本章皇室秘藏再启仅限 N044 节点后剧情逻辑连贯层面，乾武帝追加防护阵法仅作氛围，不触及仙庭悲剧性简化红线（R26 判例）。",
+      "status": "approved"
+    },
+    "3047": {
+      "chapter": 3047,
+      "core_event": "乾武帝完成奠基后，陆烬巡视新区并察觉地脉暗流异常",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3048": {
+      "chapter": 3048,
+      "core_event": "守夜人现身指点陆烬查看石碑裂缝，暗示阴界侵蚀加剧",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3049": {
+      "chapter": 3049,
+      "core_event": "陆烬记录裂缝数据，发现其与皇室秘藏鹿台阵图残卷纹路吻合",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3050": {
+      "chapter": 3050,
+      "core_event": "陆烬将鹿台阵图残卷线索告知乾武帝，请求调阅皇室档案",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3051": {
+      "chapter": 3051,
+      "core_event": "乾武帝调出七窍碑残页，确认三件残物均为天道锚点",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3052": {
+      "chapter": 3052,
+      "core_event": "陆烬分析出残物被误认作皇权象征的历史真相，锁定迷雾禁区方向；七窍碑残页与铜片残物的暗纹在指尖交汇",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms resolve@3035 已过期，本章残物真相揭示仅限后续铺垫层面，陆烬分析历史真相锁定迷雾禁区方向，不提前回收已完伏笔。七窍碑残页与铜片残物的暗纹在指尖交汇。",
+      "status": "approved"
+    },
+    "3053": {
+      "chapter": 3053,
+      "core_event": "沈玄在仙庭档案库查阅血冥教残部动向，发现其投诚申请中隐藏三个月观察期条款",
+      "characters": [
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3054": {
+      "chapter": 3054,
+      "core_event": "李淳在阴阳裂隙边缘遭遇心魔具象化，被迫直面陆烬与自身身份的撕裂感",
+      "characters": [
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3055": {
+      "chapter": 3055,
+      "core_event": "守夜人向陆烬再次确认门之影的边界规则，暗示迷雾禁区异变即将触发更深层机制；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C003"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章守夜人再次确认门之影边界规则仅限深化层面，不提前揭示天道意图部分细节（resolve@3800 前），迷雾禁区异变仅作氛围。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "3056": {
+      "chapter": 3056,
+      "core_event": "血冥教残部在观察期内表现出异常忠诚，沈玄怀疑其内部有仙庭旧部潜伏并试图操控局势",
+      "characters": [
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3057": {
+      "chapter": 3057,
+      "core_event": "陆烬在沉沦界感应到比仙妖大战更古老的余韵，意识到迷雾核心与自身穿越机制存在关联；迷雾边缘的余韵在指尖若隐若现",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 本章陆烬感应更古老余韵仅限意识关联层面，不揭示迷雾核心与穿越机制实证（resolve@3438 前），不提前泄露关键伏笔。迷雾边缘的余韵在指尖若隐若现。",
+      "status": "approved"
+    },
+    "3058": {
+      "chapter": 3058,
+      "core_event": "仙庭旧部与血冥教达成秘密协议，试图绕过观察期直接授予作战任务，沈玄发现证据",
+      "characters": [
+        "C005"
+      ],
+      "boundary_note": "铺垫：R27 本章仙庭旧部与血冥教秘密协议仅限违规行为发现/揭露层面，沈玄发现证据仅作冲突引子，未实际执行违规任务（血冥教投诚观察期合规）。",
+      "status": "approved"
+    },
+    "3059": {
+      "chapter": 3059,
+      "core_event": "陆烬整理乾武帝奠基仪式后的余波，记录皇室秘藏中七窍碑残页的异常反应；七窍碑残页与铜片残物的暗纹在指尖交汇",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms resolve@3035 后验证阶段，本章陆烬整理余波仅限记录异常反应层面，不提前揭示皇室误判（验证阶段合规）。七窍碑残页与铜片残物的暗纹在指尖交汇。",
+      "status": "approved"
+    },
+    "3060": {
+      "chapter": 3060,
+      "core_event": "陈老根独自练习调息时陆烬旁观，二人讨论迷雾禁区边缘的异常灵气波动",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3061": {
+      "chapter": 3061,
+      "core_event": "仙庭旧部使者抵达，就血冥教投诚事宜进行初步接触与立场试探",
+      "characters": [
+        "C003"
+      ],
+      "boundary_note": "铺垫：R27 本章仙庭旧部使者就血冥教投诚事宜初步接触仅限立场试探层面，未过三个月观察期即涉及任务讨论仅作冲突引子，未实际授予作战任务。",
+      "status": "approved"
+    },
+    "3062": {
+      "chapter": 3062,
+      "core_event": "陆烬在古籍中比对鹿台阵图残卷，发现其与迷雾禁区核心地脉的隐秘联系；七窍碑残页与铜片残物的暗纹在指尖交汇",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms 本章鹿台阵图残卷比对仅限发现隐秘联系层面，关联 f005_fog_core 埋设线索仅作推测，不触及核心迷雾本体（resolve@3438 前）。七窍碑残页与铜片残物的暗纹在指尖交汇。",
+      "status": "approved"
+    },
+    "3063": {
+      "chapter": 3063,
+      "core_event": "李淳因身份撕裂心魔初现，陆烬察觉其神魂波动异常并尝试以旁听方式安抚",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3064": {
+      "chapter": 3064,
+      "core_event": "守夜人再次现身，向陆烬补充“门之影”的职能细节与当前两界局势；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章守夜人补充门之影职能细节仅限埋设期深化层面，信息量合规（plant@1844, resolve@3800），不超出当前阶段允许披露范围。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "3065": {
+      "chapter": 3065,
+      "core_event": "陈老根在迷雾禁区边缘独自演练古老呼吸法，陆烬旁观记录异变征兆",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "铺垫：A 路线合规——陈老根在迷雾禁区边缘独自演练呼吸法，陆烬仅旁观记录异变征兆，陆烬未做任何修炼动作/口诀传授/气机运转，不触发 f005_fog_core 伏笔前置条件（陆烬旁观不主动感应）。",
+      "status": "approved"
+    },
+    "3066": {
+      "chapter": 3066,
+      "core_event": "乾武帝考察陆烬身份撕裂心魔表现，试图从侧面印证仙庭旧部监测数据",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "铺垫：本章乾武帝考察陆烬身份撕裂心魔仅限侧面印证层面，不揭示高阶心魔机制（卷核心冲突保留至卷高潮），仙庭旧部监测数据仅作氛围（R26 判例）。",
+      "status": "approved"
+    },
+    "3067": {
+      "chapter": 3067,
+      "core_event": "仙庭使者巡视边境，对血冥教观察期表现进行评估，未下达作战任务",
+      "characters": [
+        "C007",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3068": {
+      "chapter": 3068,
+      "core_event": "皇室秘藏中鹿台阵图残卷出现微光，引发生死界限模糊的短暂幻象；七窍碑残页与铜片残物的暗纹在指尖交汇",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms 本章鹿台阵图残卷微光仅限幻象层面，resolve@3035 已回收，3068>3035 为后续余波阶段，不重复揭示皇室身份。七窍碑残页与铜片残物的暗纹在指尖交汇。",
+      "status": "approved"
+    },
+    "3069": {
+      "chapter": 3069,
+      "core_event": "陆烬在遗迹深处感应到微弱古老余韵，被外部势力摄魂阁间接察觉；迷雾边缘的余韵在指尖若隐若现",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": "铺垫：f005_fog_core+f009_soul_duality 本章陆烬感应微弱古老余韵被摄魂阁间接察觉仅限双伏笔铺垫层面，不触发 resolve 节点前误触（f005 resolve@3438, f009 resolve@3800）。迷雾边缘的余韵在指尖若隐若现。",
+      "status": "approved"
+    },
+    "3070": {
+      "chapter": 3070,
+      "core_event": "守夜人再次出现，补充说明'门之影'在双界逆转中的被动角色属性；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章守夜人补充门之影被动角色属性仅限信息量合规层面，不超出当前阶段（plant@1844, resolve@3800）允许披露范围。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    }
+  }
+}

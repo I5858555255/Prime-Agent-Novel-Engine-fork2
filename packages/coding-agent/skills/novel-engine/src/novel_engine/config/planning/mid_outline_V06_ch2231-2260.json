@@ -1,0 +1,304 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      2231,
+      2260
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-10T21:52:49+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "30/30 approved",
+      "note": "V07 tail 段(2231-2260); 10章 boundary_note 改陈述式; ch2247 锚点补齐; R22/R23 判例已生效",
+      "last_run": true
+    }
+  },
+  "entries": {
+    "2231": {
+      "chapter": 2231,
+      "core_event": "陆烬在迷雾禁区边缘静立，感应到比残留意志更古老的余韵，确认其与自身神魂共鸣",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 埋设点（1130）后续深化，严守边界不越界，仅写余韵感应。",
+      "status": "approved"
+    },
+    "2232": {
+      "chapter": 2232,
+      "core_event": "摄魂阁探子潜入沉沦界据点，窃听陆烬神魂波动异常，记录并上报",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 外部察觉（702埋设）推进，不提前回收，仅到暗示层。",
+      "status": "approved"
+    },
+    "2233": {
+      "chapter": 2233,
+      "core_event": "陆烬尝试与迷雾余韵对话，余韵拒绝回应，仅投射出残缺的两界地图",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2234": {
+      "chapter": 2234,
+      "core_event": "守夜人再次出现，提醒陆烬勿过度消耗神魂，解释‘门之影’对迷雾的监管职责",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 信息交代（1844埋设），严守'仅基本信息'边界，不超出范围。",
+      "status": "approved"
+    },
+    "2235": {
+      "chapter": 2235,
+      "core_event": "陆烬依据残缺地图规划路线，避开摄魂阁巡逻，深入迷雾禁区核心地带",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2236": {
+      "chapter": 2236,
+      "core_event": "在迷雾深处，陆烬遭遇古玉结界失效边缘的危机，险些神魂受损，紧急收缩心神",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：肉身保护机制（古玉结界）边界测试，严守'R23 不可忽略漏洞'约束，仅在护体覆盖范围内描写。",
+      "status": "approved"
+    },
+    "2237": {
+      "chapter": 2237,
+      "core_event": "陆烬在迷雾禁区边缘静默感知天道余韵，试图解析异变背后的逻辑闭环",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2238": {
+      "chapter": 2238,
+      "core_event": "摄魂阁暗探渗透沉沦界，试图通过神魂波动捕捉陆烬两界特性的实证",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 埋设节点推进，不提前暴露特殊性，仅写暗示。",
+      "status": "approved"
+    },
+    "2239": {
+      "chapter": 2239,
+      "core_event": "李淳与陆烬在阴阳交汇处对峙，身份撕裂引发心魔反噬，二人关系降至冰点",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2240": {
+      "chapter": 2240,
+      "core_event": "古玉结界因外部干扰出现微弱裂痕，三才护魂阵自动补全但消耗巨大",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2241": {
+      "chapter": 2241,
+      "core_event": "陆烬利用裂缝中的天道规则漏洞，反向追踪迷雾禁区异变的源头坐标",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2242": {
+      "chapter": 2242,
+      "core_event": "守夜人现身警戒，警告陆烬追踪行为将触动禁制，暂留悬念不解释缘由",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 相关剧情推进，守夜人介入时机严守边界，不过早揭示。",
+      "status": "approved"
+    },
+    "2243": {
+      "chapter": 2243,
+      "core_event": "陆烬在沉沦界迷雾边缘探查，遭遇守夜人再次警示天道异变",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2244": {
+      "chapter": 2244,
+      "core_event": "陆烬发现肉身保护机制古玉出现细微裂纹，担忧防护失效",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2245": {
+      "chapter": 2245,
+      "core_event": "陆烬与陈老根回忆录对比，发现呼吸法与古玉裂纹的潜在联系",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2246": {
+      "chapter": 2246,
+      "core_event": "摄魂阁使者潜入，试图探查陆烬神魂特殊性，被陆烬察觉",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2247": {
+      "chapter": 2247,
+      "core_event": "陆烬在古玉结界加固过程中，意外感应到远古雾核的一丝波动，迷雾边缘传来一丝更古老的余韵感应",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 埋设后余韵效应，不过早强化该伏笔，仅写边缘异动。",
+      "status": "approved"
+    },
+    "2248": {
+      "chapter": 2248,
+      "core_event": "陆烬解析守夜人提供的线索，推断两界博弈的更高层次意图",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2249": {
+      "chapter": 2249,
+      "core_event": "陆烬在沉沦界边缘感知到古玉结界微弱的波动，引出手下探查任务",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2250": {
+      "chapter": 2250,
+      "core_event": "陆烬与守夜人短暂交流，进一步印证f008_doorkeeper关于'门之影'的信息碎片",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2251": {
+      "chapter": 2251,
+      "core_event": "摄魂阁探子潜伏于两界交界处，试探陆烬神魂共振异常",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 伏笔节点推进，不提前暴露神魂特殊性，仅到暗示层。",
+      "status": "approved"
+    },
+    "2252": {
+      "chapter": 2252,
+      "core_event": "陆烬通过梦境回顾古玉结界与三才护魂阵的细节，确认当前保护无漏洞",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2253": {
+      "chapter": 2253,
+      "core_event": "陆烬在迷雾禁区外围遭遇异变残留，隐约感应到比仙妖大战更古老的余韵",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 伏笔推进，在此处仅埋设古老余韵暗示，不揭示门芯脱落细节。",
+      "status": "approved"
+    },
+    "2254": {
+      "chapter": 2254,
+      "core_event": "陆烬主动梳理穿越机制与天道意图的逻辑关联，形成初步推演框架",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2255": {
+      "chapter": 2255,
+      "core_event": "陆烬在沉沦界边缘观察迷雾异动，发现其频率与古玉结界共振存在微小偏差",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2256": {
+      "chapter": 2256,
+      "core_event": "摄魂阁探子接近陆烬，试图通过神魂探知法印证其双重神魂特质，被古玉结界微弱波动干扰",
+      "characters": [
+        "C001",
+        "C009"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 外部察觉边界推进，此阶段严守边界，不暴露神魂双性核心。",
+      "status": "approved"
+    },
+    "2257": {
+      "chapter": 2257,
+      "core_event": "陆烬分析摄魂阁探子的功法特征，推断出两界博弈中隐匿势力正在调整对迷雾禁区的监控策略",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2258": {
+      "chapter": 2258,
+      "core_event": "陈老根（意识流/代身）在陆烬神识海中模拟呼吸法残篇中的“静滞”技巧，协助陆烬稳定神魂震荡",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2259": {
+      "chapter": 2259,
+      "core_event": "陆烬尝试利用“静滞”技巧微调神魂波动，成功欺骗了第二次靠近的探查神识，但消耗剧增",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2260": {
+      "chapter": 2260,
+      "core_event": "陆烬决定暂避锋芒，转入沉沦界深处，计划重新校准肉身保护机制与神魂的双重状态",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

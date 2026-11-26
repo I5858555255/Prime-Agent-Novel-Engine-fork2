@@ -1,0 +1,295 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      1367,
+      1396
+    ],
+    "node_chapters_in_range": [
+      1380
+    ],
+    "generated_at": "2026-10-30T22:30:01+00:00",
+    "batch_size": 6,
+    "status": "approved"
+  },
+  "entries": {
+    "1367": {
+      "chapter": 1367,
+      "core_event": "陆烬在皇室藏书阁翻阅孤本，发现《墟界仙庭旧部名录》残卷，隐约感到摄魂阁气息异常",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1368": {
+      "chapter": 1368,
+      "core_event": "陈老根教陆烬辨认古籍中的异体字，陆烬通过字迹推断出皇室秘藏中藏有七窍碑残页",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1369": {
+      "chapter": 1369,
+      "core_event": "陆烬借整理藏书之机，暗中比对人皇鼎碎片与鹿台阵图残卷的存放位置，发现三件残物被分隔在不同库房",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1370": {
+      "chapter": 1370,
+      "core_event": "一名皇室护卫察觉陆烬在禁书区徘徊，陆烬以整理书架为由暂时脱身，暗中记录该护卫的巡逻规律",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1371": {
+      "chapter": 1371,
+      "core_event": "陆烬在夜色中潜入另一库房，试图寻找七窍碑残页线索，却被守护阵法微弱波动惊扰，险些暴露神魂异动",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1372": {
+      "chapter": 1372,
+      "core_event": "陆烬退回正殿，将当日所见所闻默记于心，决定暂缓探宝，转而研究《太上养魂经》残法中关于神魂静定的记载",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1373": {
+      "chapter": 1373,
+      "core_event": "陆烬在皇室藏书阁查阅古籍，对“界域”概念产生模糊感知",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1374": {
+      "chapter": 1374,
+      "core_event": "摄魂阁探子暗查皇室秘藏动向，陆烬被误认为目标人选之一",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1375": {
+      "chapter": 1375,
+      "core_event": "陆烬试图梳理古籍中“天之上有域”的逻辑，因认知限制陷入困惑",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1376": {
+      "chapter": 1376,
+      "core_event": "陈老根察觉陆烬状态异常，私下向仙门旧友打听神魂异象传闻",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1377": {
+      "chapter": 1377,
+      "core_event": "皇室内部争论是否封闭藏书阁，陆烬被迫暂离核心区域",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1378": {
+      "chapter": 1378,
+      "core_event": "陆烬在离开前再次触碰七窍碑残页，短暂感应到非人皇鼎碎片的共鸣",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1379": {
+      "chapter": 1379,
+      "core_event": "陆烬随太虚仙门考察队抵达墟界边缘，目睹界壁流光与上古禁制残影",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1381": {
+      "chapter": 1381,
+      "core_event": "考察队因路线分歧爆发争执，陆烬观察到不同脉系对‘越界风险’的截然态度",
+      "characters": [
+        "C001",
+        "C005",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1382": {
+      "chapter": 1382,
+      "core_event": "陆烬在界壁阵眼处感应到微弱的神魂排斥波动，下意识屏息隐匿气息",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1383": {
+      "chapter": 1383,
+      "core_event": "摄魂阁探子借考察之名潜入，向陆烬抛出‘神魂特异者’的暗示性试探",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1384": {
+      "chapter": 1384,
+      "core_event": "陆烬利用界壁共鸣短暂避开探子追踪，被同队长老察觉其异常但归咎于环境",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1385": {
+      "chapter": 1385,
+      "core_event": "陆烬向族老请教域界概念，族老引用古籍称域界隔绝凡仙，陆烬似懂非懂",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1386": {
+      "chapter": 1386,
+      "core_event": "陆烬研读皇室藏书，试图拼凑七窍碑残页，发现其阵眼与鹿台阵图残卷有细微错位",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1387": {
+      "chapter": 1387,
+      "core_event": "陆烬向宫中供奉展示推演结果，对方讳莫如深，暗示皇室秘藏并非单纯皇权象征",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1388": {
+      "chapter": 1388,
+      "core_event": "陆烬意识到F001线索关联，私下记录三件残物关系，准备寻找外界解读者",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1389": {
+      "chapter": 1389,
+      "core_event": "陆烬离宫赴集市，偶遇游方术士，试探询问七窍碑与古老遗迹的关系",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1390": {
+      "chapter": 1390,
+      "core_event": "术士提及摄魂阁近年在搜寻具备神魂特异性的古籍持有者，陆烬感到寒意",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1391": {
+      "chapter": 1391,
+      "core_event": "陆烬返回宫中销毁记录，加固藏书阁防护，意识到F003与当前行动的风险",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1392": {
+      "chapter": 1392,
+      "core_event": "陆烬向陈老根复述“域上界”概念，试图从民间神话中验证其真伪",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1393": {
+      "chapter": 1393,
+      "core_event": "陈老根讲述雾隐村外的迷雾异象，暗示外界存在非人之力",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1394": {
+      "chapter": 1394,
+      "core_event": "陆烬观察到村民对“神魂特异者”的恐惧与排斥，记录民间反应",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1395": {
+      "chapter": 1395,
+      "core_event": "陆烬将皇室残卷记载与民间迷雾传说进行初步逻辑比对",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1396": {
+      "chapter": 1396,
+      "core_event": "陆烬决定离开村庄前往更大城镇搜寻更多关于“界域”的实证",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

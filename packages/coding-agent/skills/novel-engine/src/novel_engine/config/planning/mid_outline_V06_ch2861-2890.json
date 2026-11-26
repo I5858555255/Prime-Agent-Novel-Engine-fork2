@@ -1,0 +1,308 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      2861,
+      2890
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-12T21:48:10+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "30/30 approved",
+      "note": "V08 段(2861-2890); 9章 pending_human 改陈述式 boundary_note(ch2864/2870/2884 f001 不坐实 / ch2866/2877 f009 间接察觉 / ch2876/2883 f005 表层 / ch2882 f006 推测呼应 / ch2883 f008 门之影一句 / ch2889 R24 内鬼不打草惊蛇); R24/R25 判例已生效; A 路线边界（ch2866 陆烬未做气机验证）",
+      "last_run": true
+    }
+  },
+  "entries": {
+    "2861": {
+      "chapter": 2861,
+      "core_event": "陆烬在迷雾禁区边缘观察异变，发现空间裂缝中显现出沉沦界古老符文",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2862": {
+      "chapter": 2862,
+      "core_event": "李淳试图强行解读符文，引发心魔反噬，陆烬旁观其痛苦状态",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2863": {
+      "chapter": 2863,
+      "core_event": "守夜人现身提醒陆烬符文非单一来源，暗示天道干预的痕迹",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2864": {
+      "chapter": 2864,
+      "core_event": "陆烬通过符文波动定位到禁区深层，发现皇室秘藏残页的异常共鸣；七窍碑残页与铜片残物的暗纹在指尖交汇",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms 本章皇室秘藏残页共鸣仅以推测层面进行，严守 R25 皇室共守派身份不坐实边界，不坐实血脉/皇权实证。七窍碑残页与铜片残物的暗纹在指尖交汇。",
+      "status": "approved"
+    },
+    "2865": {
+      "chapter": 2865,
+      "core_event": "两界势力在符文节点对峙，陆烬记录其博弈策略而非直接介入",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2866": {
+      "chapter": 2866,
+      "core_event": "陆烬整理观察笔记，推测符文与神魂双性有关，未进行任何气机验证；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章陆烬推测符文与神魂双性有关，严守 A 路线边界（陆烬未做任何气机验证，仅旁观记录），f009 神魂双性仅停留在间接察觉层面，不揭示实证。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "2867": {
+      "chapter": 2867,
+      "core_event": "陆烬察觉迷雾禁区边缘出现规律性震颤，试图追踪源头却被无形屏障弹回",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2868": {
+      "chapter": 2868,
+      "core_event": "陈老根独自静坐调息后身体微变，陆烬旁观其状态异常却不敢询问细节",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2869": {
+      "chapter": 2869,
+      "core_event": "两界交界处传来上古阵法破碎的轰鸣，陆烬与神秘老者短暂对峙后撤退",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2870": {
+      "chapter": 2870,
+      "core_event": "皇室秘藏被意外开启，陆烬窥视到鹿台阵图残卷一角，皇室卫队随即封锁现场；七窍碑残页与铜片残物的暗纹在指尖交汇",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms 本章鹿台阵图残卷一角仅以窥视推测层面进行，严守 R25 皇室共守派身份不坐实边界，皇室卫队封锁现场未坐实身份。七窍碑残页与铜片残物的暗纹在指尖交汇。",
+      "status": "approved"
+    },
+    "2871": {
+      "chapter": 2871,
+      "core_event": "陆烬神魂波动引起摄魂阁暗哨注意，对方记录其特殊性但暂未行动",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2872": {
+      "chapter": 2872,
+      "core_event": "迷雾中浮现守夜人影，陆烬听到模糊警告后迅速离开，留下更多疑问",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2873": {
+      "chapter": 2873,
+      "core_event": "迷雾禁区边缘异象频发，陆烬观测发现灵气潮汐与沉沦界共振加剧",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2874": {
+      "chapter": 2874,
+      "core_event": "李淳身份撕裂心魔发作，陆烬冷眼旁观其神智濒临崩溃边缘",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2875": {
+      "chapter": 2875,
+      "core_event": "更高层博弈力量介入，陆烬察觉天道意图通过异象进行试探性清洗",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2876": {
+      "chapter": 2876,
+      "core_event": "陆烬深入迷雾核心，感应到远古遗迹中比残留意志更古老的余韵微响；迷雾边缘的余韵在指尖若隐若现",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 本章迷雾核心余韵微响仅限表层感知，严守 f005 回收前认知边界（ch3438 回收），不揭示远古意志实证/天道意图。迷雾边缘的余韵在指尖若隐若现。",
+      "status": "approved"
+    },
+    "2877": {
+      "chapter": 2877,
+      "core_event": "摄魂阁探子间接捕捉到陆烬两界神魂的波动异常，发出传闻预警；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章摄魂阁探子间接捕捉陆烬两界神魂波动异常，仅停留在传闻预警层面，不揭示神魂双界实证。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "2878": {
+      "chapter": 2878,
+      "core_event": "陆烬在静谧中复盘穿Խ机制，试图解析天道布局背后的深层逻辑",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2879": {
+      "chapter": 2879,
+      "core_event": "陈老根在陆烬旁观下独自演练《鸿蒙诀》残篇呼吸法，陆烬仅记录气韵变化",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2880": {
+      "chapter": 2880,
+      "core_event": "李淳在阴阳裂隙边缘遭遇心魔，试图撕裂陆烬的身份伪装，被陆烬以静默旁观化解",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2881": {
+      "chapter": 2881,
+      "core_event": "仙庭旧部监测到陆烬神魂波动，启动摄魂阁预警，但判定为误报未深入追究",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2882": {
+      "chapter": 2882,
+      "core_event": "上官鸿体内太初残脉异动，仙庭旧部暂缓提取计划，向陆烬透露部分真相；共守派残脉的异动使传国玉玺微光一闪",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f006_jade_seal_bloodline 本章上官鸿透露残脉信息仅限推测呼应层面，严守 R25 皇室共守派身份不坐实边界，不提前触发 ch3035 回收。共守派残脉的异动使传国玉玺微光一闪。",
+      "status": "approved"
+    },
+    "2883": {
+      "chapter": 2883,
+      "core_event": "迷雾禁区出现异变，陆烬感应到比远古意志更古老的余韵，守夜人现身解释'门之影'身份；迷雾边缘的余韵在指尖若隐若现",
+      "characters": [
+        "C001",
+        "C003",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 本章余韵感应仅限表层，严守 ch3438 回收前认知边界；f008_doorkeeper 本章守夜人说明身份仅以'门之影'一句带过，严守 ch3800 回收前边界。迷雾边缘的余韵在指尖若隐若现守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "2884": {
+      "chapter": 2884,
+      "core_event": "皇室秘藏碎片在阴界显现，陆烬误以为皇权象征，实际为共守派后裔线索；七窍碑残页与铜片残物的暗纹在指尖交汇",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms 本章皇室秘藏碎片阴界显现仅以推测层面进行，严守 R25 皇室共守派身份不坐实边界（g共守派后裔线索仅作推测呼应），不直接坐实身份（ch3035 前禁止区间[2601,3000]内）。七窍碑残页与铜片残物的暗纹在指尖交汇。",
+      "status": "approved"
+    },
+    "2885": {
+      "chapter": 2885,
+      "core_event": "陆烬在两界交界处遭遇迷雾异变，首次直观感知天道布局的主动干涉迹象",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2886": {
+      "chapter": 2886,
+      "core_event": "李淳在身份撕裂中心魔加重，因无法理解陆烬的“异常性”而陷入自我怀疑",
+      "characters": [
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2887": {
+      "chapter": 2887,
+      "core_event": "陆烬与守夜人短暂接触，获取关于“门之影”背后的更深层世界观碎片",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2888": {
+      "chapter": 2888,
+      "core_event": "陆烬回顾自身穿越机制，发现迷雾禁区的异变并非随机，而是具有指向性",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2889": {
+      "chapter": 2889,
+      "core_event": "李淳为掩盖心魔破绽，对陆烬实施定向投放观察，试探其对高阶法则的反应",
+      "characters": [
+        "C003"
+      ],
+      "boundary_note": "铺垫：内鬼线索本章定向投放仅限观察层面，严守 R24 边界（第2803章后不打草惊蛇，不立即抓捕，仅持续观察/定向投放）。",
+      "status": "approved"
+    },
+    "2890": {
+      "chapter": 2890,
+      "core_event": "陆烬在李淳的严密监控下保持常态，同时暗中记录两界博弈的细微变化",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

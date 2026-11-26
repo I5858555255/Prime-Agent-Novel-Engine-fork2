@@ -1,0 +1,291 @@
+{
+  "meta": {
+    "vid": "V02",
+    "range": [
+      664,
+      664
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-17T19:39:25+00:00",
+    "batch_size": 1,
+    "status": "approved",
+    "audit": {
+      "last_run": true
+    }
+  },
+  "entries": {
+    "647": {
+      "chapter": 647,
+      "core_event": "陆烬随行乾王府秘使前往邻县，途中遭遇劫道者试探，证实资助条件之反常",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "648": {
+      "chapter": 648,
+      "core_event": "劫道者背景揭晓为仙门外围探子，意在监控皇室动向，陆烬因身份特殊被重点观察",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "649": {
+      "chapter": 649,
+      "core_event": "探子撤离后留下七窍碑残页的模糊拓印，陆烬察觉纹路与皇室秘藏有关但无法解读",
+      "characters": [
+        "C001",
+        "C003",
+        "C004",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "650": {
+      "chapter": 650,
+      "core_event": "陆烬尝试解析拓印未果，仅能确认其非寻常金石，神秘气息令人不安",
+      "characters": [
+        "C001",
+        "C002",
+        "C003",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "651": {
+      "chapter": 651,
+      "core_event": "摄魂阁暗线首次介入，针对神魂特异者陆烬展开秘密收买，威胁其安全",
+      "characters": [
+        "C001",
+        "C005",
+        "C007"
+      ],
+      "boundary_note": "需人工确认：接近f003_shehun_ascension(plant@702)与f009_soul_duality(plant@702)埋设节点，虽本章早于埋设章，但涉外部势力察觉神魂特殊性，需确认是否提前泄露设定或仅作背景铺垫",
+      "status": "approved"
+    },
+    "653": {
+      "chapter": 653,
+      "core_event": "陆烬随商队潜入云隐坊市边缘，初窥仙门测试准入机制，为N019蓄力",
+      "characters": [
+        "C001",
+        "C003",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "654": {
+      "chapter": 654,
+      "core_event": "陆烬在云隐坊市外围游荡，目睹仙门测试初选现场乱象，对监控者感到好奇",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "655": {
+      "chapter": 655,
+      "core_event": "陈老根（若在场/背景提及）或路人提醒陆烬坊市非普通集市，陆烬观察测试流程与规则",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "656": {
+      "chapter": 656,
+      "core_event": "陆烬发现仙门代理人与朝堂势力在坊市地下层的隐蔽接触，察觉利益输送",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "657": {
+      "chapter": 657,
+      "core_event": "陆烬因衣着破乱被测试维持人员驱赶，意外触发某种低级阵法波动引起注意",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "658": {
+      "chapter": 658,
+      "core_event": "神秘势力（摄魂阁外围）派人跟踪陆烬，对其身上微弱的神魂特质产生兴趣",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：触及f003_shehun_ascension（摄魂阁收买神魂特异者）埋设节点附近，虽非正式回收，但涉及组织阴影初次实质接触，需确认是否超前",
+      "status": "approved"
+    },
+    "659": {
+      "chapter": 659,
+      "core_event": "陆烬离开云隐坊市返回大乾境内，途中被朝堂密使截获询问坊市见闻",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "660": {
+      "chapter": 660,
+      "core_event": "陆烬在云隐坊市外围观察仙门测试流程，察觉监管者对神魂波动的异常关注",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：涉及f003_shehun_ascension埋设节点，需确认监管者是否已察觉陆烬神魂特质",
+      "status": "approved"
+    },
+    "661": {
+      "chapter": 661,
+      "core_event": "陆烬试图理解测试规则，发现所谓验证实为监控收编手段的雏形",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "662": {
+      "chapter": 662,
+      "core_event": "陆烬回忆皇室资助的反常之处，与坊市见闻对照，疑心加深但未获确证",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：涉及乾武帝赎罪动机边界，仅限反常感描写，禁止点明动机",
+      "status": "approved"
+    },
+    "663": {
+      "chapter": 663,
+      "core_event": "陆烬在坊市接触七窍碑残页相关线索，仅记录纹路与寻常金石不同",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：涉及七窍碑残页用途边界，仅限实物与谜团描写，禁止解读全貌",
+      "status": "approved"
+    },
+    "664": {
+      "chapter": 664,
+      "core_event": "陆烬在云隐坊市外观察仙门测试现场，被一名年轻仙门弟子注意到并私下询问来意",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "需人工确认：ch652已确认仙门测试机会，本章若涉及仙门对陆烬神魂监控的实质交互可能触及“仙门候选人验证的监控收编本质”及“神魂特殊性被外部势力掌握”的禁止边界，需确认是否仅为单方面观察或仅留下模糊线索",
+      "status": "approved"
+    },
+    "665": {
+      "chapter": 665,
+      "core_event": "陆烬整理坊市所得，梳理仙门候选人与皇室残物的关联线索，暂存未解",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "666": {
+      "chapter": 666,
+      "core_event": "陆烬深入云隐坊市禁地外围，察觉监控法术波动异常，被迫藏匿于乱石堆后",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "667": {
+      "chapter": 667,
+      "core_event": "上官烈率众巡查，陆烬借机观察其灵力瓶颈，侧面印证仙门筛选标准的严苛",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "668": {
+      "chapter": 668,
+      "core_event": "暗巷中遭遇黑市贩子，陆烬以言语周旋，得知关于“神魂特异者”的诡异传闻",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "需人工确认：涉及 f003_shehun_ascension 及 f009_soul_duality 前置铺垫，需确认传闻内容是否越界揭示摄魂阁全貌或神魂双界本质",
+      "status": "approved"
+    },
+    "669": {
+      "chapter": 669,
+      "core_event": "陆烬避开追踪，回到客栈发现房间被搜，陈老根留下的旧物中夹带未寄出的家书",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "670": {
+      "chapter": 670,
+      "core_event": "陆烬研读家书，意识到父亲失踪前试图联络某势力，决定主动接近上官烈试探",
+      "characters": [
+        "C001",
+        "C002",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "671": {
+      "chapter": 671,
+      "core_event": "陆烬伪装成闲散少年混入上官烈护卫队外围，暗中记录其言行，为后续解救埋下伏笔",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "672": {
+      "chapter": 672,
+      "core_event": "陈老根在坊市外闲逛，偶遇旧友提及云隐坊市内部规矩森严，令陆烬对仙门产生好奇",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "673": {
+      "chapter": 673,
+      "core_event": "陆烬跟随沈知微潜入云隐坊市外围，目睹仙门弟子对凡人进行初步筛查",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "674": {
+      "chapter": 674,
+      "core_event": "陆烬因神魂特质引起仙门执事注意，被要求留下接受进一步观察",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "675": {
+      "chapter": 675,
+      "core_event": "仙门执事对陆烬进行神魂探查，发现异常但未能确定来源，陆烬被暂时羁押",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "676": {
+      "chapter": 676,
+      "core_event": "沈知微设法营救陆烬，过程中陆烬展示神魂韧性，仙门方面内部产生分歧",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

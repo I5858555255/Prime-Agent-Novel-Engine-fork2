@@ -1,0 +1,328 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      707,
+      736
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-18T22:39:17+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "last_run": true
+    }
+  },
+  "entries": {
+    "707": {
+      "chapter": 707,
+      "core_event": "太虚仙门接引长老抵达雾隐村，以仙门仪制检验陆烬根骨，陆烬因婴儿期神魂未稳反应平淡，长老面露失望",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "708": {
+      "chapter": 708,
+      "core_event": "长老判定陆烬为“凡体”，拒绝收录，仅允许陈老根随其入山旁听，陆烬被留在村中，目睹仙凡界限森严",
+      "characters": [
+        "C001",
+        "C002",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "709": {
+      "chapter": 709,
+      "core_event": "陈老根在山门外目睹各脉弟子对“凡体”之子的轻视与嘲笑，暗中立誓要改变命运，陆烬在村中因被弃而情绪低落",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "710": {
+      "chapter": 710,
+      "core_event": "上官烈途经雾隐村，发现陆烬神魂波动异常，未深究，仅留下一枚传讯玉简，暗示陆烬并非完全凡体",
+      "characters": [
+        "C001",
+        "C004",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "711": {
+      "chapter": 711,
+      "core_event": "摄魂阁外围探子潜入村中，试图探查陆烬神魂特异线索，被陈老根察觉并驱赶，留下模糊威胁",
+      "characters": [
+        "C001",
+        "C002",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "712": {
+      "chapter": 712,
+      "core_event": "陆烬在无意识中展现出微弱的神魂自护本能，吓退了一名试图近身试探的低阶黑衣人，陈老根意识到儿子不凡，决定带其前往仙门寻求正途",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "713": {
+      "chapter": 713,
+      "core_event": "陆烬在仙门演武场目睹各脉弟子因出身差异被区别对待，沈知微暗中观察并记录此乱象",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "714": {
+      "chapter": 714,
+      "core_event": "太虚仙门入门考核首日，陆烬因出身平凡被同门轻视，上官烈暗中庇护",
+      "characters": [
+        "C001",
+        "C004",
+        "C005",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "715": {
+      "chapter": 715,
+      "core_event": "考核中陆烬意外展示微弱神魂波动，引发长老注意，被标记为特异案例",
+      "characters": [
+        "C001",
+        "C005",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "716": {
+      "chapter": 716,
+      "core_event": "沈知微私下向陆烬解释仙门鄙视链，上官烈内心矛盾加剧并主动提出协助",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "717": {
+      "chapter": 717,
+      "core_event": "夜间陆烬感知到远处神秘探视气息，沈知微紧急转移其住所以避开监视",
+      "characters": [
+        "C001",
+        "C004",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "718": {
+      "chapter": 718,
+      "core_event": "陆烬在新住所初修《太上养魂经》残篇，感觉身心轻盈但无实质突破",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "719": {
+      "chapter": 719,
+      "core_event": "太虚仙门外门弟子选拔初试，陆烬因出身底层被考官轻视",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "720": {
+      "chapter": 720,
+      "core_event": "沈知微暗中观察陆烬神识反应，记录异常数据",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "721": {
+      "chapter": 721,
+      "core_event": "太虚仙门各派代表互相试探，资源分配矛盾激化",
+      "characters": [
+        "C005",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "722": {
+      "chapter": 722,
+      "core_event": "陆烬在杂役处清理禁地，无意触碰残破玉简获得只言片语",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "723": {
+      "chapter": 723,
+      "core_event": "上官烈因心结复发阻拦陆烬进入内门区域，冲突升级",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "724": {
+      "chapter": 724,
+      "core_event": "沈知微汇报陆烬异常报告被高层封存，暗流涌动",
+      "characters": [
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "725": {
+      "chapter": 725,
+      "core_event": "太虚仙门外围测试开启，陆烬目睹各脉弟子间因出身引发的暗中轻视",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "726": {
+      "chapter": 726,
+      "core_event": "陆烬被分配至杂务堂，接触《太上养魂经》入门残法时感到神魂轻微排斥",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "727": {
+      "chapter": 727,
+      "core_event": "摄魂阁探子在仙门外围窥探，发现陆烬气息异常但未能获取具体信息",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "728": {
+      "chapter": 728,
+      "core_event": "陆烬在修炼残法中因神魂双界特性导致气感紊乱，险些被执事发现异常",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "729": {
+      "chapter": 729,
+      "core_event": "沈知微介入调查杂务堂异动，暗中压制陆烬的神魂异常波动",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "730": {
+      "chapter": 730,
+      "core_event": "陆烬在镇压下强行运转残法，神魂深处首次出现跨界共鸣的痛感",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "731": {
+      "chapter": 731,
+      "core_event": "太虚仙门内务争执，陆烬目睹资源分配不公，沈知微暗中记录证据",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "732": {
+      "chapter": 732,
+      "core_event": "太虚仙门引气测灵，陆烬灵根平庸引发出身歧视，陈老根目睹儿备受冷遇",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "733": {
+      "chapter": 733,
+      "core_event": "摄魂阁外围探子伪装医者接近陆烬，试图探查神魂特质",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "734": {
+      "chapter": 734,
+      "core_event": "各脉代表会议，陆烬因资质争议被边缘化，上官烈提出质疑",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "735": {
+      "chapter": 735,
+      "core_event": "夜间巡视发现异常气息，陆烬直觉感知威胁但未展现能力",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "736": {
+      "chapter": 736,
+      "core_event": "沈知微布局清除内奸，陆烬被迫公开测试以自证清白",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

@@ -87,8 +87,9 @@ def test_load_pricing_from_cost_sandbox():
 
 def test_load_pricing_falls_back_on_missing_file():
     import tempfile
-    with tempfile.TemporaryDirectory() as td:
-        root = Path(td)
-        inp, outp = load_pricing(root)
-        assert inp == 0.0
-        assert outp == 0.0
+    base = Path(__file__).resolve().parents[1] / ".test_tmp"
+    base.mkdir(exist_ok=True)
+    root = Path(tempfile.mkdtemp(prefix="pricing_test_", dir=base))
+    inp, outp = load_pricing(root)
+    assert inp == 0.0
+    assert outp == 0.0

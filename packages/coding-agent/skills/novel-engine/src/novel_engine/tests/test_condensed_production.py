@@ -4,6 +4,7 @@ import re
 import zipfile
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 import pytest
@@ -21,6 +22,14 @@ from novel_engine.core.execution import BudgetExceeded
 
 
 SOURCE = Path(__file__).resolve().parents[1]
+
+
+@pytest.fixture
+def tmp_path():
+    """Workspace-local writable dir: the pytest AppData basetemp is sandbox-blocked."""
+    base = SOURCE / ".test_tmp"
+    base.mkdir(exist_ok=True)
+    return Path(tempfile.mkdtemp(prefix="condensed_test_", dir=base))
 
 
 def plan(chapter=1, target=4210):
@@ -108,7 +117,7 @@ def test_budget_allocation_is_program_owned_and_keeps_scene_proportions():
 
 def test_all_original_milestones_preserved_with_valid_dependencies():
     canon = load_canon(SOURCE)
-    old = json.loads((SOURCE / "config/planning/plot_graph.json").read_text())
+    old = json.loads((SOURCE / "config/planning/plot_graph.json").read_text(encoding="utf-8"))
     nodes = {node["id"]: node for node in canon["milestones"]}
     assert set(nodes) == {node["id"] for node in old["nodes"]}
     for node in nodes.values():
@@ -237,7 +246,7 @@ def test_collection_contains_only_committed_chapters(tmp_path):
     (tmp_path / "drafts").mkdir()
     (tmp_path / "drafts/chapter_2.json").write_text('{"text":"uncommitted draft"}')
     directory = compile_manuscript(store, ProductionConfig())
-    text = (directory / "全部章节简写.md").read_text()
+    text = (directory / "全部章节简写.md").read_text(encoding="utf-8")
     assert "1/3800" in text and "uncommitted draft" not in text
     assert "第1章" in text and "第2章" not in text
     store.close()
@@ -266,7 +275,7 @@ def test_portable_package_includes_complete_prompts_and_checksums(tmp_path):
     canon = load_canon(SOURCE)
     directory = export_chapter(store, 1, canon, ProductionConfig())
     manifest = verify_export(directory)
-    prompt = (directory / "扩写提示词.md").read_text()
+    prompt = (directory / "扩写提示词.md").read_text(encoding="utf-8")
     assert value["scenes"][0]["text"] in prompt
     assert canon["world"] in prompt and canon["style"] in prompt
     assert "4000至5000" in prompt and "4210" in prompt
@@ -318,7 +327,7 @@ class FakeRouter:
         text = messages[-1]["content"]
         if "执行叙事简写逻辑质检" in text:
             value = review()
-            value["input_hash"] = re.search(r'"input_hash":"([a-f0-9]+)"', text)[1]
+            value["input_hash"] = re.search(r'"input_hash":\s*"([a-f0-9]+)"', text)[1]
             candidate = json.JSONDecoder().raw_decode(text.split("\n审查对象：\n")[-1])[0]
             context = json.loads(text.split("\n设定及前章事实：\n")[-1].split("\n审查对象：\n")[0])
             task = context["plan"]
@@ -368,7 +377,7 @@ def test_failure_stops_without_publication_or_human_queue(tmp_path):
     with pytest.raises(QualityFailure):
         pipeline.generate(1)
     assert pipeline.store.prefix() == 0
-    diagnostic = json.loads((tmp_path / "drafts/chapter_1.json").read_text())
+    diagnostic = json.loads((tmp_path / "drafts/chapter_1.json").read_text(encoding="utf-8"))
     assert len(diagnostic["history"]) == 3
     assert "human" not in json.dumps(diagnostic)
     assert reviewer.calls == 1
@@ -405,7 +414,7 @@ def test_review_format_correction_does_not_rewrite_the_chapter(tmp_path):
     pipeline = CondensedPipeline(SOURCE, tmp_path, ProductionConfig(plan_batch=1, repair_rounds=0), generator, reviewer)
     assert pipeline.generate(1)["committed"]
     assert generator.calls == 2 and reviewer.calls == 2
-    saved = json.loads((tmp_path / "drafts/chapter_1.json").read_text())
+    saved = json.loads((tmp_path / "drafts/chapter_1.json").read_text(encoding="utf-8"))
     assert saved["format_repairs"] == 1
     pipeline.close()
 
@@ -481,9 +490,14 @@ def test_long_absent_character_history_is_retrieved_without_loading_the_whole_bo
         committed(store, number)
     context = store.context(["陆烬", "赵掌事"])
     assert any(item["name"] == "赵掌事" and item["first_chapter"] == 1 for item in context["character_registry"])
+    assert {item["name"] for item in context["character_registry"]} == {"陆烬", "赵掌事"}
+    assert any(item["name"] == "赵掌事" and "旧账" in item["introduction"] for item in context["character_registry"])
+    assert set(context["cast"]["names"]) == {"陆烬", "赵掌事"}
     assert any(item["name"] == "赵掌事" and "旧账" in item["introduction"] for item in context["introductions"])
     assert any(item["chapter"] == 1 for item in context["related_history"])
     assert len(context["recent_chapters"]) == 4
+    full = store.context()
+    assert "赵掌事" in [item["name"] for item in full["character_registry"]]
     store.close()
 
 

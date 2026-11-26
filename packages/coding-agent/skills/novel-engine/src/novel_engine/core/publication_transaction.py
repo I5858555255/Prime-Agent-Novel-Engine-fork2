@@ -6,6 +6,7 @@ import os
 import shutil
 import sqlite3
 import threading
+import time
 import uuid
 from contextlib import contextmanager
 from pathlib import Path
@@ -24,21 +25,34 @@ _LOCAL = threading.local()
 def atomic_write(path, content):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
+    data = content if isinstance(content, bytes) else content.encode("utf-8")
     tmp = path.with_name(path.name + "." + uuid.uuid4().hex + ".tmp")
-    try:
-        with tmp.open("wb") as stream:
-            stream.write(content if isinstance(content, bytes) else content.encode("utf-8"))
-            stream.flush()
-            os.fsync(stream.fileno())
-        os.replace(tmp, path)
-        if os.name == "posix":
-            descriptor = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
-            try:
-                os.fsync(descriptor)
-            finally:
-                os.close(descriptor)
-    finally:
-        tmp.unlink(missing_ok=True)
+    attempt = 0
+    while True:
+        attempt += 1
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            with tmp.open("wb") as stream:
+                stream.write(data)
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.replace(tmp, path)
+            if os.name == "posix":
+                descriptor = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
+                try:
+                    os.fsync(descriptor)
+                finally:
+                    os.close(descriptor)
+            return
+        except FileNotFoundError:
+            # Windows + Defender can report ENOENT on a brand-new file inside a
+            # just-created directory for a short window (handle release lag,
+            # real-time scan lock). Keep the same tmp name and back off; a
+            # persistent failure re-raises after the retries are exhausted.
+            if attempt >= 8:
+                tmp.unlink(missing_ok=True)
+                raise
+            time.sleep(0.25 * attempt)
 
 
 @contextmanager

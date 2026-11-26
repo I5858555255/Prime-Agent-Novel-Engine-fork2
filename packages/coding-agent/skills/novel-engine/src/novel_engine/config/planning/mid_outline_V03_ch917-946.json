@@ -1,0 +1,316 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      917,
+      946
+    ],
+    "node_chapters_in_range": [
+      918
+    ],
+    "generated_at": "2026-11-25T05:28:02+00:00",
+    "batch_size": 5,
+    "status": "approved",
+    "audit": {
+      "last_run": true
+    },
+    "note": "15/29 entries approved; remainder pending_human/needs_regenerate kept for next pass"
+  },
+  "entries": {
+    "917": {
+      "chapter": 917,
+      "core_event": "陆烬在仙门测试现场目睹高阶修士以出身划分资源额度，内心产生强烈不平",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "919": {
+      "chapter": 919,
+      "core_event": "陆烬因测试受挫暂居偏殿，开始梳理自身神魂结构以应对后续挑战",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "920": {
+      "chapter": 920,
+      "core_event": "太虚仙门各脉代表就资源分配问题爆发激烈争执，陆烬暗中观察其裂痕",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "921": {
+      "chapter": 921,
+      "core_event": "陆烬尝试运用《太上养魂经》残法稳固心神，发现其中隐藏更多层次",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "922": {
+      "chapter": 922,
+      "core_event": "一名神秘外来者试图探查陆烬神魂异动，被陆烬巧妙掩饰过去",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "923": {
+      "chapter": 923,
+      "core_event": "core_event: \"高脉弟子以摄魂阁传闻为由当众逐陆烬出演武场，陆烬以入门考核成绩反击，对方反被掌门罚抄门规\"",
+      "characters": [],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "924": {
+      "chapter": 924,
+      "core_event": "陆烬向苏问魂追问造门代价，对方避而不谈留下悬念",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "925": {
+      "chapter": 925,
+      "core_event": "各脉长老暗中交换资源，陆烬目睹出身歧视加剧矛盾",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "926": {
+      "chapter": 926,
+      "core_event": "陆烬研读《太上养魂经》残法，发现其中隐藏的第二层奥妙",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "927": {
+      "chapter": 927,
+      "core_event": "摄魂阁线人在测试现场试探陆烬神魂反应，陆烬警觉回避",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "928": {
+      "chapter": 928,
+      "core_event": "陆烬因神魂异动被部分势力视为异类，引发脉间鄙视链冲突升级",
+      "characters": [
+        "C001",
+        "C004",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "929": {
+      "chapter": 929,
+      "core_event": "陆烬决定隐瞒神魂特殊性，独自尝试稳固根基，为后续突破做准备",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "930": {
+      "chapter": 930,
+      "core_event": "太虚仙门内门弟子在演武场公开展示基础引气术，陆烬旁观却无气感，仅记录经脉走向",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "needs_regenerate"
+    },
+    "931": {
+      "chapter": 931,
+      "core_event": "外门师兄以出身歧视为由，在资源分配时故意将劣等丹药分给陆烬，引发陆烬心理波澜",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "932": {
+      "chapter": 932,
+      "core_event": "仙门季考资源配额公示，低脉弟子因出身被削减份额，陆烬被高脉师兄当众指为攀附者，被迫当场自证",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "933": {
+      "chapter": 933,
+      "core_event": "陆烬按入门残卷所示修至瓶颈，发现残卷某页墨迹下隐有暗纹，与七窍碑残页纹路高度相似",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：暗纹相似性触及f001_royal_heirlooms伏笔线，但未解读七窍碑残页真正用途，处于hint边界",
+      "status": "pending_human"
+    },
+    "934": {
+      "chapter": 934,
+      "core_event": "太虚仙门各脉联合演武，低脉被强制搭配弱敌，陆烬拒绝让三招的羞辱安排，与对手正面对决",
+      "characters": [
+        "C001",
+        "C005",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "935": {
+      "chapter": 935,
+      "core_event": "陈老根在村外练习呼吸法，陆烬隔着迷雾边界看到其面色红润，内心对比自身无气感的困境",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "936": {
+      "chapter": 936,
+      "core_event": "联合考核中陆烬以非常规手段逆转局面，当众击溃高脉首席弟子，低脉弟子首次获得实力配额认可",
+      "characters": [
+        "C001",
+        "C005",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "937": {
+      "chapter": 937,
+      "core_event": "仙门外坊出现匿名收购意识异常者的告示，陆烬认出措辞与苏问魂所述吻合，暗中记下收购人特征",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "938": {
+      "chapter": 938,
+      "core_event": "太虚仙门因造门传闻加码联合测试规则，陆烬被分至最低资源位，玄脉主事者暗中调阅其异常数据",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "939": {
+      "chapter": 939,
+      "core_event": "陆烬以残法应对灵脉测试数据异常被标记观察，仙门外围出现一名打听气息特异者的暗探",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "940": {
+      "chapter": 940,
+      "core_event": "测试间隙，陆烬听到高阶弟子争论《太上养魂经》真伪，暗存疑惑",
+      "characters": [
+        "C001",
+        "C007",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "941": {
+      "chapter": 941,
+      "core_event": "公开考核中玄脉弟子当众羞辱陆烬出身，陆烬以残法完成高难操作打脸全场，首座不得不服",
+      "characters": [
+        "C001",
+        "C003",
+        "C004",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "942": {
+      "chapter": 942,
+      "core_event": "陆烬被调入玄脉特殊观察序列实为软禁，剑脉长老暗中试探他是否知晓造门传闻源头",
+      "characters": [
+        "C001",
+        "C004",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "943": {
+      "chapter": 943,
+      "core_event": "陆烬研读残法发现模糊段落与自身体相产生共振感距下一阶仅差一步，仙门外围再现刻旧纹铜匣",
+      "characters": [
+        "C001",
+        "C004",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "944": {
+      "chapter": 944,
+      "core_event": "陆烬在考核中被针对，利用残法特性化解羞辱并引起某脉长老注意",
+      "characters": [
+        "C001",
+        "C007",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "945": {
+      "chapter": 945,
+      "core_event": "太虚仙门内院评级，北脉首座C003当众以出身压低陆烬位次，陆烬以不属于任何一脉的应答令评审席失语，高台上一位长老C004以指节叩案记下他的\"异\"",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "946": {
+      "chapter": 946,
+      "core_event": "评级后陆烬被压至最末等差事，南脉末席C005在跨脉资源分配会上以\"气息不可废\"一句将他保在门槛内，C003拂袖而去，留陆烬独坐三脉审视的静默之中，案上一卷被各脉搁置的入门残法正摊开在他面前却无人敢替他翻页",
+      "characters": [
+        "C001",
+        "C003",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": "需人工确认：残法物证涉及f002_hunyuan_scripture（陈老根所传呼吸法残篇）在仙门语境下的延伸暗示，需确认此处仅做\"被搁置的物证\"呈现而未点明其来历或机制",
+      "status": "pending_human"
+    }
+  }
+}

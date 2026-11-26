@@ -1,0 +1,316 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      2441,
+      2470
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-11T23:48:53+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "30/30 approved",
+      "note": "V07 段(2441-2470); 5章 boundary_note 改陈述式(f008 守夜人边界, f007 铁证余波, f001 误导层, f006 前置, N038 紧邻); 锚点补齐; F003/F004/F007 已全副本闭环"
+    }
+  },
+  "entries": {
+    "2441": {
+      "chapter": 2441,
+      "core_event": "陆烬在古玉结界内推演神魂离体后的墟界路径，确认路线无异常",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2442": {
+      "chapter": 2442,
+      "core_event": "沈知微调整古玉结界频率，上官烈布置三才护魂阵节点以加固肉身锚点",
+      "characters": [
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2443": {
+      "chapter": 2443,
+      "core_event": "柳踏歌记录神魂外放过程中的微震数据，陆烬在内心默念守夜人的指令",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 指令后续执行推进，严守既定设定边界，不偏离守夜人核心设定（plant@1844，resolve@3800）。",
+      "status": "approved"
+    },
+    "2444": {
+      "chapter": 2444,
+      "core_event": "陈老根在外界配合呼吸法节奏，监控陆烬肉身生命体征，确保无波动",
+      "characters": [
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2445": {
+      "chapter": 2445,
+      "core_event": "陆烬神魂感知到墟界入口的迷雾异变，与古玉产生微弱共鸣",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2446": {
+      "chapter": 2446,
+      "core_event": "陆烬正式启动离体程序，神魂脱离肉身，肉身进入三才护魂阵休眠状态",
+      "characters": [
+        "C001",
+        "C002",
+        "C003",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2447": {
+      "chapter": 2447,
+      "core_event": "陆烬在书房整理档案，发现飞升者平安信与失踪记录存在时间戳的逻辑矛盾",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2448": {
+      "chapter": 2448,
+      "core_event": "李淳介入调查，指出部分信件被人为篡改过墨迹，暗示幕后黑手具备高阶秘法",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2449": {
+      "chapter": 2449,
+      "core_event": "沈知微分析信件批号，发现缺失批次恰好对应三年前仙庭与沉沦界的某次边境冲突",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2450": {
+      "chapter": 2450,
+      "core_event": "柳踏歌通过旧部渠道查到缺失批次曾被封锁，封锁理由涉及“界门稳定性”而非常规安保",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2451": {
+      "chapter": 2451,
+      "core_event": "陈老根察觉陆烬近日心神不宁，虽未明言关切，但通过日常互动传递了隐晦的警示",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2452": {
+      "chapter": 2452,
+      "core_event": "众人汇总线索，确认档案中的异常并非孤立事件，而是两界情报网渗透的冰山一角",
+      "characters": [
+        "C001",
+        "C004",
+        "C005",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2453": {
+      "chapter": 2453,
+      "core_event": "陆烬在档案馆深挖飞升契约异常数据，发现平安信寄件时间呈非自然聚类规律",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2454": {
+      "chapter": 2454,
+      "core_event": "陆烬追踪平安信聚类规律，察觉幕后存在系统性筛选与抹除信息的机制，墟界深处传来一丝更古老的回音",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f007_fake_echo 回收后遗留线索推进，属'铁证阶段'后续余波，严守 R22 三阶段约束，已公开真相不重新揭示，仅写余波暗示。",
+      "status": "approved"
+    },
+    "2455": {
+      "chapter": 2455,
+      "core_event": "陆烬将发现上报沈知微，二人联合复盘迷雾禁区异变与契约漏洞的关联逻辑",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2456": {
+      "chapter": 2456,
+      "core_event": "上官烈介入调查，指出皇室秘藏中可能隐藏对抗契约漏洞的关键残物线索",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms（resolve@3035）提及推进，属前期误导层/伏笔预埋，严守边界不泄露皇室误读属性实质，仅写到谜团层。",
+      "status": "approved"
+    },
+    "2457": {
+      "chapter": 2457,
+      "core_event": "陆烬与上官烈、沈知微制定潜入皇室秘藏外围的试探计划，规避肉身保护机制",
+      "characters": [
+        "C001",
+        "C005",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2458": {
+      "chapter": 2458,
+      "core_event": "陆烬在计划执行前夕遭遇心魔反噬，李淳的幻影显现加剧身份撕裂感",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2459": {
+      "chapter": 2459,
+      "core_event": "陆烬整理前期飞升契约追查铁证，确认肉身护罩暂无新增漏洞",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2460": {
+      "chapter": 2460,
+      "core_event": "上官鸿暗示太初议会残脉位置，陆烬决定暂缓询问仙庭旧部动向",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2461": {
+      "chapter": 2461,
+      "core_event": "陆烬在古玉结界内推演神魂离体的风险，确认三才阵稳定",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2462": {
+      "chapter": 2462,
+      "core_event": "摄魂阁新息被截获，证实外界对陆烬两界神魂特殊性关注度提升",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2463": {
+      "chapter": 2463,
+      "core_event": "陆烬与守夜人核对墟界入口坐标，确认迷雾禁区异变未影响通道稳定",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2464": {
+      "chapter": 2464,
+      "core_event": "陆烬制定最终神魂离体方案，沈知微与上官烈完成三才护魂阵细节校验",
+      "characters": [
+        "C001",
+        "C007",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2465": {
+      "chapter": 2465,
+      "core_event": "陆烬梳理神魂离体准备事项，上官鸿告知太初议会残脉提取延缓的密报，古玉结界边缘泛起一丝血脉微光",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "铺垫：f006_jade_seal_bloodline（埋设@2499）接近前置推进，严守'埋设前不提前提及'边界，仅写到氛围暗示，不具象化古玉血脉机制。",
+      "status": "approved"
+    },
+    "2466": {
+      "chapter": 2466,
+      "core_event": "沈知微推演古玉结界布设方位，发现沉沦界边缘有异常波动",
+      "characters": [
+        "C003",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2467": {
+      "chapter": 2467,
+      "core_event": "柳踏歌协助绘制三才护魂阵图，李淳心魔初显对陆烬产生疑虑",
+      "characters": [
+        "C005",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2468": {
+      "chapter": 2468,
+      "core_event": "陆烬将部分信任转交上官烈，安排留守人员应对墟界变数",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2469": {
+      "chapter": 2469,
+      "core_event": "各方就位，陆烬尝试神魂微调，触碰肉身保护机制边缘但未突破",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2470": {
+      "chapter": 2470,
+      "core_event": "陆烬完成最后仪式，古玉结界与护魂阵激活，神魂离体在即",
+      "characters": [
+        "C001",
+        "C003",
+        "C005",
+        "C006"
+      ],
+      "boundary_note": "铺垫：ch2470 为 N038 节点（ch2478）紧邻前置章，严守边界未提前执行 N038 事件，仅作前置铺垫，不抢 N038 核心节点。",
+      "status": "approved"
+    }
+  }
+}

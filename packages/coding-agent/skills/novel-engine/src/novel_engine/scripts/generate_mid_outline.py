@@ -96,6 +96,39 @@ def _current_volume_forbidden(author_intent: str, vid: str, chapter_num: int) ->
     return []
 
 
+def _cognition_window(vid: str, chapter_num: int, bible: dict) -> dict:
+    """按当前章节所在卷的阶段取 author_intent 的 forbidden 条款 + 关键禁词。
+
+    根因：旧版只注入卷级 forbidden 字符串，模型仍会在 core_event 里写
+    '引气术/筑基/神识/养魂经'等越界词 → audit 撞 concept 锁 → pending_human。
+    这里把 forbidden 条款逐条展开为"生成时必须回避"的硬约束，并附上该卷
+    的关键禁词清单（未解锁概念词），让模型在源头就不越界。
+    """
+    import re
+    author_intent = bible.get("author_intent", "")
+    if not author_intent:
+        return {}
+    stage_block = ""
+    for blk in re.split(r"^## ", author_intent, flags=re.M):
+        m = re.match(r"第[一二三四五六七八九十]+阶段.*?（第?(\d+)-?(\d+)章?）", blk)
+        if not m:
+            continue
+        lo, hi = int(m.group(1)), int(m.group(2) or m.group(1))
+        if lo <= chapter_num <= hi:
+            stage_block = blk
+            break
+    if not stage_block:
+        stage_block = author_intent
+    forbidden_lines = [ln.strip().lstrip("- ").strip('"')
+                       for ln in stage_block.splitlines() if ln.strip().startswith("-")]
+    key_terms = []
+    for t in ("引气", "气感", "吐纳", "灵力运转", "周天", "丹田", "筑基", "神识", "灵气",
+              "灵根", "神魂", "养魂经", "太上", "元婴", "化神", "金丹", "飞升", "摄魂阁"):
+        if t in stage_block or t in author_intent:
+            key_terms.append(t)
+    return {"forbidden": forbidden_lines, "key_terms": key_terms, "stage": stage_block[:400]}
+
+
 def _build_batch_prompt(
     vid: str,
     chapters: list[int],
@@ -107,6 +140,7 @@ def _build_batch_prompt(
     world_state_summary: str,
 ) -> str:
     """构造一批章节的中纲生成 prompt。"""
+    cog = _cognition_window(vid, chapters[0], bible)
     lines = [
         f"【待规划章节】{chapters[0]}-{chapters[-1]}（共 {len(chapters)} 章，均为无 plot 节点章）",
         "",
@@ -122,6 +156,16 @@ def _build_batch_prompt(
     lines.append("【本卷禁止事项（硬约束，任何章节不得违反）】")
     lines.append("；".join(forbidden) if forbidden else "（无显式条款）")
     lines.append("")
+    # 根因修复：章级认知窗口 —— 把该阶段 forbidden 条款 + 未解锁概念词展开为生成硬约束
+    if cog.get("forbidden") or cog.get("key_terms"):
+        lines.append("【认知窗口硬约束（本批章节所在阶段，core_event 必须逐条回避）】")
+        for fb in cog.get("forbidden", []):
+            lines.append(f"- 禁：{fb[:80]}")
+        if cog.get("key_terms"):
+            lines.append("- 未解锁概念词（本阶段 core_event 不得出现，仅可写'模糊感知/传闻/物证'，"
+                         "不得点明机制或名称）：" + "、".join(cog["key_terms"]))
+        lines.append("  违反任一条 → 该章会被 audit 判 needs_regenerate，必须用中性观察语言重写。")
+        lines.append("")
     lines.append("【结局与伏笔时间表（仅列与本章范围相关的条目）】")
     for fs in relevant_foreshadows:
         lines.append(
@@ -145,6 +189,17 @@ def _build_batch_prompt(
                  "必须在 boundary_note 字段显式标注'需人工确认：<原因>'，不得自行决定放行。")
     lines.append("4. 每章 core_event 用 20-40 字一句话，写清'发生什么'，不写氛围描写。")
     lines.append("")
+    # 爆款爽点节奏（根因：旧中纲整段压抑向无爽点，读者流失）
+    lines.append("【爆款爽点节奏（每 10 章批次必须满足，防止结构塌缩/无爽点）】")
+    lines.append("- 每 10 章内必须包含：≥2 冲突章（正面对抗/打脸/羞辱反转）、≥1 揭示章"
+                 "（隐藏信息部分揭开/金手指线索/身份暗示）、≥1 爽点章（主角逆风翻盘/"
+                 "打脸反派/获得资源或认可的情绪峰值）。")
+    lines.append("- 爽点章的 core_event 必须写清'谁被打脸/谁翻盘/峰值情绪是什么'，不得只写氛围。")
+    lines.append("- 同类型间隔 ≥3 章；不得连续 3 章以上为同一类型；压抑/边缘化情节每 3 章后"
+                 "必须接一次反转或进展，不得无限累积。")
+    lines.append("- 每章 core_event 末尾暗含一个章末钩子（未解决危机/新悬念/下章将发生的暗示），"
+                 "不得以抒情或总结收尾。")
+    lines.append("")
     lines.append("【角色代号】C001=陆烬（主角，婴儿-幼年期，第一阶段禁修炼动作）；"
                  "C002=陈老根（养父，可练习呼吸法）；C003/C004/C005/C006/C007/C008="
                  "后续登场的村民/江湖/仙门角色（按剧情需要引入，不要凭空造新代号）。")
@@ -162,6 +217,57 @@ def _build_batch_prompt(
     return "\n".join(lines)
 
 
+def _build_client():
+    """Build an LLMClient from config/llm_providers.json active_profile.
+
+    The legacy runtime_config.json (llm.api_base / api_key_env) no longer ships in
+    the condensed-only repo; the single source of truth is llm_providers.json
+    (active_profile -> base_url / api_key_env / timeout_s / phases.<name>.models).
+    """
+    import json as _json
+    from novel_engine.core.llm_client import LLMClient
+
+    providers_path = ROOT / "config" / "llm_providers.json"
+    if not providers_path.exists():
+        raise FileNotFoundError(
+            f"llm_providers.json not found at {providers_path}; cannot resolve active LLM profile")
+    cfg = _json.loads(providers_path.read_text(encoding="utf-8"))
+    active = cfg["active_profile"]
+    profile = cfg["profiles"][active]
+    base_url = profile.get("base_url", "")
+    api_key_env = profile.get("api_key_env", "LLM_API_KEY")
+    api_key = os.environ.get(api_key_env) or os.environ.get("AGNES_API_KEY") or ""
+    # Fall back to the .env file next to the package when the env var is unset.
+    if not api_key:
+        for env_candidate in (ROOT / ".env", ROOT.parent / ".env"):
+            if env_candidate.exists():
+                for line in env_candidate.read_text(encoding="utf-8").splitlines():
+                    line = line.strip()
+                    if line.startswith(api_key_env + "="):
+                        api_key = line.split("=", 1)[1].strip().strip('"').strip("'")
+                        break
+                if api_key:
+                    break
+    # model: first phase that carries models (director for planning, else outline/scenes)
+    model = ""
+    phases = profile.get("phases") or {}
+    for pname in ("director", "outline", "scenes"):
+        ms = (phases.get(pname) or {}).get("models") or []
+        if ms:
+            model = ms[0]
+            break
+    if not model:
+        for c in phases.values():
+            ms = (c or {}).get("models") or []
+            if ms:
+                model = ms[0]
+                break
+    if not model:
+        model = profile.get("default_model", "agnes-3.0-flash")
+    timeout = int(profile.get("timeout_s", 120))
+    return LLMClient(api_base=base_url, model=model, api_key=api_key, timeout=timeout)
+
+
 async def _generate_batch(prompt: str, logger: logging.Logger,
                           retries: int = 2) -> list[dict]:
     """一次 LLM 调用生成一批中纲条目（JSON 数组）。
@@ -170,25 +276,7 @@ async def _generate_batch(prompt: str, logger: logging.Logger,
     重试耗尽返回 []，由上层记录缺失章并继续。
     """
     from novel_engine.core.llm_client import call_llm
-    from novel_engine.core.llm_client import _load_runtime_config, LLMClient
-    cfg = _load_runtime_config() or {}
-    llm_cfg = cfg.get("llm", {}) or {}
-    # api_key 显式解析：按 runtime_config 的 api_key_env 字段读取
-    # （当前 active provider 是 agnes → AGNES_API_KEY）。
-    # 修复：SILICONFLOW_API_KEY 从优先级移除/置后——系统环境变量里残留的硅基 key
-    # 曾被优先选中、发到 agnes 导致 401 Invalid token（2026-10-10 中纲生成事故）。
-    api_key = (
-        os.environ.get(llm_cfg.get("api_key_env", "LLM_API_KEY"))
-        or os.environ.get("AGNES_API_KEY")
-        or os.environ.get("LLM_API_KEY")
-        or ""
-    )
-    client = LLMClient(
-        api_base=llm_cfg.get("api_base"),
-        model=llm_cfg.get("model"),
-        api_key=api_key,
-        timeout=int(llm_cfg.get("timeout_seconds", 120)),
-    )
+    client = _build_client()
     last_err = "unknown"
     for attempt in range(retries + 1):
         try:
@@ -196,7 +284,7 @@ async def _generate_batch(prompt: str, logger: logging.Logger,
                 prompt=prompt,
                 system_prompt=SYSTEM_PROMPT,
                 client=client,
-                output_json=False,  # siliconflow DeepSeek 的 output_json 模式系统性返回空 content
+                output_json=False,  # 行格式解析，不用 output_json
             )
         except Exception as exc:
             last_err = str(exc)
@@ -274,7 +362,7 @@ async def _run(
 
     forbidden = _current_volume_forbidden(bible.get("author_intent", ""), vid, start)
 
-    # 世界状态摘要（用 ch=start 的状态，作为承接参考）
+    # 世界状态摘要（可选；condensed-only 部署无 engine.db，缺省为空）
     world_state_summary = ""
     try:
         from novel_engine.engine.db import StateDB
@@ -286,6 +374,7 @@ async def _run(
         except Exception:
             world_state_summary = ""
     except Exception:
+        # engine 模块已移除或无历史世界状态：跳过，不影响中纲生成。
         world_state_summary = ""
 
     # 无节点章列表
@@ -389,8 +478,9 @@ def main(argv: list[str] | None = None) -> int:
     logging.basicConfig(level=logging.INFO,
                         format="%(asctime)s [%(levelname)s] %(message)s")
     logger = logging.getLogger("generate_mid_outline")
-    if not (os.environ.get("AGNES_API_KEY") or os.environ.get("LLM_API_KEY")):
-        logger.error("No API key (AGNES_API_KEY/LLM_API_KEY). Aborting.")
+    if not (os.environ.get("AGNES_TOKEN_API_KEY") or os.environ.get("AGNES_API_KEY")
+            or os.environ.get("LLM_API_KEY")):
+        logger.error("No API key (AGNES_TOKEN_API_KEY/AGNES_API_KEY/LLM_API_KEY). Aborting.")
         return 2
 
     out = args.out
