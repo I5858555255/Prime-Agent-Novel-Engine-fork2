@@ -528,9 +528,13 @@ export function installOwnedSessionWorkerOwnerWatch(): void {
 		}
 		ownerGone = true;
 		process.off("disconnect", terminate);
-		if (process.connected) {
-			process.disconnect();
-		}
+		// This is a forked child: its global `process` has no `disconnect()`
+		// (that is a parent-side ChildProcess method, not a child-side global).
+		// Tearing down the watch just unsubscribes + drops the child-side IPC
+		// channel reference; the parent-side "disconnect" event (handled above)
+		// is what actually terminates the worker.
+		const channel = process.channel as { ref?: () => void; unref?: () => void } | undefined;
+		channel?.unref?.();
 		closeOwnerWatch = undefined;
 	};
 }
