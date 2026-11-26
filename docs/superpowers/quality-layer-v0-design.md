@@ -175,6 +175,8 @@ In one line: we attach a quality verdict to a chapter without changing the chapt
 
 ### Milestone-2 placeholders (scoped, not built in v0)
 
+> 逐项的落点/前置依赖/验收 + 实施顺序：见 `quality-layer-m2-roadmap.md`（与本 spec 同目录，M2 路线图）。
+
 * Per-chapter **repair + re-judge loop** (after G7 proves the judge correlates with a reference).
 * **Knob rules engine** + LLM climax classification (beside, not replacing, `concept_terms`) + `volume_reopen`.
 * **Prompt cache** (no savings claim) + rolling **drift metrics** + paging channel.
