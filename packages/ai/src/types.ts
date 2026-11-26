@@ -68,7 +68,7 @@ export type CacheRetention = "none" | "short" | "long";
 
 export type Transport = "sse" | "websocket" | "websocket-cached" | "auto";
 
-export type ServiceTier = "auto" | "default" | "flex" | "scale" | "priority" | null;
+export type ServiceTier = "auto" | "default" | "flex" | "scale" | "priority" | "fast" | "ultrafast" | null;
 
 export interface ProviderResponse {
 	status: number;
