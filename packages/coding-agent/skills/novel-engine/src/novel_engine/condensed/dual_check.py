@@ -21,6 +21,7 @@ import httpx
 
 from .accept_check import run as program_run, load_manifest
 from .providers import load_provider
+from . import volume_knobs
 
 
 def _cognition_boundary_notes(package: Path) -> str:
@@ -118,10 +119,36 @@ def _extract_llm_blocking(llm_text: str) -> list[str]:
     return _filter_wordcount(blocking)
 
 
+def _active_knob_set_for_chapter(chapter: int) -> dict | None:
+    """Resolve the active volume for `chapter` and return its knob_set via
+    volume_knobs.read_active_knobs. Returns None when the chapter is not
+    covered by any volume in volumes.json (spec=None path → quality_notes=[])."""
+    import json as _json
+    import pathlib as _pathlib
+    volumes_path = (_pathlib.Path(__file__).resolve().parent.parent
+                    / "config" / "planning" / "volumes.json")
+    if not volumes_path.exists():
+        return None
+    data = _json.loads(volumes_path.read_text(encoding="utf-8"))
+    for volume in data.get("volumes", []):
+        start, end = volume["chapter_range"]
+        if start <= chapter <= end:
+            knob_set, _rationale = volume_knobs.read_active_knobs(volume)
+            return knob_set
+    return None
+
+
 def dual_check(package: Path, prose_path: Path, out_path: Path | None = None,
-               fast_path: bool = False) -> dict:
+               fast_path: bool = False, spec: dict | None = None,
+               verdict: dict | None = None) -> dict:
     manifest = load_manifest(package)
-    program_report = program_run(package, prose_path, out_path=package / "accept_report.json")
+    if spec is None:
+        # Read the active volume's knob set for the manifest chapter. When the
+        # chapter is not inside any shipped volume, spec stays None and both
+        # return sites carry quality_notes=[] (back-compat).
+        spec = _active_knob_set_for_chapter(manifest.get("chapter", 0))
+    program_report = program_run(package, prose_path, out_path=package / "accept_report.json",
+                                 spec=spec, verdict=verdict)
 
     # P1-3 fast-path: if program check passes and fast_path is enabled,
     # skip the LLM semantic check. The program check covers word count,
@@ -132,6 +159,7 @@ def dual_check(package: Path, prose_path: Path, out_path: Path | None = None,
         merged = {
             "chapter": manifest.get("chapter"),
             "program_report": program_report["report"] if isinstance(program_report, dict) and "report" in program_report else program_report,
+            "quality_notes": program_report.get("quality_notes", []),
             "fast_path": True,
             "llm_wall_s": 0,
             "llm_blocking_count": 0,
@@ -164,6 +192,7 @@ def dual_check(package: Path, prose_path: Path, out_path: Path | None = None,
     merged = {
         "chapter": manifest.get("chapter"),
         "program_report": program_report["report"] if isinstance(program_report, dict) and "report" in program_report else program_report,
+        "quality_notes": program_report.get("quality_notes", []),
         "llm_wall_s": round(llm_wall, 1),
         "llm_blocking_count": len(llm_blocking),
         "llm_blocking_samples": llm_blocking[:5],

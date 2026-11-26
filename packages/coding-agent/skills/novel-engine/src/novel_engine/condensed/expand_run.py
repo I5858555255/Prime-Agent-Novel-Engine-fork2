@@ -6,9 +6,11 @@ draft is given) until the cleaned prose is inside the manifest's expanded range.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import sys
+import uuid
 from pathlib import Path
 
 import httpx
@@ -18,6 +20,10 @@ from novel_engine.core.env_bootstrap import load_project_env
 from .accept_check import check_prose, extract_prose, han_count, load_card, load_manifest, INFANT_SELF_AWARENESS
 from .contracts import dumps
 from .synonym_repair import deterministic_repair
+from . import observability, quality_store
+from .providers import load_provider_full
+from .quality_judge import judge_prose
+from .volume_knobs import knob_set_hash
 
 CONTINUE_TEMPLATE = """你是本小说的正文续写者。以下是已完成部分和剩余任务。
 
@@ -97,7 +103,11 @@ def _forbidden_terms_block(chapter: int) -> str:
 
 def _llm(base_url: str, api_key: str, model: str, messages: list[dict],
          max_tokens: int, temperature: float,
-         reasoning_effort: str | None = None) -> str:
+         reasoning_effort: str | None = None) -> tuple[str, dict]:
+    """One polish call. Returns (content, usage) where usage carries
+    total_tokens/prompt_tokens/completion_tokens + usage_estimated (True when
+    the provider returned no `usage` and we estimated: CJK≈1 token/char,
+    ASCII≈4 chars/token, mirroring llm_client._estimate_usage)."""
     url = f"{base_url.rstrip('/')}/v1/chat/completions"
     body: dict = {"model": model, "messages": messages,
                   "max_tokens": max_tokens, "temperature": temperature}
@@ -106,18 +116,54 @@ def _llm(base_url: str, api_key: str, model: str, messages: list[dict],
     with httpx.Client(timeout=httpx.Timeout(connect=15, read=300, write=30, pool=30)) as c:
         r = c.post(url, headers={"Authorization": f"Bearer {api_key}"}, json=body)
         r.raise_for_status()
-        return r.json()["choices"][0]["message"]["content"]
+        payload = r.json()
+    content = payload["choices"][0]["message"]["content"]
+    usage = payload.get("usage") or {}
+    if not usage.get("total_tokens"):
+        prompt_chars = sum(len(str(m.get("content", ""))) for m in messages)
+        prompt_est = observability._estimate_tokens("x" * prompt_chars)
+        completion_est = observability._estimate_tokens(content)
+        usage = {"total_tokens": int(prompt_est + completion_est),
+                 "prompt_tokens": int(prompt_est), "completion_tokens": int(completion_est),
+                 "usage_estimated": True}
+    else:
+        usage = dict(usage)
+        usage.setdefault("prompt_tokens", 0)
+        usage.setdefault("completion_tokens", usage.get("total_tokens", 0))
+        usage["usage_estimated"] = False
+    return content, usage
 
 
 def expand_until_range(package: Path, base_url: str, api_key: str, model: str,
                        initial_draft: Path | None = None, max_rounds: int = 5,
                        target: int | None = None, out_dir: Path | None = None,
                        temperature: float | None = None,
-                       reasoning_effort: str | None = None) -> dict:
+                       reasoning_effort: str | None = None,
+                       trace_id: str | None = None, spec: dict | None = None,
+                       store=None) -> dict:
     card = load_card(package)
     manifest = load_manifest(package)
     lo, hi = manifest.get("expanded_range", [4000, 5000])
     target = target or manifest.get("expanded_target_han") or 4210
+
+    if trace_id is None:
+        trace_id = quality_store.new_trace_id()
+    run_id_counter = {"n": 0}
+    total_expansion_tokens = 0
+
+    def _call_llm(messages, max_tokens, temperature, reasoning_effort=None):
+        nonlocal total_expansion_tokens
+        content, usage = _llm(base_url, api_key, model, messages,
+                              max_tokens, temperature, reasoning_effort=reasoning_effort)
+        run_id = f"{trace_id}-{run_id_counter['n']}"
+        run_id_counter["n"] += 1
+        total_expansion_tokens += int(usage.get("total_tokens", 0))
+        if store is not None:
+            observability.record_expansion_call(store.db, trace_id, run_id,
+                                                usage.get("total_tokens", 0), model,
+                                                prompt_ver=None,
+                                                usage_estimated=usage.get("usage_estimated", False))
+        return content
 
     prompt_text = (package / "扩写提示词.md").read_text(encoding="utf-8")
     cut = prompt_text.find("## 全书设定.md")
@@ -126,12 +172,11 @@ def expand_until_range(package: Path, base_url: str, api_key: str, model: str,
     if initial_draft:
         raw = initial_draft.read_text(encoding="utf-8-sig")
     else:
-        raw = _llm(base_url, api_key, model,
-                   [{"role": "system",
-                     "content": "你是专业小说正文扩写者。严格遵守所有资料规则。只输出纯正文，不加任何标签或说明。"
-                                + _forbidden_terms_block(manifest.get("chapter", 0))},
-                    {"role": "user", "content": prompt_text}],
-                   max_tokens=10000, temperature=0.85)
+        raw = _call_llm([{"role": "system",
+                          "content": "你是专业小说正文扩写者。严格遵守所有资料规则。只输出纯正文，不加任何标签或说明。"
+                                     + _forbidden_terms_block(manifest.get("chapter", 0))},
+                         {"role": "user", "content": prompt_text}],
+                       max_tokens=10000, temperature=0.85)
 
     rounds: list[dict] = []
     prose = raw
@@ -139,7 +184,9 @@ def expand_until_range(package: Path, base_url: str, api_key: str, model: str,
     for i in range(max_rounds + 1):
         prose, notes = extract_prose(prose)
         han = han_count(prose)
-        report = check_prose(prose, card, manifest)
+        # Intermediate rounds: compliance-only (spec=None) — the knob-set judge
+        # verdict is applied to the FINAL check after the loop.
+        report = check_prose(prose, card, manifest, spec=None)
         verdict = "PASS" if not report["blocking"] else "BLOCK"
         violations = _collect_violations(report)
         rounds.append({"round": i, "han": han, "verdict": verdict,
@@ -164,10 +211,9 @@ def expand_until_range(package: Path, base_url: str, api_key: str, model: str,
                     forbidden_terms=_forbidden_terms_block(manifest.get("chapter", 0)),
                     prose=prose)
             pre_han = han_count(prose)
-            fixed = _llm(base_url, api_key, model,
-                         [{"role": "system", "content": "你是小说正文修订者。只输出修订后的完整正文，不加标签或说明。"},
-                          {"role": "user", "content": fix_prompt}],
-                         max_tokens=10000, temperature=0.3)
+            fixed = _call_llm([{"role": "system", "content": "你是小说正文修订者。只输出修订后的完整正文，不加标签或说明。"},
+                               {"role": "user", "content": fix_prompt}],
+                              max_tokens=10000, temperature=0.3)
             fixed_clean, _ = extract_prose(fixed)
             # Non-destructive repair: adopt only if it preserves most of the
             # prose (guards against a whole-chapter collapse to near-zero that
@@ -192,10 +238,9 @@ def expand_until_range(package: Path, base_url: str, api_key: str, model: str,
                                                current=han, remaining=remaining,
                                                forbidden_terms=_forbidden_terms_block(manifest.get("chapter", 0)),
                                                materials=materials)
-        continuation = _llm(base_url, api_key, model,
-                            [{"role": "system", "content": "你是小说正文续写者。只输出新增正文，不重复已有内容。"},
-                             {"role": "user", "content": cont_prompt}],
-                            max_tokens=4000, temperature=0.85)
+        continuation = _call_llm([{"role": "system", "content": "你是小说正文续写者。只输出新增正文，不重复已有内容。"},
+                                   {"role": "user", "content": cont_prompt}],
+                                  max_tokens=4000, temperature=0.85)
         prose = prose + "\n\n" + continuation
 
     # Post-loop trim: if a repair/continuation left the prose over `hi`, drop
@@ -239,12 +284,31 @@ def expand_until_range(package: Path, base_url: str, api_key: str, model: str,
         "deterministic_missed": missed_tokens,
         "final_han": han_count(final_prose),
         "final_draft": str(final_path),
+        "trace_id": trace_id,
+        "total_expansion_tokens": total_expansion_tokens,
     }
     # Reflect the trimmed deliverable in the pass flag (a trim can clear a
-    # word_count block that the last round still showed).
-    final_report = check_prose(final_prose, card, manifest)
+    # word_count block that the last round still showed). spec + the judge
+    # verdict apply to the FINAL check only (intermediate rounds ran with
+    # spec=None) — one critic call (a parse/timeout retry makes ≤2).
+    verdict = None
+    if spec is not None:
+        if store is None:
+            raise ValueError("expand_until_range with spec requires a store")
+        judge_provider = load_provider_full("judge")
+        verdict = judge_prose(final_prose, spec, judge_provider, trace_id,
+                              knob_set_hash_arg=knob_set_hash(spec))
+    final_report = check_prose(final_prose, card, manifest, spec=spec, verdict=verdict)
     summary["final_blocking"] = [b.get("check") for b in final_report["blocking"]]
+    summary["quality_notes"] = final_report.get("quality_notes", [])
     summary["pass"] = not final_report["blocking"] and lo <= han_count(final_prose) <= hi
+    if spec is not None:
+        prose_sha256 = hashlib.sha256(final_prose.encode("utf-8")).hexdigest()
+        quality_store.record_verdict(
+            store.db, store, manifest["chapter"], verdict, prose_sha256,
+            trace_id, knob_set_hash=knob_set_hash(spec),
+            judge_model=verdict.get("judge_model"), prompt_ver=verdict.get("prompt_ver"))
+        summary["verdict_recorded"] = True
     report_path = out / f"expand_report_ch{manifest['chapter']:04d}.json"
     report_path.write_text(dumps(summary), encoding="utf-8")
     return summary

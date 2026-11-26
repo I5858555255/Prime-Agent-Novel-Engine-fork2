@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import sqlite3
 import uuid
+from datetime import datetime, timezone
 from pathlib import Path
 
 from novel_engine.core.publication_transaction import atomic_write
@@ -44,6 +45,37 @@ class Store:
                                                      PRIMARY KEY(chapter,name));
             CREATE INDEX IF NOT EXISTS actor_history ON chapter_actors(name,chapter);
         """)
+        # Unconditional quality-layer migration: runs on new and existing DBs.
+        # usage gains captured_at (idempotent PRAGMA-guarded ALTER so re-opening
+        # an already-migrated DB does not fail on a duplicate column); pre-existing
+        # rows stay NULL (= legacy, included in the running budget total).
+        if not any(row[1] == "captured_at" for row in self.db.execute("PRAGMA table_info(usage)")):
+            self.db.execute("ALTER TABLE usage ADD COLUMN captured_at TEXT")
+        quality_config = self._load_quality_config()
+        if quality_config.get("enable_quality"):
+            self.db.executescript("""
+                CREATE TABLE IF NOT EXISTS quality_verdicts(
+                  chapter INTEGER NOT NULL, version INTEGER NOT NULL DEFAULT 1,
+                  verdict TEXT NOT NULL, knob_set_hash TEXT NOT NULL,
+                  judge_model TEXT NOT NULL, prompt_ver TEXT NOT NULL,
+                  prose_sha256 TEXT, verdict_error TEXT,
+                  quality_verdict_hash TEXT NOT NULL, parent_hash TEXT NOT NULL,
+                  trace_id TEXT NOT NULL, accept_check_version INTEGER NOT NULL DEFAULT 1,
+                  PRIMARY KEY(chapter, version));
+                CREATE INDEX IF NOT EXISTS idx_qv_chapter ON quality_verdicts(chapter, version DESC);
+                CREATE TABLE IF NOT EXISTS retention(chapter INTEGER PRIMARY KEY, read_through REAL, reread REAL,
+                                                     abandon_rate REAL, captured_at TEXT, source TEXT);
+                CREATE TABLE IF NOT EXISTS knob_overrides(chapter INTEGER NOT NULL, dim TEXT NOT NULL, new_value INTEGER NOT NULL,
+                                                          rationale TEXT, override_hash TEXT, created_at TEXT,
+                                                          PRIMARY KEY(chapter, dim));
+                INSERT OR IGNORE INTO metadata(key,value) VALUES('quality_schema_version','1');
+            """)
+            # chapters.schema_version: one-time additive ALTER (existing rows backfill 0).
+            if not any(row[1] == "schema_version" for row in self.db.execute("PRAGMA table_info(chapters)")):
+                self.db.execute("ALTER TABLE chapters ADD COLUMN schema_version INTEGER NOT NULL DEFAULT 0")
+            self.quality_enabled = True
+        else:
+            self.quality_enabled = False
         indexed = self.metadata("entity_index_head") or 0
         with self.db:
             for number, raw in self.db.execute("SELECT number,payload FROM chapters WHERE number>? ORDER BY number", (indexed,)):
@@ -51,6 +83,16 @@ class Store:
 
     def close(self):
         self.db.close()
+
+    def _load_quality_config(self):
+        """quality_config.json lives in the source config tree; a project-local
+        override inside the output root wins when present (test injection point)."""
+        candidates = [self.root / "quality_config.json",
+                      Path(__file__).resolve().parent.parent / "config" / "quality_config.json"]
+        for path in candidates:
+            if path.exists():
+                return json.loads(path.read_text(encoding="utf-8"))
+        return {}
 
     def metadata(self, key, value=None):
         if value is not None:
@@ -194,8 +236,14 @@ class Store:
             previous_day = self.chapter(prefix)["payload"]["story_day"] if prefix else 0
             if review.get("quality_contract") == 3 and validate_timeline(payload, previous_day):
                 raise ValueError("cannot commit a noncontiguous timeline")
-            self.db.execute("INSERT INTO chapters VALUES(?,?,?,?,?,?)",
-                            (chapter, dumps(payload), hashed, parent, dumps(review), payload["story_day"]))
+            if getattr(self, "quality_enabled", False):
+                # chapters carries the additive schema_version column; pre-migration
+                # rows backfill 0, new commits record 1 (dual-signal population).
+                self.db.execute("INSERT INTO chapters(number,payload,hash,parent_hash,review,story_day,schema_version) VALUES(?,?,?,?,?,?,?)",
+                                (chapter, dumps(payload), hashed, parent, dumps(review), payload["story_day"], 1))
+            else:
+                self.db.execute("INSERT INTO chapters VALUES(?,?,?,?,?,?)",
+                                (chapter, dumps(payload), hashed, parent, dumps(review), payload["story_day"]))
             for change in payload["state_changes"]:
                 current = self.db.execute("SELECT value FROM facts WHERE entity=? AND key=?",
                                           (change["entity"], change["key"])).fetchone()
@@ -245,8 +293,12 @@ class Store:
         reported = sum(bool(event.get("usage", {}).get("total_tokens"))
                        for event in trace["events"] if event["kind"] == "provider")
         with self.db:
-            self.db.execute("INSERT INTO usage VALUES(?,?,?) ON CONFLICT(run_id) DO UPDATE SET total_tokens=MAX(usage.total_tokens,excluded.total_tokens), reported_requests=MAX(usage.reported_requests,excluded.reported_requests)",
-                            (trace["run_id"], trace["usage"].get("total_tokens", 0), reported))
+            self.db.execute("INSERT INTO usage(run_id,total_tokens,reported_requests,captured_at) VALUES(?,?,?,?) "
+                            "ON CONFLICT(run_id) DO UPDATE SET total_tokens=MAX(usage.total_tokens,excluded.total_tokens), "
+                            "reported_requests=MAX(usage.reported_requests,excluded.reported_requests), "
+                            "captured_at=excluded.captured_at",
+                            (trace["run_id"], trace["usage"].get("total_tokens", 0), reported,
+                             datetime.now(timezone.utc).isoformat()))
 
     def allowance(self, name):
         row = self.db.execute("SELECT extra_calls,extra_seconds FROM allowances WHERE id=?", (name,)).fetchone()
@@ -291,6 +343,8 @@ class Store:
         with self.db:
             self.db.execute("DELETE FROM chapters WHERE number>=?", (chapter,))
             self.db.execute("DELETE FROM exports WHERE number>=?", (chapter,))
+            if self.quality_enabled:
+                self.db.execute("DELETE FROM quality_verdicts WHERE chapter>=?", (chapter,))
             self.db.execute("DELETE FROM facts")
             self.db.execute("DELETE FROM characters")
             self.db.execute("DELETE FROM chapter_actors")
