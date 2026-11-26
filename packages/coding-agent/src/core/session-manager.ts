@@ -1106,7 +1106,7 @@ async function scanSessionInfo(filePath: string, stats: Awaited<ReturnType<typeo
 		const cwd = typeof header.cwd === "string" ? header.cwd : "";
 		const parentSessionPath = header.parentSession;
 		const rlmDepth = resolveSessionRlmDepth(header, filePath);
-		const modified = getSessionModifiedDateFromLastActivity(lastActivityTime, header, stats.mtime);
+		const modified = getSessionModifiedDateFromLastActivity(lastActivityTime, header, stats!.mtime);
 
 		return {
 			path: filePath,
