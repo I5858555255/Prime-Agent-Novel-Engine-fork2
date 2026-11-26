@@ -143,7 +143,8 @@ def extract_prose(text: str) -> tuple[str, list[str]]:
     return prose.strip(), notes
 
 
-def check_prose(prose: str, card: dict, manifest: dict) -> dict:
+def check_prose(prose: str, card: dict, manifest: dict,
+                spec: dict | None = None, verdict: dict | None = None) -> dict:
     blocking, warnings, info = [], [], []
     target = manifest.get("expanded_target_han")
     lo, hi = manifest.get("expanded_range", [4000, 5000])
@@ -226,15 +227,46 @@ def check_prose(prose: str, card: dict, manifest: dict) -> dict:
                          "samples": self_hits[:3],
                          "waivable": True})
 
-    return {"blocking": blocking, "warnings": warnings, "info": info, "han": han}
+    # 8. Quality-layer v0 (G2 + G5): per-dimension quality_notes derived from
+    #    the same knob set as the judge. quality_notes is a NEW top-level key
+    #    that is NEVER in blocking and NEVER in warnings-blocking logic; it is
+    #    informational only. The key is ABSENT when spec is None (back-compat).
+    #    In v0 the per-dimension scores come from the judge verdict, not from
+    #    a re-scoring here — the caller passes `verdict` alongside `spec`.
+    result: dict = {"blocking": blocking, "warnings": warnings, "info": info, "han": han}
+    if spec is not None:
+        notes: list[dict] = []
+        for dim in ("爽点", "钩子", "压抑"):
+            knob = spec.get(dim)
+            if knob is None:
+                continue
+            score = None
+            if isinstance(verdict, dict) and verdict.get("verdict_error") is None:
+                s = verdict.get(dim)
+                if isinstance(s, int) and not isinstance(s, bool):
+                    score = s
+            if score is not None and score < knob:
+                notes.append({
+                    "check": "quality_note",
+                    "dim": dim,
+                    "score": score,
+                    "threshold": knob,
+                    "detail": f"{dim} score {score} below knob {knob} (soft, non-blocking)",
+                })
+        result["quality_notes"] = notes
+    return result
 
 
-def run(package_dir: Path, prose_path: Path, out_path: Path | None = None) -> dict:
+def run(package_dir: Path, prose_path: Path, out_path: Path | None = None,
+        spec: dict | None = None, verdict: dict | None = None) -> dict:
     card = load_card(package_dir)
     manifest = load_manifest(package_dir)
     raw = prose_path.read_text(encoding="utf-8-sig")
     prose, notes = extract_prose(raw)
-    result = check_prose(prose, card, manifest)
+    # spec/verdict propagate to check_prose; the report JSON carries
+    # `quality_notes` verbatim (a top-level key, informational only — it is
+    # NEVER in blocking, NEVER in warnings, and NEVER gates pass/verdict).
+    result = check_prose(prose, card, manifest, spec=spec, verdict=verdict)
     result.update({
         "chapter": manifest.get("chapter"),
         "package": str(package_dir),

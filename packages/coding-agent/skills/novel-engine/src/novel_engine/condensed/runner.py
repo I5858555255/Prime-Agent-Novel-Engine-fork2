@@ -28,6 +28,7 @@ from .prompts import DRAFT, PLAN, REPAIR, REVIEW, SYSTEM
 from .render import generation_view, render_brief
 from .store import Store
 from .timeline import normalize_timeline, phase, validate_timeline
+from . import quality_store, volume_knobs
 
 logger = logging.getLogger(__name__)
 
@@ -577,12 +578,61 @@ class CondensedPipeline:
                         kernel.CloseHandle(handle)
             except (ProcessLookupError, KeyError, PermissionError, OSError):
                 worker["state"] = "unknown"
-        return {"mode": "condensed", "committed_chapters": prefix, "target_chapters": self.settings.chapters,
-                "exported_chapters": exported, "complete": prefix == self.settings.chapters and exported == prefix and audited,
-                "expanded_budget_han": self.settings.total_expanded_han * prefix // self.settings.chapters,
-                "physical_requests": calls, "operation_wall_s": round(wall, 3),
-                "reported_total_tokens": tokens, "requests_without_usage": max(0, calls - reported),
-                "external_expansion_verified": False, "worker": worker}
+        # Quality-layer read surface (G6): verdict pass-rate over the LATEST-version
+        # leaves, where the denominator excludes verdict_error leaves and the
+        # numerator counts leaves where every dim meets its knob (pass). The knob
+        # set is resolved from the leaf's own knob_set_hash against the active
+        # quality_config.json so the rate tracks the criterion, not a static bar.
+        verdict_pass_rate = None
+        verdict_error_rate = None
+        budget = None
+        if getattr(self.store, "quality_enabled", False):
+            db = self.store.db
+            leaves = db.execute(
+                "SELECT chapter, version, verdict, knob_set_hash, verdict_error FROM quality_verdicts").fetchall()
+            knob_cfg = volume_knobs.load_quality_config()
+            # Map each distinct knob_set_hash -> its knob_set via the config stages.
+            hash_to_knob = {}
+            for entry in knob_cfg.get("knob_sets", []):
+                hash_to_knob[volume_knobs.knob_set_hash(entry["knob_set"])] = entry["knob_set"]
+            latest = {}
+            for chapter, version, verdict_raw, knob_set_hash, verdict_error in leaves:
+                # latest-version leaf per chapter (max version); a verdict_error
+                # leaf is counted only in the error rate, never the pass-rate denom.
+                if chapter not in latest or version > latest[chapter][0]:
+                    latest[chapter] = (version, verdict_raw, knob_set_hash, verdict_error)
+            denom = 0
+            numer = 0
+            error_count = 0
+            total_latest = len(latest)
+            for _chapter, (version, verdict_raw, knob_set_hash, verdict_error) in latest.items():
+                if verdict_error:
+                    error_count += 1
+                    continue
+                verdict = json.loads(verdict_raw)
+                knob = hash_to_knob.get(knob_set_hash)
+                # A scored leaf is one that carries a resolvable knob set; it counts
+                # toward the pass-rate denominator. The error rate is over ALL
+                # latest-version leaves (the spec: "counted in verdict_error_rate"),
+                # so its denominator is total_latest, not just the scored subset.
+                if knob is not None:
+                    denom += 1
+                    if all(verdict.get(dim) is not None and verdict.get(dim) >= knob.get(dim, 0) for dim in ("爽点", "钩子", "压抑")):
+                        numer += 1
+            verdict_pass_rate = round(numer / denom, 4) if denom else None
+            verdict_error_rate = round(error_count / total_latest, 4) if total_latest else 0.0
+            budget = quality_store.budget_status(db, int(knob_cfg.get("token_cap", 0)))
+        out = {"mode": "condensed", "committed_chapters": prefix, "target_chapters": self.settings.chapters,
+               "exported_chapters": exported, "complete": prefix == self.settings.chapters and exported == prefix and audited,
+               "expanded_budget_han": self.settings.total_expanded_han * prefix // self.settings.chapters,
+               "physical_requests": calls, "operation_wall_s": round(wall, 3),
+               "reported_total_tokens": tokens, "requests_without_usage": max(0, calls - reported),
+               "external_expansion_verified": False, "worker": worker}
+        if getattr(self.store, "quality_enabled", False):
+            out["verdict_pass_rate"] = verdict_pass_rate
+            out["verdict_error_rate"] = verdict_error_rate
+            out["quality_budget"] = budget
+        return out
 
     def worker_state(self, state, chapter=None):
         self.store.metadata("worker", {"state": state, "pid": os.getpid(), "chapter": chapter})
@@ -597,7 +647,96 @@ class CondensedPipeline:
                 raise ValueError("export does not match committed chapter")
         if prefix:
             self.store.metadata("final_audit", {"head_hash": self.store.chapter(prefix)["hash"], "chapters": prefix})
+        # Quality-layer chain integrity (Fork 3a): recompute every verdict leaf
+        # hash + parent link before returning. A tampered leaf is a hard failure.
+        if getattr(self.store, "quality_enabled", False):
+            quality_store.validate_quality_chain(self.store.db, self.store)
         return self.status()
+
+    def qc(self):
+        """Read-only per-chapter verdict lines + pass-rate (G6). A verdict_error
+        leaf is readable here and is excluded from the pass-rate denominator."""
+        if not getattr(self.store, "quality_enabled", False):
+            return {"lines": [], "pass_rate": None, "error_rate": 0.0, "note": "quality layer disabled"}
+        db = self.store.db
+        knob_cfg = volume_knobs.load_quality_config()
+        hash_to_knob = {}
+        for entry in knob_cfg.get("knob_sets", []):
+            hash_to_knob[volume_knobs.knob_set_hash(entry["knob_set"])] = entry["knob_set"]
+        lines = []
+        denom = 0
+        numer = 0
+        error_count = 0
+        scored = 0
+        for chapter, version, verdict_raw, knob_set_hash, verdict_error in db.execute(
+                "SELECT chapter, version, verdict, knob_set_hash, verdict_error FROM quality_verdicts "
+                "ORDER BY chapter, version DESC"):
+            # Only the latest version per chapter is the operator's read surface;
+            # a verdict_error leaf is surfaced as a line but excluded from the
+            # pass-rate denominator (the spec's test_verdict_error_not_in_pass_rate).
+            if lines and lines[-1]["chapter"] == chapter:
+                continue
+            verdict = json.loads(verdict_raw)
+            knob = hash_to_knob.get(knob_set_hash)
+            if verdict_error:
+                error_count += 1
+                scored += 1
+                lines.append({"chapter": chapter, "version": version, "status": "verdict_error",
+                              "error": verdict_error})
+                continue
+            scored += 1
+            if knob is None:
+                lines.append({"chapter": chapter, "version": version, "status": "unresolved_knob",
+                              "scores": {k: verdict.get(k) for k in ("爽点", "钩子", "压抑")}})
+                continue
+            denom += 1
+            passed = all(verdict.get(dim) is not None and verdict.get(dim) >= knob.get(dim, 0)
+                         for dim in ("爽点", "钩子", "压抑"))
+            if passed:
+                numer += 1
+            lines.append({"chapter": chapter, "version": version,
+                          "status": "PASS" if passed else "BELOW_KNOB",
+                          "scores": {k: verdict.get(k) for k in ("爽点", "钩子", "压抑")},
+                          "target": knob})
+        return {"lines": lines,
+                "pass_rate": round(numer / denom, 4) if denom else None,
+                "error_rate": round(error_count / scored, 4) if scored else 0.0}
+
+    def knobs(self, show=False, history=False):
+        """Deterministic per-stage knob read surface (G3/G4 v0). `--show` returns
+        the active per-stage knob sets + rationale; `--history` lists the
+        knob_overrides staging rows (M2 commit_override folds them into the chain)."""
+        cfg = volume_knobs.load_quality_config()
+        if not getattr(self.store, "quality_enabled", False) and not show:
+            return {"enabled": False, "note": "quality layer disabled"}
+        out: dict = {"enabled": bool(cfg.get("enable_quality"))}
+        if show:
+            out["active"] = [{"stage": entry["stage"], "knob_set": entry["knob_set"],
+                              "hash": volume_knobs.knob_set_hash(entry["knob_set"])}
+                             for entry in cfg.get("knob_sets", [])]
+        if history:
+            if getattr(self.store, "quality_enabled", False):
+                rows = self.store.db.execute(
+                    "SELECT chapter, dim, new_value, rationale, override_hash, created_at "
+                    "FROM knob_overrides ORDER BY chapter, dim").fetchall()
+                out["overrides"] = [{"chapter": r[0], "dim": r[1], "new_value": r[2],
+                                     "rationale": r[3], "override_hash": r[4], "created_at": r[5]}
+                                    for r in rows]
+        return out
+
+    def note_quality(self, chapter):
+        """Stamp the manifest's soft-class `quality_note` from the chapter's
+        verdict leaf (G5, separate from compliance). Read-only over the chain;
+        the only write is the manifest field."""
+        from .mark_verified import note_quality
+        if not getattr(self.store, "quality_enabled", False):
+            raise ValueError("note-quality requires the quality layer")
+        leaf = quality_store.verdict_for(self.store.db, self.store, chapter)
+        if leaf is None:
+            raise ValueError(f"chapter {chapter} has no verdict leaf; run expand first")
+        pkg = self.root / "expansion" / f"chapter_{chapter:04d}"
+        manifest = note_quality(pkg, leaf, out_path=pkg / "manifest.json")
+        return manifest
 
 
 def main(argv=None):
@@ -611,7 +750,7 @@ def main(argv=None):
             pass
 
     parser = argparse.ArgumentParser(description="Generate independently reviewed condensed chapters and external LLM packages")
-    parser.add_argument("command", choices=("run", "status", "export", "archive", "verify", "compile", "invalidate", "extend-budget", "accept-check", "mark-verified", "expand", "dual-check"))
+    parser.add_argument("command", choices=("run", "status", "export", "archive", "verify", "compile", "invalidate", "extend-budget", "accept-check", "mark-verified", "expand", "dual-check", "qc", "knobs", "note-quality"))
     parser.add_argument("--source", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--end", type=int, default=3800)
@@ -628,6 +767,9 @@ def main(argv=None):
     parser.add_argument("--program-report", type=Path,
                         help="accept-check report for mark-verified (default: <pkg>/accept_report.json)")
     parser.add_argument("--max-rounds", type=int, default=5, help="max continue-rounds for expand")
+    parser.add_argument("--show", action="store_true", help="knobs: print the active per-stage knob sets")
+    parser.add_argument("--history", action="store_true", help="knobs: list the knob_overrides staging rows")
+    parser.add_argument("--chapter", type=int, help="note-quality: the chapter to stamp the manifest quality_note")
     parser.add_argument("--refresh-uncommitted-canon", action="store_true",
                         help="adopt corrected canon only before any chapter commits; retain all request budgets")
     args = parser.parse_args(argv)
@@ -635,7 +777,8 @@ def main(argv=None):
     args.output.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(filename=args.output / "production.log", level=logging.INFO,
                         format="%(asctime)s %(levelname)s %(name)s %(message)s")
-    if args.command in ("run", "status", "export", "archive", "verify", "compile", "invalidate", "extend-budget"):
+    if args.command in ("run", "status", "export", "archive", "verify", "compile", "invalidate", "extend-budget",
+                        "qc", "knobs", "note-quality"):
         pipeline = CondensedPipeline(args.source, args.output, refresh_uncommitted_canon=args.refresh_uncommitted_canon)
     else:
         pipeline = None
@@ -735,18 +878,46 @@ def main(argv=None):
         elif args.command == "expand":
             from novel_engine.condensed.expand_run import expand_until_range
             from novel_engine.condensed.providers import load_provider_full
+            from novel_engine.condensed import observability
             import os
             if args.from_chapter is None:
                 raise ValueError("expand requires --from-chapter N")
             pkg = args.output / "expansion" / f"chapter_{args.from_chapter:04d}"
+            # G9 clean quota halt: read the monthly budget from the real `usage`
+            # table BEFORE the expansion calls; at 100% the run halts with a
+            # clear "quota" reason instead of the round-2 mystery freeze.
+            budget = observability.budget_guard_configured(pipeline.store.db)
+            if budget.get("halt"):
+                print(dumps({"event": "halted", "reason": "quota", **budget,
+                             "chapter": args.from_chapter}), flush=True)
+                atomic_write(args.output / "failure.json", dumps({"event": "halted", "reason": "quota", **budget}))
+                exit_code = 1
+                return exit_code
             base_url, key_env, model, opts = load_provider_full("polish")
             key = os.environ.get(key_env, "")
             if not key:
                 raise ValueError(f"missing env var {key_env}")
+            # G2/G3: pass the active volume's knob set as `spec` + the store so
+            # the final check_prose + judge_prose + record_verdict fire. The knob
+            # is resolved from config/planning/volumes.json for the manifest
+            # chapter (None when the chapter is not inside a shipped volume ->
+            # spec=None back-compat, quality_notes=[]).
+            spec = None
+            try:
+                from novel_engine.condensed.dual_check import _active_knob_set_for_chapter
+                spec = _active_knob_set_for_chapter(args.from_chapter)
+            except Exception as exc:
+                # A missing/malformed volumes.json or knob config would otherwise
+                # silently degrade the whole quality signal to spec=None. Log it
+                # so the operator knows WHY this chapter ships without a verdict.
+                logger.warning("expand ch%s: could not resolve a knob spec (%s); "
+                               "expanding with spec=None (no quality verdict)", args.from_chapter, exc)
+                spec = None
             summary = expand_until_range(pkg, base_url=base_url, api_key=key, model=model,
                                          initial_draft=args.prose, max_rounds=args.max_rounds,
                                          temperature=opts.get("temperature"),
-                                         reasoning_effort=opts.get("reasoning_effort"))
+                                         reasoning_effort=opts.get("reasoning_effort"),
+                                         spec=spec, store=pipeline.store)
             print(dumps(summary), flush=True)
             exit_code = 0 if summary["pass"] else 1
         elif args.command == "mark-verified":
@@ -759,6 +930,18 @@ def main(argv=None):
                 raise ValueError(f"missing program report {program}; run accept-check first")
             manifest = mark_verified(pkg, program, args.llm_report, args.waiver)
             print(dumps({"chapter": manifest["chapter"], "verification": manifest["verification"]}), flush=True)
+        elif args.command == "qc":
+            # G6 read surface: per-chapter verdict lines + pass-rate. Read-only
+            # over the chain; a verdict_error leaf is surfaced, never a crash.
+            print(dumps(pipeline.qc()), flush=True)
+        elif args.command == "knobs":
+            out = pipeline.knobs(show=args.show, history=args.history)
+            print(dumps(out), flush=True)
+        elif args.command == "note-quality":
+            if args.chapter is None:
+                raise ValueError("note-quality requires --chapter N")
+            manifest = pipeline.note_quality(args.chapter)
+            print(dumps({"chapter": manifest["chapter"], "quality_note": manifest.get("quality_note")}), flush=True)
         if pipeline is not None:
             print(dumps(pipeline.status()), flush=True)
             atomic_write(args.output / "status.json", dumps(pipeline.status()))

@@ -337,6 +337,19 @@
           "extra_body": {
             "reasoning_effort": "none"
           }
+        },
+        "judge": {
+          "models": [
+            "agnes-3.0-flash"
+          ],
+          "response_format": "json_object",
+          "stream": false,
+          "temperature": 0,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 220,
+          "extra_body": {
+            "reasoning_effort": "none"
+          }
         }
       }
     }
