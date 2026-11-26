@@ -738,6 +738,20 @@ class CondensedPipeline:
         manifest = note_quality(pkg, leaf, out_path=pkg / "manifest.json")
         return manifest
 
+    def commit_override(self, chapter, dim, new_value, rationale=""):
+        """Fold a knob override into the chain (M2-3, G4 write path). Records the
+        staging row if missing, then folds it into a knob_commits leaf; returns
+        the leaf hash. Gated on enable_quality (RuntimeError when disabled)."""
+        if not getattr(self.store, "quality_enabled", False):
+            raise RuntimeError("quality layer not enabled")
+        db = self.store.db
+        # Ensure the staging row exists (idempotent upsert with identical content),
+        # then fold it into the chain. commit_override re-reads the staging row's
+        # override_hash, so the two calls stay consistent on the same content.
+        quality_store.record_override(db, chapter, dim, new_value, rationale)
+        leaf_hash = quality_store.commit_override(db, self.store, chapter, dim, new_value, rationale)
+        return leaf_hash
+
 
 def main(argv=None):
     # Windows: block the task/session Ctrl+C that otherwise interrupts the
@@ -750,7 +764,7 @@ def main(argv=None):
             pass
 
     parser = argparse.ArgumentParser(description="Generate independently reviewed condensed chapters and external LLM packages")
-    parser.add_argument("command", choices=("run", "status", "export", "archive", "verify", "compile", "invalidate", "extend-budget", "accept-check", "mark-verified", "expand", "dual-check", "qc", "knobs", "note-quality"))
+    parser.add_argument("command", choices=("run", "status", "export", "archive", "verify", "compile", "invalidate", "extend-budget", "accept-check", "mark-verified", "expand", "dual-check", "qc", "knobs", "note-quality", "commit-override"))
     parser.add_argument("--source", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--end", type=int, default=3800)
@@ -770,6 +784,9 @@ def main(argv=None):
     parser.add_argument("--show", action="store_true", help="knobs: print the active per-stage knob sets")
     parser.add_argument("--history", action="store_true", help="knobs: list the knob_overrides staging rows")
     parser.add_argument("--chapter", type=int, help="note-quality: the chapter to stamp the manifest quality_note")
+    parser.add_argument("--dim", default="爽点", help="commit-override: knob dimension (爽点/钩子/压抑)")
+    parser.add_argument("--new-value", type=int, default=0, help="commit-override: the overridden knob value (1..5)")
+    parser.add_argument("--rationale", default="", help="commit-override: operator rationale recorded on the leaf")
     parser.add_argument("--refresh-uncommitted-canon", action="store_true",
                         help="adopt corrected canon only before any chapter commits; retain all request budgets")
     args = parser.parse_args(argv)
@@ -778,7 +795,7 @@ def main(argv=None):
     logging.basicConfig(filename=args.output / "production.log", level=logging.INFO,
                         format="%(asctime)s %(levelname)s %(name)s %(message)s")
     if args.command in ("run", "status", "export", "archive", "verify", "compile", "invalidate", "extend-budget",
-                        "qc", "knobs", "note-quality"):
+                        "qc", "knobs", "note-quality", "commit-override"):
         pipeline = CondensedPipeline(args.source, args.output, refresh_uncommitted_canon=args.refresh_uncommitted_canon)
     else:
         pipeline = None
@@ -942,6 +959,15 @@ def main(argv=None):
                 raise ValueError("note-quality requires --chapter N")
             manifest = pipeline.note_quality(args.chapter)
             print(dumps({"chapter": manifest["chapter"], "quality_note": manifest.get("quality_note")}), flush=True)
+        elif args.command == "commit-override":
+            if args.chapter is None:
+                raise ValueError("commit-override requires --chapter N")
+            if not 1 <= args.new_value <= 5:
+                raise ValueError("commit-override --new-value must be 1..5")
+            leaf_hash = pipeline.commit_override(args.chapter, args.dim, args.new_value, args.rationale)
+            chain = quality_store.validate_knob_commits(pipeline.store.db, pipeline.store)
+            print(dumps({"chapter": args.chapter, "dim": args.dim, "new_value": args.new_value,
+                         "knob_commit_hash": leaf_hash, "validate": chain}), flush=True)
         if pipeline is not None:
             print(dumps(pipeline.status()), flush=True)
             atomic_write(args.output / "status.json", dumps(pipeline.status()))

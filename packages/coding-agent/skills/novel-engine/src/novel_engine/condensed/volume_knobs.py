@@ -41,13 +41,21 @@ def knob_set_for_stage(stage: int) -> dict:
 
 
 def select_knobs(volume: dict, stage: int) -> tuple[dict, dict]:
-    """Deterministic per-stage knob pick. Returns (knob_set, rationale).
+    """Deterministic knob pick. Returns (knob_set, rationale).
 
-    rationale = {bible_field, climax_chapter, stage} — the provenance record
-    for the pick (which bible field + which climax chapter + which stage it
-    came from). No LLM; the M2 rules engine replaces this as the override
-    point.
+    If quality_config.json carries a `knob_rules` block (M2-2 rules engine),
+    the pick delegates to knob_rules.evaluate_knob_rules (bible field + volume
+    theme + climax_chapter + stage, versioned rationale). Otherwise it is
+    EXACTLY the v0 per-stage fixed knob_set + rationale {bible_field,
+    climax_chapter, stage} — byte-identical when there is no `knob_rules`
+    config (the regression guard). No LLM on either path.
     """
+    config = load_quality_config()
+    if "knob_rules" in config:
+        # Lazy import: knob_rules imports volume_knobs (for the stage fallback),
+        # so a top-level import here would be circular.
+        from . import knob_rules
+        return knob_rules.evaluate_knob_rules(volume, stage, config["knob_rules"])
     knob_set = dict(knob_set_for_stage(stage))
     rationale = {"bible_field": "world", "climax_chapter": volume.get("climax_chapter"), "stage": stage}
     return knob_set, rationale

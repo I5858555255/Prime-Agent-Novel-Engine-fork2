@@ -13,6 +13,17 @@ from .contracts import digest, dumps, generic_role, validate_review
 from .timeline import validate_timeline
 
 
+def _v0_bootstrap_ledger_hash(applied_at: str) -> str:
+    """Compute the deterministic ledger_hash for the v0 bootstrap migration row
+    (migration_id='quality_schema_v1', 0->1, parent=GENESIS) for a given
+    applied_at. Reuses quality_store's single source of truth so the backfill
+    row validates under quality_store.validate_migration_ledger. A lazy import
+    avoids any store <-> quality_store import-order edge."""
+    from . import quality_store
+    return quality_store._ledger_hash(
+        "quality_schema_v1", 0, 1, applied_at, "bootstrap the quality-layer schema v0 marker", "GENESIS")
+
+
 class Store:
     def __init__(self, root):
         self.root = Path(root)
@@ -68,12 +79,46 @@ class Store:
                 CREATE TABLE IF NOT EXISTS knob_overrides(chapter INTEGER NOT NULL, dim TEXT NOT NULL, new_value INTEGER NOT NULL,
                                                           rationale TEXT, override_hash TEXT, created_at TEXT,
                                                           PRIMARY KEY(chapter, dim));
+                CREATE TABLE IF NOT EXISTS knob_commits(
+                  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                  chapter INTEGER NOT NULL, dim TEXT NOT NULL, new_value INTEGER NOT NULL,
+                  rationale TEXT, override_hash TEXT NOT NULL,
+                  knob_commit_hash TEXT NOT NULL,
+                  parent_hash TEXT NOT NULL,
+                  trace_id TEXT NOT NULL, created_at TEXT NOT NULL);
+                CREATE INDEX IF NOT EXISTS idx_kc_chapter ON knob_commits(chapter, id DESC);
+                -- M2-10: formal hash-chained schema-migration ledger (global
+                -- schema history, NOT per-chapter; invalidate_from must not delete it).
+                CREATE TABLE IF NOT EXISTS migration_ledger(
+                  migration_id TEXT PRIMARY KEY,
+                  from_version INTEGER NOT NULL, to_version INTEGER NOT NULL,
+                  applied_at TEXT NOT NULL, description TEXT,
+                  ledger_hash TEXT NOT NULL, parent_hash TEXT NOT NULL);
                 INSERT OR IGNORE INTO metadata(key,value) VALUES('quality_schema_version','1');
             """)
             # chapters.schema_version: one-time additive ALTER (existing rows backfill 0).
             if not any(row[1] == "schema_version" for row in self.db.execute("PRAGMA table_info(chapters)")):
                 self.db.execute("ALTER TABLE chapters ADD COLUMN schema_version INTEGER NOT NULL DEFAULT 0")
+            # knob_overrides.committed_at: additive ALTER so a pre-M2 DB that already
+            # created the 6-column knob_overrides table migrates in place (idempotent
+            # PRAGMA-guard, mirrors the usage.captured_at pattern).
+            if not any(row[1] == "committed_at" for row in self.db.execute("PRAGMA table_info(knob_overrides)")):
+                self.db.execute("ALTER TABLE knob_overrides ADD COLUMN committed_at TEXT")
             self.quality_enabled = True
+            # M2-10 backfill: fold the v0 schema_version marker into the ledger
+            # exactly once. Quality enabled (v0 marker present) + empty ledger ->
+            # record the bootstrap migration 0->1. Idempotent (re-open no-op),
+            # purely additive (existing chapters row hashes untouched). applied_at
+            # is stamped ONCE and fed to both the stored column and the
+            # ledger_hash so the row self-validates under validate_migration_ledger.
+            with self.db:
+                if self.db.execute("SELECT COUNT(*) FROM migration_ledger").fetchone()[0] == 0:
+                    applied_at = datetime.now(timezone.utc).isoformat()
+                    self.db.execute(
+                        "INSERT INTO migration_ledger(migration_id,from_version,to_version,applied_at,description,"
+                        "ledger_hash,parent_hash) VALUES('quality_schema_v1',0,1,?,?,?,?)",
+                        (applied_at, "bootstrap the quality-layer schema v0 marker",
+                         _v0_bootstrap_ledger_hash(applied_at), "GENESIS"))
         else:
             self.quality_enabled = False
         indexed = self.metadata("entity_index_head") or 0
@@ -344,7 +389,13 @@ class Store:
             self.db.execute("DELETE FROM chapters WHERE number>=?", (chapter,))
             self.db.execute("DELETE FROM exports WHERE number>=?", (chapter,))
             if self.quality_enabled:
+                # M2-10: per-chapter content (verdict leaves, knob commits/overrides)
+                # is invalidated; the migration_ledger is GLOBAL schema history (not
+                # per-chapter), so invalidate_from deliberately does NOT delete it —
+                # migrations are a project-wide schema record, not chapter content.
                 self.db.execute("DELETE FROM quality_verdicts WHERE chapter>=?", (chapter,))
+                self.db.execute("DELETE FROM knob_commits WHERE chapter>=?", (chapter,))
+                self.db.execute("DELETE FROM knob_overrides WHERE chapter>=?", (chapter,))
             self.db.execute("DELETE FROM facts")
             self.db.execute("DELETE FROM characters")
             self.db.execute("DELETE FROM chapter_actors")
