@@ -103,7 +103,7 @@ The design adds **components** and **modifies existing files**. It stays inside 
 
 2. **`volume_knobs.py`** — deterministic per-volume knob selection (G3).
    - **v0 = fixed per-stage `knob_set`** read from `quality_config.json` (stage 1 vs stage 2). `select_knobs(volume, stage) -> (knob_set, rationale)` where rationale = `{bible_field, climax_chapter, stage}`. **Fully deterministic** — the real stage path (`accept_check.STAGE1_MAX_CHAPTER`, `concept_terms.forbidden_for_chapter`) is a pure JSON lookup with **no LLM** (codebase F4); the draft's earlier "versioned LLM edge" is retracted.
-   - **Stage-aware at every concept-unlock boundary**, not only ch317: `regimes_for(chapter_range) -> list[int]` reads `concept_unlocks.json` and returns the sorted in-range concept-unlock chapter numbers strictly inside `(start, end]` (600–700 → `[653]`; 300–500 → `[317]`; none → `[]`); `select_knobs` emits one knob set per regime (`len(regimes)+1`). With current volume boundaries no volume crosses 317/653/988, so this path is a guard against future re-cuts, not exercised by today's data.
+   - **Stage-aware at every concept-unlock boundary**, not only ch317: `regimes_for(chapter_range) -> list[int]` reads `concept_unlocks.json` and returns the sorted in-range concept-unlock chapter numbers strictly inside `(start, end]` (600–700 → `[653]`; 300–500 → `[317]`; none → `[]`); `select_knobs_for_volume(volume) -> list[(knob_set, rationale, sub_range)]` emits one knob set per regime (`len(regimes)+1` segments), each scoped to its own sub_range + the stage of its first chapter, so a knob never applies across two forbidden-term regimes. The single-stage `select_knobs(volume, stage)` and the per-chapter `read_active_knobs(volume)` remain the simpler read APIs for the non-straddling case. With current volume boundaries no volume crosses 317/653/988, so this path is a guard against future re-cuts, not exercised by today's data.
    - **The knob rules engine + LLM climax classification + `volume_reopen` are (M2)** (R22): v0's `select_knobs` is the thin override point a rules engine replaces later.
 
 3. **`quality_store.py`** — versioned chain leaf (Fork 3a). A new table **`quality_verdicts`** in `manuscript.sqlite3` (DDL above):
@@ -288,8 +288,10 @@ Notes: `parent_hash` = `chapters.hash` **for the same chapter number** (the cont
 ```
 CREATE TABLE telemetry(
   id INTEGER PRIMARY KEY AUTOINCREMENT, trace_id TEXT NOT NULL, run_id TEXT,
-  kind TEXT NOT NULL, tokens INTEGER NOT NULL, model TEXT, prompt_ver TEXT,
+  kind TEXT NOT NULL, tokens INTEGER NOT NULL, model TEXT, prompt_ver TEXT, payload TEXT,
   captured_at TEXT NOT NULL);
+-- `payload` carries per-row context the spec left open: an expansion row stores the
+`usage_estimated` 0/1 flag; a budget-alert row stores the `{"pct":…, "alert_pct":…}` JSON.
 ```
 **`usage` migration (UNCONDITIONAL — in the first `executescript`, NOT gated by `enable_quality`):** `ALTER TABLE usage ADD COLUMN captured_at TEXT;` (existing rows backfill `NULL` = legacy/unaccounted; the monthly window treats `NULL` as included in the running total). `record_trace`'s INSERT becomes 4-column, unconditionally. **Only the `quality_verdicts` DDL is gated behind `enable_quality`** (second, gated `executescript`), so an `enable_quality=false` project still has the 4-column `usage` and never breaks `record_trace`.
 

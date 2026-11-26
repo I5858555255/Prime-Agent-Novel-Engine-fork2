@@ -53,6 +53,45 @@ def select_knobs(volume: dict, stage: int) -> tuple[dict, dict]:
     return knob_set, rationale
 
 
+def select_knobs_for_volume(volume: dict) -> list[tuple[dict, dict, list[int]]]:
+    """Emit one knob set per forbidden-term regime the volume spans.
+
+    Splits the volume's chapter_range on `regimes_for(volume["chapter_range"])`
+    (the concept-unlock boundaries strictly inside (start, end]) and returns
+    `len(regimes)+1` (knob_set, rationale, sub_range) tuples — one per regime
+    segment, each using that segment's own stage (via STAGE1_MAX_CHAPTER).
+    A volume that crosses a regime boundary therefore yields multiple knob
+    sets instead of one, so a knob never applies across two regimes. A volume
+    that does not cross a boundary yields exactly one tuple (back-compat).
+
+    This is the regime-aware entry point; `select_knobs` (single stage) and
+    `read_active_knobs` (the volume's last-chapter stage) remain the simpler
+    read APIs for the non-straddling case.
+    """
+    start, end = volume["chapter_range"]
+    boundaries = regimes_for(volume["chapter_range"])
+    # Segments: the regime that begins at `start`, then one per boundary. A
+    # boundary chapter `b` is the FIRST chapter of the new regime (it belongs to
+    # the next segment, not the one before it), so each segment ends at
+    # (next_boundary - 1).
+    segments: list[list[int]] = []
+    cursor = start
+    for boundary in boundaries:
+        if boundary - 1 >= cursor:
+            segments.append([cursor, boundary - 1])
+        cursor = boundary
+    if end >= cursor:
+        segments.append([cursor, end])
+    out: list[tuple[dict, dict, list[int]]] = []
+    for sub_start, sub_end in segments:
+        # A segment represents the regime that *begins* at sub_start; its stage
+        # is the stage of its first chapter (sub_start), not its endpoint.
+        sub_volume = {**volume, "chapter_range": [sub_start, sub_end]}
+        knob_set, rationale = select_knobs(sub_volume, stage_for(sub_start))
+        out.append((knob_set, rationale, [sub_start, sub_end]))
+    return out
+
+
 def regime_boundaries(path=None) -> list[int]:
     """Sorted concept-unlock chapter numbers (deduped) from concept_unlocks.json —
     the same source concept_terms.forbidden_for_chapter reads."""

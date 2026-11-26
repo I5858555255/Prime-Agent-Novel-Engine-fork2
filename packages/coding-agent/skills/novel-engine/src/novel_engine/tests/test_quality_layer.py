@@ -239,12 +239,52 @@ def test_knob_determinism_stage(tmp_path):
     assert regimes_for([300, 500]) == [317]
     assert regimes_for([1, 300]) == [6, 15, 20, 25]
     assert regimes_for([100, 200]) == []
+    # A straddling volume yields len(regimes)+1 distinct per-regime knob sets via
+    # the REAL emission API (select_knobs_for_volume), not a caller-side loop.
+    from novel_engine.condensed.volume_knobs import select_knobs_for_volume
     regimes = regimes_for(straddler["chapter_range"])
-    assert len(regimes) == 2
-    knob_sets = [select_knobs(straddler, 2)[0] for _ in range(len(regimes) + 1)]
-    assert len(knob_sets) == len(regimes) + 1 == 3
+    emitted = select_knobs_for_volume(straddler)
+    assert len(emitted) == len(regimes) + 1 == 3
+    # Each segment carries its own sub_range; [300,700] splits on 317 and 653
+    # into the exact regime spans [300,316],[317,652],[653,700] (a boundary
+    # chapter belongs to the regime that begins at it).
+    sub_ranges = [seg for _, _, seg in emitted]
+    assert sub_ranges == [[300, 316], [317, 652], [653, 700]]
+    # The non-straddling volume yields exactly one set (back-compat).
+    assert len(select_knobs_for_volume(volume)) == 1
     store = Store(tmp_path)
     store.close()
+
+
+def test_select_knobs_for_volume_regime_aware(tmp_path):
+    """select_knobs_for_volume emits one knob set per regime a volume spans:
+    a volume crossing 317/653/988 yields len(regimes)+1 distinct sets, each
+    scoped to its own sub_range + stage, so a knob never applies across two
+    forbidden-term regimes. No-current-data-crosses (the spec's own note):
+    this is a guard against future re-cuts, exercised by a synthetic volume."""
+    from novel_engine.condensed.volume_knobs import select_knobs_for_volume
+    config = load_quality_config()
+    stage1 = config["knob_sets"][0]["knob_set"]
+    stage2 = config["knob_sets"][1]["knob_set"]
+    # [300,700] crosses 317 (stage 1->2) and 653 (stays stage 2): 3 regimes.
+    straddler = {"id": "VS", "title": "straddle", "chapter_range": [300, 700],
+                 "climax_chapter": 700}
+    emitted = select_knobs_for_volume(straddler)
+    assert len(emitted) == 3
+    (ks0, rat0, seg0), (ks1, rat1, seg1), (ks2, rat2, seg2) = emitted
+    # Segment stages by FIRST chapter: [300,316]->stage 1; [317,652]->stage 2;
+    # [653,700]->stage 2. A boundary chapter begins the next regime.
+    assert rat0["stage"] == 1 and ks0 == stage1
+    assert rat1["stage"] == 2 and ks1 == stage2
+    assert rat2["stage"] == 2 and ks2 == stage2
+    assert seg0 == [300, 316] and seg1 == [317, 652] and seg2 == [653, 700]
+    # A single-regime volume yields exactly one set + one segment. [318,652]
+    # contains no concept-unlock boundary (653>652, 317<318) -> one regime.
+    single = {"id": "V1", "title": "single", "chapter_range": [318, 652],
+              "climax_chapter": 500}
+    single_emitted = select_knobs_for_volume(single)
+    assert len(single_emitted) == 1
+    assert single_emitted[0][0] == stage2 and single_emitted[0][2] == [318, 652]
 
 
 def test_chain_parent_intact(tmp_path):
