@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { getModel } from "../src/models.js";
 import { streamSimple } from "../src/stream.js";
 import type { Model } from "../src/types.js";
@@ -56,9 +56,20 @@ vi.mock("openai", () => {
 });
 
 describe("openai-completions empty tools handling", () => {
+	const savedCloudflareAccount = process.env.CLOUDFLARE_ACCOUNT_ID;
+	const savedCloudflareGateway = process.env.CLOUDFLARE_GATEWAY_ID;
 	beforeEach(() => {
 		mockState.lastParams = undefined;
 		mockState.lastClientOptions = undefined;
+	});
+	afterEach(() => {
+		// These tests set CLOUDFLARE_* env vars; restore them so a later test in the
+		// same vitest worker does not inherit them and change provider behavior
+		// (cross-test pollution is a likely cause of flaky CI failures here).
+		if (savedCloudflareAccount === undefined) delete process.env.CLOUDFLARE_ACCOUNT_ID;
+		else process.env.CLOUDFLARE_ACCOUNT_ID = savedCloudflareAccount;
+		if (savedCloudflareGateway === undefined) delete process.env.CLOUDFLARE_GATEWAY_ID;
+		else process.env.CLOUDFLARE_GATEWAY_ID = savedCloudflareGateway;
 	});
 
 	it("omits tools field when context.tools is an empty array", async () => {
