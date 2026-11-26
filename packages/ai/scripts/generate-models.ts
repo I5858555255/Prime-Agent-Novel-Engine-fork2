@@ -24,6 +24,22 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const packageRoot = join(__dirname, "..");
 
+// Frozen mode: when GENERATE_MODELS_FROZEN=1 (or NO_LIVE_FETCH=1), the script
+// skips ALL external fetches (models.dev, OpenRouter, Prime Inference, AI
+// Gateway) and uses only the committed EXISTING_MODELS as the source of truth.
+// This makes the catalog a deterministic, committed artifact in CI, so the
+// test suite (written against the committed snapshot) passes reproducibly.
+// Developers run `npm run generate-models` WITHOUT this flag to pick up new
+// models from the live APIs; CI sets the flag to freeze the catalog.
+const FROZEN =
+	process.env.GENERATE_MODELS_FROZEN === "1" || process.env.NO_LIVE_FETCH === "1";
+
+if (FROZEN) {
+	console.log(
+		"[generate-models] FROZEN mode: skipping live external fetches; using committed models.generated.ts as the sole source.",
+	);
+}
+
 interface ModelsDevModel {
 	id: string;
 	name: string;
@@ -1543,6 +1559,19 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 }
 
 async function generateModels() {
+	// Frozen mode: the committed src/models.generated.ts is the source of
+	// truth. Skip all live external fetches AND skip regenerating the file —
+	// CI builds against the committed snapshot so the test suite (written
+	// against it) passes deterministically. Developers run `npm run
+	// generate-models` WITHOUT GENERATE_MODELS_FROZEN=1 to pick up new
+	// models from the live APIs and commit the refreshed catalog.
+	if (FROZEN) {
+		console.log(
+			"[generate-models] FROZEN mode: using committed src/models.generated.ts as-is (no live fetch, no rewrite).",
+		);
+		return;
+	}
+
 	// Fetch models from both sources
 	// models.dev: Anthropic, Google, OpenAI, Groq, Cerebras
 	// OpenRouter: xAI and other providers (excluding Anthropic, Google, OpenAI)

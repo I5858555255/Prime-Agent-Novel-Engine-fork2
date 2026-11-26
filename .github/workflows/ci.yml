@@ -38,6 +38,13 @@ jobs:
         run: npm ci
 
       - name: Build
+        env:
+          # Freeze the model catalog at the committed snapshot: skip the live
+          # external fetches in `generate-models` so the test suite (written
+          # against the committed catalog) runs deterministically. Developers
+          # regenerate the catalog locally (without this flag) to pick up new
+          # models and commit the refreshed snapshot.
+          GENERATE_MODELS_FROZEN: "1"
         run: npm run build
 
       - name: Check
@@ -103,6 +110,13 @@ jobs:
         run: npm ci
 
       - name: Build
+        env:
+          # Freeze the model catalog at the committed snapshot: skip the live
+          # external fetches in `generate-models` so the test suite (written
+          # against the committed catalog) runs deterministically. Developers
+          # regenerate the catalog locally (without this flag) to pick up new
+          # models and commit the refreshed snapshot.
+          GENERATE_MODELS_FROZEN: "1"
         run: npm run build
 
       - name: Install uv
