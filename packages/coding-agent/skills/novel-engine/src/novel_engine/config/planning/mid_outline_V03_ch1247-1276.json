@@ -1,0 +1,289 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      1247,
+      1276
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-30T01:26:55+00:00",
+    "batch_size": 6,
+    "status": "approved"
+  },
+  "entries": {
+    "1247": {
+      "chapter": 1247,
+      "core_event": "陆烬随陈老根回村修整，目睹村民因迷雾异象频发产生恐慌与猜疑，气氛压抑",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1248": {
+      "chapter": 1248,
+      "core_event": "陈老根向陆烬讲述修仙界传闻中“神魂特异者”常被神秘势力收买的危险情况，暗示危机",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1249": {
+      "chapter": 1249,
+      "core_event": "陆烬在夜间冥想时，无意识间触碰到远古仙妖大战遗迹残留的一丝古老余韵，感到灵魂轻微震颤",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1250": {
+      "chapter": 1250,
+      "core_event": "村里流传起某位修士被掳走的谣言，陈老根神情凝重，暗示外部势力已在暗中观察雾隐村",
+      "characters": [
+        "C002",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1251": {
+      "chapter": 1251,
+      "core_event": "陆烬两界神魂特性在情绪激动下产生微弱波动，被路过的陌生修士间接察觉异样，对方若有所思地离开",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1252": {
+      "chapter": 1252,
+      "core_event": "陈老根加强警戒，整理家中旧物时发现人皇鼎碎片微光闪烁，陆烬感应到碎片中蕴含的皇室秘藏气息",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1253": {
+      "chapter": 1253,
+      "core_event": "陆烬在太虚仙门内院偶遇神秘黑衣老者，老者低声提及神魂异象",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1254": {
+      "chapter": 1254,
+      "core_event": "陆烬参加仙门基础礼仪考核，因出身凡人被高阶弟子暗中刁难",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1255": {
+      "chapter": 1255,
+      "core_event": "陆烬借阅《太上养魂经》残卷，发现内容枯燥仅有入门吐纳技巧",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1256": {
+      "chapter": 1256,
+      "core_event": "摄魂阁探子在仙门外围窥探，记录陆烬神魂波动异常数据",
+      "characters": [
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1257": {
+      "chapter": 1257,
+      "core_event": "陆烬夜间失眠，下意识模仿呼吸法动作，被路过的陈老根发现并制止",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1258": {
+      "chapter": 1258,
+      "core_event": "太虚仙门各脉代表开会讨论资源分配，暗示对凡人出身者的隐性限制",
+      "characters": [
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1259": {
+      "chapter": 1259,
+      "core_event": "陆烬随陈老根在坊市闲逛，陈老根练习残篇呼吸法引动微弱灵机，陆烬仅旁观",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1260": {
+      "chapter": 1260,
+      "core_event": "沈孤城察觉坊市暗流涌动，暗中布控以探查仙门各脉在凡俗界的渗透动向",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1261": {
+      "chapter": 1261,
+      "core_event": "陆烬在古玉贴身佩戴时感到一丝刺痛，首次察觉古玉非死物，与自身神魂产生微弱共鸣",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1262": {
+      "chapter": 1262,
+      "core_event": "黑市拍卖会上，《太上养魂经》残卷被秘密成交，买家身份成谜，现场气氛紧张",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1263": {
+      "chapter": 1263,
+      "core_event": "陈老根因过度修炼残篇呼吸法导致经脉紊乱，陆烬焦急守护，体现凡人保护意识",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1264": {
+      "chapter": 1264,
+      "core_event": "陆烬将古玉放入迷雾边缘测试，古玉发出微光回应，首次印证跨界神魂感应特性",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1265": {
+      "chapter": 1265,
+      "core_event": "陆烬在雾隐村外迷雾边缘静立，感应到比残留意志更古老的余韵，村民因异象恐慌",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1266": {
+      "chapter": 1266,
+      "core_event": "摄魂阁暗探潜入雾隐村外围，试图收买神魂特异者，被陆烬察觉但未暴露身份",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1267": {
+      "chapter": 1267,
+      "core_event": "陆烬尝试以古玉微光抵御暗探窥探，事后出现轻微神魂钝痛，意识古玉有代价",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1268": {
+      "chapter": 1268,
+      "core_event": "陈老根带陆烬回村修炼呼吸法，强调强身健体不提修炼，陆烬在旁观察未见气感",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1269": {
+      "chapter": 1269,
+      "core_event": "雾隐村长老发现陆烬神魂波动异常，试图用传统符咒压制，反被古玉护盾弹开",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1270": {
+      "chapter": 1270,
+      "core_event": "陆烬在迷雾中独自消化神魂痛感，隐约听到古老余韵呼唤，未形成明确记忆",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1271": {
+      "chapter": 1271,
+      "core_event": "太虚仙门外门例行考核启动，陆烬随众测试灵力亲和度，结果平庸遭排挤",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1272": {
+      "chapter": 1272,
+      "core_event": "陆烬因灵力低下被分至杂役堂，负责清理禁地外围阵法废墟",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1273": {
+      "chapter": 1273,
+      "core_event": "杂役期间陆烬触碰废墟中的七窍碑残页，触发微弱神魂共鸣，未显现修炼迹象",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1274": {
+      "chapter": 1274,
+      "core_event": "摄魂阁暗线探子潜入太虚底层区域，观察陆烬异常的神魂波动，记录在案",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1275": {
+      "chapter": 1275,
+      "core_event": "陆烬因夜间神魂不稳产生梦境异象，梦见迷雾深处古老余韵，醒来后精神疲惫",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1276": {
+      "chapter": 1276,
+      "core_event": "血冥教外围势力试探太虚，陆烬被卷入小规模冲突，首次目睹血冥法术",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

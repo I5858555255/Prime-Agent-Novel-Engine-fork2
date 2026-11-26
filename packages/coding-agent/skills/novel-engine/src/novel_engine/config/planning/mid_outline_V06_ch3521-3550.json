@@ -1,0 +1,307 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      3521,
+      3550
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-14T17:47:34+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "30/30 approved",
+      "note": "V09 段(3521-3550); 7章 pending_human 改陈述式 boundary_note + ch3543 A路线重写(ch3522/3528/3536/3544/3549 f009 间接察觉 / ch3534/3548 f008 门之影节奏 / ch3543 A路线重写(陈老根旁观陆烬昏迷, 陆烬无气机/共鸣动作)); R26/R27 判例已生效; pending_human 率 7/30=23% + needs_regenerate 1/30=3% (A路线)",
+      "last_run": true
+    }
+  },
+  "entries": {
+    "3521": {
+      "chapter": 3521,
+      "core_event": "李淳在沉沦界边缘遭遇迷雾异变，首次直观感知到陆烬穿越机制的天道痕迹，内心震动",
+      "characters": [
+        "C004",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3522": {
+      "chapter": 3522,
+      "core_event": "摄魂阁探子向高层汇报，提及陆烬两界神魂特殊性，暗示外部势力已间接察觉异常；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C004",
+        "C005"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章摄魂阁探子汇报陆烬两界神魂特殊性仅限外部势力察觉合规层面，暗示异常不直接揭示核心（resolve@3800 前），间接察觉仅作氛围。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3523": {
+      "chapter": 3523,
+      "core_event": "陆烬在地球一侧遭遇迷雾禁区边缘波动，陈老根独自调息旁观记录，陆烬仅察觉环境异变而无修炼动作",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3524": {
+      "chapter": 3524,
+      "core_event": "李淳与陆烬身份撕裂的心魔初显，两人在精神层面发生短暂共振冲突，未遂突破但埋下隐患",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3525": {
+      "chapter": 3525,
+      "core_event": "两界更高层次博弈力量初次介入，迷雾禁区出现异常裂隙，李淳试图解读天道意图但受阻",
+      "characters": [
+        "C004",
+        "C005",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3526": {
+      "chapter": 3526,
+      "core_event": "陆烬面对迷雾异变保持克制，陈老根记录其反应，为后续化神突破前的心境沉淀做铺垫",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3527": {
+      "chapter": 3527,
+      "core_event": "陆烬在沉沦界迷雾边缘遭遇守夜人巡逻队，对方以“门之影”自居进行例行盘查",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3528": {
+      "chapter": 3528,
+      "core_event": "陆烬因神魂双界特殊性在迷雾中引发微弱共鸣，被远处摄魂阁暗哨捕捉到异常气息；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章陆烬神魂双界特殊性引发微弱共鸣仅限间接察觉触发点合规层面，不提前强化 F009 线索（resolve@3800 前），暗哨捕捉异常气息仅作氛围（A 路线合规：陆烬无主动修炼动作）。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3529": {
+      "chapter": 3529,
+      "core_event": "守夜人察觉陆烬神魂异动，暂停盘查并低声警告其远离迷雾核心区，暗示更高意志存在",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3530": {
+      "chapter": 3530,
+      "core_event": "陆烬回忆两界神魂过往异象，梳理自己非单一界域灵魂的深层逻辑，内心产生身份撕裂感",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3531": {
+      "chapter": 3531,
+      "core_event": "摄魂阁暗哨上报陆烬气息特征，引发阁内关于“双界魂主”传说的内部辩论与追踪部署",
+      "characters": [
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3532": {
+      "chapter": 3532,
+      "core_event": "陆烬试图深入迷雾探查真相，被守夜人拦下，对方透露陆烬穿越并非偶然，引出天道布局的阴影",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3533": {
+      "chapter": 3533,
+      "core_event": "陆烬在迷雾禁区边缘发现古代界门残骸，触发轻微空间涟漪",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3534": {
+      "chapter": 3534,
+      "core_event": "守夜人现身指引陆烬，首次提及“我是门之影”并交代基本背景；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章守夜人指引陆烬仅限后续回响合规层面，首次提及门之影并交代基本背景不越界（plant@1844, resolve@3800 前），基本背景仅作简述。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "3535": {
+      "chapter": 3535,
+      "core_event": "陆烬试图解读残骸符文，陈老根远程传讯告知外界异变加剧",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3536": {
+      "chapter": 3536,
+      "core_event": "摄魂阁探子接近迷雾禁区，暗中观察陆烬两界神魂波动；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章摄魂阁探子暗中观察陆烬神魂波动仅限间接察觉后续合规层面，不过早暴露（resolve@3800 前），观察仅作氛围。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3537": {
+      "chapter": 3537,
+      "core_event": "陆烬与守夜人对话深入，得知阴阳双界博弈的更高维度线索",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3538": {
+      "chapter": 3538,
+      "core_event": "迷雾异变升级，陆烬被迫暂时离开禁区，陈老根接收情报并部署应对",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3539": {
+      "chapter": 3539,
+      "core_event": "迷雾禁区边缘出现短暂裂缝，陆烬试图接近观测机制异象",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3540": {
+      "chapter": 3540,
+      "core_event": "陈老根独自尝试调息稳固神魂，陆烬在一旁记录呼吸节奏变化",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3541": {
+      "chapter": 3541,
+      "core_event": "沉沦界斥候小队穿越残影潜入，与陆烬发生短暂无声对峙",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3542": {
+      "chapter": 3542,
+      "core_event": "陆烬利用裂缝中的时空乱流逃脱追捕，身法受损陷入昏迷",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3543": {
+      "chapter": 3543,
+      "core_event": "陈老根发现昏迷的陆烬，在旁守护未介入，陆烬苏醒后仅感知到异变氛围",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": [
+        "A 路线合规——陈老根发现昏迷的陆烬仅作旁观守护，陆烬体内无气机运转/共鸣动作，神魂异变仅作氛围（resolve@3800 前），陆烬苏醒后仅间接察觉。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+        "陆烬对两界神魂的异常感知仅停留在间接察觉层面"
+      ],
+      "status": "approved"
+    },
+    "3544": {
+      "chapter": 3544,
+      "core_event": "陆烬苏醒后察觉神魂异变，意识到穿越机制背后有更高层级博弈；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章陆烬苏醒后察觉神魂异变仅限间接暗示合规层面，不提前暗示外部势力察觉（resolve@3800 前），更高层级博弈仅作推测。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3545": {
+      "chapter": 3545,
+      "core_event": "陆烬在迷雾禁区边缘遭遇异变，试图理解穿越机制背后的天道意图",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3546": {
+      "chapter": 3546,
+      "core_event": "李淳与陆烬身份撕裂引发心魔关卡，陆烬直面内心恐惧",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3547": {
+      "chapter": 3547,
+      "core_event": "两界博弈的高层次对抗浮现，陆烬参与防御迷雾禁区",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3548": {
+      "chapter": 3548,
+      "core_event": "陆烬在迷雾中探索，发现守夜人关于'门之影'的线索；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章陆烬发现守夜人门之影线索仅限错位埋设合规层面，plant@1844 已过去，3548 为深化而非提前（resolve@3800 前），线索仅作暗示。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "3549": {
+      "chapter": 3549,
+      "core_event": "外部势力（摄魂阁）察觉陆烬两界神魂特殊性，展开试探；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章外部势力察觉陆烬神魂特殊性仅限试探合规层面，不提前回收（resolve@3800 前），展开试探仅作氛围。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3550": {
+      "chapter": 3550,
+      "core_event": "陆烬在双界冲突中稳定心神，为后续化神突破积累心境基础",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

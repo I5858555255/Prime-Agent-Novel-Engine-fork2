@@ -1,0 +1,306 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      2621,
+      2650
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-12T11:51:02+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "30/30 approved",
+      "note": "V08 段(2621-2650); 16章 boundary_note 改陈述式(f006/f009/f005/f001/f008 埋设边界, R24 内鬼不打草惊蛇, R25 共守派不坐实); 锚点补齐; R24/R25 判例已生效"
+    }
+  },
+  "entries": {
+    "2621": {
+      "chapter": 2621,
+      "core_event": "上官鸿在太初旧部会议上首次提及残脉提取受阻，引发高层对陆烬身份的重新评估，共守派残脉的异动使传国玉玺微光一闪",
+      "characters": [
+        "C006",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f006_jade_seal_bloodline（plant@2499，resolve@3035）临近推进，严守 R25（大乾皇室共守派身份不直接坐实）约束，不触发回收逻辑，仅写到残脉异动暗示层。",
+      "status": "approved"
+    },
+    "2622": {
+      "chapter": 2622,
+      "core_event": "摄魂阁探子潜入迷雾禁区边缘，捕捉到陆烬神魂波动的异常回响",
+      "characters": [
+        "C008"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality（plant@702，resolve@3800）间接呼应推进，察觉程度严守边界不越界，仅写到间接察觉暗示层，不坐实神魂双性核心。",
+      "status": "approved"
+    },
+    "2623": {
+      "chapter": 2623,
+      "core_event": "陆烬在古遗迹深处冥想，隐约感应到比仙妖大战更古老的余韵波动，迷雾边缘传来一丝更古老的余韵感应",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core（plant@1130，resolve@3438）直接关联推进，严守边界不提前泄露核心机制，仅写到余韵暗示层，不揭示门芯脱落实质。",
+      "status": "approved"
+    },
+    "2624": {
+      "chapter": 2624,
+      "core_event": "陈老根私下向陆烬展示皇室秘藏的鹿台阵图残卷，试图解释两界阵法原理",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms（plant@74，resolve@3035）推进，严守皇室身份推测限制，不提前坐实皇室误读属性，仅写到谜团暗示层。",
+      "status": "approved"
+    },
+    "2625": {
+      "chapter": 2625,
+      "core_event": "李淳在梦境关卡中直面心魔，发现陆烬身份与自身记忆存在不可调和的矛盾",
+      "characters": [
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2626": {
+      "chapter": 2626,
+      "core_event": "大乾皇室共守派旧部试图截获陆烬，但在迷雾中迷失方向并遭遇反噬",
+      "characters": [
+        "C001",
+        "C003",
+        "C008"
+      ],
+      "boundary_note": "铺垫：大乾皇室'共守派'身份呼应推进，严守 R25（仅可推测呼应，不直接坐实）硬约束，不坐实共守派血脉实质，仅写到推测呼应层。",
+      "status": "approved"
+    },
+    "2627": {
+      "chapter": 2627,
+      "core_event": "陆烬穿越界限抵达沉沦界，迷雾禁区边缘异象初现，天道气息压制周身",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2628": {
+      "chapter": 2628,
+      "core_event": "沉沦界古老遗迹中，陆烬感应到超越残留意志的古老余韵，记忆片段闪回，迷雾边缘传来一丝更古老的余韵感应",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core（plant@1130，resolve@3438）伏笔埋设点推进，严守边界不提前揭示核心信息，仅写到余韵暗示层。",
+      "status": "approved"
+    },
+    "2629": {
+      "chapter": 2629,
+      "core_event": "李淳现身迷雾禁区外围，试图阻截陆烬，两人身份撕裂心魔首次交锋",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2630": {
+      "chapter": 2630,
+      "core_event": "李淳内心道魔爆发，对陆烬发出警告，暗示两界博弈背后有更高势力操控",
+      "characters": [
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2631": {
+      "chapter": 2631,
+      "core_event": "陆烬在迷雾深处获得上古残片，碎片中封印的古老意志试图沟通，提供线索",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 相关古老意志信息推进，严守边界与 plant@1130 设定不冲突，不提前泄露核心机制，仅写到信息暗示层。",
+      "status": "approved"
+    },
+    "2632": {
+      "chapter": 2632,
+      "core_event": "陆烬突破迷雾核心区域，直面天道布局的初步形态，神魂承受巨大冲击",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2633": {
+      "chapter": 2633,
+      "core_event": "上官鸿私下向陆烬展示太初残脉异动，暗示仙庭旧部即将启动提取程序，共守派残脉的异动使传国玉玺微光一闪",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "铺垫：f006_jade_seal_bloodline（plant@2499）关键进展推进，严守 R24（内鬼线索不过早打草惊蛇）边界，仙庭旧部动作仅在异动暗示层，不触发抓捕/揭破。",
+      "status": "approved"
+    },
+    "2634": {
+      "chapter": 2634,
+      "core_event": "迷雾禁区边缘出现异变前兆，陆烬感知到比残留意志更古老的余韵波动",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core（plant@1130，resolve@3438）埋设后长期沉淀期呼应推进，此时点感应严守伏笔时间表节奏，不越界至实质揭示。",
+      "status": "approved"
+    },
+    "2635": {
+      "chapter": 2635,
+      "core_event": "摄魂阁探子潜入沉沦界边境，试图探查陆烬神魂特殊性",
+      "characters": [
+        "C001",
+        "C004",
+        "C007"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality（plant@702，resolve@3800）外部察觉机制触发，间接察觉力度严守伏笔设定，不坐实神魂双性核心实质。",
+      "status": "approved"
+    },
+    "2636": {
+      "chapter": 2636,
+      "core_event": "陆烬与上官鸿在遗迹深处发现鹿台阵图残卷的新记载，指向皇室秘藏",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2637": {
+      "chapter": 2637,
+      "core_event": "守夜人现身迷雾外沿，向陆烬透露更多关于‘门之影’的细节",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper（plant@1844，resolve@3800）信息补全阶段推进，严守边界不提前泄露回收点信息，仅写到异动暗示层。",
+      "status": "approved"
+    },
+    "2638": {
+      "chapter": 2638,
+      "core_event": "陈老根在远处默默观察陆烬异状，手中紧握着七窍碑残页的拓本",
+      "characters": [
+        "C002",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2639": {
+      "chapter": 2639,
+      "core_event": "陆烬探索迷雾禁区边缘，感应到古老余韵加剧神魂震荡",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 深层感应推进，严守边界不提前触碰核心伏笔实质，仅写到感应暗示层。",
+      "status": "approved"
+    },
+    "2640": {
+      "chapter": 2640,
+      "core_event": "李淳因身份撕裂心魔加剧，试图向陆烬坦白过往秘密未果",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2641": {
+      "chapter": 2641,
+      "core_event": "摄魂阁探子潜入沉沦界，通过传闻间接察觉陆烬神魂特殊性",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 外部察觉推进，严守边界不在此处提前埋设实质证据，仅写到察觉暗示层。",
+      "status": "approved"
+    },
+    "2642": {
+      "chapter": 2642,
+      "core_event": "太初议会旧部暂缓提取上官鸿体内残脉，内部产生分歧",
+      "characters": [
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2643": {
+      "chapter": 2643,
+      "core_event": "陆烬在遗迹中解读七窍碑残页，发现皇室秘藏异常之处",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms 残页解读推进，严守 R25 皇室身份推测限制，不过早揭示皇室身份实质，仅写到解读暗示层。",
+      "status": "approved"
+    },
+    "2644": {
+      "chapter": 2644,
+      "core_event": "天地异象初显，阴阳双界壁垒出现细微裂痕，众人警觉",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2645": {
+      "chapter": 2645,
+      "core_event": "陆烬在迷雾禁区边缘遭遇高阶游魂，以神魂韧性逼退对方，未施展实质功法",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2646": {
+      "chapter": 2646,
+      "core_event": "摄魂阁外围探子向本体汇报陆烬神魂异常数据，触发内部警报",
+      "characters": [
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2647": {
+      "chapter": 2647,
+      "core_event": "陈老根在旁观察陆烬神念波动，记录呼吸法对神魂稳定性的微弱影响",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2648": {
+      "chapter": 2648,
+      "core_event": "迷雾禁区深处传来古老意志的低语，陆烬感应到一丝超越仙妖大战的余韵",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 埋设相关线索推进，严守边界不提前暴露'比所有残留意志更古老'余韵实质，仅写到线索暗示层。",
+      "status": "approved"
+    },
+    "2649": {
+      "chapter": 2649,
+      "core_event": "陆烬分析游魂被驱散的原因，推测自身神魂具备两界特性，内心产生疑惑",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 回收前置节点推进，严守边界允许主角自我察觉两界神魂特殊性（非外部坐实），不触发回收逻辑。",
+      "status": "approved"
+    },
+    "2650": {
+      "chapter": 2650,
+      "core_event": "陆烬尝试在梦境中模拟迷雾内部结构，被陈老根发现并制止危险的神魂透支行为",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

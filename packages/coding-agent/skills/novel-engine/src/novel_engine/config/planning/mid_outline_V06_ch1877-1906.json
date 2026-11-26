@@ -1,0 +1,312 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      1877,
+      1906
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-09T07:48:40+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "30/30 approved",
+      "note": "V06 forbidden 2/2 已条款化(R20/R21); 7章 boundary_note 改陈述式; concept_unlocks V06 缺失为提示级不阻塞",
+      "last_run": true
+    }
+  },
+  "entries": {
+    "1877": {
+      "chapter": 1877,
+      "core_event": "守夜人指引陆烬踏入迷雾边缘，感知到比遗迹更古老的余韵波动",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1878": {
+      "chapter": 1878,
+      "core_event": "摄魂阁探子暗中观察陆烬异态，将“神魂双界”传闻上报阁主",
+      "characters": [
+        "C004",
+        "C005"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 外部察觉推进，仅到传闻级暗示，不坐实探子身份或察觉程度。",
+      "status": "approved"
+    },
+    "1879": {
+      "chapter": 1879,
+      "core_event": "李淳在身份撕裂心魔中挣扎，质疑陆烬穿越机制的正当性",
+      "characters": [
+        "C006",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1880": {
+      "chapter": 1880,
+      "core_event": "陆烬在迷雾中短暂感应门芯脱落迹象，未深究机制",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 推进，只写迷雾边缘异动感应，不揭示门芯脱落细节，分阶段残物功用限制内。",
+      "status": "approved"
+    },
+    "1881": {
+      "chapter": 1881,
+      "core_event": "陈老根向陆烬提及皇室秘藏传闻，陆烬初识人皇鼎碎片价值",
+      "characters": [
+        "C001",
+        "C002",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1882": {
+      "chapter": 1882,
+      "core_event": "陆烬神魂轻微震荡，村民因异象恐慌，暗示跨界本质",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": "需人工确认：f004_mitochondria_earth 异象描写边界",
+      "status": "approved"
+    },
+    "1883": {
+      "chapter": 1883,
+      "core_event": "陆烬在迷雾边缘发现刻有古老符文的黑石，引起周围灵气微小异动",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1884": {
+      "chapter": 1884,
+      "core_event": "黑石异动惊动沉睡的古魂残片，向陆烬传递模糊的警告信息",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1885": {
+      "chapter": 1885,
+      "core_event": "古魂残片消散前指出迷雾深处存在被掩盖的空间裂隙入口",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1886": {
+      "chapter": 1886,
+      "core_event": "陆烬尝试接近裂隙，因神魂特殊性导致迷雾产生异常排斥反应",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1887": {
+      "chapter": 1887,
+      "core_event": "迷雾剧烈动荡中，陆烬感应到两界通道另一端的微弱呼唤声，陆烬在古玉残片上瞥见活化氧异象与地球牵引力的暗示",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：两界通道呼应仅作感应描写，不触及 f004_mitochondria_earth 机制与线粒体原理。",
+      "status": "approved"
+    },
+    "1888": {
+      "chapter": 1888,
+      "core_event": "陆烬强行压下呼唤冲动，在迷雾核心暂留神秘印记以封存异常",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：封存异常推进，f005_fog_core 埋设深度内，仅写异动不揭示脱落机制。",
+      "status": "approved"
+    },
+    "1889": {
+      "chapter": 1889,
+      "core_event": "陆烬在迷雾边缘徘徊，感应到门芯深处极微弱的牵引力，试图探查其机制",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：接近地球机制边界，仅展示'牵引力'现象，不揭示线粒体细节，f004 回收留待后续节点。",
+      "status": "approved"
+    },
+    "1890": {
+      "chapter": 1890,
+      "core_event": "李淳闯入迷雾禁区外围，与陆烬对峙，质问其身份撕裂的心魔根源",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1891": {
+      "chapter": 1891,
+      "core_event": "陆烬心魔初显，幻境中重现降生时的异象，李淳试图以自身神魂压制",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1892": {
+      "chapter": 1892,
+      "core_event": "守夜人现身迷雾深处，向陆烬首次说明'我是门之影'的基本信息，隐晦提及两界平衡",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 卷内后续交代，严守'仅交代基本信息'硬约束，不重复埋设、不揭示完整身世。",
+      "status": "approved"
+    },
+    "1893": {
+      "chapter": 1893,
+      "core_event": "李淳强行抽取陆烬部分神魂以断其魔障，导致陆烬意识短暂沉入迷雾底层",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1894": {
+      "chapter": 1894,
+      "core_event": "陆烬在迷雾底层碎片中瞥见两界逆转的宏观图景一角，随即被弹回，李淳重伤退出",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1895": {
+      "chapter": 1895,
+      "core_event": "陆烬在迷雾禁区边缘驻足，尝试解读周遭诡异异象与穿越机制的关联",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：涉及f004_mitochondria_earth（穿越机制/线粒体）接近本卷高潮回收前的敏感区，且可能触及f005_fog_core（迷雾核心）边界",
+      "status": "approved"
+    },
+    "1896": {
+      "chapter": 1896,
+      "core_event": "李淳介入陆烬的探索，两人在迷雾中遭遇精神幻境，被迫直面过往记忆",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1897": {
+      "chapter": 1897,
+      "core_event": "李淳与陆烬在幻境中的冲突外溢，揭示李淳对陆烬身份撕裂的潜在恐惧与执念",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1898": {
+      "chapter": 1898,
+      "core_event": "幻境破碎，外界传来摄魂阁探子接近迷雾禁区的异动消息，气氛骤然紧张，两界通道感应使神魂产生特殊察觉",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 伏笔回收前兆，仅写摄魂阁察觉的边缘暗示，不坐实神魂双性核心。",
+      "status": "approved"
+    },
+    "1899": {
+      "chapter": 1899,
+      "core_event": "陆烬与摄魂阁探子对峙，探子言语试探提及“两界同源”的传闻，暗示高层博弈",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1900": {
+      "chapter": 1900,
+      "core_event": "对峙因更强大势力的介入而中断，陆烬暂时避开锋芒，回归迷雾深处休整",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1901": {
+      "chapter": 1901,
+      "core_event": "陆烬在迷雾边缘观察到潮汐规律，发现异象频率与地脉波动共振",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1902": {
+      "chapter": 1902,
+      "core_event": "守夜人暗中记录异象坐标，首次向陆烬提及“门之影”的静默职责",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1903": {
+      "chapter": 1903,
+      "core_event": "摄魂阁密探潜入雾隐村外围，试图探测陆烬神魂的双界波动特征",
+      "characters": [
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1904": {
+      "chapter": 1904,
+      "core_event": "陆烬在昏迷中本能屏蔽探知，导致密探神识受创，双方达成短暂默契",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1905": {
+      "chapter": 1905,
+      "core_event": "陆烬整理两界记忆碎片，将意识流图与地脉残卷在脑海中初步叠加",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1906": {
+      "chapter": 1906,
+      "core_event": "守夜人划清界限，警告陆烬不得主动干涉异象，暗示天道意图正在苏醒",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

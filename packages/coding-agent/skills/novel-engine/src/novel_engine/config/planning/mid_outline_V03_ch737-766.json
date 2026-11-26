@@ -1,0 +1,313 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      737,
+      766
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-19T12:20:48+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "last_run": true
+    }
+  },
+  "entries": {
+    "737": {
+      "chapter": 737,
+      "core_event": "陆烬抵达太虚仙门外围市集，目睹低阶弟子因出身被管事呵斥，心生不平但未发声",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "738": {
+      "chapter": 738,
+      "core_event": "陆烬以普通凡人孩童身份混入外门杂役行列，协助搬运药材，展现坚韧性格",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "739": {
+      "chapter": 739,
+      "core_event": "管事发现陆烬非仙门弟子欲驱逐，陈老根旧友出现的云游散修出面调解，留下考验",
+      "characters": [
+        "C001",
+        "C002",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "740": {
+      "chapter": 740,
+      "core_event": "陆烬通过初步体能考验，获准在外门藏经阁底层抄书，首次接触到残缺的导引术图谱",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "741": {
+      "chapter": 741,
+      "core_event": "抄书时陆烬下意识以呼吸配合笔势，引气入体微弱震动，被路过的记名长老瞥见异色",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "742": {
+      "chapter": 742,
+      "core_event": "记名长老并未点破，仅令陆烬加倍劳作以示惩戒，陆烬在劳作中神魂微微苏醒一丝感知",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "743": {
+      "chapter": 743,
+      "core_event": "陆烬在太虚仙门外场协助整理杂务，目睹内门弟子对低阶外门弟子实施隐性资源歧视",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "744": {
+      "chapter": 744,
+      "core_event": "陆烬在藏经阁旁侧听到关于《太上养魂经》仅是入门残法的流言，引发对功法真实性的怀疑",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "745": {
+      "chapter": 745,
+      "core_event": "一名陌生访客以采买药材为由在仙门附近徘徊，暗中观察具有异象的陆烬，留下模糊的视线威胁",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "746": {
+      "chapter": 746,
+      "core_event": "陆烬参与仙门基础礼仪考核，因出身凡人背景被考官刻意压低评价，凸显规则下的不公",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "747": {
+      "chapter": 747,
+      "core_event": "陈老根通过信鸽询问陆烬近况，陆烬在回信中隐晦提及外界窥探，内心不安加剧",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "748": {
+      "chapter": 748,
+      "core_event": "陆烬夜间在偏院听到远处传来异常神魂波动，惊醒时只看到一名灰袍人闪过，惊疑不定",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "749": {
+      "chapter": 749,
+      "core_event": "陆烬在仙门外围集市目睹因出身被拒的测试者，初显资源歧视",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "750": {
+      "chapter": 750,
+      "core_event": "太虚仙门各脉弟子在茶楼交流，形成隐蔽的鄙视链",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "751": {
+      "chapter": 751,
+      "core_event": "陆烬在仙门集市旁目睹低阶弟子被高阶师兄当众羞辱，内心生出压抑的屈辱感与对规则的怀疑",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "752": {
+      "chapter": 752,
+      "core_event": "陆烬发现《太上养魂经》残卷，表面为入门法门",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "753": {
+      "chapter": 753,
+      "core_event": "市集暗流涌动，陌生修士对陆烬神魂气质显露好奇",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "754": {
+      "chapter": 754,
+      "core_event": "陆烬因神魂异动引起注意，被要求参加外围测试",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "755": {
+      "chapter": 755,
+      "core_event": "陈老根向陆烬提及镇外新来的游方郎中，暗示仙门测试临近",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "756": {
+      "chapter": 756,
+      "core_event": "游方郎中为村民义诊，陆烬旁观其诊脉手法，察觉其中暗藏探查神魂之意",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "757": {
+      "chapter": 757,
+      "core_event": "郎中离开后，陈老根警示陆烬仙门测试中关于出身与血脉的隐含规则",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "758": {
+      "chapter": 758,
+      "core_event": "陆烬整理家中旧物，发现母亲遗留物中夹有一张模糊的阵图残页",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "759": {
+      "chapter": 759,
+      "core_event": "陆烬尝试向陈老根询问阵图含义，陈老根讳莫如深，转移话题至呼吸法练习",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "760": {
+      "chapter": 760,
+      "core_event": "仙门使节抵达小镇，宣布测试规则，强调公平竞争表象下的资源门槛",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "761": {
+      "chapter": 761,
+      "core_event": "陆烬在仙门外围集市闲逛，听到关于脉系歧视的闲言碎语",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "762": {
+      "chapter": 762,
+      "core_event": "陆烬目睹底层弟子因出身被拒之门外，心生不忿但无力改变",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "763": {
+      "chapter": 763,
+      "core_event": "陈老根在旁指点陆烬观察修仙界规则，强调资源分配的不公",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "764": {
+      "chapter": 764,
+      "core_event": "陆烬尝试接近《太上养魂经》相关区域，感受到莫名的排斥感",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "765": {
+      "chapter": 765,
+      "core_event": "陆烬因行为举止异样引起一名路过的杂役弟子注意，被盘问身份",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "766": {
+      "chapter": 766,
+      "core_event": "陆烬通过简单说辞摆脱盘问，内心警惕摄魂阁可能存在的视线",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

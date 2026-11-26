@@ -1,0 +1,313 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      2741,
+      2770
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-12T13:54:41+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "30/30 approved",
+      "note": "V08 段(2741-2770); ch2744 A路线硬锁修复(陈老根独自调息,陆烬旁观记录,无口诀传授); 14章 boundary_note 改陈述式(f009/f005/f001/f006/f008 埋设边界, R25 共守派不坐实, R24 内鬼持续观察); ch2751 f006 共守派/传国玉玺锚点补齐; C014 摄魂阁密探已登记",
+      "last_run": true
+    }
+  },
+  "entries": {
+    "2741": {
+      "chapter": 2741,
+      "core_event": "铁面Ḕ政官内部审讯大乾皇室密使，发现密使试图转移七窍碑残页线索",
+      "characters": [
+        "C008",
+        "李淳"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2742": {
+      "chapter": 2742,
+      "core_event": "李淳潜入皇室秘库外围，借光影障眼法短暂记录鹿台阵图残卷流向，触发微量警报",
+      "characters": [
+        "李淳",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2743": {
+      "chapter": 2743,
+      "core_event": "陆烬因身份撕裂心魔加剧，神魂波动泄露，引起周围低阶修士对“双界气息”的疑惑与窥探",
+      "characters": [
+        "C001",
+        "陈老根"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality（plant@702，resolve@3800）早期征兆间接体现推进，严守边界属间接察觉范畴，不坐实神魂双性核心，仅写到征兆暗示层。",
+      "status": "approved"
+    },
+    "2744": {
+      "chapter": 2744,
+      "core_event": "陈老根独自调息压制自身异样，陆烬在旁静默记录其气息节奏，未做修炼动作，仅以旁观视角描述",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "铺垫：A路线硬红线约束，陆烬 phase 1 不做任何修炼动作（呼吸/口诀/传授/气机），陈老根独自调息、陆烬仅旁观记录，不出现口诀传授描写。",
+      "status": "approved"
+    },
+    "2745": {
+      "chapter": 2745,
+      "core_event": "铁面Ḕ政官根据柳暗花明的线索，锁定皇室“共守派”后裔身份仅存在于推测层面，决定暂缓抓捕，继续定向投放假消息",
+      "characters": [
+        "C008",
+        "李淳"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2746": {
+      "chapter": 2746,
+      "core_event": "迷雾禁区边缘出现微小异变，陆烬感应到古老余韵的轻微颤动，铁面Ḕ政官下令加强对该区域监控",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f005_fog_core（plant@1130，resolve@3438）余韵颤动感应推进，严守边界不构成伏笔泄露，仅写到余韵暗示层，不揭示门芯脱落实质。",
+      "status": "approved"
+    },
+    "2747": {
+      "chapter": 2747,
+      "core_event": "皇室密档显示共守派后裔身份，陆烬察觉玉玺异动",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2748": {
+      "chapter": 2748,
+      "core_event": "陆烬分析玉玺结构，发现内嵌七窍碑残页线索",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms（七窍碑残页）推测呼应推进，严守 R25 边界仅做推测而非坐实皇室共守派身份，仅写到谜团暗示层。",
+      "status": "approved"
+    },
+    "2749": {
+      "chapter": 2749,
+      "core_event": "摄魂阁密报陆烬神魂异常，暗示其两界特殊性",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality（摄魂阁间接察觉神魂特殊性）首次间接察觉节点推进，严守边界不坐实神魂双性核心实质，仅写到察觉暗示层。",
+      "status": "approved"
+    },
+    "2750": {
+      "chapter": 2750,
+      "core_event": "陆烬推演迷雾禁区异变，回溯天道对穿越机制的干预",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 迷雾禁区异变设定推进，严守边界不过早揭示天道意图细节，仅写到异变暗示层。",
+      "status": "approved"
+    },
+    "2751": {
+      "chapter": 2751,
+      "core_event": "上官鸿透露仙庭旧部暂缓提取其残脉之事，共守派残脉的异动使传国玉玺微光一闪",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "铺垫：f006_jade_seal_bloodline（plant@2499）上官鸿坦白藏有太初议会残脉被暂缓提取推进，严守边界此时点埋设合规，仅写到残脉异动暗示层，不坐实共守派血脉实质。",
+      "status": "approved"
+    },
+    "2752": {
+      "chapter": 2752,
+      "core_event": "守夜人重申门之影身份，提供两界博弈新情报",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper（plant@1844）守夜人交代基本信息深化推进，此处为深化而非重复首次说明，严守 R20 边界不揭示完整身世，仅写到异动暗示层。",
+      "status": "approved"
+    },
+    "2753": {
+      "chapter": 2753,
+      "core_event": "李淳调查传国玉玺异常，发现共守派封裝残留气息与陆烬神魂共鸣",
+      "characters": [
+        "李淳",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2754": {
+      "chapter": 2754,
+      "core_event": "铁面执行官汇报玉玺监测数据，暗示大乾皇室内部对封裝体认知出现分歧",
+      "characters": [
+        "铁面执行官",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2755": {
+      "chapter": 2755,
+      "core_event": "陆烬在迷雾禁区边缘感应到更古老余韵，与f005_fog_core埋设的远古意志产生微弱连接",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2756": {
+      "chapter": 2756,
+      "core_event": "摄魂阁密探记录陆烬神魂波动异常，首次将两界神魂特殊性上报高层，间接印证f009_soul_duality",
+      "characters": [
+        "摄魂阁密探",
+        "C001"
+      ],
+      "boundary_note": "铺垫：C014 摄魂阁密探新角色出场推进，登记入册（C014），行动仅在异动暗示层，不触及伏笔实质。",
+      "status": "approved"
+    },
+    "2757": {
+      "chapter": 2757,
+      "core_event": "守夜人向陆烬解释门之影身份背景，交代f008_doorkeeper基本信息，揭示两界通道监控机制",
+      "characters": [
+        "守夜人",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2758": {
+      "chapter": 2758,
+      "core_event": "李淳深入分析玉玺封裝体，推测共守派后裔身份，但未坐实皇室血脉关联，保持f001_royal_heirlooms埋设状态",
+      "characters": [
+        "李淳",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2759": {
+      "chapter": 2759,
+      "core_event": "陆烬在迷雾禁区边缘发现玉玺封印松动，引发周边灵力紊乱，铁面执行官远程监测异常",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2760": {
+      "chapter": 2760,
+      "core_event": "沈老根在后方通过气感推测陆烬处境，尝试用呼吸法静心推演玉玺共鸣频率",
+      "characters": [
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2761": {
+      "chapter": 2761,
+      "core_event": "陆烬触碰玉玺残片，脑海涌入共守派先祖的记忆碎片，但无法完全解读",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：大乾皇室='共守派'后裔推测推进，严守 R25（仅可推测呼应，不直接坐实）约束，推测不过度坐实血脉实质。",
+      "status": "approved"
+    },
+    "2762": {
+      "chapter": 2762,
+      "core_event": "迷雾禁区异变加剧，陆烬神魂受冲撞出现微颤，外部势力摄魂阁间接察觉其神魂特殊性",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality（plant@702）间接察觉回响推进，严守边界不触发伏笔逻辑实质回收，仅写到回响暗示层。",
+      "status": "approved"
+    },
+    "2763": {
+      "chapter": 2763,
+      "core_event": "铁面执行官下令暂停对玉玺的定向投放观察，转而在沉沦界部署接应点",
+      "characters": [
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2764": {
+      "chapter": 2764,
+      "core_event": "陆烬在接应点与守夜人短暂交集，获知'门之影'的更深一层职能，但未完全揭示",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper（plant@1844）后续进展推进，此处为深化而非首次说明，严守节奏边界，仅写到异动暗示层。",
+      "status": "approved"
+    },
+    "2765": {
+      "chapter": 2765,
+      "core_event": "陆烬研读玉玺封印构造，推断出迷雾禁区异变与皇室秘藏存在隐性关联",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2766": {
+      "chapter": 2766,
+      "core_event": "摄魂阁探子潜入边境，暗中记录陆烬神魂波动数据，首次确认双魂异常特征",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 伏笔埋设细节推进，严守边界不过度坐实神魂双性核心，仅写到细节暗示层。",
+      "status": "approved"
+    },
+    "2767": {
+      "chapter": 2767,
+      "core_event": "铁面执行官根据新情报，对大乾皇室加强监视，但未发现内鬼确切身份",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2768": {
+      "chapter": 2768,
+      "core_event": "陆烬在遗迹深处感应到古老余韵，意识到其非普通残留意志，似与迷雾核心有关",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 伏笔关键节点推进，严守边界不揭示门芯脱落实质，仅写到关键节点暗示层。",
+      "status": "approved"
+    },
+    "2769": {
+      "chapter": 2769,
+      "core_event": "上官鸿向陆烬透露体内残脉状态，称仙庭旧部暂缓提取计划，暗示更高层博弈",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2770": {
+      "chapter": 2770,
+      "core_event": "守夜人现身，告知陆烬'门之影'身份即将面临考验，需为后续布局做准备",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 伏笔进展推进，严守边界不揭示完整身世（R20），仅写到进展暗示层。",
+      "status": "approved"
+    }
+  }
+}

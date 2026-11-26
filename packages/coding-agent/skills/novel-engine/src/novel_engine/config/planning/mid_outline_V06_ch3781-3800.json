@@ -1,0 +1,203 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      3781,
+      3800
+    ],
+    "node_chapters_in_range": [
+      3800
+    ],
+    "generated_at": "2026-11-15T01:54:59+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "19/19 approved",
+      "note": "V10 段(3781-3800, R28/R29, 全书收官段); 7章 pending_human 改陈述式 boundary_note(ch3781/3789/3798/3799 f008 门之影 resolve@3800 前 / ch3782/3790 f009 间接察觉 / ch3786 N049 邻近确认节点); R28/R29 判例已生效; pending_human 率 7/19=37%（收官段密集区，正常偏高）; LLM 漏章 ch3780 已丢弃, 19 章条目（20 章区间中 1 章越界被丢弃）",
+      "last_run": true
+    }
+  },
+  "entries": {
+    "3781": {
+      "chapter": 3781,
+      "core_event": "守夜人在迷雾边缘与陆烬短暂交汇，暗示\"门之影\"身份与陆烬穿越机制的深层关联；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001",
+        "守夜人"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章守夜人暗示门之影身份与陆烬穿越机制深层关联仅限 resolve@3800 前合规层面，不越界揭示核心（全书收官节点），暗示仅作氛围。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "3782": {
+      "chapter": 3782,
+      "core_event": "摄魂阁密探潜入沉沦界外围，暗中记录陆烬神魂波动异常并传回阁中；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001",
+        "摄魂阁密探"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章摄魂阁密探记录陆烬神魂波动异常仅限 resolve@3800 前合规层面，不触发回收边界（全书收官节点），暗中记录仅作氛围。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3783": {
+      "chapter": 3783,
+      "core_event": "陆烬在沉沦界废墟中发现刻有古道的石壁，触发记忆碎片闪回，暗示两界逆转历史",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3784": {
+      "chapter": 3784,
+      "core_event": "陈老根独自演练吐纳口诀巩固境界，陆烬在旁观察并记录气机变化作为后续参考",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3785": {
+      "chapter": 3785,
+      "core_event": "李淳化身迷雾中的执念残影，向陆烬质问身份撕裂心魔，陆烬陷入短暂神魂震荡",
+      "characters": [
+        "C001",
+        "李淳"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3786": {
+      "chapter": 3786,
+      "core_event": "陆烬平息神魂震荡后向守夜人询问人道退场仪式细节，为 ch3800 N049 主动退场做认知铺垫",
+      "characters": [
+        "C001",
+        "守夜人"
+      ],
+      "boundary_note": "铺垫：N049 本章陆烬向守夜人询问人道退场仪式细节仅限 ch3800 N049 邻近确认节点合规层面，不提前泄露人道重定仙天秩序具体内容，认知铺垫仅作氛围。",
+      "status": "approved"
+    },
+    "3787": {
+      "chapter": 3787,
+      "core_event": "陆烬协助摄魂阁整理两界神魂档案，发现自身神魂数据异常波动",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3788": {
+      "chapter": 3788,
+      "core_event": "陈老根独自闭关调息稳固根基，陆烬在旁记录并观察其呼吸频率变化",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3789": {
+      "chapter": 3789,
+      "core_event": "陆烬深入迷雾禁区边缘，遭遇守夜人残影，对方提及“门之影”的隐喻；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章陆烬遭遇守夜人残影提及门之影隐喻仅限暗示合规层面，不在此章完成首次明确说明（resolve@3800 前），隐喻仅作氛围。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "3790": {
+      "chapter": 3790,
+      "core_event": "摄魂阁长老警告陆烬神魂特殊性已被察觉，建议其隐藏气息避免暴露；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章摄魂阁长老警告陆烬神魂特殊性已被察觉仅限外部势力间接察觉合规层面，不直接揭示神魂核心（resolve@3800 前），建议隐藏气息仅作冲突引子。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3791": {
+      "chapter": 3791,
+      "core_event": "陆烬与李淳在阴阳交界地带进行试探性对话，触及身份撕裂的心理阴影",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3792": {
+      "chapter": 3792,
+      "core_event": "陆烬整理近期异象证据，规划后续前往沉沦界核心的路径与风险",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3793": {
+      "chapter": 3793,
+      "core_event": "守夜人现身迷雾禁区边缘，向陆烬首次说明“我是门之影”身份并交代基本信息",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3794": {
+      "chapter": 3794,
+      "core_event": "陆烬在守夜人指引下探索禁区外围，察觉两界神魂特殊性引起摄魂阁潜伏探子注意",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3795": {
+      "chapter": 3795,
+      "core_event": "摄魂阁探子暗中记录陆烬神魂异常，陆烬遭遇初步试探但未暴露核心秘密",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3796": {
+      "chapter": 3796,
+      "core_event": "陆烬通过守夜人获得的线索，分析迷雾禁区异变与天道布局的关联",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3797": {
+      "chapter": 3797,
+      "core_event": "陆烬与守夜人深入禁区核心区域，发现阴阳逆转的古老封印痕迹",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3798": {
+      "chapter": 3798,
+      "core_event": "陆烬整理两界情报，强化对人道秩序的认知，为ch3800主动退场做心理铺垫；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper+f009_soul_duality 本章陆烬整理两界情报仅限 resolve@3800 前合规层面，已完成伏笔铺垫且未提前回收（全书收官节点），心理铺垫仅作氛围。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "3799": {
+      "chapter": 3799,
+      "core_event": "守夜人向陆烬揭示自己是“门之影”并交代两界异变背景；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章守夜人揭示门之影身份并交代两界异变背景仅限埋设点合规层面，不越界（resolve@3800 前），两界异变背景仅作暗示。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    }
+  }
+}

@@ -2,6 +2,7 @@
 import json
 import math
 import os
+import tempfile
 import time
 from pathlib import Path
 from unittest.mock import MagicMock, patch
@@ -12,6 +13,13 @@ import httpx
 from novel_engine.core.llm_client import LLMClient, TimeoutSpec
 from novel_engine.core.errors import TransientLLMError, PermanentLLMError, ConfigFatalError
 from novel_engine.core.model_router import ModelRouter, TimeoutSpec as RouterTimeoutSpec
+
+
+def _writable_tmp() -> Path:
+    """Workspace-local dir the sandbox permits (AppData tmp_path is blocked)."""
+    base = Path(__file__).resolve().parents[1] / ".test_tmp"
+    base.mkdir(exist_ok=True)
+    return Path(tempfile.mkdtemp(prefix="llm_stream_test_", dir=base))
 
 
 # ── SSE helper ────────────────────────────────────────────────────────────────
@@ -185,8 +193,9 @@ def test_streaming_401_config_fatal():
         client.chat_completion([], timeout_spec=spec)
 
 
-def test_modelrouter_missing_key_raises_config_fatal(tmp_path):
+def test_modelrouter_missing_key_raises_config_fatal():
     """active_profile 环境变量缺失 → ConfigFatalError."""
+    tmp_path = _writable_tmp()
     cfg = {
         "active_profile": "test",
         "profiles": {

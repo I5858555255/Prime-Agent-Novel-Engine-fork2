@@ -1,0 +1,180 @@
+{
+  "meta": {
+    "vid": "V01",
+    "range": [
+      1,
+      20
+    ],
+    "node_chapters_in_range": [
+      1,
+      2,
+      5,
+      9,
+      17
+    ],
+    "generated_at": "2026-11-24T19:18:13+00:00",
+    "batch_size": 5,
+    "status": "approved",
+    "audit": {
+      "last_run": true
+    }
+  },
+  "entries": {
+    "10": {
+      "chapter": 10,
+      "core_event": "陆烬每日照陈老根所说做几趟笨拙拉伸，数日后陈老根点头道气色好些了，未再深言",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "11": {
+      "chapter": 11,
+      "core_event": "村中粮价上涨，陈老根带陆烬进山采药换粮，途中陆烬对山间浊气反应不适",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "12": {
+      "chapter": 12,
+      "core_event": "陆烬夜咳不止，陈老根熬草药喂药，村中王婶探病提及迷雾边常有夜雾入村",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "13": {
+      "chapter": 13,
+      "core_event": "邻村猎户老赵牛群迷入迷雾边缘仅带回一头瘸牛，村民议论迷雾近年似更浓",
+      "characters": [
+        "C001",
+        "C002",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "14": {
+      "chapter": 14,
+      "core_event": "陈老根夜间翻看旧册被陆烬撞见，迅速藏起只称旧账，陆烬隐约觉得根伯有秘密",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "15": {
+      "chapter": 15,
+      "core_event": "秋收时节陆烬随陈老根在田里帮忙，趁其背身偷跑向村后迷雾边缘张望",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "16": {
+      "chapter": 16,
+      "core_event": "村中老猎户闲聊提及雾里偶现异光，陈老根面色微变，当夜独自在院中练呼吸法",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "18": {
+      "chapter": 18,
+      "core_event": "陈老根将迷雾枯枝封入地窖底部，对陆烬说那东西碰不得，陆烬委屈但不再靠近",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "19": {
+      "chapter": 19,
+      "core_event": "陈老根在村东雾线前插木桩立界，严令陆烬不得再近，陆烬虽不解却乖乖照做",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "20": {
+      "chapter": 20,
+      "core_event": "开春走货郎进村，陆烬看中一只铜铃，陈老根付钱买下后回家将其藏入地窖",
+      "characters": [
+        "C001",
+        "C002",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3": {
+      "chapter": 3,
+      "core_event": "陈老根闭门独养陆烬，拒收村中米粮，\"雾里捡的\"闲话在村中蔓延",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "4": {
+      "chapter": 4,
+      "core_event": "陆烬婴夜不哭，目光随窗外雾聚雾散而转，陈老根深夜查看觉异样未言",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "6": {
+      "chapter": 6,
+      "core_event": "陆烬病愈体虚，陈老根每日姜水擦身，村妇送药粥，陆烬闻雾气方向偏头避开",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "7": {
+      "chapter": 7,
+      "core_event": "陆烬溪边吸入浊气剧烈咳喘，陈老根背他赶去村中药铺，村民窃议其根骨单薄",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "8": {
+      "chapter": 8,
+      "core_event": "陈老根带陆烬去村中老井取水，遇猎户搭话，陆烬近井闻浊气咳嗽不止",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

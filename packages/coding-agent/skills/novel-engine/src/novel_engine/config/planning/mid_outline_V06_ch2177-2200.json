@@ -1,0 +1,240 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      2177,
+      2200
+    ],
+    "node_chapters_in_range": [
+      2200
+    ],
+    "generated_at": "2026-11-10T07:47:59+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "24/24 approved",
+      "note": "V06 卷尾最后一段（2177-2200）; ch2200 卷高潮手动补入（陆烬化神突破，f004 resolve@2200 落地）; 4章 boundary_note 改陈述式; V06 forbidden 2/2 已条款化(R20/R21)"
+    }
+  },
+  "entries": {
+    "2177": {
+      "chapter": 2177,
+      "core_event": "陆烬整理李淳残存的剑意感悟，发现其心魔消散后残留的空壳感",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2178": {
+      "chapter": 2178,
+      "core_event": "陆烬在遗迹深处发现关于阴阳逆转早期观察的简略石刻",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2179": {
+      "chapter": 2179,
+      "core_event": "陆烬尝试将陆烬与李淳两种神魂状态叠加，产生轻微眩晕但不涉及具体机制",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2180": {
+      "chapter": 2180,
+      "core_event": "外部势力察觉神魂异动的余波，远处有探查之力扫过但未锁定位置",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 外部察觉伏笔边界内推进，仅写余波暗示，不实质介入神魂双性核心。",
+      "status": "approved"
+    },
+    "2181": {
+      "chapter": 2181,
+      "core_event": "陆烬在迷雾边缘静止感知，捕捉到比已知余韵更底层的气息但无法解析",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 深层伏笔边界内推进，不过早揭示门芯脱落细节，仅写迷雾异动。",
+      "status": "approved"
+    },
+    "2182": {
+      "chapter": 2182,
+      "core_event": "陆烬基于感知制定主动迎接天道布局的初步心境纲领",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2183": {
+      "chapter": 2183,
+      "core_event": "陆烬整理心魔消散后的神魂余韵，察觉两界气息在体内形成微妙平衡",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2184": {
+      "chapter": 2184,
+      "core_event": "迷雾禁区边缘异象轻微扰动，陆烬感应到深处有道痕波动",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2185": {
+      "chapter": 2185,
+      "core_event": "守夜人现身警告陆烬勿深入禁区，简述'门之影'对两界封印的维护",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2186": {
+      "chapter": 2186,
+      "core_event": "陆烬在禁区外围试探性共鸣，神魂出现轻微撕裂痛感，未突破化神",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2187": {
+      "chapter": 2187,
+      "core_event": "陆烬复盘自身穿越机制，确认线粒体源自地球，但隐瞒门芯脱落细节",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f004_mitochondria_earth 回收节点前推进，不过度揭示门芯细节，仅写现象级异动。",
+      "status": "approved"
+    },
+    "2188": {
+      "chapter": 2188,
+      "core_event": "陆烬立下直面天道布局之志，神魂趋于稳固，为化神突破做最后准备",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2189": {
+      "chapter": 2189,
+      "core_event": "陆烬在迷雾禁区边缘静守，感应到天道布局的细微异变动向",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2190": {
+      "chapter": 2190,
+      "core_event": "李淳现身迷雾外周，与陆烬进行关于身份撕裂的深层对话",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2191": {
+      "chapter": 2191,
+      "core_event": "两人合力探查迷雾深处异变源头，遭遇高阶傀儡阻挠",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2192": {
+      "chapter": 2192,
+      "core_event": "击破傀儡后，陆烬从残存信息中解读出两界博弈新规则",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2193": {
+      "chapter": 2193,
+      "core_event": "陆烬尝试对抗规则压制，神魂出现波动，李淳协助稳固心神",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2194": {
+      "chapter": 2194,
+      "core_event": "迷雾暂时退去，陆烬确立直面天道的决心，准备下一步行动，古玉残片上活化氧异象与地球牵引力的暗示一闪而过",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：临近 ch2200 f004_mitochondria_earth 回收节点，不提前触及地球机制细节，仅写前兆暗示。",
+      "status": "approved"
+    },
+    "2195": {
+      "chapter": 2195,
+      "core_event": "陆烬复盘阴阳双界机制，确认N035心魔消除后的稳固心态，为突破积蓄内力",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2196": {
+      "chapter": 2196,
+      "core_event": "陆烬感应周围灵气流动，尝试将神魂与外界天道规则进行深层链接",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2197": {
+      "chapter": 2197,
+      "core_event": "李淳残影在识海中与陆烬对话，协助其解析天道布局的底层逻辑",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2198": {
+      "chapter": 2198,
+      "core_event": "陆烬遭遇天道意志的微弱排斥，主动抵御并反向解析其运行轨迹",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2199": {
+      "chapter": 2199,
+      "core_event": "陆烬完成最后的神魂整合，确立主动选择直面天道的坚定意志",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2200": {
+      "chapter": 2200,
+      "vid": "V06",
+      "core_event": "陆烬在迷雾禁区边缘静坐至破晓，体内气机与古玉残片上的活化氧异象共鸣渐盛，主动直面天道布局而非被动接受命运，化神突破的契机在神魂与两界通道感应中成型，陈老根在院中收势时只觉天光微亮",
+      "boundary_note": "铺垫：V06 卷尾高潮（陆烬化神突破），f004_mitochondria_earth 回收节点（resolve@2200）落地，揭示地球跨界机制核心，f005_fog_core 迷雾异动收束，f009_soul_duality 神魂特殊性坐实，f008_doorkeeper 守夜人基本信息收束，V07 卷级概念解锁铺垫。",
+      "status": "approved"
+    }
+  }
+}

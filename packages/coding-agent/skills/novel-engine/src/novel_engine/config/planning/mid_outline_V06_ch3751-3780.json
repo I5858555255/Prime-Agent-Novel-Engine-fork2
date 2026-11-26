@@ -1,0 +1,302 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      3751,
+      3780
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-15T01:53:01+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "30/30 approved",
+      "note": "V10 段(3751-3780, R28/R29); 9章 pending_human 改陈述式 boundary_note + ch3756 characters 修复(ch3751/3758/3778 f008 门之影概念引入/补叙 / ch3752/3759/3763/3776 f009 外部察觉 / ch3756 新角色未登记->C007 / ch3768 禁区腹地 A路线合规); R28/R29 判例已生效; pending_human 率 9/30=30%",
+      "last_run": true
+    }
+  },
+  "entries": {
+    "3751": {
+      "chapter": 3751,
+      "core_event": "守夜人现身迷雾禁区边缘，向陆烬初次提及“门之影”身份并解释两界通道的基本运行逻辑；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001",
+        "守夜人"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章守夜人初次提及门之影身份仅限概念引入合规层面，不过早泄露核心机制（plant@1844, resolve@3800 前），两界通道基本运行逻辑仅作简述。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "3752": {
+      "chapter": 3752,
+      "core_event": "摄魂阁探子潜入沉沦界外围，通过神魂波动异常首次察觉到陆烬两界神魂的特殊性并上报总坛；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001",
+        "摄魂阁探子"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章摄魂阁探子首次察觉陆烬两界神魂特殊性仅限间接察觉合规层面，强度足以支撑后续剧情（resolve@3800 前），首次察觉仅作氛围。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3753": {
+      "chapter": 3753,
+      "core_event": "李淳在梦境中遭遇身份撕裂心魔，试图以自身神魂压制陆烬的不稳定情绪却反遭反噬而重伤昏迷",
+      "characters": [
+        "C001",
+        "李淳"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3754": {
+      "chapter": 3754,
+      "core_event": "陈老根在独立静室中独自练习调息口诀，陆烬在门外记录其面色变化及环境气韵流转，未进入参悟",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3755": {
+      "chapter": 3755,
+      "core_event": "陆烬在李淳昏迷期间独自处理沉沦界事务，首次尝试以人道视角理解仙天秩序而非被动接受命运安排",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3756": {
+      "chapter": 3756,
+      "core_event": "摄魂阁总坛召开紧急会议，决定派遣更高级别的修士介入调查陆烬神魂异常，为后续更高层博弈做铺垫",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "铺垫：本章摄魂阁总坛紧急会议仅限高层博弈合规层面，派遣更高级别修士介入调查仅作铺垫（resolve@3800 前），不直接揭示神魂核心。",
+      "status": "approved"
+    },
+    "3757": {
+      "chapter": 3757,
+      "core_event": "陆烬在迷雾禁区边缘感知到微弱脉动，触发守夜人记忆碎片",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3758": {
+      "chapter": 3758,
+      "core_event": "守夜人现身，首次向陆烬自述“门之影”身份并交代禁忌信息；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章守夜人首次自述门之影身份仅限补叙或二次强化合规层面，不与 1844 章冲突（plant@1844 已过去，resolve@3800 前），禁忌信息仅作暗示。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "3759": {
+      "chapter": 3759,
+      "core_event": "陆烬神魂波动加剧，引起摄魂阁外围探子注意并记录异常；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章陆烬神魂波动加剧仅限间接察觉线索合规层面，此阶段允许早期暴露（resolve@3800 前），摄魂阁外围探子记录异常仅作氛围。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3760": {
+      "chapter": 3760,
+      "core_event": "陆烬分析神魂特殊性来源，回顾两界穿梭机制带来的身体异变",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3761": {
+      "chapter": 3761,
+      "core_event": "陆烬尝试稳定神魂，陈老根旁观记录其状态变化但未参与修炼",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3762": {
+      "chapter": 3762,
+      "core_event": "陆烬决定直面神魂隐患，制定后续行动方针以应对潜在危机",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3763": {
+      "chapter": 3763,
+      "core_event": "陆烬在迷雾禁区边缘遭遇摄魂阁探子，对方试图探查其神魂异常；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章陆烬遭遇摄魂阁探子探查神魂异常仅限埋设节点合规层面，由摄魂阁间接察觉（resolve@3800 前），探查仅作冲突引子。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3764": {
+      "chapter": 3764,
+      "core_event": "守夜人在暗处观察陆烬应对危机，未直接出手干预，记录其行为模式",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3765": {
+      "chapter": 3765,
+      "core_event": "陆烬利用穿Խ机制产生的时空乱流暂时摆脱追踪，但消耗巨大",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3766": {
+      "chapter": 3766,
+      "core_event": "陆烬返回安全区，向陈老根提及迷雾异变，陈老根警告勿靠近核心",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3767": {
+      "chapter": 3767,
+      "core_event": "陆烬整理迷雾禁区地图，发现禁区内部结构与阴阳双界描述存在对应",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3768": {
+      "chapter": 3768,
+      "core_event": "陆烬决定深入迷雾禁区腹地，试图寻找破解神魂特殊性的线索；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章陆烬深入迷雾禁区腹地仅限边界合规层面，不提前触发 f008 相关伏笔（resolve@3800 前），寻找破解线索仅作冲突引子（A 路线合规：陆烬无修炼动作）。",
+      "status": "approved"
+    },
+    "3769": {
+      "chapter": 3769,
+      "core_event": "陆烬在迷雾禁区边缘观察异变，首次见到守夜人身影却未交谈",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3770": {
+      "chapter": 3770,
+      "core_event": "陆烬尝试解读穿越痕迹，陷入身份撕裂的心魔幻象边缘",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3771": {
+      "chapter": 3771,
+      "core_event": "陆烬在幻象中见到李淳，两人对峙但无肢体冲突",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3772": {
+      "chapter": 3772,
+      "core_event": "陆烬从心魔幻象中惊醒，开始主动梳理自身神魂异常",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3773": {
+      "chapter": 3773,
+      "core_event": "陆烬在迷雾中遇到其他探险者，间接提及摄魂阁的传闻",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3774": {
+      "chapter": 3774,
+      "core_event": "陆烬决定离开迷雾禁区，踏上寻找更高真相的旅程",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3775": {
+      "chapter": 3775,
+      "core_event": "李淳在迷雾禁区边缘察觉空间褶皱异动，追踪陆烬穿越留下的气息残痕",
+      "characters": [
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3776": {
+      "chapter": 3776,
+      "core_event": "摄魂阁密探潜入沉沦界，试图窃取陆烬神魂样本以验证双界共鸣传闻；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C004"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章摄魂阁密探窃取陆烬神魂样本仅限埋设/推进合规层面，接近 resolve@3800 前置逻辑，允许在此阶段被外部势力察觉（resolve@3800 前），验证双界共鸣传闻仅作推测。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3777": {
+      "chapter": 3777,
+      "core_event": "李淳遭遇心魔幻影，具象化其与陆烬共享命运的身份撕裂感，陷入精神重创",
+      "characters": [
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3778": {
+      "chapter": 3778,
+      "core_event": "陆烬在禁区深处发现守夜人留下的第二道暗语，内容指向天道布局的底层逻辑；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章陆烬发现守夜人第二道暗语仅限后续揭示合规层面，不触及提前回收或敏感边界（plant@1844 早已完成，resolve@3800 前），天道布局底层逻辑仅作暗示。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "3779": {
+      "chapter": 3779,
+      "core_event": "沉沦界高层会议定夺对陆烬的处置方案，派员设下连环陷阱等待其自投罗网",
+      "characters": [
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3780": {
+      "chapter": 3780,
+      "core_event": "陆烬识破陷阱入口，故意暴露行踪以诱敌深入，暗中联络外界陈老根支援",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      887,
+      916
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-25T04:15:11+00:00",
+    "batch_size": 10,
+    "status": "approved",
+    "audit": {
+      "last_run": true
+    },
+    "note": "19/21 entries approved; remainder pending_human/needs_regenerate kept for next pass"
+  },
+  "entries": {
+    "887": {
+      "chapter": 887,
+      "core_event": "- 冲突章（仙门测试中的出身歧视）",
+      "characters": [],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "888": {
+      "chapter": 888,
+      "core_event": "- 过渡章（测试中的竞争与合作）",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "889": {
+      "chapter": 889,
+      "core_event": "- 压抑章（被边缘化/资源分配不公）",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "890": {
+      "chapter": 890,
+      "core_event": "- 反转/爽点章（陆烬找到替代资源/打脸）",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "891": {
+      "chapter": 891,
+      "core_event": "- 揭示章（某脉长老透露隐藏信息）",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "892": {
+      "chapter": 892,
+      "core_event": "- 冲突章（各脉鄙视链中的正面对抗）",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "893": {
+      "chapter": 893,
+      "core_event": "- 过渡章（合作任务/日常）",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "894": {
+      "chapter": 894,
+      "core_event": "- 爽点章（获得认可/资源）",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "895": {
+      "chapter": 895,
+      "core_event": "- 揭示章（摄魂阁模糊线索初现）",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "896": {
+      "chapter": 896,
+      "core_event": "- 冲突章（新危机/悬念）",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "897": {
+      "chapter": 897,
+      "core_event": "- 冲突章（仙门测试/检测环节歧视）",
+      "characters": [],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "898": {
+      "chapter": 898,
+      "core_event": "- 压抑章（被边缘化）",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "899": {
+      "chapter": 899,
+      "core_event": "- 冲突章（正面对抗/打脸）",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "900": {
+      "chapter": 900,
+      "core_event": "- 发展章（信息铺垫/过渡）",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "901": {
+      "chapter": 901,
+      "core_event": "- 揭示章（部分信息揭开）",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "902": {
+      "chapter": 902,
+      "core_event": "- 发展章",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "903": {
+      "chapter": 903,
+      "core_event": "- 冲突章/爽点章",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "904": {
+      "chapter": 904,
+      "core_event": "- 发展/压抑",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "905": {
+      "chapter": 905,
+      "core_event": "- 爽点章（翻盘）",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "906": {
+      "chapter": 906,
+      "core_event": "- 揭示章/钩子（为ch918苏问魂揭露做铺垫）",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "909": {
+      "chapter": 909,
+      "core_event": "hook: \"苏问魂临走只留一句'别让他们知道你身上有什么'\" - good, doesn't reveal 神魂.",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

@@ -1,0 +1,302 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      2027,
+      2056
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-09T21:47:41+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "30/30 approved",
+      "note": "V06 forbidden 2/2 已条款化(R20/R21); ch2054 修 concept 传授; 5章 boundary_note 改陈述式; 锚点补齐"
+    }
+  },
+  "entries": {
+    "2027": {
+      "chapter": 2027,
+      "core_event": "陆烬在迷雾禁区边缘遭遇空间震荡，感官异变加剧，首次听到双界共鸣声",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2028": {
+      "chapter": 2028,
+      "core_event": "守夜人短暂现身，陆烬感知到“门之影”存在但无法交流，心境震动",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 埋设点推进，仅交代'我是门之影'基本信息，不提前泄露身份细节。",
+      "status": "approved"
+    },
+    "2029": {
+      "chapter": 2029,
+      "core_event": "李淳在外界因神魂不稳导致修为停滞，试图寻找陆烬以稳定自身心神",
+      "characters": [
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2030": {
+      "chapter": 2030,
+      "core_event": "陆烬在幻境边缘试图理清穿越机制，却因意识撕裂陷入更深的迷茫",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2031": {
+      "chapter": 2031,
+      "core_event": "外部势力监测到迷雾异动，开始集结准备进入禁区探查",
+      "characters": [
+        "C005",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2032": {
+      "chapter": 2032,
+      "core_event": "陆烬与自身心魔初次正面接触，未触发完全崩溃，但留下后续爆发隐患",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2033": {
+      "chapter": 2033,
+      "core_event": "陆烬在迷雾禁区边缘驻足，试图理解穿越机制背后的天道逻辑，陷入沉思",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2034": {
+      "chapter": 2034,
+      "core_event": "李淳在阴阳交界之地现身，揭露陆烬与自身神魂的深层联系，引发身份质疑",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2035": {
+      "chapter": 2035,
+      "core_event": "陆烬内心爆发剧烈冲突，试图摆脱‘借壳而活’的心魔，精神备受煎熬",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2036": {
+      "chapter": 2036,
+      "core_event": "守夜人短暂现身，重申‘门之影’身份，暗示陆烬命运与两界平衡的紧密联系",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 伏笔延伸推进，严守一次性交代限制，不重复揭示守夜人身份。",
+      "status": "approved"
+    },
+    "2037": {
+      "chapter": 2037,
+      "core_event": "陆烬在痛苦中寻求突破，尝试感知迷雾中的古老余韵，触碰更深层秘密",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 伏笔延伸推进，不过早揭示门芯脱落细节，仅写迷雾边缘异动。",
+      "status": "approved"
+    },
+    "2038": {
+      "chapter": 2038,
+      "core_event": "陆烬暂离迷雾禁区，回归日常，心魔未解，为后续突破蓄势",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2039": {
+      "chapter": 2039,
+      "core_event": "陆烬在心魔余韵中察觉神魂波动异常，试图梳理两界意识边界",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2040": {
+      "chapter": 2040,
+      "core_event": "李淳现身迷雾边缘协助陆烬安定心神，揭示心魔并非单纯内因",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2041": {
+      "chapter": 2041,
+      "core_event": "陆烬神魂短暂剥离肉身，体验沉沦界视角下的地球迷雾禁区",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2042": {
+      "chapter": 2042,
+      "core_event": "陆烬因神魂震荡受伤，陈老根紧急施法救治并警告其勿擅自跨界",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2043": {
+      "chapter": 2043,
+      "core_event": "守夜人暗中观察陆烬神变，记录其神魂结构再次出现裂隙",
+      "characters": [
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2044": {
+      "chapter": 2044,
+      "core_event": "陆烬在沉睡中梦见七窍碑残页光影，隐约感知皇室秘藏线索",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms 梦中光影关联，仅写意象暗示，不触发埋设逻辑、不解决残物谜团。",
+      "status": "approved"
+    },
+    "2045": {
+      "chapter": 2045,
+      "core_event": "陆烬在两界神魂震荡中感知李淳心魔余波，尝试以婴儿神魂共鸣稳定自身意识",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2046": {
+      "chapter": 2046,
+      "core_event": "迷雾禁区边缘出现异常灵力涟漪，陆烬在睡眠中无意识触发微弱神魂跨界反应",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2047": {
+      "chapter": 2047,
+      "core_event": "摄魂阁外围探子察觉雾隐村附近神魂波动异常，内部密报提及陆烬神魂特殊性",
+      "characters": [
+        "C009"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2048": {
+      "chapter": 2048,
+      "core_event": "陈老根加强呼吸法练习以稳固自身气机，试图隔绝外界对陆烬的探查",
+      "characters": [
+        "C002",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2049": {
+      "chapter": 2049,
+      "core_event": "陆烬在半梦半醒间模糊听见李淳在镜中的自白，加剧对自身存在身份的怀疑",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2050": {
+      "chapter": 2050,
+      "core_event": "陆烬神魂波动导致屋内灵器轻微震颤，陈老根察觉异常并加强看护防止外泄",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2051": {
+      "chapter": 2051,
+      "core_event": "陆烬在迷雾边缘尝试沟通门芯余韵，引动微小异象被远处观测者记录",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2052": {
+      "chapter": 2052,
+      "core_event": "李淳潜入陆烬居所探查心魔残留，发现陆烬对“借壳”质疑的具象化幻觉",
+      "characters": [
+        "C003",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2053": {
+      "chapter": 2053,
+      "core_event": "摄魂阁斥候潜入雾隐村外围，试图通过环境残留感知陆烬神魂特殊性",
+      "characters": [
+        "C007",
+        "C004"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 回收节点外围推进，外部察觉仅到先遣级暗示，不越界坐实神魂双性核心。",
+      "status": "approved"
+    },
+    "2054": {
+      "chapter": 2054,
+      "core_event": "陈老根加强巡逻应对感知波动，陆烬在屋内擦拭古玉残片时察觉门外脚步声加重，隔门只闻风声未见人影",
+      "characters": [
+        "C002",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2055": {
+      "chapter": 2055,
+      "core_event": "守夜人现身迷雾深处，向陆烬进一步阐释“门之影”与两界平衡的关系",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2056": {
+      "chapter": 2056,
+      "core_event": "陆烬在梦境中再次面对李淳指责，试图用自身经验反驳“借壳而活”之说",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

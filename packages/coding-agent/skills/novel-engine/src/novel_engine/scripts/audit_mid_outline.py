@@ -348,12 +348,21 @@ def main(argv: list[str] | None = None) -> int:
     if not rules:
         print("[warn] decision_rules.json 未加载，规则表判定跳过（仅 concept/forbidden/A 路线）")
 
-    # 全局初始化（scope_gate 内部缓存）
-    from novel_engine.quality.scope_gate import (
-        detect_scope_violations,
-        reset_concept_cache,
-    )
-    reset_concept_cache()
+    # 全局初始化（concept 判定缓存）
+    from novel_engine.condensed.concept_terms import term_concept_map
+    _TERM_MAP = term_concept_map()
+
+    def detect_scope_violations(text: str, chapter: int, _ctx, _root) -> dict:
+        """condensed-only 替代 quality.scope_gate：concept 锁定的术语 → hard。"""
+        hard, soft = [], []
+        for term, concept in _TERM_MAP.items():
+            if term in text:
+                from novel_engine.condensed.concept_terms import is_term_unlocked
+                if not is_term_unlocked(term, chapter, _TERM_MAP):
+                    hard.append({"term": term, "sentence": text[:60]})
+                else:
+                    soft.append({"term": term, "sentence": text[:60]})
+        return {"hard": hard, "soft": soft}
 
     author_intent = ""
     p = ROOT / "bible" / "author_intent.md"

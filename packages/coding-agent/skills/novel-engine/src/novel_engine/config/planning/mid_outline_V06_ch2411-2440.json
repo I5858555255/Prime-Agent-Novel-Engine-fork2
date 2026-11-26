@@ -1,0 +1,304 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      2411,
+      2440
+    ],
+    "node_chapters_in_range": [
+      2413
+    ],
+    "generated_at": "2026-11-11T19:48:40+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "29/29 approved",
+      "note": "V07 段(2411-2440); ch2413 节点章被生成器跳过(29非30); 7章 boundary_note 改陈述式(f007 追查/R22, F001 皇室秘藏, R23 护体, f005/f009 感应边界); 锚点补齐"
+    }
+  },
+  "entries": {
+    "2411": {
+      "chapter": 2411,
+      "core_event": "陆烬在档案室对比平安信笔迹，发现纸页陈旧度与寄出时间存在矛盾",
+      "characters": [
+        "C001",
+        "守夜人"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2412": {
+      "chapter": 2412,
+      "core_event": "李淳介入调查，试图封锁档案室线索以保护自身飞升计划不被干扰，墟界深处传来一丝更古老的回音",
+      "characters": [
+        "C001",
+        "李淳"
+      ],
+      "boundary_note": "铺垫：f007_fake_echo 追查阶段推进，严守'R22 飞升契约三阶段节奏'约束，李淳阻挠符合'疑惑→铁证'过渡逻辑，不提前泄露铁证。",
+      "status": "approved"
+    },
+    "2414": {
+      "chapter": 2414,
+      "core_event": "铁证暴露导致高层动荡，陆烬被软禁并启动古玉结界保护肉身免受窥探",
+      "characters": [
+        "C001",
+        "C006",
+        "守夜人"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2415": {
+      "chapter": 2415,
+      "core_event": "陆烬在结界内复盘α回音机制，推导出现存飞升契约背后的天道筛选逻辑",
+      "characters": [
+        "C001",
+        "守夜人"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2416": {
+      "chapter": 2416,
+      "core_event": "李淳察觉陆烬识破伪装，强行打破部分档案室结界试图销毁剩余证据",
+      "characters": [
+        "C001",
+        "李淳",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2417": {
+      "chapter": 2417,
+      "core_event": "陆烬以神魂共鸣反制李淳夺档，并在废墟中拾获七窍碑残页碎片",
+      "characters": [
+        "C001",
+        "李淳"
+      ],
+      "boundary_note": "铺垫：F001 残页拾获推进，当前卷内皇室秘藏线索严守边界，不提前具象化皇室误读属性，仅写到谜团层。",
+      "status": "approved"
+    },
+    "2418": {
+      "chapter": 2418,
+      "core_event": "陆烬依据铁证追踪α回音源头，发现守夜人网络内部存在被植入的虚假记忆锚点",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2419": {
+      "chapter": 2419,
+      "core_event": "陆烬潜入迷雾禁区边缘，验证古玉结界对新型精神侵蚀的保护极限出现波动",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：肉身保护机制漏洞边界推进，严守 R23（古玉结界+三才护魂阵之外漏洞不可忽略）约束，不忽略古玉结界完整性，仅在护体覆盖范围内描写。",
+      "status": "approved"
+    },
+    "2420": {
+      "chapter": 2420,
+      "core_event": "李淳与陆烬在阴阳逆转节点对峙，身份撕裂心魔引发神魂共振，双方记忆碎片强制交换",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2421": {
+      "chapter": 2421,
+      "core_event": "陆烬解析交换的记忆，发现李淳并非敌人而是被天道篡改的镜像，确立合作可能性",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2422": {
+      "chapter": 2422,
+      "core_event": "二人联合布设三才护魂阵外围警戒，测试阵法对跨界监控的屏蔽效率",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "铺垫：三才护魂阵防护范围界定推进，严守既定保护机制边界，不超出护体覆盖范围，仅写到防护层暗示。",
+      "status": "approved"
+    },
+    "2423": {
+      "chapter": 2423,
+      "core_event": "陆烬制定化神前最后筹备清单，梳理α回音残留影响并预判天道下一阶段干预形式",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2424": {
+      "chapter": 2424,
+      "core_event": "陆烬整理α回音档案，发现抄写模板笔迹与皇室秘藏七窍碑残页（f001）特征高度相似",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2425": {
+      "chapter": 2425,
+      "core_event": "陆烬推测七窍碑残页为回音机制核心载体，试图从皇室渠道获取残页详细拓片",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2426": {
+      "chapter": 2426,
+      "core_event": "摄魂阁间谍通过暗线监测陆烬动向，间接察觉其神魂在两界穿梭时的独特波动（f009埋设回响）",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2427": {
+      "chapter": 2427,
+      "core_event": "陆烬与陈老根演练肉身保护机制（古玉结界+三才护魂阵），确认无遗漏漏洞",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2428": {
+      "chapter": 2428,
+      "core_event": "陆烬依据新线索深入迷雾禁区边缘，感应到比残留意志更古老的余韵微弱波动（f005埋设加深）",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core（resolve@3438）关键深化阶段推进，不提前触发高阶感应红线，仅写余韵强化暗示。",
+      "status": "approved"
+    },
+    "2429": {
+      "chapter": 2429,
+      "core_event": "守夜人再次现身，进一步阐释“门之影”在阴阳逆转中的具体定位与限制（f008埋设延续）",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2430": {
+      "chapter": 2430,
+      "core_event": "陆烬整理α回音铁证档案，发现信纸墨迹中隐含古玉结界的微弱共鸣",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2431": {
+      "chapter": 2431,
+      "core_event": "摄魂阁探子潜入档案馆窃取回音样本，触发陆烬预设的误导假线索，两界通道感应使神魂产生特殊察觉",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality（C008 间接察觉神魂异常）推进，严守边界不坐实神魂双性核心，仅写到间接察觉暗示层。",
+      "status": "approved"
+    },
+    "2432": {
+      "chapter": 2432,
+      "core_event": "陆烬与守夜人复盘迷雾禁区异变，确认α回音与天道意图存在非因果关联",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2433": {
+      "chapter": 2433,
+      "core_event": "陆烬试图肉身保护古玉结界，意外发现三才护魂阵在阴面失效的微小偏差",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2434": {
+      "chapter": 2434,
+      "core_event": "陆烬向陈老根提及呼吸法对神魂稳定性的辅助作用，仅描述结果不涉修炼",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2435": {
+      "chapter": 2435,
+      "core_event": "李淳察觉陆烬神魂波动异常，启动身份撕裂心魔的初期心理防御机制",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2436": {
+      "chapter": 2436,
+      "core_event": "陆烬在铁证基础上开始追查模板抄写者的身份，锁定守夜人旧部",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2437": {
+      "chapter": 2437,
+      "core_event": "陆烬潜入迷雾禁区边缘，发现α回音与f005_fog_core古老余韵的微弱共振",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 伏笔节点推进，共振程度严守边界不越界，仅写到感应层暗示。",
+      "status": "approved"
+    },
+    "2438": {
+      "chapter": 2438,
+      "core_event": "陆烬利用古玉结界与三才护魂阵双重防护，深入禁区核心区域侦察",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2439": {
+      "chapter": 2439,
+      "core_event": "陆烬遭遇禁区异变，揭示陆烬穿越机制背后的天道意图初露端倪",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2440": {
+      "chapter": 2440,
+      "core_event": "李淳身份撕裂心魔发作，陆烬以α回音证据安抚并引导其直面心魔",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

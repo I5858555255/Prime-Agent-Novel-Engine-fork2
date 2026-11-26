@@ -1,0 +1,307 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      1997,
+      2026
+    ],
+    "node_chapters_in_range": [
+      2011
+    ],
+    "generated_at": "2026-11-09T19:48:13+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "29/29 approved",
+      "note": "V06 forbidden 2/2 已条款化(R20/R21); ch2011 节点章被生成器跳过(29非30); 10章 boundary_note 改陈述式; ch2020 补 f004 锚点"
+    }
+  },
+  "entries": {
+    "1997": {
+      "chapter": 1997,
+      "core_event": "迷雾禁区异象频发，守夜人向陆烬简述门之影身世基础，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 埋设点推进，仅交代'我是门之影'基本信息，严禁展开完整身世。",
+      "status": "approved"
+    },
+    "1998": {
+      "chapter": 1998,
+      "core_event": "陆烬神魂跨界机制线索浮现，陈老根在旁观察到陆烬状态异常但未干预，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1999": {
+      "chapter": 1999,
+      "core_event": "摄魂阁外围探子察觉陆烬两界神魂特殊性，留下低级别传闻记录，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 埋设点推进，仅限间接察觉，不正面揭示神魂双性核心。",
+      "status": "approved"
+    },
+    "2000": {
+      "chapter": 2000,
+      "core_event": "李淳对陆烬身份撕裂心魔初显，两界博弈高层视角短暂闪回，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2001": {
+      "chapter": 2001,
+      "core_event": "迷雾禁区深处远古遗迹余韵微弱波动，陆烬被动感应到一丝古老气息，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 相关线索推进，控制感应强度，不过早揭示门芯脱落细节。",
+      "status": "approved"
+    },
+    "2002": {
+      "chapter": 2002,
+      "core_event": "皇室秘藏残物相关情报在江湖流传，陆烬与陈老根前往迷雾边缘核实动静，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms 关联背景推进，不提前解决残物谜团，仅写边缘异动。",
+      "status": "approved"
+    },
+    "2003": {
+      "chapter": 2003,
+      "core_event": "迷雾禁区边缘异象频发，陆烬感应到古老余韵但未深究，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 感应余韵（plant@1130，resolve@3438），不提前泄露门芯脱落细节，严守阶段限制。",
+      "status": "approved"
+    },
+    "2004": {
+      "chapter": 2004,
+      "core_event": "李淳潜入迷雾外围探查天道布局，遭遇低阶魂修阻截，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2005": {
+      "chapter": 2005,
+      "core_event": "陆烬因神魂波动导致迷雾短暂紊乱，村民恐慌加剧，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C002",
+        "C005"
+      ],
+      "boundary_note": "需人工确认：陆烬异象引发恐慌接近f004_mitochondria_earth伏笔范围，需确认是否隐含地球线粒体机制泄露风险",
+      "status": "approved"
+    },
+    "2006": {
+      "chapter": 2006,
+      "core_event": "守夜人现身解释'门之影'身份，警告陆烬勿触核心，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：守夜人仅交代基本信息，严禁涉及完整身世或门芯脱落细节，严守 forbidden 边界。",
+      "status": "approved"
+    },
+    "2007": {
+      "chapter": 2007,
+      "core_event": "摄魂阁探子试探陆烬神魂双性，陆烬以本能反应掩盖，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 外部势力察觉神魂特殊性，仅到先遣级暗示，不超前回收。",
+      "status": "approved"
+    },
+    "2008": {
+      "chapter": 2008,
+      "core_event": "陆烬在幻境边缘自我对话，质疑穿越动机但未破关，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2009": {
+      "chapter": 2009,
+      "core_event": "陆烬在迷雾边缘遭遇守夜人试探，对方暗示跨界机制有更高意志介入，陆烬内心产生动摇，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f004_mitochondria_earth 与 f008_doorkeeper 深层关联推进，信息增量控制在 forbidden 边界内，不泄露守夜人完整身世。",
+      "status": "approved"
+    },
+    "2010": {
+      "chapter": 2010,
+      "core_event": "李淳与陆烬在两界交叠处对峙，李淳质疑陆烬身份合法性，陆烬试图证明自己是独立个体而非替代品，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2012": {
+      "chapter": 2012,
+      "core_event": "李淳在幻境中模拟陆烬前世记忆，试图通过抹除差异来统一自我认知，导致心魔初步滋生，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2013": {
+      "chapter": 2013,
+      "core_event": "陆烬察觉李淳神魂波动异常，主动介入幻境试图唤醒李淳，两界神魂冲突引发局部空间震荡，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2014": {
+      "chapter": 2014,
+      "core_event": "幻境内两人开始共同面对“借壳而活”的指控，李淳自我怀疑加剧，陆烬面临被吞噬神魂的风险，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2015": {
+      "chapter": 2015,
+      "core_event": "陆烬以婴儿形态的纯粹神魂核心抵御侵蚀，李淳在临界点短暂清醒，目睹陆烬的牺牲性守护，心魔暂退，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "铺垫：N034 节点后续，陆烬神魂特性展示仅到暗示层，不超前暴露 f009_soul_duality 神魂双性细节。",
+      "status": "approved"
+    },
+    "2016": {
+      "chapter": 2016,
+      "core_event": "李淳在幻境边缘目睹陆烬与自身重叠，惊骇后强行破界苏醒，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2017": {
+      "chapter": 2017,
+      "core_event": "陆烬被唤醒后神情冷寂，李淳试探询问遭遇，陆烬仅言“镜中有我”，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2018": {
+      "chapter": 2018,
+      "core_event": "陆烬向陈老根复述幻境经历，陈老根察觉其神魂双生异象初显，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2019": {
+      "chapter": 2019,
+      "core_event": "陈老根以呼吸法残篇引导陆烬平复神魂躁动，首次显现双核震荡，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2020": {
+      "chapter": 2020,
+      "core_event": "守夜人现身告知迷雾禁区异动加剧，天道布局开始向陆烬神魂施压，守夜人只道'我是门之影'便不再多言，陆烬感应到神魂跨界压力与古玉残片上的活化氧异象",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 身份深化与 f004_mitochondria_earth 神魂跨界压力推进，不触发守夜人进一步暴露身世，严守 R20 边界。",
+      "status": "approved"
+    },
+    "2021": {
+      "chapter": 2021,
+      "core_event": "陆烬直面神魂撕裂痛感，拒绝外界安抚，李淳在旁见证其心魔稳固，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2022": {
+      "chapter": 2022,
+      "core_event": "陆烬从心魔状态苏醒，李淳隐瞒真相试图独自承受后果，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2023": {
+      "chapter": 2023,
+      "core_event": "摄魂阁探子潜入雾隐村外围，搜寻goddess残篇线索，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2024": {
+      "chapter": 2024,
+      "core_event": "李淳与陆烬爆发激烈冲突，陆烬决意亲自查明身世真相，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2025": {
+      "chapter": 2025,
+      "core_event": "陆烬深入迷雾禁区边缘，遭遇异兽攻击，激发异常生命力，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2026": {
+      "chapter": 2026,
+      "core_event": "陆烬在异兽血气中短暂窥见界膜波动，强化阴阳双界认知，守夜人只道'我是门之影'便不再多言",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

@@ -1,0 +1,297 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      767,
+      796
+    ],
+    "node_chapters_in_range": [
+      780,
+      786
+    ],
+    "generated_at": "2026-10-21T03:02:20+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "last_run": true
+    }
+  },
+  "entries": {
+    "767": {
+      "chapter": 767,
+      "core_event": "陆烬随商队抵达黑市外围，因无资质被拒之门外，暂居陋巷",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "768": {
+      "chapter": 768,
+      "core_event": "陆烬观察黑市交易规则，发现神魂特异者遭高价收购的模糊传闻",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "需人工确认：涉及f003_shehun_ascension伏笔埋设前兆，需确认是否过度揭露摄魂阁目的",
+      "status": "approved",
+      "audit_note": " | V01判例自主放行：模糊线索/未坐实（ch768黑市传闻、ch772契约符印记线索、ch774试探无异常、ch782传闻提及、ch784坚拒未交付、ch795债符追踪伪装撤离），未坐实摄魂阁目的，未点全貌 | V01判例自主放行（终态approved）：模糊线索未坐实，未点摄魂阁全貌"
+    },
+    "769": {
+      "chapter": 769,
+      "core_event": "陆烬结识黑市线人，获知内部入场需信誉担保而非仙门令牌",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "770": {
+      "chapter": 770,
+      "core_event": "陆烬寻找担保品，发现普通财物无效，需涉及神魂契约",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "771": {
+      "chapter": 771,
+      "core_event": "陆烬决定以未来信誉担保，与黑市中间人达成口头协议",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "772": {
+      "chapter": 772,
+      "core_event": "陆烬绘制契约符准备担保，符中残留神魂印记成为后续追踪线索",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": "需人工确认：契约符作为摄魂阁追踪线索，接近ch786节点，需确认神魂特殊性是否被过度暴露",
+      "status": "approved",
+      "audit_note": " | V01判例自主放行：模糊线索/未坐实（ch768黑市传闻、ch772契约符印记线索、ch774试探无异常、ch782传闻提及、ch784坚拒未交付、ch795债符追踪伪装撤离），未坐实摄魂阁目的，未点全貌 | V01判例自主放行（终态approved）：模糊线索未坐实，未点摄魂阁全貌"
+    },
+    "773": {
+      "chapter": 773,
+      "core_event": "陆烬在仙门外围观察各脉弟子资源分配不均，目睹世家子弟独占灵药",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "774": {
+      "chapter": 774,
+      "core_event": "摄魂阁外围探子在集市试探陆烬神魂波动，未获明确异常反应",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：触及 f009_soul_duality 埋设前兆（ch702），需确认此章是否过早暴露外部察觉",
+      "status": "approved",
+      "audit_note": " | V01判例自主放行：模糊线索/未坐实（ch768黑市传闻、ch772契约符印记线索、ch774试探无异常、ch782传闻提及、ch784坚拒未交付、ch795债符追踪伪装撤离），未坐实摄魂阁目的，未点全貌 | V01判例自主放行（终态approved）：模糊线索未坐实，未点摄魂阁全貌"
+    },
+    "775": {
+      "chapter": 775,
+      "core_event": "陆烬完成黑市送信任务前置踩点，记录护卫换班规律",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "776": {
+      "chapter": 776,
+      "core_event": "仙门测试规则发布，陆烬发现“出身”隐性门槛，制定应对策略",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "777": {
+      "chapter": 777,
+      "core_event": "陆烬与陈老根（若在场）或同伴讨论《太上养魂经》残法表象下的危险",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "778": {
+      "chapter": 778,
+      "core_event": "陆烬抵达黑市入口，以信誉担保通过初检，进入交易区",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "779": {
+      "chapter": 779,
+      "core_event": "陆烬因失信被仙门外围驱逐，落入青云城黑市边缘流浪",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "781": {
+      "chapter": 781,
+      "core_event": "送信途中遇袭，陆烬以凡俗搏命术重伤逃脱，藏匿信物",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "782": {
+      "chapter": 782,
+      "core_event": "陆烬藏身破庙，黑市中间人上门逼债，提及神魂异常传闻",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "需人工确认：触及f003_shehun_ascension与f009_soul_duality的模糊线索边界，需确认是否越权揭露摄魂阁全貌",
+      "status": "approved",
+      "audit_note": " | V01判例自主放行：模糊线索/未坐实（ch768黑市传闻、ch772契约符印记线索、ch774试探无异常、ch782传闻提及、ch784坚拒未交付、ch795债符追踪伪装撤离），未坐实摄魂阁目的，未点全貌 | V01判例自主放行（终态approved）：模糊线索未坐实，未点摄魂阁全貌"
+    },
+    "783": {
+      "chapter": 783,
+      "core_event": "陆烬为求活命，向中间人展示信物换取短期庇护，欠下因果",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "784": {
+      "chapter": 784,
+      "core_event": "中间人逼迫陆烬交付神魂本源，陆烬坚拒，双方对峙僵持",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "需人工确认：涉及g009_soul_duality特殊性被外部势力察觉，需确认是否违反‘仅留模糊线索’的红线",
+      "status": "approved",
+      "audit_note": " | V01判例自主放行：模糊线索/未坐实（ch768黑市传闻、ch772契约符印记线索、ch774试探无异常、ch782传闻提及、ch784坚拒未交付、ch795债符追踪伪装撤离），未坐实摄魂阁目的，未点全貌 | V01判例自主放行（终态approved）：模糊线索未坐实，未点摄魂阁全貌"
+    },
+    "785": {
+      "chapter": 785,
+      "core_event": "陆烬趁乱脱身，决意刻下契约符作为长期担保，切断直接纠缠",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "787": {
+      "chapter": 787,
+      "core_event": "陈老根检查陆烬债符灵力残留，发现波动异常需专业鉴识",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "788": {
+      "chapter": 788,
+      "core_event": "陆烬被黑市掮客引荐至太虚仙门外围杂役区，目睹资源分配不均",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "789": {
+      "chapter": 789,
+      "core_event": "杂役区长老暗示陆烬出身可疑，令其去寒池区领取低阶丹药学徒令",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "790": {
+      "chapter": 790,
+      "core_event": "寒池区学员因出身歧视排斥陆烬，陆烬以沉默耐受避免肢体冲突",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "791": {
+      "chapter": 791,
+      "core_event": "陈老根远程传讯警告陆烬警惕仙门内斗，陆烬将债符藏于衣襟深处",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "792": {
+      "chapter": 792,
+      "core_event": "陆烬在丹药学堂首次接触草木灵气，仅凭嗅觉记忆辨认药材性味",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "793": {
+      "chapter": 793,
+      "core_event": "陆烬在黑市外围目睹摄魂阁探子拦截欠债修士，暗中收紧对神魂特异者的搜索",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "794": {
+      "chapter": 794,
+      "core_event": "陈老根教导陆烬如何辨认黑市交易暗语，陆烬首次独立记录三笔可疑交易",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "795": {
+      "chapter": 795,
+      "core_event": "摄魂阁探子循着 ch786 遗留的债符痕迹逼近，陆烬在陈老根掩护下伪装成普通货郎撤离",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：逼近行为可能间接强化 f009_soul_duality 被外部察觉的逻辑链，且涉及 f003_shehun_ascension 埋设期的细节安全",
+      "status": "approved",
+      "audit_note": " | V01判例自主放行：模糊线索/未坐实（ch768黑市传闻、ch772契约符印记线索、ch774试探无异常、ch782传闻提及、ch784坚拒未交付、ch795债符追踪伪装撤离），未坐实摄魂阁目的，未点全貌 | V01判例自主放行（终态approved）：模糊线索未坐实，未点摄魂阁全貌"
+    },
+    "796": {
+      "chapter": 796,
+      "core_event": "陆烬将收集到的黑市情报兑换为仙门入门资材，为 V03 主线仙门测试做准备",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

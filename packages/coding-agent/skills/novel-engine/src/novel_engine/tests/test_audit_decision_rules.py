@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import sys
+import tempfile
 from pathlib import Path
 
 from novel_engine.scripts.audit_mid_outline import (
@@ -20,6 +21,13 @@ from novel_engine.scripts.audit_mid_outline import (
 _SRC = Path(__file__).resolve().parents[1]
 if str(_SRC) not in sys.path:
     sys.path.insert(0, str(_SRC))
+
+
+def _writable_tmp() -> Path:
+    """Workspace-local dir the sandbox permits (AppData tmp_path is blocked)."""
+    base = _SRC / ".test_tmp"
+    base.mkdir(exist_ok=True)
+    return Path(tempfile.mkdtemp(prefix="audit_test_", dir=base))
 
 _RULES = _load_decision_rules()
 
@@ -77,9 +85,9 @@ def test_unmatched_falls_through():
     assert st == "" and rid is None
 
 
-def test_audit_main_writes_entry_status(tmp_path):
+def test_audit_main_writes_entry_status():
     """端到端：draft 中纲经 audit 后写回逐条 entry.status（approved/needs_regenerate）。"""
-    out = tmp_path / "mid_outline_V01_test.json"
+    out = _writable_tmp() / "mid_outline_V01_test.json"
     payload = {
         "meta": {"vid": "V01", "range": [1, 30], "status": "draft"},
         "entries": {

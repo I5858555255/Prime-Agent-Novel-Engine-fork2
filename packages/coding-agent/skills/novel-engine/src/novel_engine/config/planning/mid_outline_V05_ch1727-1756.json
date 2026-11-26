@@ -1,0 +1,322 @@
+{
+  "meta": {
+    "vid": "V05",
+    "range": [
+      1727,
+      1756
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-07T16:20:26+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "last_run": true,
+      "result": "30 approved / 0 pending / 0 needs_regenerate",
+      "coverage": "V05 forbidden 2/2 条款化（R18/R19）"
+    }
+  },
+  "entries": {
+    "1727": {
+      "chapter": 1727,
+      "core_event": "陆烬整理书房中残物文献，发现七窍碑残页与鹿台阵图的记载存在逻辑互斥",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1728": {
+      "chapter": 1728,
+      "core_event": "朝堂旧臣私下聚会，激进的改革派主张彻底废除人皇鼎碎片以断绝仙门借名压制的根基",
+      "characters": [
+        "C004",
+        "C005",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1729": {
+      "chapter": 1729,
+      "core_event": "陈老根独自闭门数日，气色反倒比往日更盛；陆烬在门外递饭，只觉异样却说不出关窍，也未将其与七窍碑残页联系起来",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1730": {
+      "chapter": 1730,
+      "core_event": "摄魂阁暗探潜入皇都，试图接近掌握人皇体系核心秘密的朝堂激进派成员",
+      "characters": [
+        "C006",
+        "C008"
+      ],
+      "boundary_note": "铺垫：摄魂阁暗探线推进，只接近不揭露组织目的",
+      "status": "approved"
+    },
+    "1731": {
+      "chapter": 1731,
+      "core_event": "陆烬试图结合鹿台阵图残卷与皇室秘藏信息，推演人道修炼体系中被仙门刻意压制的部分",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1732": {
+      "chapter": 1732,
+      "core_event": "仙门代表使者抵达皇都，以“维持人间秩序”为名，要求皇室上交并封存人皇鼎碎片",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1733": {
+      "chapter": 1733,
+      "core_event": "陆烬在旧档堆中比对鹿台阵图残卷，发现其中暗藏指向皇室秘藏的坐标线索",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1734": {
+      "chapter": 1734,
+      "core_event": "陈老根练习呼吸法时气息紊乱，陆烬在旁观察并记录下异常反应数据",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1735": {
+      "chapter": 1735,
+      "core_event": "陆烬与C005秘密会谈，分析七窍碑残页中被人刻意涂抹的关键笔画含义",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1736": {
+      "chapter": 1736,
+      "core_event": "摄魂阁探子出现在雾隐村外，陆烬远程感知到针对神魂特异者的搜捕气息",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：摄魂阁搜捕线延续，神魂特异只在传闻层被提及",
+      "status": "approved"
+    },
+    "1737": {
+      "chapter": 1737,
+      "core_event": "陆烬试图拼凑人皇鼎碎片，触发微弱共鸣，导致周围古物产生连锁震动",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1738": {
+      "chapter": 1738,
+      "core_event": "陆烬将三件残物的初步拼接结果告知C006，揭示其非皇权象征而是独立大道载体",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1739": {
+      "chapter": 1739,
+      "core_event": "陆烬协助整理云州旧档，发现其中“人皇祭祀”记录缺失，引发对皇权象征实质的质疑",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1740": {
+      "chapter": 1740,
+      "core_event": "激进派代表借旧档漏洞煽动民间不满，指责仙门压制人道，引发小规模骚动",
+      "characters": [
+        "C004",
+        "C007",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1741": {
+      "chapter": 1741,
+      "core_event": "陆烬从皇室秘藏碎片中拼凑出“鹿台阵图”残卷一角，初步印证残物非单纯权柄符号",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1742": {
+      "chapter": 1742,
+      "core_event": "摄魂阁密使潜入云州，试图收买掌握阵图线索的陆烬，双方初次交锋试探",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "铺垫：摄魂阁与陆烬初次试探，不涉组织全貌",
+      "status": "approved"
+    },
+    "1743": {
+      "chapter": 1743,
+      "core_event": "陆烬在静默推演中，神魂与七窍碑残页产生微弱共鸣，首次模糊感知到“独立大道”的轮廓",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：独立大道只到模糊轮廓，完整历史留到卷末之后，不提前展开",
+      "status": "approved"
+    },
+    "1744": {
+      "chapter": 1744,
+      "core_event": "陈老根察觉陆烬神魂波动异常，强行切断其与碑页的联系，只道呼吸法不过是强身健体，不许他多想",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "铺垫：f002_hunyuan_scripture 只重申强身健体表象，不揭修炼本质",
+      "status": "approved"
+    },
+    "1745": {
+      "chapter": 1745,
+      "core_event": "陆烬在整理皇室秘藏时发现七窍碑残页背面有细微仙纹，引动护碑禁制轻微震颤",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1746": {
+      "chapter": 1746,
+      "core_event": "摄魂阁探子潜入雾隐村外围，试图测试陆烬神魂特质是否具备“可剥离”价值",
+      "characters": [
+        "C001",
+        "C004",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1747": {
+      "chapter": 1747,
+      "core_event": "陆烬借陈老根所传呼吸法残篇原理，逆向推演人皇鼎碎片共鸣频率，但被自身神魂壁垒阻挡",
+      "characters": [
+        "C001",
+        "C002",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1748": {
+      "chapter": 1748,
+      "core_event": "激进派改革者绑架鹿台阵图残卷保管人，企图强行解读阵图以建立人道独立修炼体系",
+      "characters": [
+        "C005",
+        "C006",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1749": {
+      "chapter": 1749,
+      "core_event": "陆烬发现三件残物并非完整，且每一件的修复都需要不同的“人道”认知维度作为钥匙",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1750": {
+      "chapter": 1750,
+      "core_event": "太初议会分离方案的历史迷雾中，隐约浮现出“仙权对人道的系统性压制”证据链",
+      "characters": [
+        "C001",
+        "C005",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1751": {
+      "chapter": 1751,
+      "core_event": "陆烬在古卷中寻获残缺的人道气机图谱，陈老根以呼吸法印证其运行轨迹初现共鸣",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1752": {
+      "chapter": 1752,
+      "core_event": "仙门特使降临凡界边境，以皇权正统为由封锁人道遗迹线索，陆烬察觉体制压迫迹象",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1753": {
+      "chapter": 1753,
+      "core_event": "陆烬利用七窍碑残页破解阵图局部逻辑，发现其并非皇权象征而是修炼体系核心组件",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1754": {
+      "chapter": 1754,
+      "core_event": "激进派修士试图强行夺取残物，陆烬与陈老根在逃亡中触发鹿台阵图残卷的自毁保护机制",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1755": {
+      "chapter": 1755,
+      "core_event": "陈老根因过度引导陆烬感应残物余韵而气息紊乱，陆烬被迫独自承受神魂波动，首次独立解析气机",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1756": {
+      "chapter": 1756,
+      "core_event": "三人残物在特定天象下短暂共振，陆烬窥见人道独立于成仙之外的大道雏形，但信息仍不完整",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

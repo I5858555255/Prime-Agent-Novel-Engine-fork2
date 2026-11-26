@@ -78,3 +78,7 @@ dist/
 build/
 .eggs/
 pip-wheel-metadata/
+
+# Test-run temp dirs and learned-synonym backups (regenerated per run)
+packages/coding-agent/skills/novel-engine/src/novel_engine/.test_tmp/
+packages/coding-agent/skills/novel-engine/src/novel_engine/config/synonym_learned.bak

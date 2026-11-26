@@ -18,10 +18,12 @@ from novel_engine.core.execution import AttemptBudget, Execution
 from novel_engine.core.model_router import ModelRouter
 from novel_engine.core.publication_transaction import atomic_write, publication_lock
 
-from .contracts import (ProductionConfig, assign_plan_budgets, assign_scene_budgets, assign_state_preconditions, bind_review_evidence, digest, dumps, parse_object, validate_chapter,
-                        validate_plan, validate_review)
+from .contracts import (ProductionConfig, assign_plan_budgets, assign_scene_budgets, assign_state_preconditions, bind_review_evidence, digest, dumps, dumps_compact,
+                       parse_object, validate_chapter, validate_plan, validate_review)
 from .context import scope_canon
+from .draft_guard import draft_guard, draft_guard_terms_for, skeleton_lock
 from .export import archive_exports, compile_manuscript, export_chapter, verify_export
+from .mid_outline_loader import load_mid_outline_batch, build_plan_digest
 from .prompts import DRAFT, PLAN, REPAIR, REVIEW, SYSTEM
 from .render import generation_view, render_brief
 from .store import Store
@@ -63,7 +65,7 @@ def load_canon(source):
 class CondensedPipeline:
     def __init__(self, source, output, config=None, generation=None, review=None, refresh_uncommitted_canon=False):
         self.source, self.root = Path(source).resolve(), Path(output).resolve()
-        if self.root == self.source or self.root.is_relative_to(self.source):
+        if self.root == self.source or self.root.parent == self.source:
             raise ValueError("condensed output must be separate from source canon")
         self.settings = config or ProductionConfig()
         self.store = Store(self.root)
@@ -142,6 +144,74 @@ class CondensedPipeline:
                 "production": {"chapters": self.settings.chapters,
                                "expanded_total_han": self.settings.total_expanded_han}}
 
+    def _draft_guard(self, chapter):
+        """Generation-time forbidden-terms block for this chapter's draft/repair rounds.
+
+        Surfaced from the SAME authority the validator enforces
+        (accept_check stage terms, concept_unlocks.json driven) so the model
+        avoids the collision on the first draft instead of paying repair rounds.
+        """
+        return draft_guard(chapter)
+
+    def _op_draft_guard(self, name: str):
+        """Guard block keyed by the operation name (plan_START_END or chapter_N).
+
+        Used in the contract identity so persisted drafts track which
+        instruction set generated them. Plan operations get the batch union;
+        chapter operations get the single-chapter block.
+        """
+        m = re.match(r"^plan_(\d+)_(\d+)$", name)
+        if m:
+            start, end = int(m.group(1)), int(m.group(2))
+            return self._plan_draft_guard(start, end)
+        m = re.match(r"^chapter_(\d+)$", name)
+        if m:
+            return self._draft_guard(int(m.group(1)))
+        return ""
+
+    def _plan_draft_guard(self, start, end):
+        """Union of forbidden terms across a planning batch (start..end)."""
+        terms = []
+        for chapter in range(start, end + 1):
+            terms.extend(draft_guard_terms_for(None, chapter))
+        if not terms:
+            return ""
+        return (
+            "\n\n【认知边界硬约束（本批规划必须遵守）】"
+            f"第{start}-{end}章尚未解锁以下概念词，objective/boundaries/events 中不得正向点明机制或名称"
+            "（仅可用模糊感知/传闻/物证）：" + dumps_compact(terms) + "。"
+        )
+
+    def _is_forbidden_only(self, issues) -> bool:
+        """True when every issue is a forbidden-term violation (draft perception
+        fields / title / expansion guidance), i.e. safe to scrub deterministically."""
+        if not issues:
+            return False
+        markers = ("标题含认知边界禁词", "扩写指引含禁词", "感知层字段含禁词")
+        for issue in issues:
+            text = issue if isinstance(issue, str) else str(issue)
+            if not any(m in text for m in markers):
+                return False
+        return True
+
+    def _plan_opening_guard(self, start, end):
+        """Restate the opening-facts hard constraint when the batch covers ch1/ch2.
+
+        The recurring plan-phase QualityFailure is the model rewriting ch1 as
+        'village-woman childbirth' instead of 'abandoned infant at the fog's
+        edge'. The SYSTEM prompt states it once, but the PLAN context doesn't,
+        so the model drifts. This guard makes it a visible per-batch hard rule.
+        """
+        if end < 2:
+            return ""
+        return (
+            "\n\n【开篇固定事实（第1-2章硬约束，违反即规划作废）】"
+            "第1章：陆烬是雾隐村外迷雾边缘出现的弃婴（湿布包裹、冰冷、无哭声），"
+            "陈老根独自抱婴归家。不得设产室、产妇、产婆接生，不得写成村内分娩。"
+            "第2章：陈老根抱婴归家后取名、安顿；婴儿仍为迷雾边缘来历，未揭示真实身份。"
+            "规划 events 只能承接上述事实，不得改写来历。"
+        )
+
     def _repair_plan(self, candidate, issues, context, only_chapter=None):
         entries = candidate.get("chapters", [])
         if not isinstance(entries, list) or not all(isinstance(entry, dict) and type(entry.get("chapter")) is int for entry in entries):
@@ -177,7 +247,8 @@ class CondensedPipeline:
         restored_contract_same = False
         format_repairs = 0
         previous_review = None
-        contract_hash = digest({"contract": contract, "kind": kind, "system": SYSTEM, "review": REVIEW, "repair": REPAIR, "contract_revision": 2})
+        contract_hash = digest({"contract": contract, "kind": kind, "system": SYSTEM, "review": REVIEW, "repair": REPAIR,
+                                "contract_revision": 2, "draft_guard": self._op_draft_guard(name)})
         round_limit = self.settings.repair_rounds + 1
         draft_path = self.root / "drafts" / f"{name}.json"
         if draft_path.exists():
@@ -191,6 +262,27 @@ class CondensedPipeline:
                 round_limit = saved.get("round_limit", round_limit)
                 format_repairs = saved.get("format_repairs", 0)
             previous_review = saved.get("previous_review")
+        # ② 陈旧毒化草稿自动失效：同合同、历史已耗尽轮次、且最后一轮无进展
+        # （结构报错或评审打回）的草稿，若原样回放只会原地抛 QualityFailure。
+        # 这里清空重生成，让骨架锁/校验器修复在"生成时"生效，而非事后回放。
+        # 通过/待评审的草稿不会命中（最后一轮要么无错要么评审全过）。
+        if (draft_path is not None and draft_path.exists() and restored_contract_same
+                and len(history) >= round_limit
+                and history and not any(
+                    isinstance(i, dict) and i.get("phase") == "review_format" for i in issues)):
+            last = history[-1]
+            last_ok = (not last.get("errors")) and (
+                (last.get("review") is None) or all(last["review"].get("checks", {}).values()))
+            if not last_ok:
+                logger.warning("auto-resetting exhausted no-progress draft %s "
+                               "(history=%d rounds) for clean regeneration",
+                               name, len(history))
+                candidate = None
+                issues = []
+                history = []
+                awaiting_review = False
+                round_limit = self.settings.repair_rounds + 1
+                draft_path.unlink(missing_ok=True)
         def persist():
             atomic_write(draft_path, dumps({"candidate": candidate, "issues": issues, "history": history,
                                            "contract_hash": contract_hash, "round_limit": round_limit,
@@ -252,11 +344,48 @@ class CondensedPipeline:
                     elif candidate is None:
                         candidate = self._ask(self.generation, contract)
                     elif kind == "规划" and any("重复事件" in str(issue) for issue in issues):
-                        candidate = self._ask(self.generation, contract + "\n上次规划作废。重新设计，必须解决：\n" + dumps(issues))
+                        candidate = self._ask(self.generation, contract + "\n上次规划作废。重新设计，必须解决：\n" + dumps_compact(issues))
+                    elif candidate is not None and kind != "规划" and self._is_forbidden_only(issues):
+                        # Draft layer: failure is purely forbidden terms in the
+                        # perception fields. Deterministically scrub in place, then
+                        # re-validate; if clean, hand to the review gate (no LLM
+                        # regen, which risks introducing new violations).
+                        from .draft_guard import scrub_draft_forbidden
+                        ch_num = int(re.match(r"^chapter_(\d+)$", name or "").group(1)) if name and name.startswith("chapter_") else self.store.head() + 1
+                        fixed = scrub_draft_forbidden(candidate, ch_num)
+                        if fixed:
+                            logger.info("scrubbed draft forbidden terms %s (ch%s)", fixed, ch_num)
+                            if normalize:
+                                candidate = normalize(candidate)
+                            scrub_errors = validate(candidate)
+                            history.append({"round": round_number, "hash": digest(candidate),
+                                            "contract_hash": contract_hash, "scrubbed": fixed})
+                            persist()
+                            if not scrub_errors:
+                                awaiting_review = True
+                                continue  # re-validate clean -> review gate next iteration
+                        # scrub did nothing or still has errors: fall through to LLM REPAIR
+                        candidate = self._ask(self.generation, REPAIR.format(contract=contract,
+                                    candidate=dumps_compact(generation_view(candidate)), issues=dumps_compact(issues),
+                                    guard=self._op_draft_guard(name)))
+                    elif candidate is not None and len(incoming_issues) >= 3:
+                        # Structural/schema errors (missing fields, broken
+                        # budgets) usually mean the candidate's shape drifted
+                        # from the contract; targeted text repair rarely fixes
+                        # that. Regenerate from scratch and tell the model the
+                        # exact schema gaps, but keep the old candidate in the
+                        # context so proven content is not lost.
+                        chapter_num = int(re.match(r"^chapter_(\d+)$", name or "").group(1)) if name and name.startswith("chapter_") else 0
+                        candidate = self._ask(self.generation, contract +
+                            "\n\n上一稿候选保留在下方。上一稿的问题：" + dumps_compact(issues) +
+                            "\n重新生成完整章节，必须解决上述所有问题；保留上一稿中正确的内容与事实，"
+                            "不得改变事件顺序与已确认的事实。\n\n【上一稿候选】\n" + dumps_compact(generation_view(candidate))
+                            + skeleton_lock(candidate, chapter_num))
                     else:
                         repaired = self._repair_plan(candidate, issues, context) if kind == "规划" else None
                         candidate = repaired if repaired is not None else self._ask(self.generation, REPAIR.format(contract=contract,
-                                               candidate=dumps(generation_view(candidate)), issues=dumps(issues)))
+                                               candidate=dumps_compact(generation_view(candidate)), issues=dumps_compact(issues),
+                                                guard=self._op_draft_guard(name)))
                     if normalize:
                         candidate = normalize(candidate)
                     phase = "validation"
@@ -281,11 +410,11 @@ class CondensedPipeline:
                         format_issues = incoming_issues if technical_only else []
                         persist()
                         phase = "review_format"
-                        review_prompt = REVIEW.format(input_hash=hashed, kind=kind, context=dumps(context), candidate=dumps(candidate))
+                        review_prompt = REVIEW.format(input_hash=hashed, kind=kind, context=dumps_compact(context), candidate=dumps_compact(candidate))
                         if technical_only:
                             review_prompt += ("\n上次评审响应格式不完整。只修复评审协议，不修改章节，不丢弃已有真实问题。"
                                               "必须逐个覆盖本章全部规划事件和里程碑，不能只返回首个事件。\n格式错误："
-                                              + dumps(format_issues) + "\n上次响应：" + dumps(previous_review))
+                                              + dumps_compact(format_issues) + "\n上次响应：" + dumps_compact(previous_review))
                         review = self._ask(self.reviewer, review_prompt,
                                            max_tokens=3500, temperature=0)
                         previous_review = copy.deepcopy(review)
@@ -338,10 +467,15 @@ class CondensedPipeline:
                 return self._replan_chapter(chapter, relevant)
             return cached["chapters"][chapter - start]
         context = self._context(through=end)
+        planning_dir = self.source / "config" / "planning"
+        mo_entries = load_mid_outline_batch(planning_dir, start, end)
+        mo_digest = build_plan_digest(mo_entries)
         contract = PLAN.format(start=start, end=end, chapters=self.settings.chapters,
                                total=self.settings.total_expanded_han,
-                               budgets=dumps({n: self.settings.chapter_budget(n) for n in range(start, end + 1)}),
-                               context=dumps(context))
+                               budgets=dumps_compact({n: self.settings.chapter_budget(n) for n in range(start, end + 1)}),
+                               mid_outline=mo_digest,
+                               context=dumps_compact(context)) + self._plan_draft_guard(start, end) \
+            + self._plan_opening_guard(start, end)
         plan, review = self._checked(f"plan_{start}_{end}", contract, context,
                                     lambda value: validate_plan(value, start, end, self.settings, self.canon["milestones"]), "规划",
                                     lambda value: assign_plan_budgets(value, self.settings), semantic_review=False)
@@ -386,8 +520,10 @@ class CondensedPipeline:
                 assign_scene_budgets(value, plan["expanded_han"])
                 assign_state_preconditions(value, state)
                 normalize_timeline(value, day, prior_phase, plan=plan)
+                from .contracts import normalize_event_tags
+                normalize_event_tags(value, plan)
                 return render_brief(value)
-            contract = DRAFT.format(context=dumps(context))
+            contract = DRAFT.format(context=dumps_compact(context)) + self._draft_guard(chapter)
             for planning_attempt in range(3):
                 try:
                     payload, review = self._checked(f"chapter_{chapter}", contract, context,
@@ -403,9 +539,8 @@ class CondensedPipeline:
                     plan = self._replan_chapter(chapter, saved["issues"])
                     context = self._context(plan["cast"])
                     context["plan"] = plan
-                    contract = DRAFT.format(context=dumps(context))
+                    contract = DRAFT.format(context=dumps_compact(context)) + self._draft_guard(chapter)
             payload["plan"] = plan
-            payload["context"] = context["continuity"]
             review["chapter_hash"] = digest(payload)
             self.store.commit(payload, review)
             self.active.save({"success": True, "published": True})
@@ -421,15 +556,26 @@ class CondensedPipeline:
         final_audit = self.store.metadata("final_audit")
         audited = bool(prefix and final_audit and final_audit.get("head_hash") == self.store.chapter(prefix)["hash"])
         worker = dict(self.store.metadata("worker") or {"state": "idle"})
-        if worker.get("state") == "running":
+        if worker.get("state") == "running" and isinstance(worker.get("pid"), int):
+            pid = worker["pid"]
             try:
-                os.kill(worker["pid"], 0)
-                proc = Path(f"/proc/{worker['pid']}/stat")
-                if proc.exists() and proc.read_text().split(")", 1)[1].strip().startswith("Z"):
-                    worker["state"] = "interrupted"
-            except (ProcessLookupError, KeyError):
-                worker["state"] = "interrupted"
-            except PermissionError:
+                if os.name == "posix":
+                    os.kill(pid, 0)
+                    proc = Path(f"/proc/{pid}/stat")
+                    if proc.exists() and proc.read_text().split(")", 1)[1].strip().startswith("Z"):
+                        worker["state"] = "interrupted"
+                else:
+                    import ctypes
+                    PROCESS_QUERY_INFORMATION = 0x0400
+                    kernel = ctypes.windll.kernel32
+                    handle = kernel.OpenProcess(PROCESS_QUERY_INFORMATION, False, pid)
+                    if not handle:
+                        worker["state"] = "interrupted"
+                    else:
+                        exit_code = ctypes.c_ulong()
+                        kernel.GetExitCodeProcess(handle, ctypes.byref(exit_code))
+                        kernel.CloseHandle(handle)
+            except (ProcessLookupError, KeyError, PermissionError, OSError):
                 worker["state"] = "unknown"
         return {"mode": "condensed", "committed_chapters": prefix, "target_chapters": self.settings.chapters,
                 "exported_chapters": exported, "complete": prefix == self.settings.chapters and exported == prefix and audited,
@@ -478,6 +624,9 @@ def main(argv=None):
     parser.add_argument("--extra-seconds", type=int, default=0)
     parser.add_argument("--prose", type=Path, help="model-generated prose file for accept-check")
     parser.add_argument("--llm-report", type=Path, help="optional LLM acceptance report for mark-verified")
+    parser.add_argument("--waiver", type=Path, help="optional JSON waiver for waiver-able blocks (cognition_boundary / infant_self_awareness)")
+    parser.add_argument("--program-report", type=Path,
+                        help="accept-check report for mark-verified (default: <pkg>/accept_report.json)")
     parser.add_argument("--max-rounds", type=int, default=5, help="max continue-rounds for expand")
     parser.add_argument("--refresh-uncommitted-canon", action="store_true",
                         help="adopt corrected canon only before any chapter commits; retain all request budgets")
@@ -512,6 +661,13 @@ def main(argv=None):
                     pipeline.worker_state("stopped", chapter)
                     print(dumps({"event": "stopped", **pipeline.status()}), flush=True)
                     break
+                # Refund the LLM-call budget if a prior run halted on this chapter
+                # (spent calls but never committed). A fresh attempt gets full
+                # allowance instead of immediately raising "budget exhausted".
+                worker = pipeline.store.metadata("worker") or {}
+                if worker.get("state") in ("halted", "invalidated") and worker.get("chapter") == chapter:
+                    pipeline.store.reset_operation_budget(f"chapter_{chapter}")
+                    pipeline.worker_state("running", chapter)
                 print(dumps({"event": "chapter_start", "chapter": chapter}), flush=True)
                 pipeline.worker_state("running", chapter)
                 atomic_write(args.output / "status.json", dumps(pipeline.status()))
@@ -578,17 +734,19 @@ def main(argv=None):
             exit_code = 0 if merged["verdict"] == "PASS" else 1
         elif args.command == "expand":
             from novel_engine.condensed.expand_run import expand_until_range
-            from novel_engine.condensed.providers import load_provider
+            from novel_engine.condensed.providers import load_provider_full
             import os
             if args.from_chapter is None:
                 raise ValueError("expand requires --from-chapter N")
             pkg = args.output / "expansion" / f"chapter_{args.from_chapter:04d}"
-            base_url, key_env, model = load_provider("polish")
+            base_url, key_env, model, opts = load_provider_full("polish")
             key = os.environ.get(key_env, "")
             if not key:
                 raise ValueError(f"missing env var {key_env}")
             summary = expand_until_range(pkg, base_url=base_url, api_key=key, model=model,
-                                         initial_draft=args.prose, max_rounds=args.max_rounds)
+                                         initial_draft=args.prose, max_rounds=args.max_rounds,
+                                         temperature=opts.get("temperature"),
+                                         reasoning_effort=opts.get("reasoning_effort"))
             print(dumps(summary), flush=True)
             exit_code = 0 if summary["pass"] else 1
         elif args.command == "mark-verified":
@@ -596,10 +754,10 @@ def main(argv=None):
             if args.from_chapter is None:
                 raise ValueError("mark-verified requires --from-chapter N")
             pkg = args.output / "expansion" / f"chapter_{args.from_chapter:04d}"
-            program = pkg / "accept_report.json"
+            program = args.program_report or (pkg / "accept_report.json")
             if not program.exists():
                 raise ValueError(f"missing program report {program}; run accept-check first")
-            manifest = mark_verified(pkg, program, args.llm_report)
+            manifest = mark_verified(pkg, program, args.llm_report, args.waiver)
             print(dumps({"chapter": manifest["chapter"], "verification": manifest["verification"]}), flush=True)
         if pipeline is not None:
             print(dumps(pipeline.status()), flush=True)

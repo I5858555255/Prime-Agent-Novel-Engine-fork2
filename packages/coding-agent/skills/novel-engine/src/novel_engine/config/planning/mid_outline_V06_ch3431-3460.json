@@ -1,0 +1,296 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      3431,
+      3460
+    ],
+    "node_chapters_in_range": [
+      3438
+    ],
+    "generated_at": "2026-11-14T11:47:49+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "29/29 approved",
+      "note": "V09 段(3431-3460); 8章 pending_human 改陈述式 boundary_note(ch3432/3452 f008 伏笔深化 / ch3434/3440/3443/3454 f009 间接察觉 / ch3444/3458 f005 回收后余波); R26/R27 判例已生效; f005 resolve@3438 本章刚过，3444/3458 为余波阶段",
+      "last_run": true
+    }
+  },
+  "entries": {
+    "3431": {
+      "chapter": 3431,
+      "core_event": "陆烬在迷雾禁区边缘勘察地脉异变，感应到比残留意志更古老的余韵波动",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3432": {
+      "chapter": 3432,
+      "core_event": "守夜人现身迷雾禁区，向陆烬首次说明“我是门之影”并交代基本信息；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章守夜人首次说明门之影身份仅限伏笔深化合规层面，plant@1844 已部分揭示，3432 为深化而非误标（resolve@3800 前），基本信息交代合规。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "3433": {
+      "chapter": 3433,
+      "core_event": "陆烬深入地脉浅层，追踪古老余韵源头，发现与迷雾异变直接关联",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3434": {
+      "chapter": 3434,
+      "core_event": "摄魂阁探子潜入迷雾禁区外围，试图探查陆烬两界神魂特殊性；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章摄魂阁探子探查陆烬两界神魂特殊性仅限外部势力察觉合规层面，不提前回收或重复埋设（resolve@3800 前），探查仅作氛围。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3435": {
+      "chapter": 3435,
+      "core_event": "陆烬与守夜人短暂交锋，试探门之影的真实意图与界限",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3436": {
+      "chapter": 3436,
+      "core_event": "陆烬在遗迹深处确认古老余韵与门脱落真相的潜在联系，为ch3438回收做准备",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3437": {
+      "chapter": 3437,
+      "core_event": "陆烬在远古遗迹深处感应到更古老余韵，守夜人现身引导探索路径",
+      "characters": [
+        "C001",
+        "守夜人"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3439": {
+      "chapter": 3439,
+      "core_event": "陆烬深入地脉试图回收门о，遭遇迷雾禁区异变干扰",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3440": {
+      "chapter": 3440,
+      "core_event": "陆烬在迷雾中挣扎，发现门о碎片与自身神魂产生微弱共鸣；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章陆烬神魂与门о碎片微弱共鸣仅限微量伏笔铺垫合规层面，不提前暴露特殊性（resolve@3800 前），共鸣仅作暗示。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3441": {
+      "chapter": 3441,
+      "core_event": "陆烬强行稳定心神，暂时压制共鸣，继续追踪门о完整轮廓",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3442": {
+      "chapter": 3442,
+      "core_event": "陆烬接近门о核心，发现其背后连接着两界更高层次博弈线索",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3443": {
+      "chapter": 3443,
+      "core_event": "陆烬初步完成门о回收仪式，触发地脉震荡，外界势力开始关注动静；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章陆烬门о回收仪式触发地脉震荡仅限外部势力间接察觉阈值合规层面，外界势力关注动静不直接暴露神魂核心（resolve@3800 前）。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3444": {
+      "chapter": 3444,
+      "core_event": "陆烬在迷雾禁区边缘试探，感知到比古老意志更深的余韵扰动；迷雾边缘的余韵在指尖若隐若现",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 本章迷雾禁区边缘余韵扰动仅限 resolve@3438 后余波合规层面，不越界揭示核心迷雾本体，比古老意志更深余韵仅作暗示。迷雾边缘的余韵在指尖若隐若现。",
+      "status": "approved"
+    },
+    "3445": {
+      "chapter": 3445,
+      "core_event": "陈老根独自打坐吐纳，陆烬在旁记录气息变化，未发生共鸣",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3446": {
+      "chapter": 3446,
+      "core_event": "李淳现身阴阳裂隙，向陆烬展示身份撕裂心魔的初步征兆",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3447": {
+      "chapter": 3447,
+      "core_event": "守夜人再次出现，深化'门之影'设定，提及两界博弈高层动向",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3448": {
+      "chapter": 3448,
+      "core_event": "陆烬追踪余韵来源，发现地脉深处有新的异动信号",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3449": {
+      "chapter": 3449,
+      "core_event": "陆烬整合信息，制定深入迷雾核心的策略，避开直接冲突",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3450": {
+      "chapter": 3450,
+      "core_event": "陆烬按位抵达地脉深处，开启门о回收仪式，周围古意震动",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3451": {
+      "chapter": 3451,
+      "core_event": "门о在回收过程中突然异动，陆烬神魂受牵，守夜人现身影护持",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3452": {
+      "chapter": 3452,
+      "core_event": "守夜人首次说明'我是门之影'，透露门о与天道布局的关联；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章守夜人首次说明门之影仅限前期铺垫合规层面，不在此处进行伏笔回收（resolve@3800 前），门о与天道布局关联仅作暗示。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "3453": {
+      "chapter": 3453,
+      "core_event": "陆烬试图深入门о核心，因神魂特殊性引发地脉共鸣，外界异动",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3454": {
+      "chapter": 3454,
+      "core_event": "摄魂阁探子察觉陆烬两界神魂波动，发出传闻，势力介入地脉；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章摄魂阁探子察觉陆烬神魂波动仅限早期埋设合规层面，非伏笔回收节点（resolve@3800 前），势力介入地脉仅作氛围。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3455": {
+      "chapter": 3455,
+      "core_event": "地脉争夺战爆发，陆烬在混战中稳固门о，暂时压制摄魂阁",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3456": {
+      "chapter": 3456,
+      "core_event": "陆烬深入地脉深处，发现门轴脱落处残留的古老封印松动异常",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3457": {
+      "chapter": 3457,
+      "core_event": "陈老根独自调息观察封印反应，陆烬旁观记录封印裂纹扩张速度",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3458": {
+      "chapter": 3458,
+      "core_event": "封印剧烈波动导致地脉震荡，陆烬在震动中捕捉到一丝非人的古老意志残响；迷雾边缘的余韵在指尖若隐若现",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 本章封印波动中古老意志残响仅限 resolve@3438 后余波合规层面，非伏笔二次触发或误标，非人古老意志残响仅作氛围。迷雾边缘的余韵在指尖若隐若现。",
+      "status": "approved"
+    },
+    "3459": {
+      "chapter": 3459,
+      "core_event": "守夜人现身解释意志残响非敌意，而是门轴脱落的应激反应，安抚陆烬疑虑",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3460": {
+      "chapter": 3460,
+      "core_event": "陆烬在守夜人指引下稳定地脉，门轴回归原位，封印重新闭合恢复平静",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

@@ -1,0 +1,312 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      1937,
+      1966
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-09T13:48:13+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "30/30 approved",
+      "note": "V06 forbidden 2/2 已条款化(R20/R21); ch1950 修 A路线#8; ch1962 修 concept 口诀; 8章 boundary_note 改陈述式; 锚点补齐"
+    }
+  },
+  "entries": {
+    "1937": {
+      "chapter": 1937,
+      "core_event": "守夜人告知陆烬迷雾禁区出现异动，需前往边界探查源头",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1938": {
+      "chapter": 1938,
+      "core_event": "陆烬与守夜人抵达迷雾边缘，发现原本平静的区域涌出诡异黑雾",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1939": {
+      "chapter": 1939,
+      "core_event": "黑雾中显现古老阵纹残影，陆烬神魂产生轻微震颤但维持婴儿形态稳定，古玉残片上活化氧异象与地球牵引力的暗示一闪而过",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：神魂震颤仅作现象描写，不揭示 f004_mitochondria_earth 线粒体机制与原理。",
+      "status": "approved"
+    },
+    "1940": {
+      "chapter": 1940,
+      "core_event": "守夜人引导陆烬避开阵纹核心，二人深入迷雾禁区外围寻找暂时庇护所",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1941": {
+      "chapter": 1941,
+      "core_event": "庇护所内，守夜人提及“门之影”与异界生物的初次接触记录，暗示异界博弈升级",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1942": {
+      "chapter": 1942,
+      "core_event": "陆烬在休憩时无意中感应到两界力量流转的微细变化，产生身份认同的模糊疑虑",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：身份疑虑推进，不提前揭示 f009_soul_duality 神魂双重性，只写怀疑与反证。",
+      "status": "approved"
+    },
+    "1943": {
+      "chapter": 1943,
+      "core_event": "陆烬在迷雾边缘感应到更古老余韵，神识剧烈震荡险些失智",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1944": {
+      "chapter": 1944,
+      "core_event": "陆烬强压异变回归，向同伴简述感应，同伴质疑其神魂状态",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1945": {
+      "chapter": 1945,
+      "core_event": "摄魂阁外围试探性探查，察觉陆烬神魂波动中的两界特征",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1946": {
+      "chapter": 1946,
+      "core_event": "陆烬尝试理解异变本质，陷入自我怀疑与心魔边缘",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1947": {
+      "chapter": 1947,
+      "core_event": "守夜人出现，以'门之影'身份首次透露部分跨界机制背景",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1948": {
+      "chapter": 1948,
+      "core_event": "陆烬结合余韵与守夜人话语，初步构建身份撕裂认知框架",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1949": {
+      "chapter": 1949,
+      "core_event": "守夜人首次向陆烬自报家门“我是门之影”，简要解释其职责是看守两界通道",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 植点范围内推进，严守'仅交代我是门之影'基本信息边界，不揭示完整身世。",
+      "status": "approved"
+    },
+    "1950": {
+      "chapter": 1950,
+      "core_event": "陈老根在院中独自收势练功，陆烬在屋内擦拭古玉残片时听见门外风声渐起，指尖微凉，未开口询问",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1951": {
+      "chapter": 1951,
+      "core_event": "李淳与陆烬在双界交界处对峙，身份撕裂导致李淳心魔初显但未爆发",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1952": {
+      "chapter": 1952,
+      "core_event": "陆烬在静谧中被动感知到迷雾深处古老余韵的微弱波动，未主动探索",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 高潮前铺垫，不提前泄露'比残留意志更古老'的门芯脱落细节，只写边缘感应。",
+      "status": "approved"
+    },
+    "1953": {
+      "chapter": 1953,
+      "core_event": "守夜人监测到天道布局的微小偏移，警告陆烬不可试图理解跨界机制本质，迷雾边缘传来一丝更古老的余韵感应",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：陆烬跨界机制揭示边界内推进，不触及门芯脱落等禁止事项，仅写现象级异动。",
+      "status": "approved"
+    },
+    "1954": {
+      "chapter": 1954,
+      "core_event": "陆烬在压力下尝试稳定神魂，避免被双界之力撕裂，过程被动且无修炼动作",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1955": {
+      "chapter": 1955,
+      "core_event": "迷雾禁区边缘出现未知生物侵蚀村落结界，守夜人现身布下临时屏障",
+      "characters": [
+        "C001",
+        "C002",
+        "守夜人"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1956": {
+      "chapter": 1956,
+      "core_event": "陆烬体内异界能量波动加剧，引发周围灵植枯萎，村民惊恐将其软禁，迷雾边缘传来一丝更古老的余韵感应",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 伏笔推进，不触发早期余韵感应，只写迷雾边缘异动暗示。",
+      "status": "approved"
+    },
+    "1957": {
+      "chapter": 1957,
+      "core_event": "陈老根强行使用呼吸法压制陆烬体内躁动，自身修为倒退并陷入昏迷",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1958": {
+      "chapter": 1958,
+      "core_event": "守夜人解析陈老根昏迷原因，揭示迷雾禁区异变与地球天道布局有关联",
+      "characters": [
+        "C002",
+        "守夜人"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1959": {
+      "chapter": 1959,
+      "core_event": "陆烬在梦中接触残存的世界意志碎片，获得关于阴阳逆转的模糊影像，古玉残片上活化氧异象与地球牵引力的暗示一闪而过",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：接近 f004_mitochondria_earth 回收节点，不提前揭示线粒体机制，仅写牵引力现象。",
+      "status": "approved"
+    },
+    "1960": {
+      "chapter": 1960,
+      "core_event": "醒来后的陆烬主动尝试吸收外界灵气而非被动接受，陈老根苏醒后察觉其变化，古玉残片上活化氧异象与地球牵引力的暗示一闪而过",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "铺垫：此章已远超第一阶段，修炼动作红线不适用；f004_mitochondria_earth 门芯脱落细节严守禁止事项，不揭示。",
+      "status": "approved"
+    },
+    "1961": {
+      "chapter": 1961,
+      "core_event": "陈老根在迷雾边缘发现异常灵气波动，警惕地护住陆烬远离源头",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1962": {
+      "chapter": 1962,
+      "core_event": "陆烬因灵气扰动夜不能寐，陈老根只叮嘱他早些歇息、莫要强撑，二人对坐饮茶，未传任何口诀",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1963": {
+      "chapter": 1963,
+      "core_event": "守夜人在暗中观察陆烬状态，确认其神魂稳定性后选择继续隐匿",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1964": {
+      "chapter": 1964,
+      "core_event": "雾隐村外围出现微弱阵法涟漪，村民察觉异样但无人能解析成因",
+      "characters": [
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1965": {
+      "chapter": 1965,
+      "core_event": "陈老根为探查源头误入浅层迷雾，陆烬在身后试图感知父亲方位",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1966": {
+      "chapter": 1966,
+      "core_event": "陈老根返回告知迷雾深处有古老封印松动迹象，全家进入戒备状态",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

@@ -118,9 +118,31 @@ def _extract_llm_blocking(llm_text: str) -> list[str]:
     return _filter_wordcount(blocking)
 
 
-def dual_check(package: Path, prose_path: Path, out_path: Path | None = None) -> dict:
+def dual_check(package: Path, prose_path: Path, out_path: Path | None = None,
+               fast_path: bool = False) -> dict:
     manifest = load_manifest(package)
     program_report = program_run(package, prose_path, out_path=package / "accept_report.json")
+
+    # P1-3 fast-path: if program check passes and fast_path is enabled,
+    # skip the LLM semantic check. The program check covers word count,
+    # forbidden terms, and metadata leaks — the three most common blocking
+    # issues. LLM semantic check (dialogue intent, cast, continuity) is
+    # only run when the program check fails or when fast_path is disabled.
+    if fast_path and program_report.get("pass", False):
+        merged = {
+            "chapter": manifest.get("chapter"),
+            "program_report": program_report["report"] if isinstance(program_report, dict) and "report" in program_report else program_report,
+            "fast_path": True,
+            "llm_wall_s": 0,
+            "llm_blocking_count": 0,
+            "llm_blocking_samples": [],
+            "llm_pass": True,
+            "llm_skipped": "fast-path: program check passed",
+            "verdict": "PASS",
+        }
+        if out_path:
+            out_path.write_text(json.dumps(merged, ensure_ascii=False, indent=2), encoding="utf-8")
+        return merged
 
     base_url, key_env, model = load_provider("review")
     import os
@@ -167,13 +189,16 @@ def main(argv=None) -> int:
     # the package is at args.prose.parent / f"expansion/chapter_{args.chapter:04d}"
     # But that's fragile. Accept a --root argument instead.
     parser.add_argument("--root", type=Path, default=None, help="output root containing expansion/ dir")
+    parser.add_argument("--fast-path", action="store_true",
+                        help="skip LLM check when program check passes (faster, less thorough)")
     args2 = parser.parse_args(argv)
     root = args2.root or args2.prose.parent
     package = root / "expansion" / f"chapter_{args2.chapter:04d}"
     if not package.exists():
         print(f"package not found: {package}", file=sys.stderr)
         return 2
-    merged = dual_check(package, args2.prose, out_path=package / "dual_check_report.json")
+    merged = dual_check(package, args2.prose, out_path=package / "dual_check_report.json",
+                        fast_path=args2.fast_path)
     print(json.dumps(merged, ensure_ascii=False, indent=2))
     return 0 if merged["verdict"] == "PASS" else 1
 

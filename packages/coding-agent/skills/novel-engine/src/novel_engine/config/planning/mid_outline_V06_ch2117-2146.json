@@ -1,0 +1,300 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      2117,
+      2146
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-10T03:48:01+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "30/30 approved",
+      "note": "V06 forbidden 2/2 已条款化(R20/R21); 6章 boundary_note 改陈述式; 锚点补齐"
+    }
+  },
+  "entries": {
+    "2117": {
+      "chapter": 2117,
+      "core_event": "陆烬在迷雾禁区边缘感知到天道意志的排斥与吸引，神魂剧烈震荡",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2118": {
+      "chapter": 2118,
+      "core_event": "李淳残影在陆烬梦中出现，试图将陆烬拖回凡人身份，陆烬以意志抵抗",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2119": {
+      "chapter": 2119,
+      "core_event": "守夜人短暂现身，警告陆烬身份撕裂的代价，重申“门之影”的基本约束",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 伏笔回收边缘推进，严守禁止泄露守夜人完整身世边界，仅写基本信息。",
+      "status": "approved"
+    },
+    "2120": {
+      "chapter": 2120,
+      "core_event": "陆烬尝试融合李淳的记忆碎片，导致部分村民误认其为异类，引发小规模恐慌",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2121": {
+      "chapter": 2121,
+      "core_event": "陈老根察觉陆烬状态异常，用呼吸法残篇的稳固功效安抚其心神，太上养魂经残页在灯下微微显影",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "铺垫：f002_hunyuan_scripture 伏笔推进，陆烬仅被提及结果或旁观，禁止出现修炼动作，严守 A 路线 #8。",
+      "status": "approved"
+    },
+    "2122": {
+      "chapter": 2122,
+      "core_event": "陆烬意识到身份撕裂并非终点，而是通往更高层次博弈的必经之路，心境初步平稳",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2123": {
+      "chapter": 2123,
+      "core_event": "陆烬在李淳遗留的剑冢内冥想，通过剑魂共鸣追溯前世记忆碎片，初步构建心魔具象化的轮廓",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2124": {
+      "chapter": 2124,
+      "core_event": "心魔具象化为李淳影分身，向陆烬质问其跨界存在的合理性，陆烬陷入身份认同的激烈辩论与意识混乱中",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2125": {
+      "chapter": 2125,
+      "core_event": "外部干扰打破僵局，陆烬意识到心魔本质是“李淳身份”与“陆烬自我”的撕裂，拒绝吞噬任一极端，试图保持平衡",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2126": {
+      "chapter": 2126,
+      "core_event": "陆烬在平衡中感到窒息，发现“从李淳走向陆烬”的路径本身即完整闭环，无需消灭李淳，只需接纳其作为过去的一部分",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2127": {
+      "chapter": 2127,
+      "core_event": "心魔因陆烬的接纳而转化，不再是阻碍而是力量源泉，陆烬心境平稳，对天道布局的被动感减轻，主动意识苏醒",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2128": {
+      "chapter": 2128,
+      "core_event": "陆烬走出剑冢，面对外界时眼神坚定，不再视穿越为诅咒，而是视为自我完整性证明，为后续直面天道布局奠定心理基础",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2129": {
+      "chapter": 2129,
+      "core_event": "陆烬在迷雾边缘尝试感知“门”的波动，引发局部异象，李淳察觉神魂震颤",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2130": {
+      "chapter": 2130,
+      "core_event": "守夜人现身解释迷雾异变是天道自我修复，陆烬意识到自身穿越被更高意志注视",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 守夜人身份揭示边界内推进，仅维持'门之影'基本信息前提，不展开完整身世。",
+      "status": "approved"
+    },
+    "2131": {
+      "chapter": 2131,
+      "core_event": "李淳教导陆烬收敛气息以躲避天道探查，两界神魂特殊性在压制中产生微弱共鸣",
+      "characters": [
+        "C001",
+        "C004",
+        "C009"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 神魂特殊性外泄风险推进，共鸣强度严守外部察觉阈值边界，不坐实神魂双性核心。",
+      "status": "approved"
+    },
+    "2132": {
+      "chapter": 2132,
+      "core_event": "陆烬在李淳引导下回顾自身记忆，发现李淳人格碎片在脑海中逐渐具象化",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2133": {
+      "chapter": 2133,
+      "core_event": "陆烬试图主动压制李淳记忆以确立自我，却导致神魂不稳，李淳显露出痛苦并警告后果",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2134": {
+      "chapter": 2134,
+      "core_event": "陆烬接受身份撕裂的现状，开始尝试与李淳共生而非对抗，心境从排斥转向平静",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2135": {
+      "chapter": 2135,
+      "core_event": "迷雾禁区边缘异象加剧，陆烬无意识中触发线粒体共鸣，远处观测者首次记录到双向波动",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f004_mitochondria_earth 机制边界内推进，不过早揭示跨界原理，仅写现象级异动。",
+      "status": "approved"
+    },
+    "2136": {
+      "chapter": 2136,
+      "core_event": "守夜人现身迷雾边界，警告陆烬勿再靠近核心，并简述“门之影”职责限制",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2137": {
+      "chapter": 2137,
+      "core_event": "李淳残影在陆烬梦中浮现，质疑其作为陆烬的存在合理性，引发身份认知震荡",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2138": {
+      "chapter": 2138,
+      "core_event": "陆烬强行压制梦境干扰，尝试以意志稳固神魂，未习得功法但确立心理防线",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2139": {
+      "chapter": 2139,
+      "core_event": "迷雾中的古老余韵似有回应，陆烬感应到比仙妖大战更早的气息，但未触碰核心",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 埋设节点推进，不提前泄露余韵本质，仅写迷雾边缘异动暗示。",
+      "status": "approved"
+    },
+    "2140": {
+      "chapter": 2140,
+      "core_event": "陆烬拒绝深入迷雾，退至安全区，决定直面心魔而非逃避，为后续顿悟铺垫",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2141": {
+      "chapter": 2141,
+      "core_event": "陆烬在静默中复盘李淳记忆碎片，发现自身魂火对心魔的抗性异变",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2142": {
+      "chapter": 2142,
+      "core_event": "陆烬于梦境深渊直面心魔具象化攻击，神魂承受剧烈震荡险些破碎",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2143": {
+      "chapter": 2143,
+      "core_event": "陆烬惊觉心魔非外敌而是李淳残余意识的投射，尝试与幻象对话",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2144": {
+      "chapter": 2144,
+      "core_event": "陆烬意识到“走向陆烬”的过程即为消弭心魔路径，不再抗拒接纳自我",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2145": {
+      "chapter": 2145,
+      "core_event": "陆烬在精神世界模拟推演身份融合，发现撕裂感在接纳中自然消融",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2146": {
+      "chapter": 2146,
+      "core_event": "陆烬神魂核心趋于平静，准备迎接即将到来的顿悟，心境豁然开朗",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

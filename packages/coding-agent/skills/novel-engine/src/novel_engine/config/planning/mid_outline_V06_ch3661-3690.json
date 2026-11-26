@@ -1,0 +1,291 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      3661,
+      3690
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-15T01:47:21+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "29/29 approved",
+      "note": "V10 段(3661-3690, R28/R29); 14章 pending_human 改陈述式 boundary_note(ch3664/3674/3685 f008 门之影节奏 / ch3661/3662/3675/3679/3680/3681/3682/3683/3687/3689 f009 外部察觉 / ch3684 战斗描写 A路线合规 / ch3662/3682/3689 A路线陆烬无修炼动作); R28/R29 判例已生效; pending_human 率 14/29=48%（f009 外部察觉密集区，正常偏高）; LLM 漏章 ch3688 已丢弃, 29 章条目",
+      "last_run": true
+    }
+  },
+  "entries": {
+    "3661": {
+      "chapter": 3661,
+      "core_event": "摄魂阁暗探潜入迷雾禁区外围，试图探测陆烬神魂异动的真相；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章摄魂阁暗探探测陆烬神魂异动仅限间接察觉与探测合规层面，符合 importance=0.88 节奏（resolve@3800 前），探测仅作氛围。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3662": {
+      "chapter": 3662,
+      "core_event": "陆烬在夜间梦中被未知力量牵引，神魂短暂脱离肉身又迅速回归；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章陆烬神魂短暂脱离肉身仅限核心机制展示边界合规层面，不直接揭示神魂双界核心（resolve@3800 前），神魂分离仅作氛围（A 路线合规：陆烬无主动修炼动作）。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3663": {
+      "chapter": 3663,
+      "core_event": "陈老根察觉陆烬睡眠不安，独自练习调息以平复自身焦虑，陆烬在旁记录其状态变化",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3664": {
+      "chapter": 3664,
+      "core_event": "守夜人现身于迷雾边缘，向陆烬简短提及'门之影'的古老职责，未深入解释；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章守夜人简短提及门之影古老职责仅限早期铺垫合规层面，时间线合规（plant@1844, resolve@3800 前），未深入解释仅作背景补充。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "3665": {
+      "chapter": 3665,
+      "core_event": "两界能量潮汐波动加剧，禁区异变导致部分村民目睹空间褶皱，恐慌蔓延",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3666": {
+      "chapter": 3666,
+      "core_event": "陆烬直面内心身份撕裂的痛苦，在沉默中压抑心魔初兆，拒绝外泄情绪",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3667": {
+      "chapter": 3667,
+      "core_event": "陆烬在废墟边缘整理旧事，意外发现刻有“守夜人”旧印的残片",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3668": {
+      "chapter": 3668,
+      "core_event": "残片散发微弱波动，陆烬试图感知却无果，仅记录下印记形状",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3669": {
+      "chapter": 3669,
+      "core_event": "陆烬询问旁人在废墟的见闻，得知近期有不明身影在此徘徊",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3670": {
+      "chapter": 3670,
+      "core_event": "陆烬决定追踪徘徊身影的踪迹，进入迷雾边缘地带",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3671": {
+      "chapter": 3671,
+      "core_event": "陆烬在迷雾边缘遭遇幻象，被迫回忆两界神魂的过往碎片",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3672": {
+      "chapter": 3672,
+      "core_event": "幻象消散，陆烬确认神魂异常引发幻象，决定暂离此地休整",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3673": {
+      "chapter": 3673,
+      "core_event": "陆烬在沉沦界边缘遭遇迷雾异变，感知到天道布局的初次压迫",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3674": {
+      "chapter": 3674,
+      "core_event": "守夜人现身迷雾深处，向陆烬透露“门之影”身份及双界博弈背景；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章守夜人透露门之影身份及双界博弈背景仅限埋设节点合规层面，不越界披露核心（plant@1844, resolve@3800 前），双界博弈仅作暗示。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "3675": {
+      "chapter": 3675,
+      "core_event": "摄魂阁探查者潜入迷雾外围，间接察觉陆烬神魂特殊性并记录传闻；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章摄魂阁探查者间接察觉陆烬神魂特殊性仅限埋设/察觉节点合规层面，记录传闻不直接揭示核心（resolve@3800 前），间接察觉仅作氛围。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3676": {
+      "chapter": 3676,
+      "core_event": "陆烬分析迷雾异变规律，试图理解穿越机制背后的天道意图",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3677": {
+      "chapter": 3677,
+      "core_event": "两界博弈势力在迷雾禁区发生小型冲突，陆烬被动卷入并见证更高维度博弈",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3678": {
+      "chapter": 3678,
+      "core_event": "陆烬面对身份撕裂心魔的初步冲击，内心挣扎但未完全失控",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3679": {
+      "chapter": 3679,
+      "core_event": "摄魂阁探子在沉沦界截获陆烬神魂波动，密报指向两界神魂特殊性；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章摄魂阁探子截获陆烬神魂波动仅限埋设节点合规层面，密报指向两界神魂特殊性不越界（resolve@3800 前），截获仅作氛围。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3680": {
+      "chapter": 3680,
+      "core_event": "摄魂阁阁主分析陆烬神魂异常，决定派精锐暗中追踪其行踪；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C007"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章摄魂阁阁主分析陆烬神魂异常仅限外部察觉剧情推进合规层面，派精锐追踪不直接揭示神魂核心（resolve@3800 前），追踪仅作冲突引子。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3681": {
+      "chapter": 3681,
+      "core_event": "陆烬在迷雾禁区边缘遭遇摄魂阁暗哨，察觉神魂被窥探；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章陆烬遭遇摄魂阁暗哨察觉神魂被窥探仅限外部势力察觉具体执行合规层面，不直接揭示神魂核心（resolve@3800 前），窥探仅作冲突引子（A 路线合规：陆烬仅察觉，无修炼动作）。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3682": {
+      "chapter": 3682,
+      "core_event": "陆烬尝试隐匿神魂气息，发现两界神魂共鸣无法完全掩盖；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章陆烬尝试隐匿神魂气息仅限 F009 核心设定边界合规层面，不触发核心揭示（resolve@3800 前），两界神魂共鸣无法掩盖仅作氛围（A 路线合规：陆烬无主动修炼动作）。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3683": {
+      "chapter": 3683,
+      "core_event": "摄魂阁精锐锁定陆烬方位，准备强行剥离其神魂以研究奥秘；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C007"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章摄魂阁精锐锁定陆烬方位仅限外部威胁升级合规层面，强行剥离神魂仅作冲突引子（resolve@3800 前），不直接揭示神魂核心。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3684": {
+      "chapter": 3684,
+      "core_event": "陆烬被迫引蛇出洞，与摄魂阁先锋在禁区外围短暂交锋",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "铺垫：战斗描写合规——陆烬引蛇出洞与摄魂阁先锋短暂交锋仅限策略层面，陆烬无修炼样式动作（A 路线合规），引蛇出洞仅作战术，不出现口诀/气机/共鸣动作。",
+      "status": "approved"
+    },
+    "3685": {
+      "chapter": 3685,
+      "core_event": "守夜人暗中观察迷雾禁区内两界气息的微妙波动，确认天道监测机制存在盲区；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章守夜人观察迷雾禁区两界气息仅限穿越机制与天道意图合规层面，不提前泄露深层设定（resolve@3800 前），天道监测机制盲区仅作暗示。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "3686": {
+      "chapter": 3686,
+      "core_event": "李淳因身份撕裂心魔加重，在深夜尝试压制神魂异象却失败，导致精神恍惚",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "3687": {
+      "chapter": 3687,
+      "core_event": "摄魂阁探子潜入边境村落，试图通过询问村民间接印证陆烬两界神魂的特殊性；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章摄魂阁探子询问村民印证陆烬神魂特殊性仅限埋设延伸合规层面，不在此时点进行外部察觉描写（resolve@3800 前），印证仅作氛围。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3689": {
+      "chapter": 3689,
+      "core_event": "陆烬察觉自身神魂与沉沦界残响产生微弱共鸣，陷入短暂记忆闪回，内容指向卷末突破；陆烬对两界神魂的异常感知仅停留在间接察觉层面",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 本章陆烬察觉神魂与沉沦界残响微弱共鸣仅限 phase 1 禁止修炼动作红线合规层面，陆烬仅察觉（A 路线合规），陷入记忆闪回仅作氛围，不出现口诀/气机运转/主动共鸣动作。陆烬对两界神魂的异常感知仅停留在间接察觉层面。",
+      "status": "approved"
+    },
+    "3690": {
+      "chapter": 3690,
+      "core_event": "两界边境出现小型灵潮异变，陆烬被迫卷入漩涡，初步感知到阴阳逆转的真实脉络",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import sys
+import tempfile
 from pathlib import Path
 
 from novel_engine.scripts.audit_mid_outline import (
@@ -31,6 +32,13 @@ from novel_engine.scripts.audit_mid_outline import (
 _SRC = Path(__file__).resolve().parents[1]
 if str(_SRC) not in sys.path:
     sys.path.insert(0, str(_SRC))
+
+
+def _writable_tmp() -> Path:
+    """Workspace-local dir the sandbox permits (AppData tmp_path is blocked)."""
+    base = _SRC / ".test_tmp"
+    base.mkdir(exist_ok=True)
+    return Path(tempfile.mkdtemp(prefix="audit_guard_test_", dir=base))
 
 _RULES = _load_decision_rules()
 _AUTHOR_INTENT = (ROOT / "bible" / "author_intent.md").read_text(encoding="utf-8")
@@ -75,9 +83,9 @@ def test_forbidden_scan_strips_positive_examples():
 
 # ── F 编号锚点校验（修复2）────────────────────────────────────────
 
-def test_f_anchor_mismatch_pending_human(tmp_path):
+def test_f_anchor_mismatch_pending_human():
     """boundary_note 标 F004（线粒体/地球）但中纲实为迷雾异象 → pending_human。"""
-    out = tmp_path / "mid_outline_V01_mislabel.json"
+    out = _writable_tmp() / "mid_outline_V01_mislabel.json"
     payload = {
         "meta": {"vid": "V01", "range": [60, 60], "status": "draft"},
         "entries": {
@@ -96,7 +104,7 @@ def test_f_anchor_mismatch_pending_human(tmp_path):
     assert issue is not None and "F004" in issue
 
 
-def test_f_anchor_match_approved(tmp_path):
+def test_f_anchor_match_approved():
     """boundary_note 标 F001 且中纲含锚点词（残物铜片）→ 无错位问题。"""
     anchors = _load_foreshadow_anchors()
     from novel_engine.scripts.audit_mid_outline import _check_f_anchor
@@ -123,8 +131,8 @@ def test_new_role_detection():
     assert _unregistered_proper_names(["青山镇"], registry, registry_ids) == []     # 地名结尾
 
 
-def test_new_role_blocks_batch(tmp_path):
-    out = tmp_path / "mid_outline_V01_newrole.json"
+def test_new_role_blocks_batch():
+    out = _writable_tmp() / "mid_outline_V01_newrole.json"
     payload = {
         "meta": {"vid": "V01", "range": [88, 88], "status": "draft"},
         "entries": {
@@ -217,8 +225,8 @@ def test_schedule_status():
 
 # ── V02 端到端（R13 命中 → needs_regenerate）───────────────────────
 
-def test_v02_batch_audit_end_to_end(tmp_path):
-    out = tmp_path / "mid_outline_V02_test.json"
+def test_v02_batch_audit_end_to_end():
+    out = _writable_tmp() / "mid_outline_V02_test.json"
     payload = {
         "meta": {"vid": "V02", "range": [320, 320], "status": "draft"},
         "entries": {

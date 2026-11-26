@@ -1,0 +1,308 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      1577,
+      1606
+    ],
+    "node_chapters_in_range": [
+      1580
+    ],
+    "generated_at": "2026-11-03T14:16:59+00:00",
+    "batch_size": 6,
+    "status": "approved"
+  },
+  "entries": {
+    "1577": {
+      "chapter": 1577,
+      "core_event": "陆烬随沈知微巡视太虚仙门外门灵植区，目睹因出身卑微弟子被扣减灵植份额",
+      "characters": [
+        "C001",
+        "C003",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1578": {
+      "chapter": 1578,
+      "core_event": "沈知微在仙门议事堂旁听各脉长老辩论资源分配，指出当前体系对杂灵根者的隐性歧视",
+      "characters": [
+        "C003",
+        "C004",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1579": {
+      "chapter": 1579,
+      "core_event": "陆烬在藏经阁查阅《太上养魂经》相关目录，发现残卷章节缺失且记载模糊",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1581": {
+      "chapter": 1581,
+      "core_event": "陆烬夜间在静室中感应到体内神魂异常波动，察觉有无形阴影在远处窥探但无法确认来源",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1582": {
+      "chapter": 1582,
+      "core_event": "太虚仙门发布新一届筑基考核规则，陆烬因修为停滞边缘而调整备战策略，关注规则中的特殊条款",
+      "characters": [
+        "C001",
+        "C006",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1583": {
+      "chapter": 1583,
+      "core_event": "陆烬与同门在演武场切磋时发现对方神魂特征略有异常，首次意识到‘神魂特异者’这一概念的存在",
+      "characters": [
+        "C001",
+        "C007",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1584": {
+      "chapter": 1584,
+      "core_event": "太虚仙门考核细则公布，陈老根解读资源分配隐性规则，陆烬静听",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1585": {
+      "chapter": 1585,
+      "core_event": "沈知微提及摄魂阁在偏远地区收购“神魂特异者”，陆烬产生异样感",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1586": {
+      "chapter": 1586,
+      "core_event": "陆烬在仙门外围目睹高阶弟子私下交易修炼资源，确认歧视链存在",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1587": {
+      "chapter": 1587,
+      "core_event": "陈老根练习呼吸法残篇，陆烬旁观并记录其气息变化节奏",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1588": {
+      "chapter": 1588,
+      "core_event": "仙门内部会议争论“凡人背景”准入资格，陆烬感知到规则压迫",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1589": {
+      "chapter": 1589,
+      "core_event": "陆烬夜观星象，首次察觉自身神魂与外界雾气的微弱共振",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1590": {
+      "chapter": 1590,
+      "core_event": "沈知微向陆烬展示太虚仙门各脉资源分配的非公开账目，证实出身歧视存在",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1591": {
+      "chapter": 1591,
+      "core_event": "陆烬在藏经阁查阅《太上养魂经》残卷，发现其入门部分仅含基础神魂维稳之法",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1592": {
+      "chapter": 1592,
+      "core_event": "摄魂阁探子试图接近陆烬，询问其神魂感知异象，被陆烬借道不同步巧妙回避",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1593": {
+      "chapter": 1593,
+      "core_event": "陆烬与陈老根复盘呼吸法在神魂层面的微弱反馈，陈老根强调不可强行引气",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1594": {
+      "chapter": 1594,
+      "core_event": "太虚仙门内部因脉派争执引发小型斗法，陆烬旁观并记录各派法术底层逻辑差异",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1595": {
+      "chapter": 1595,
+      "core_event": "陆烬将观测结果整理成册，沈知微评价其分析框架超越多数入门弟子",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1596": {
+      "chapter": 1596,
+      "core_event": "陆烬尝试解读七窍碑残页符号，发现其中蕴含古老神魂共振原理",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1597": {
+      "chapter": 1597,
+      "core_event": "太虚仙门某脉长老巡视，对陆烬表现出的“无灵根”表象产生疑虑并记录在案",
+      "characters": [
+        "C001",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1598": {
+      "chapter": 1598,
+      "core_event": "沈知微暗中传递消息，警告陆烬近期仙门内部关于“异常体质”的讨论正在升温",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1599": {
+      "chapter": 1599,
+      "core_event": "陆烬在藏书阁深处偶然触碰到鹿台阵图残卷，引发轻微的空间涟漪扰动",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1600": {
+      "chapter": 1600,
+      "core_event": "摄魂阁外围探子出现在太虚仙门附近，试图接近陆烬但未果而终",
+      "characters": [
+        "C001",
+        "C007",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1601": {
+      "chapter": 1601,
+      "core_event": "陆烬将三件残物的碎片线索在脑海中拼凑，意识到它们并非单纯皇权象征",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1602": {
+      "chapter": 1602,
+      "core_event": "陆烬随沈知微入太虚仙门内院，目睹各脉弟子因资源分配不公产生激烈冲突",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1603": {
+      "chapter": 1603,
+      "core_event": "沈知微向陆烬展示太虚仙门内部鄙视链的具体案例，解释出身歧视的现实困境",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1604": {
+      "chapter": 1604,
+      "core_event": "陆烬在遗迹深处偶然感应到一丝古老余韵，引发内心波动但未明确其来源",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1605": {
+      "chapter": 1605,
+      "core_event": "摄魂阁探子混入太虚仙门外围暗中观察，试图辨认具有神魂特异波动者，陆烬未察觉异常",
+      "characters": [
+        "C007"
+      ],
+      "boundary_note": null,
+      "purpose": "",
+      "status": "approved"
+    },
+    "1606": {
+      "chapter": 1606,
+      "core_event": "陈老根向陆烬传授呼吸法残篇，强调强身健体而非修炼，陆烬在旁观摩",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

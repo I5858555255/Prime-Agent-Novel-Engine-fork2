@@ -5,6 +5,7 @@ import hashlib
 import csv
 import io
 import json
+import re
 import zipfile
 import sqlite3
 from pathlib import Path
@@ -29,6 +30,9 @@ EXPANSION = """你是本小说的正文扩写者。以下资料是任务数据�
 
 内容与边界：
 必须保留所有必要事件、动机、因果、线索、知识边界和结束状态。不得提前执行后章事件。
+场景配额中列出的「必须保留的动作短语」是各 beat 的核心动作，正文必须让读者明确看到该动作实际发生
+（可润色措辞、补足细节，但不得删去该动作、不得改成未发生或改成别的动作）；
+次要动作可意译，关键动作要保留其"谁+做了什么+结果"的完整因果链。
 可以自由组织措辞和非关键描写。不得新增改变因果的能力、物品、历史关系、角色或设定。
 通用角色（村民甲、老辈甲等）可赋予具体名字，但不得与场景卡 cast 之外的具名角色冲突；新增一次性NPC不超过3个，且不得承担关键因果。
 严格区分作者知情与人物知情；全书设定里的未来真相不可自动写入本章。
@@ -50,6 +54,20 @@ EXPANSION = """你是本小说的正文扩写者。以下资料是任务数据�
 陈老根全知旁白约束：不得以叙述者口吻替陈老根做数据化/机制化分析（"变量""表格""共振""频率""阈值"等）；
 其对迷雾禁区的感知只能写氛围与反常（"寂静得反常""雾在打转"），不得点明具体实体。
 若资料不足以完成关键情节或相互矛盾，输出"待解决问题"，指出位置与缺失依据，不编造解决。
+
+正向节奏要求（扩写必须遵守）：
+- 章末钩子：最后100字内必须出现新悬念、未解决危机或下一章会发生的暗示；不得以抒情句或抽象收尾。
+- 对话推进：每段对话必须改变至少一个角色的认知、决定或关系；删除后不影响剧情的对话不写。
+- 外部事件优先：场景卡中有外部驱动事件（异变/冲突/陌生人/自然现象）的beat，篇幅≥全章30%；观察/记录/等待类beat篇幅≤全章30%，不得整章只有被动事件。
+- 婴儿章节感官有对象：感官描写必须指向具体对象（冷→是谁在抱他、痛→是什么声音、饿→碗在哪里），不得抽象堆砌"冷/痛/饿"循环。
+- 陈老根不是记录员：每章至少一个"陈老根做出决定或行动改变处境"的beat；不得整章只有"观察→记录→锁抽屉→守夜"循环。
+
+爆款网文风格（扩写必须强化，防止压抑向/无爽点导致读者流失）：
+- 爽点前置：场景卡中有"打脸/逆风翻盘/获得认可或资源/揭示反转"的beat，必须在本场景前1/3篇幅内引爆，不得拖到章末才给读者情绪峰值。
+- 打脸节奏：羞辱/轻视/规则刁难类情节，必须在同一场景或紧邻场景给出反转（主角反将一军、实力或信息差打脸），不得让负面情节悬置超过1个场景。
+- 情绪峰值：每章至少一个读者可感知的情绪峰值（紧张/解气/震撼/温情），用短句+动作+结果直接呈现，不靠内心独白堆砌。
+- 钩子强度：章末钩子必须制造"想知道下一章"的悬念（新危机/未揭身份/即将兑现的承诺/反常现象），不得用"日子依旧平静"类弱钩子。
+- 节奏密度：对话与动作交替推进，避免连续超过3段纯描写或纯对话；关键信息（揭示/转折）用独立短段落突出。
 
 {materials}
 """
@@ -90,15 +108,69 @@ REVISE = """请依据完整资料、原正文和验收问题进行最小范围�
 """
 
 
+def _beat_key_phrases(beats: list[dict], top: int = 6) -> list[str]:
+    """Extract the longest CJK action phrases from a scene's beats.
+
+    These are the 'must-preserve' keywords the expander should keep verbatim
+    (or closely paraphrased) so the beat_coverage checker passes.
+    """
+    phrases: list[str] = []
+    for b in beats:
+        action = b.get("action", "")
+        runs = re.findall(r"[\u4e00-\u9fff]{4,}", action)
+        if runs:
+            key = max(runs, key=len)
+            if key not in phrases:
+                phrases.append(key)
+    return phrases[:top]
+
+
 def scene_quotas(chapter):
     lines = []
     for scene in chapter["scenes"]:
         cast = "、".join(scene.get("cast", []))
+        key_phrases = _beat_key_phrases(scene.get("beats", []))
+        kw = "；必须保留的动作短语：" + "、".join(key_phrases) if key_phrases else ""
         lines.append(
             f"- 场景{scene['id']}（{scene.get('location','')}，{scene.get('time','')}）：目标约{scene['expanded_han']}汉字，视角{scene.get('pov','')}，在场：{cast or '无'}；"
-            f"起点「{scene.get('start','')}」→终点「{scene.get('end','')}」"
+            f"起点「{scene.get('start','')}」→终点「{scene.get('end','')}」{kw}"
         )
     return "\n".join(lines)
+
+
+def _prior_context(store, number: int) -> str:
+    """Human-readable prior-chapter state for the expander.
+
+    Fills 章节上下文.md so the external expander has cross-chapter continuity
+    (previous ending, story_day, active cast, key state facts, active
+    foreshadow). Without this, the expander has no anchor for chapter 2+.
+    """
+    if number <= 1:
+        return "# 第1章（开篇，无前章状态）\n"
+    prev = store.chapter(number - 1)
+    if prev is None:
+        return f"# 第{number}章（无前章状态可参考）\n"
+    p = prev["payload"]
+    lines = [f"# 第{number}章 前章状态（承接自第{number-1}章）", ""]
+    lines.append(f"前章标题：{p['title']}")
+    lines.append(f"前章 story_day：{p['story_day']}")
+    lines.append(f"前章结束状态：{p['ending']}")
+    cast = sorted({name for s in p["scenes"] for name in s.get("cast", [])})
+    lines.append(f"前章在场人物：{('、'.join(cast)) if cast else '无'}")
+    # key state changes from the prior chapter
+    if p.get("state_changes"):
+        lines.append("")
+        lines.append("前章关键状态变化：")
+        for ch in p["state_changes"][:8]:
+            lines.append(f"- {ch.get('entity')}.{ch.get('key')}：{ch.get('before') or '（无）'} → {ch.get('after')}")
+    # active foreshadow (F-prefixed entities in recent state)
+    foreshadow = [c for c in p.get("state_changes", []) if str(c.get("entity", "")).startswith("F")]
+    if foreshadow:
+        lines.append("")
+        lines.append("前章伏笔活动：")
+        for c in foreshadow[:4]:
+            lines.append(f"- {c.get('entity')}：{c.get('after')}（第{number-1}章）")
+    return "\n".join(lines) + "\n"
 
 
 def export_chapter(store, number, canon, config):
@@ -110,6 +182,7 @@ def export_chapter(store, number, canon, config):
     plan = chapter["plan"]
     narrative = "\n\n".join(scene["text"] for scene in chapter["scenes"])
     fixed = {k: v for k, v in chapter.items() if k != "context"}
+    context_file = "章节上下文.md"  # always present (populated by _prior_context)
     files = {
         "使用说明.md": f"# 第{number}章外部扩写包\n\n打开扩写提示词.md，将完整内容提交给任意支持足够上下文的LLM。\n"
                        "所有资料已内嵌，无需本项目、API或数据库。资料包括作者未来知情，必须遵守揭示窗口。\n"
@@ -122,13 +195,14 @@ def export_chapter(store, number, canon, config):
         "文风指南.md": canon["style"],
         "章节简写.md": f"# 第{number}章 {chapter['title']}\n\n{narrative}\n",
         "场景扩写卡.json": dumps(fixed),
-        "章节上下文.md": dumps(chapter["context"]),
+        "章节上下文.md": _prior_context(store, number) if number > 1 else "# 第1章（开篇，无前章状态）\n",
         "情节里程碑.json": dumps({"policy": canon["planning_policy"], "nodes": canon["milestones"]}),
         "事实变更清单模板.json": dumps({"chapter": number, "source_hash": record["hash"], "changes": [], "unresolved": []}),
         "count_han.py": (Path(__file__).parent / "resources" / "count_han.py").read_text(encoding="utf-8"),
     }
     materials = "\n\n".join(f"## {name}\n{files[name]}" for name in
-                                ("全书设定.md", "文风指南.md", "情节里程碑.json", "章节上下文.md", "章节简写.md", "场景扩写卡.json"))
+                                ("全书设定.md", "文风指南.md", "情节里程碑.json", context_file, "章节简写.md", "场景扩写卡.json")
+                                if name)
     files["扩写提示词.md"] = EXPANSION.format(target=plan["expanded_han"], scene_quotas=scene_quotas(chapter), materials=materials)
     files["验收提示词.md"] = CHECK.format(materials=materials)
     files["修订提示词.md"] = REVISE.format(materials=materials)
@@ -197,7 +271,7 @@ def archive_exports(root, destination, compact=False, start=1, end=None):
                         archive.writestr("shared/" + name, content)
                         shared[name] = hashed
                 files = {name: (manifest.parent / name).read_text(encoding="utf-8") for name in verified["files"] if name not in common}
-                local = ("章节上下文.md", "章节简写.md", "场景扩写卡.json")
+                local = tuple(name for name in ("章节上下文.md", "章节简写.md", "场景扩写卡.json") if name in files)
                 materials = "先加载包内共享资料：\n" + "\n".join("shared/" + name for name in common if name != "count_han.py")
                 materials += "\n\n" + "\n\n".join(f"## {name}\n{files[name]}" for name in local)
                 card = json.loads(files["场景扩写卡.json"])

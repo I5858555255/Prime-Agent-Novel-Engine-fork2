@@ -10,6 +10,17 @@ _cache: dict | None = None
 
 def load_provider(phase: str) -> tuple[str, str, str]:
     """Return (base_url, api_key_env, model) for the active profile's phase."""
+    base_url, key_env, model, _ = load_provider_full(phase)
+    return base_url, key_env, model
+
+
+def load_provider_full(phase: str) -> tuple[str, str, str, dict]:
+    """Return (base_url, api_key_env, model, phase_opts) for the active profile.
+
+    `phase_opts` carries the controllability knobs the expansion path must
+    honor: {"temperature": float|None, "reasoning_effort": str|None}. A null
+    temperature means "use the caller's default".
+    """
     global _cache
     if _cache is None:
         _cache = json.loads(_CONFIG.read_text(encoding="utf-8"))
@@ -17,6 +28,7 @@ def load_provider(phase: str) -> tuple[str, str, str]:
     base_url = active["base_url"]
     key_env = active["api_key_env"]
     phases = active.get("phases", {})
+    phase_cfg = phases.get(phase, {})
     model = None
     if phase in phases:
         models = phases[phase].get("models") or []
@@ -29,4 +41,9 @@ def load_provider(phase: str) -> tuple[str, str, str]:
                 break
     if model is None:
         model = active.get("default_model", "")
-    return base_url, key_env, model
+    opts = {
+        "temperature": phase_cfg.get("temperature"),
+        "reasoning_effort": (phase_cfg.get("extra_body") or {}).get("reasoning_effort")
+        or (active.get("default_extra_body") or {}).get("reasoning_effort"),
+    }
+    return base_url, key_env, model, opts

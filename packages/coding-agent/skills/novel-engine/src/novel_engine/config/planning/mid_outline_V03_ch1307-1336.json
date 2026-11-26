@@ -1,0 +1,302 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      1307,
+      1336
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-10-30T13:32:41+00:00",
+    "batch_size": 6,
+    "status": "approved"
+  },
+  "entries": {
+    "1307": {
+      "chapter": 1307,
+      "core_event": "陆烬反思古玉代价，试图以肉身强度弥补神魂损伤，触发血脉本能共鸣",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1308": {
+      "chapter": 1308,
+      "core_event": "陆烬在冥想中遭遇神魂风暴，隐约听到外界关于“神魂特异者”的流言碎语",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1309": {
+      "chapter": 1309,
+      "core_event": "太虚仙门使者抵达村口，因陆烬气机外泄（非修炼动作）产生异样，引发村民恐慌",
+      "characters": [
+        "C001",
+        "C002",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1310": {
+      "chapter": 1310,
+      "core_event": "陈老根为保护陆烬，强行压制古玉威压，自身旧伤复发，显露凡人躯体极限",
+      "characters": [
+        "C002",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1311": {
+      "chapter": 1311,
+      "core_event": "使者离去前留下一枚传讯玉简，警告仙门将对“异常气运之子”进行定期甄别",
+      "characters": [
+        "C006",
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1312": {
+      "chapter": 1312,
+      "core_event": "陆烬夜观天象，感应到远方遗迹传来的古老余韵，心中莫名悸动",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1313": {
+      "chapter": 1313,
+      "core_event": "陆烬在仙门演武场外目睹高阶弟子内斗，感知到神魂被窥探的细微刺痛",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1314": {
+      "chapter": 1314,
+      "core_event": "陆烬尝试通过静坐缓解神魂刺痛，却因缺乏功法指引而效率极低",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1315": {
+      "chapter": 1315,
+      "core_event": "某神秘势力探查陆烬神魂特质，暗中记录其数据并上报",
+      "characters": [
+        "C001",
+        "C009"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1316": {
+      "chapter": 1316,
+      "core_event": "陆烬遭遇针对神魂的暗杀，依靠人皇古玉被动防御脱险",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1317": {
+      "chapter": 1317,
+      "core_event": "古玉释放威压导致陆烬头痛欲裂，但他未意识到这是玉的代价",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1318": {
+      "chapter": 1318,
+      "core_event": "陆烬决定深入遗迹寻找解法，途中遭遇迷雾异动",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1319": {
+      "chapter": 1319,
+      "core_event": "陆烬在人皇古玉余韵引导下进入废墟深层，直面血冥教长老残留识海",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1320": {
+      "chapter": 1320,
+      "core_event": "陆烬在识海中窥见血冥教内部对“修心神”体系的隐秘崇拜，但未触及同源真相",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1321": {
+      "chapter": 1321,
+      "core_event": "陆烬从识海退出，因神魂剧烈震荡陷入沉眠，陈老根守在旁侧静养",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1322": {
+      "chapter": 1322,
+      "core_event": "陆烬苏醒后发现自身神魂结构微妙变化，能短暂感知周围灵力波动，但无修炼动作",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1323": {
+      "chapter": 1323,
+      "core_event": "摄魂阁密探察觉废墟异动，开始暗中调查陆烬的神魂特质，初步怀疑其为特异者",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1324": {
+      "chapter": 1324,
+      "core_event": "陆烬决定离开废墟前往下一处秘境，陈老根送行并叮嘱安全，二人短暂离别",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1325": {
+      "chapter": 1325,
+      "core_event": "陆烬在废墟中整理李长风遗物，发现藏于夹层内的摄魂阁银色令牌碎片",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1326": {
+      "chapter": 1326,
+      "core_event": "陆烬在人皇古玉灼痛余韵中静歇，陈老根守夜察觉古玉微热并安抚其入睡",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1327": {
+      "chapter": 1327,
+      "core_event": "陆烬因长期强撑古玉，神魂出现细微裂纹，昏迷三日，梦中见迷雾异象",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1328": {
+      "chapter": 1328,
+      "core_event": "陆烬苏醒，回忆梦境细节，与陈老根对照古籍，确认古玉与雾隐村的地理关联",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1329": {
+      "chapter": 1329,
+      "core_event": "陆烬尝试独立运用呼吸法疏导神魂负荷，发现古玉吸收异气速度加快",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1330": {
+      "chapter": 1330,
+      "core_event": "陆烬将古玉埋入地下，陈老根记录实验数据，两人决定寻找古玉本源之地",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1331": {
+      "chapter": 1331,
+      "core_event": "陆烬在太虚山后山古洞发现刻有上古灵纹的石碑，触发神魂异动",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1332": {
+      "chapter": 1332,
+      "core_event": "灵纹震荡引起洞内积存的陈旧妖气苏醒，陆烬陷入幻觉挣扎",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1333": {
+      "chapter": 1333,
+      "core_event": "陈老根感应到异常，循迹进入古洞，以呼吸法压制妖气",
+      "characters": [
+        "C002",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1334": {
+      "chapter": 1334,
+      "core_event": "陈老根发现石碑背面隐现的残缺阵图，与皇室秘藏鹿台阵图相似",
+      "characters": [
+        "C002",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1335": {
+      "chapter": 1335,
+      "core_event": "陆烬触碰石碑导致神魂暂时离体，看见洞外有黑袍人暗中窥视",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1336": {
+      "chapter": 1336,
+      "core_event": "陈老根驱赶黑袍人失败，决定携带陆烬离开太虚山前往人间",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

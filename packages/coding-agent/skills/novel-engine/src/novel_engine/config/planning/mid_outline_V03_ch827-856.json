@@ -1,0 +1,305 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      827,
+      856
+    ],
+    "node_chapters_in_range": [
+      848
+    ],
+    "generated_at": "2026-10-24T05:39:19+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "last_run": true
+    }
+  },
+  "entries": {
+    "827": {
+      "chapter": 827,
+      "core_event": "太虚外门长老在考核中公开质疑陆烬出身寒微缺乏根基，引发众议",
+      "characters": [
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "828": {
+      "chapter": 828,
+      "core_event": "陆烬在资源分配环节仅获最底层丹药，目睹同门凭族谱获得高阶资源",
+      "characters": [
+        "C001",
+        "C005",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "829": {
+      "chapter": 829,
+      "core_event": "陆烬夜间独自研读入门功法，发现《太上养魂经》残页中藏有隐晦警示",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "830": {
+      "chapter": 830,
+      "core_event": "白衣陌生人夜间潜入陆烬居所，探查其神魂波动后迅速撤离",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "需人工确认：Ch830处于f003/f009埋设节点(Ch702)之后，Ch848回收节点之前，该探查行为可能提前揭示“神魂特异”属性，需确认是否违反f009在Ch3800才完全解开的模糊性限制",
+      "status": "approved"
+    },
+    "831": {
+      "chapter": 831,
+      "core_event": "太虚内门师兄暗中警告陆烬勿信外门流言，透露宗门内部派系斗争内幕",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "832": {
+      "chapter": 832,
+      "core_event": "陆烬在杂役区清理废弃法器，偶然发现刻有摄魂阁旧印记的碎片",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "需人工确认：该场景直接关联Ch848伏笔f003及禁止事项中“仅可留下模糊线索”，需确认此显性线索是否超出“模糊”边界",
+      "status": "approved"
+    },
+    "833": {
+      "chapter": 833,
+      "core_event": "陆烬在太虚仙门外门演武场旁目睹高出身修士对平民子弟的冷眼，资源分配不公初显",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "834": {
+      "chapter": 834,
+      "core_event": "陈老根在村口向陆烬演示呼吸法残篇的强身效果，陆烬在旁观看并询问原理",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "835": {
+      "chapter": 835,
+      "core_event": "外门弟子分组任务中，陆烬因缺乏背景被分配至险地，同伴流露鄙视链态度",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "836": {
+      "chapter": 836,
+      "core_event": "陆烬在《太上养魂经》入门残法练习中察觉灵魂波动异常，但未深究原因",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "837": {
+      "chapter": 837,
+      "core_event": "黑市上出现寻找‘神魂特异者’的匿名悬赏单，陆烬无意中瞥见一角",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：ch837涉及f003_shehun_ascension埋设节点，虽在ch702后，但接近ch848回收点前，需确认是否仅留模糊线索避免提前揭露摄魂阁全貌",
+      "status": "approved"
+    },
+    "838": {
+      "chapter": 838,
+      "core_event": "陆烬试图追查悬赏单来源，在藏书阁找到残缺笔记，仅见到‘魂’字残页",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "839": {
+      "chapter": 839,
+      "core_event": "陆烬初识太虚仙门外门弟子体系，目睹低阶弟子被苛以杂役且无人问津",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "840": {
+      "chapter": 840,
+      "core_event": "陆烬因出身平凡在测试中受轻视，被同门嘲讽为“泥腿子”，隐忍不发",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "841": {
+      "chapter": 841,
+      "core_event": "仙门高层分发灵药资源时明显偏向世家子弟，陆烬旁观记录不公细节",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "842": {
+      "chapter": 842,
+      "core_event": "陆烬尝试融入《太上养魂经》入门功法，发现其中隐含的压制神魂机制",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：涉及F003/f003_shehun_ascension埋设节点（虽plant@702，但ch848前需保持模糊，此处发现残法表象可能隐含摄魂阁线索，需确认是否触发边界）",
+      "status": "approved"
+    },
+    "843": {
+      "chapter": 843,
+      "core_event": "陆烬暗中观察一名神秘外门弟子，对方似乎在寻找具有特殊气质的孩童",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "需人工确认：可能触及F003/f003_shehun_ascension（摄魂阁寻子）及F009/f009_soul_duality（神魂特殊性被察觉），ch848前有模糊线索限制，需确认“寻找特殊气质孩童”是否越界",
+      "status": "approved"
+    },
+    "844": {
+      "chapter": 844,
+      "core_event": "陆烬在藏书阁角落无意触碰一枚旧符，脑海中闪过模糊的“以魂为引”残影",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：接近ch848“以魂Ϊ引，假托飞升”残破笔记节点，需确认此残影是否构成f003_shehun_ascension的过早暴露或触及禁止事项",
+      "status": "approved"
+    },
+    "845": {
+      "chapter": 845,
+      "core_event": "陆烬在藏经阁底层翻阅杂书，误触《太上养魂经》残页，引发书页微颤",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": "需人工确认：接近f003_shehun_ascension埋设点，需确认未直接揭露摄魂阁全貌",
+      "status": "approved"
+    },
+    "846": {
+      "chapter": 846,
+      "core_event": "守阁长老发现异状，以“童稚无意”为由驳回陆烬，将其驱离藏经阁",
+      "characters": [
+        "C001",
+        "C007",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "847": {
+      "chapter": 847,
+      "core_event": "陆烬被驱逐后，在院中听到两位弟子低声议论“神魂特异者”被某神秘势力收买",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "需人工确认：f003_shehun_ascension埋设相关，需确认线索保持模糊，未揭露组织全貌",
+      "status": "approved"
+    },
+    "849": {
+      "chapter": 849,
+      "core_event": "陆烬夜间梦呓，提及“雾隐村”迷雾边缘的异象，被陈老根听到",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：f004_mitochondria_earth相关，需确认仅提及地点异象，未揭露跨界神魂本质",
+      "status": "approved"
+    },
+    "850": {
+      "chapter": 850,
+      "core_event": "陈老根向仙门医官咨询陆烬状况，医官记录“神魂波动异常”并上报宗门",
+      "characters": [
+        "C001",
+        "C002",
+        "C007"
+      ],
+      "boundary_note": "需人工确认：f009_soul_duality相关，需确认外部势力仅“间接察觉”，未完全掌握其特殊性",
+      "status": "approved"
+    },
+    "851": {
+      "chapter": 851,
+      "core_event": "宗门长老会议讨论陆烬案例，决定将其转入“特材监护”序列，限制自由",
+      "characters": [
+        "C001",
+        "C007",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "852": {
+      "chapter": 852,
+      "core_event": "陆烬在仙门测试区目睹高阶弟子炫耀法宝，引发底层弟子对出身歧视的私下吐槽",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "853": {
+      "chapter": 853,
+      "core_event": "太虚仙门各脉在公示榜前争执资源分配额度，剑脉与丹脉当众互不相让",
+      "characters": [
+        "C003",
+        "C004",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "854": {
+      "chapter": 854,
+      "core_event": "陆烬偶然捡到他人丢弃的破旧玉简，发现其中记载的养魂法片段极其简略",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "855": {
+      "chapter": 855,
+      "core_event": "神秘黑衣人在测试场外徘徊，向特定几名神魂波动的考生发放匿名邀请函",
+      "characters": [
+        "C006",
+        "C007"
+      ],
+      "boundary_note": "需人工确认：涉及 f003_shehun_ascension 埋设（摄魂阁影子初现），需确认是否触发第702章埋设的后续延续或仅限模糊暗示",
+      "status": "approved"
+    },
+    "856": {
+      "chapter": 856,
+      "core_event": "陆烬收到匿名邀请但拒绝进入内场，转而旁观陈老根指导新学员进行基础吐纳",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

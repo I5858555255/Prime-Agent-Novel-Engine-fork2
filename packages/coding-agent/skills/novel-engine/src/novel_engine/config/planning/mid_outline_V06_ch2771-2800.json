@@ -1,0 +1,310 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      2771,
+      2800
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-12T15:58:54+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "30/30 approved",
+      "note": "V08 段(2771-2800); 5章 pending_human 改陈述式 boundary_note(ch2774 f006 不坐实 / ch2775 f005 表层感知 / ch2780 R24 内鬼不打草惊蛇 / ch2789 f008 门之影一句带过 / ch2799 f001 残物轻触不坐实); R24/R25 判例已生效; ch2803 是 R24 边界，ch2801-2803 内鬼处理需'持续观察'措辞",
+      "last_run": true
+    }
+  },
+  "entries": {
+    "2771": {
+      "chapter": 2771,
+      "core_event": "陆烬整理沉沦界情报，发现迷雾禁区边缘出现异常天象波动",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2772": {
+      "chapter": 2772,
+      "core_event": "李淳身份撕裂心魔初显，因界域波动陷入短暂走火入魔状态",
+      "characters": [
+        "C004",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2773": {
+      "chapter": 2773,
+      "core_event": "陆烬尝试解读皇室秘藏中的七窍碑残页，仅发现与穿越机制相关的隐性关联",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2774": {
+      "chapter": 2774,
+      "core_event": "上官鸿提及仙庭旧部对太初议会残脉的暂缓提取策略，暗示幕后博弈升级；共守派残脉的异动使传国玉玺微光一闪",
+      "characters": [
+        "C005",
+        "C001"
+      ],
+      "boundary_note": "铺垫：f006_jade_seal_bloodline 埋设点@2499，本章仅以提取策略层面轻触，严守 R25 大乾皇室=共守派后裔不坐实边界，仅作推测呼应，不展开认知深度。共守派残脉的异动使传国玉玺微光一闪。",
+      "status": "approved"
+    },
+    "2775": {
+      "chapter": 2775,
+      "core_event": "陆烬在遗迹余韵中感应到古老意志碎片，印证迷雾核心与穿越机制的深层联系；迷雾边缘的余韵在指尖若隐若现",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "铺垫：f005_fog_core 埋设点@1130，本章感应余韵仅限表层感知，严守 f005 回收前认知边界，不触及核心迷雾本体。迷雾边缘的余韵在指尖若隐若现。",
+      "status": "approved"
+    },
+    "2776": {
+      "chapter": 2776,
+      "core_event": "两界势力暗流涌动，陆烬察觉定向投放策略尚未启动，维持潜伏观察状态",
+      "characters": [
+        "C001",
+        "C003",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2777": {
+      "chapter": 2777,
+      "core_event": "柳踏歌暗中记录求和派夜间联络细节，陆烬旁观其整理线索",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2778": {
+      "chapter": 2778,
+      "core_event": "陆烬试探性接近可疑外客，对方感知异常后仓皇离开",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2779": {
+      "chapter": 2779,
+      "core_event": "陆烬复盘接触过程，推断对方具备探测神魂的手段",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2780": {
+      "chapter": 2780,
+      "core_event": "陆烬制定下一步“定向投放”假情报的方案框架",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：内鬼线索本章仅做定向投放与持续观察，严守 R24 边界（第2803章前不打草惊蛇，不立即抓捕，不做正面冲突）。",
+      "status": "approved"
+    },
+    "2781": {
+      "chapter": 2781,
+      "core_event": "陆烬执行投放，将伪造的皇室残物信息传递给目标对象",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2782": {
+      "chapter": 2782,
+      "core_event": "目标对象将假情报带回阵营，陆烬确认其已被成功误导",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2783": {
+      "chapter": 2783,
+      "core_event": "两界边境迷雾轻微异动，陆烬捕捉到异常波动并向摄魂阁通报",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2784": {
+      "chapter": 2784,
+      "core_event": "上官鸿解释太初议会残脉特性，提及守夜人曾在此驻足",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2785": {
+      "chapter": 2785,
+      "core_event": "陆烬分析求和派近期异动，柳踏歌提供线报佐证异常联络",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2786": {
+      "chapter": 2786,
+      "core_event": "大乾皇室派使者递交密函，暗示对七窍碑残页的重新评估",
+      "characters": [
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2787": {
+      "chapter": 2787,
+      "core_event": "陈老根独自练习呼吸法，陆烬旁观记录其状态无异常",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2788": {
+      "chapter": 2788,
+      "core_event": "陆烬神魂微颤感应到异界余韵，暂不深究仅做标记归档",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2789": {
+      "chapter": 2789,
+      "core_event": "陆烬潜入沉沦界迷雾边缘，感知到异变加剧，守夜人现身暗示其穿越非偶然；守夜人低声自陈'我是门之影'",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 本章深化守夜人线索，仅以'门之影'自陈一句带过，不揭示门之影的具体身份/来历/能力，严守 f008 回收前边界。守夜人低声自陈'我是门之影'。",
+      "status": "approved"
+    },
+    "2790": {
+      "chapter": 2790,
+      "core_event": "李淳察觉陆烬神魂波动异常，内心矛盾加剧，试图掩盖自身身份关联",
+      "characters": [
+        "C001",
+        "李淳"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2791": {
+      "chapter": 2791,
+      "core_event": "陆烬在迷雾中遭遇旧部试探，被迫暴露更多两界秘密，引发高层关注",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2792": {
+      "chapter": 2792,
+      "core_event": "陆烬与陈老根在安全屋分析迷雾异变规律，发现其与天道布局的隐性关联",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2793": {
+      "chapter": 2793,
+      "core_event": "李淳在暗中观察陆烬，内心决裂感达到临界点，准备采取关键行动",
+      "characters": [
+        "李淳",
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2794": {
+      "chapter": 2794,
+      "core_event": "陆烬短暂闭目调息以缓解神魂撕裂，未修吐纳但神魂结构产生微妙变化",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2795": {
+      "chapter": 2795,
+      "core_event": "陆烬整理沉沦界情报，发现求和派联络路线与迷雾禁区异变存在隐秘关联",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2796": {
+      "chapter": 2796,
+      "core_event": "陈老根在乡间独自演练呼吸法，陆烬旁观记录其气机流转细节以完善对照档案",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2797": {
+      "chapter": 2797,
+      "core_event": "陆烬推演陆氏穿越机制，推测天道意在通过两界反转测试神魂双生的稳定性",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2798": {
+      "chapter": 2798,
+      "core_event": "李淳试图接触陆烬进行心魔对话，但被陆烬以逻辑矛盾点反制而陷入自证循环",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2799": {
+      "chapter": 2799,
+      "core_event": "陆烬向守夜人询问门之影背景，获得关于大乾皇室“共守派”后裔的模糊推测；七窍碑残页与铜片残物的暗纹在指尖交汇",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms 相关身份暗示本章仅以残物暗纹交汇一句轻触，严守 R25 大乾皇室=共守派后裔不坐实边界，仅作推测呼应，不坐实血脉/皇权。七窍碑残页与铜片残物的暗纹在指尖交汇。",
+      "status": "approved"
+    },
+    "2800": {
+      "chapter": 2800,
+      "core_event": "陆烬制定针对求和派的监控预案，决定暂不抓捕而是通过定向投放情报进行诱导",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

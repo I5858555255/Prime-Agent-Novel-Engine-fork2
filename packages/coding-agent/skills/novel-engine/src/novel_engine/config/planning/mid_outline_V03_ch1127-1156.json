@@ -1,0 +1,289 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      1127,
+      1156
+    ],
+    "node_chapters_in_range": [
+      1128,
+      1130
+    ],
+    "generated_at": "2026-10-28T16:28:39+00:00",
+    "batch_size": 6,
+    "status": "approved"
+  },
+  "entries": {
+    "1127": {
+      "chapter": 1127,
+      "core_event": "荒尾展示妖族传承的观气手法，陆烬被动感知到遗迹入口的微弱波动",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1129": {
+      "chapter": 1129,
+      "core_event": "陆烬跟随荒尾进入深山密林，遭遇低阶妖修试探，荒尾展示护道手段",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1131": {
+      "chapter": 1131,
+      "core_event": "二人抵达远古仙妖大战遗迹外围，陆烬首次接触残破的仙阵铭文",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1132": {
+      "chapter": 1132,
+      "core_event": "陆烬在遗迹深处触碰到石壁，脑海中出现非视觉的古老信息碎片",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1133": {
+      "chapter": 1133,
+      "core_event": "荒尾解读陆烬所见碎片，揭示该遗迹曾镇压过某种跨界意识",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1134": {
+      "chapter": 1134,
+      "core_event": "陆烬与荒尾撤离遗迹，约定下次深入探索，陆烬感到神魂负荷减轻",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1135": {
+      "chapter": 1135,
+      "core_event": "陆烬在遗迹深处探索发现古老符文，触发轻微神魂共鸣无实质突破",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1136": {
+      "chapter": 1136,
+      "core_event": "荒尾解读符文揭示仙妖大战时双方曾短暂合作对抗外敌",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1137": {
+      "chapter": 1137,
+      "core_event": "陆烬因共鸣引发短暂昏睡，醒来后回忆起碎片化非本人记忆",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1138": {
+      "chapter": 1138,
+      "core_event": "陈老根观察陆烬异样，试探性询问梦境内容被陆烬模糊带过",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1139": {
+      "chapter": 1139,
+      "core_event": "陆烬与荒尾深入遗迹核心，发现被封印的仙妖合葬之地",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1140": {
+      "chapter": 1140,
+      "core_event": "陆烬在合葬地感受到两股对立又交融的意志，神魂再次震荡但未受伤",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1141": {
+      "chapter": 1141,
+      "core_event": "陆烬在遗迹深处遭遇幻象，荒尾警告其神魂受古老余韵侵蚀风险",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1142": {
+      "chapter": 1142,
+      "core_event": "陆烬尝试利用幻象残片定位雾隐村坐标，发现空间法则对神魂的排斥",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1143": {
+      "chapter": 1143,
+      "core_event": "陆烬返回人间界，在迷雾边缘遭遇村民恐慌性清理行动",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1144": {
+      "chapter": 1144,
+      "core_event": "陈老根引导陆烬观察村民仪式，揭示皇室秘藏残物在民间流传的误区",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1145": {
+      "chapter": 1145,
+      "core_event": "摄魂阁探子伪装成游方术士接近迷雾村，试探神魂特异者",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1146": {
+      "chapter": 1146,
+      "core_event": "陆烬避开探查，利用陈老根残篇呼吸法强化神魂伪装，暂避锋芒",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1147": {
+      "chapter": 1147,
+      "core_event": "陈老根向陆烬解释修仙界资源分配逻辑，陆烬记录各脉鄙视链细节",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1148": {
+      "chapter": 1148,
+      "core_event": "陆烬在遗迹深处发现刻有‘神魂’字样的非妖族符箓，荒尾警告其危险",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1149": {
+      "chapter": 1149,
+      "core_event": "陆烬模拟《太上养魂经》入门残法，发现残卷中隐藏的第二层禁制",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1150": {
+      "chapter": 1150,
+      "core_event": "陆烬与荒尾深入遗迹次级洞穴，遭遇修仙界流落在外的探查傀儡",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1151": {
+      "chapter": 1151,
+      "core_event": "陆烬利用遗迹余韵干扰探查傀儡，首次尝试以神魂波动进行伪装躲避",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1152": {
+      "chapter": 1152,
+      "core_event": "陆烬整理遗迹收获，制定下一阶段的资源置换计划以获取更高级残卷",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1153": {
+      "chapter": 1153,
+      "core_event": "陆烬滞留遗迹深处，陈老根远程引导其感知边界，陆烬察觉余韵指向不同",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1154": {
+      "chapter": 1154,
+      "core_event": "陆烬被古老余韵短暂困住心神，陈老根察觉异常并准备动用最后手段撤离",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1155": {
+      "chapter": 1155,
+      "core_event": "陈老根强行唤醒陆烬，两人狼狈退出遗迹，陆烬对余韵源头产生模糊印象",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1156": {
+      "chapter": 1156,
+      "core_event": "陆烬回到雾隐村休整，向陈老根描述遗迹感受，陈老根决定长期驻守",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

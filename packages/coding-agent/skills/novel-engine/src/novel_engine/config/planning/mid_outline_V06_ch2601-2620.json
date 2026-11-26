@@ -1,0 +1,211 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      2601,
+      2620
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-12T11:48:12+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "20/20 approved",
+      "note": "V08 头段(2601-2620); 4章 boundary_note 改陈述式(f001/f005/f008/f006 埋设边界, R20 守夜人, R25 共守派); 锚点补齐; R24/R25 判例已生效"
+    }
+  },
+  "entries": {
+    "2601": {
+      "chapter": 2601,
+      "core_event": "陆烬深入墟界遗迹，识破入口处的古老防御阵纹残局",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2602": {
+      "chapter": 2602,
+      "core_event": "在遗迹内部遭遇人皇体系遗留的器灵残影，进行问答试探",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2603": {
+      "chapter": 2603,
+      "core_event": "陆烬解读器灵指认的坐标，发现指向被迷雾掩盖的禁区核心",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2604": {
+      "chapter": 2604,
+      "core_event": "回溯途中迷雾异变加剧，陆烬利用穿越机制短暂规避天劫",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2605": {
+      "chapter": 2605,
+      "core_event": "李淳现身拦截，与陆烬在遗迹边缘爆发身份撕裂的心魔对决",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2606": {
+      "chapter": 2606,
+      "core_event": "冲突暂息，双方短暂和解，陆烬决意正面面对更高层次天道布局",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2607": {
+      "chapter": 2607,
+      "core_event": "陆烬与李淳在遗迹入口遭遇守卫幻阵，李淳因心魔动摇导致阵法崩溃险些被反噬",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2608": {
+      "chapter": 2608,
+      "core_event": "二人强行破开幻阵外围，遭遇第一波由远古人皇意志残余操控的傀儡守军",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2609": {
+      "chapter": 2609,
+      "core_event": "陆烬在激战中发现傀儡核心竟刻有与皇室秘藏相似的七窍碑纹路，七窍碑残页与铜片残物的暗纹在指尖交汇",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms（F001，resolve@3035）皇室误认皇权象征暗示推进，严守边界不提前泄露皇室误读属性实质，仅写到误认暗示层。",
+      "status": "approved"
+    },
+    "2610": {
+      "chapter": 2610,
+      "core_event": "李淳试图夺取傀儡核心以镇压心魔，陆烬强行阻止并指出此举会激活更深层封印",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2611": {
+      "chapter": 2611,
+      "core_event": "傀儡暴走，陆烬利用对遗迹地脉的熟悉感将其引向远离入口的死角",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2612": {
+      "chapter": 2612,
+      "core_event": "二人脱离险境，陆烬在废墟中感应到一丝比人皇意志更古老且陌生的余韵，迷雾边缘传来一丝更古老的余韵感应",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "铺垫：f005_fog_core（plant@1130，resolve@3438）中间探索推进，严守边界不构成提前回收，此处为异常追加余韵暗示，不揭示门芯脱落实质细节。",
+      "status": "approved"
+    },
+    "2613": {
+      "chapter": 2613,
+      "core_event": "陆烬在墟界遗迹探索中遭遇空间紊乱，险些被拉入更深层禁区",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2614": {
+      "chapter": 2614,
+      "core_event": "守夜人现身干扰陆烬，短暂展示“门之影”能力以阻断其深入",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper（plant@1844，resolve@3800）核心设定揭示推进，严守'R20 守夜人完整身世不一次性交代'约束，仅写到'门之影'异动暗示层，不揭示完整身世。",
+      "status": "approved"
+    },
+    "2615": {
+      "chapter": 2615,
+      "core_event": "陆烬因神魂震荡昏迷，陈老根远程感应并试图通过呼吸法残篇稳定其状态",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2616": {
+      "chapter": 2616,
+      "core_event": "陈老根发现陆烬神魂异常与太初残脉共鸣，上官鸿在暗处观察并记录，共守派残脉的异动使传国玉玺微光一闪",
+      "characters": [
+        "C002",
+        "C004"
+      ],
+      "boundary_note": "铺垫：f006_jade_seal_bloodline（plant@2499，resolve@3035）埋设节点血线身份推测推进，严守'R25 大乾皇室共守派身份不直接坐实'约束，仅写到推测呼应层，不坐实实质。",
+      "status": "approved"
+    },
+    "2617": {
+      "chapter": 2617,
+      "core_event": "陆烬苏醒后记忆模糊，对两界关系产生深层困惑，引发心魔初现",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2618": {
+      "chapter": 2618,
+      "core_event": "陆烬离开墟界遗迹，陈老根叮嘱其勿再靠近迷雾禁区边缘",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2619": {
+      "chapter": 2619,
+      "core_event": "陆烬探索遗迹外围，遭遇上古残存的防御禁制并强行破开",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2620": {
+      "chapter": 2620,
+      "core_event": "陆烬进入遗迹主厅，发现人皇体系核心典籍残缺不全并遭遇守护者意志袭击",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

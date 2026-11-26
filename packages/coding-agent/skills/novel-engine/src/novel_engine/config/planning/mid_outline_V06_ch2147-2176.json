@@ -1,0 +1,295 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      2147,
+      2176
+    ],
+    "node_chapters_in_range": [
+      2157
+    ],
+    "generated_at": "2026-11-10T05:47:56+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "29/29 approved",
+      "note": "V06 forbidden 2/2 已条款化(R20/R21); ch2172 节点章被生成器跳过(29非30); 4章 boundary_note 改陈述式; 锚点补齐"
+    }
+  },
+  "entries": {
+    "2147": {
+      "chapter": 2147,
+      "core_event": "陆烬在迷雾边缘遭遇心魔具象化阴影，试图吞噬其神魂本源",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2148": {
+      "chapter": 2148,
+      "core_event": "李淳记忆碎片爆发，陆烬在身份认同混淆中陷入深度昏迷",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2149": {
+      "chapter": 2149,
+      "core_event": "陈老根施展呼吸法稳定陆烬气机，但意识仍未回归",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2150": {
+      "chapter": 2150,
+      "core_event": "陆烬意识沉入记忆深渊，目睹李淳过往与陆烬前世的双重撕裂，两界通道感应使神魂产生特殊察觉",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 神魂特殊性内部逻辑推进，不越界提前揭示双界神魂机制，仅写现象。",
+      "status": "approved"
+    },
+    "2151": {
+      "chapter": 2151,
+      "core_event": "外部干扰切断心魔连接，陆烬痛斥李淳残影，强行压制异梦",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2152": {
+      "chapter": 2152,
+      "core_event": "陆烬苏醒，确立拒绝李淳过去、专注自我存在的内心准则",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2153": {
+      "chapter": 2153,
+      "core_event": "陆烬复盘心魔历程，发现撕裂感源于对李淳身份的过度排斥",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2154": {
+      "chapter": 2154,
+      "core_event": "陆烬尝试接纳李淳记忆，但阴阳双界冲突加剧导致神魂震荡",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2155": {
+      "chapter": 2155,
+      "core_event": "陆烬在震荡中窥见迷雾禁区异变与穿越机制的微弱关联",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2156": {
+      "chapter": 2156,
+      "core_event": "陆烬直面身份撕裂的核心矛盾，试图区分李淳与陆烬的本质",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2158": {
+      "chapter": 2158,
+      "core_event": "陆烬领悟\"走向陆烬\"并非舍弃李淳，而是融合二者的完整路径",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2159": {
+      "chapter": 2159,
+      "core_event": "心魔彻底消散，陆烬神魂趋于稳定，为后续直面天道布局做准备",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2160": {
+      "chapter": 2160,
+      "core_event": "陆烬尝试跨越阴阳边界探索两界逆转机制真相",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2161": {
+      "chapter": 2161,
+      "core_event": "陆烬发现穿越机制与迷雾禁区异变存在直接关联",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2162": {
+      "chapter": 2162,
+      "core_event": "陆烬深入迷雾禁区，遭遇未知力量阻挠与考验",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2163": {
+      "chapter": 2163,
+      "core_event": "陆烬揭示迷雾禁区是天道的核心控制枢纽",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2164": {
+      "chapter": 2164,
+      "core_event": "陆烬开始理解并尝试影响两界博弈的更高层次规则",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2165": {
+      "chapter": 2165,
+      "core_event": "陆烬面对李淳与自身身份撕裂的心魔考验，内心剧烈震荡",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2166": {
+      "chapter": 2166,
+      "core_event": "李淳梳理两界天道规则差异，发现迷雾禁区异变规律",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2167": {
+      "chapter": 2167,
+      "core_event": "陆烬神魂深处感应到古老余韵，对门芯细节仍保持模糊",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2168": {
+      "chapter": 2168,
+      "core_event": "李淳与陆烬探讨身份撕裂心魔，确认内心已接受双面身份",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2169": {
+      "chapter": 2169,
+      "core_event": "守夜人再次出现，补充说明阴阳双界博弈的高层背景",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": "铺垫：f008_doorkeeper 伏笔推进，再次提及仅到门之影基本信息层，不展开完整身世细节。",
+      "status": "approved"
+    },
+    "2170": {
+      "chapter": 2170,
+      "core_event": "摄魂阁势力察觉陆烬神魂特殊性，派遣探子靠近雾隐村",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": "铺垫：f009_soul_duality 伏笔推进，外部察觉控制尺度，仅到先遣级暗示，不坐实神魂双性核心。",
+      "status": "approved"
+    },
+    "2171": {
+      "chapter": 2171,
+      "core_event": "陆烬在修炼中回顾心魔消散过程，稳固当前境界",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2172": {
+      "chapter": 2172,
+      "core_event": "陆烬在李淳心魔消散后的平静期，与村民探讨凡人如何守护家园",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2173": {
+      "chapter": 2173,
+      "core_event": "外部势力（摄魂阁探子）在村外驻足，试图嗅探陆烬神魂的特殊性",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2174": {
+      "chapter": 2174,
+      "core_event": "陆烬察觉异常，未动用功法仅以直觉示警，陈老根协助驱离探子",
+      "characters": [
+        "C001",
+        "C002",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2175": {
+      "chapter": 2175,
+      "core_event": "陆烬反思自身存在对两界平衡的潜在影响，内心产生新的迷茫",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2176": {
+      "chapter": 2176,
+      "core_event": "陆烬决心不依赖外力，尝试通过观察自然规律理解自身力量本质，古玉残片上活化氧异象与地球牵引力的暗示一闪而过",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": "铺垫：陆烬对力量本质深层理解推进，严守 f004（resolve@2200）与 f005（resolve@3438）早期铺垫边界，不过早揭示门芯脱落细节、不泄露核心机制。",
+      "status": "approved"
+    }
+  }
+}

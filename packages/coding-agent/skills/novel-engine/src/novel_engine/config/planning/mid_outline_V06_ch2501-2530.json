@@ -1,0 +1,316 @@
+{
+  "meta": {
+    "vid": "V06",
+    "range": [
+      2501,
+      2530
+    ],
+    "node_chapters_in_range": [],
+    "generated_at": "2026-11-12T03:49:44+00:00",
+    "batch_size": 6,
+    "status": "approved",
+    "audit": {
+      "result": "30/30 approved",
+      "note": "V07 段(2501-2530); 6章 boundary_note 改陈述式(R23 护体, f006 共守派/传国玉玺锚点, f001 三阶段节奏); 锚点补齐; F003/F004/F007 全副本闭环, ch2471 hard gate 仍报属连接锁残留(下批自然消减)"
+    }
+  },
+  "entries": {
+    "2501": {
+      "chapter": 2501,
+      "core_event": "陆烬在沉沦界边缘试图沟通仙庭斥候，遭遇古玉结界异常波动，惊现肉身保护机制的微小裂痕",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "铺垫：肉身保护机制边界推进，严守 R23（古玉结界+三才护魂阵之外漏洞不可忽略）约束，不忽略机制外漏洞，仅在护体覆盖范围内描写。",
+      "status": "approved"
+    },
+    "2502": {
+      "chapter": 2502,
+      "core_event": "上官鸿因残脉反噬导致气息不稳，被迫向陆烬隐瞒仙庭内部关于提取残脉的最新密令",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2503": {
+      "chapter": 2503,
+      "core_event": "陆烬分析仙庭密令中的暗语，发现其中提及“迷雾禁区”的异变并非自然，暗示天道干预",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2504": {
+      "chapter": 2504,
+      "core_event": "神秘黑衣势力潜入陆烬营地，未动手试探古玉结界强度，记录其波动频率后撤离",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": "铺垫：肉身保护机制外部试探推进，严守 R23 护体边界，不构成'忽略漏洞'风险，试探描写仅在护体覆盖范围内。",
+      "status": "approved"
+    },
+    "2505": {
+      "chapter": 2505,
+      "core_event": "上官鸿坦白仙庭旧部计划加速提取残脉，陆烬意识到自己是仙庭博弈中的关键变数",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2506": {
+      "chapter": 2506,
+      "core_event": "陆烬结合仙庭情报与上官鸿证词，初步推断两界博弈背后存在超越天道的第三股力量",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2507": {
+      "chapter": 2507,
+      "core_event": "陆烬在沉沦界边缘遭遇仙庭旧部巡逻队，古玉结界自动激活抵御探查",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2508": {
+      "chapter": 2508,
+      "core_event": "陈老根在迷雾禁区外围布置三才护魂阵残篇，修补肉身保护机制的微小缝隙",
+      "characters": [
+        "C002",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2509": {
+      "chapter": 2509,
+      "core_event": "陆烬通过七窍碑残页线索，发现沉沦界某处有隐藏的皇室秘藏遗迹入口",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2510": {
+      "chapter": 2510,
+      "core_event": "仙庭旧部内部关于是否立即提取上官鸿体内残脉产生分歧，暂缓决定被执行，共守派残脉的异动使传国玉玺微光一闪",
+      "characters": [
+        "C006",
+        "C007"
+      ],
+      "boundary_note": "铺垫：f006_jade_seal_bloodline（resolve@3035）回收前期推进，严守'未至 resolve 节点不公开核心秘密'边界，仅写执行层级拖延策略，不提前泄露太初议会时代残脉实质真相。",
+      "status": "approved"
+    },
+    "2511": {
+      "chapter": 2511,
+      "core_event": "陆烬感应到远古仙妖大战遗迹深处比残留意志更古老的余韵，短暂获得方向指引",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2512": {
+      "chapter": 2512,
+      "core_event": "陆烬与摄魂阁外围线人在黑市交易信息，首次被间接察觉两界神魂特殊性",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2513": {
+      "chapter": 2513,
+      "core_event": "陆烬在迷雾禁区边缘感知到古玉结界微微震颤，引发外界仙庭旧部的警惕与窥视",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2514": {
+      "chapter": 2514,
+      "core_event": "三才护魂阵因陆烬神魂异动出现微弱共振，陆烬被迫承受神魂撕裂的初阶痛苦以稳固自身",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2515": {
+      "chapter": 2515,
+      "core_event": "上官鸿潜入陆烬驻守地，试图趁其神魂不稳之际提取太初残脉，被古玉结界自动拦截，共守派残脉的异动使传国玉玺微光一闪",
+      "characters": [
+        "C001",
+        "C003",
+        "C005"
+      ],
+      "boundary_note": "铺垫：f006_jade_seal_bloodline 相关人物互动推进，严守仙庭旧部暂缓提取敏感期边界，不提前触发提取，仅写到氛围暗示层。",
+      "status": "approved"
+    },
+    "2516": {
+      "chapter": 2516,
+      "core_event": "陆烬利用神魂裂隙读取到上官鸿记忆中的模糊影像，确认其确实携带太初议会信息，古玉结界边缘泛起一丝血脉微光",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "铺垫：f006_jade_seal_bloodline 伏笔线索深层挖掘推进，严守边界不提前揭示证据链实质细节，仅写到谜团层。",
+      "status": "approved"
+    },
+    "2517": {
+      "chapter": 2517,
+      "core_event": "仙庭旧部发现上官鸿接触陆烬，遂封锁区域，陆烬在迷雾中隐藏行踪以躲避搜捕",
+      "characters": [
+        "C001",
+        "C003",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2518": {
+      "chapter": 2518,
+      "core_event": "陆烬在隐匿中发现迷雾禁区异变的频率与自身神魂波动同步，初步意识到天道布局的干预迹象",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2519": {
+      "chapter": 2519,
+      "core_event": "陆烬在沉沦界边缘遭遇守夜人，对方提及门之影的深层职责与迷雾禁区异动",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2520": {
+      "chapter": 2520,
+      "core_event": "上官鸿隐瞒体内残脉真相，陆烬察觉其灵力波动异常并产生怀疑",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2521": {
+      "chapter": 2521,
+      "core_event": "摄魂阁探子潜入沉沦界外围，暗中监测陆烬双魂特质并记录数据",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2522": {
+      "chapter": 2522,
+      "core_event": "陆烬与上官鸿在迷雾禁区边缘试探，上官鸿欲掩盖太初议会残脉来源",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2523": {
+      "chapter": 2523,
+      "core_event": "古玉结界自动强化，陆烬感应到外界天道意志对肉身保护的微调压力",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2524": {
+      "chapter": 2524,
+      "core_event": "守夜人向陆烬解释两界博弈中的信息屏蔽机制，上官鸿在远处监听",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2525": {
+      "chapter": 2525,
+      "core_event": "沈沦界探索者团队遭遇古玉结界外围的能量排斥反应",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2526": {
+      "chapter": 2526,
+      "core_event": "上官鸿尝试激活体内残脉失败，证实仙庭旧部监控仍在",
+      "characters": [
+        "C006",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2527": {
+      "chapter": 2527,
+      "core_event": "陆烬通过三才护魂阵感应到迷雾禁区深处的异变波动",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2528": {
+      "chapter": 2528,
+      "core_event": "调查飞升契约证据链，发现皇室秘藏中隐藏七窍碑残页线索",
+      "characters": [
+        "C007",
+        "C008"
+      ],
+      "boundary_note": "铺垫：f001_royal_heirlooms（resolve@3035）回收前期推进，严守'疑惑→追查→铁证三阶段'节奏，此处'追查阶段'推进，不触发铁证阶段，不提前公开皇室误读属性实质。",
+      "status": "approved"
+    },
+    "2529": {
+      "chapter": 2529,
+      "core_event": "守夜人再次现身，暗示陆烬神魂特殊性与门之影的深层关联",
+      "characters": [
+        "C001",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "2530": {
+      "chapter": 2530,
+      "core_event": "陆烬在意识海中直面身份撕裂心魔，古玉结界自动强化保护",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

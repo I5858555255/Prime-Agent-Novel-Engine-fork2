@@ -9,6 +9,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "config"))
 
 
+def _writable_tmp() -> Path:
+    """Workspace-local dir the sandbox permits (AppData tmp_path is blocked)."""
+    base = Path(__file__).resolve().parents[1] / ".test_tmp"
+    base.mkdir(exist_ok=True)
+    return Path(tempfile.mkdtemp(prefix="switch_llm_test_", dir=base))
+
+
 def _make_tmp_config(tmp_path):
     """Copy llm_providers.json to tmp_path for testing."""
     src = Path(__file__).parent.parent / "config" / "llm_providers.json"
@@ -17,10 +24,10 @@ def _make_tmp_config(tmp_path):
     return dst
 
 
-def test_list_shows_active_and_profiles(tmp_path, monkeypatch):
+def test_list_shows_active_and_profiles(monkeypatch):
     """List command shows current active and all profiles (model-agnostic)."""
     import switch_llm
-    cfg_path = _make_tmp_config(tmp_path)
+    cfg_path = _make_tmp_config(_writable_tmp())
     monkeypatch.setattr(switch_llm, "CONFIG_PATH", cfg_path)
 
     cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
@@ -42,10 +49,10 @@ def test_list_shows_active_and_profiles(tmp_path, monkeypatch):
     assert any(f"[{p}]" in output for p in others), "no other profile listed"
 
 
-def test_switch_direct_syntax(tmp_path, monkeypatch):
+def test_switch_direct_syntax(monkeypatch):
     """switch_llm.py <profile> works as direct switch."""
     import switch_llm
-    cfg_path = _make_tmp_config(tmp_path)
+    cfg_path = _make_tmp_config(_writable_tmp())
     monkeypatch.setattr(switch_llm, "CONFIG_PATH", cfg_path)
 
     import io
@@ -65,10 +72,10 @@ def test_switch_direct_syntax(tmp_path, monkeypatch):
     assert cfg["active_profile"] == "siliconflow"
 
 
-def test_switch_subcommand_syntax(tmp_path, monkeypatch):
+def test_switch_subcommand_syntax(monkeypatch):
     """switch_llm.py switch <profile> works."""
     import switch_llm
-    cfg_path = _make_tmp_config(tmp_path)
+    cfg_path = _make_tmp_config(_writable_tmp())
     monkeypatch.setattr(switch_llm, "CONFIG_PATH", cfg_path)
 
     import io
@@ -87,10 +94,10 @@ def test_switch_subcommand_syntax(tmp_path, monkeypatch):
     assert cfg["active_profile"] == "siliconflow"
 
 
-def test_switch_preserves_other_fields(tmp_path, monkeypatch):
+def test_switch_preserves_other_fields(monkeypatch):
     """Switching profile must preserve _help and other profiles unchanged."""
     import switch_llm
-    cfg_path = _make_tmp_config(tmp_path)
+    cfg_path = _make_tmp_config(_writable_tmp())
     monkeypatch.setattr(switch_llm, "CONFIG_PATH", cfg_path)
 
     # Read original
@@ -115,10 +122,10 @@ def test_switch_preserves_other_fields(tmp_path, monkeypatch):
     assert cfg["active_profile"] == "siliconflow"
 
 
-def test_invalid_profile_exits_nonzero(tmp_path, monkeypatch):
+def test_invalid_profile_exits_nonzero(monkeypatch):
     """Invalid profile name exits with non-zero code."""
     import switch_llm
-    cfg_path = _make_tmp_config(tmp_path)
+    cfg_path = _make_tmp_config(_writable_tmp())
     monkeypatch.setattr(switch_llm, "CONFIG_PATH", cfg_path)
 
     sys.argv = ["switch_llm.py", "nonexistent"]
@@ -129,10 +136,10 @@ def test_invalid_profile_exits_nonzero(tmp_path, monkeypatch):
         assert e.code == 1
 
 
-def test_no_args_lists_profiles(tmp_path, monkeypatch):
+def test_no_args_lists_profiles(monkeypatch):
     """No args prints list (exits 0)."""
     import switch_llm
-    cfg_path = _make_tmp_config(tmp_path)
+    cfg_path = _make_tmp_config(_writable_tmp())
     monkeypatch.setattr(switch_llm, "CONFIG_PATH", cfg_path)
 
     sys.argv = ["switch_llm.py"]

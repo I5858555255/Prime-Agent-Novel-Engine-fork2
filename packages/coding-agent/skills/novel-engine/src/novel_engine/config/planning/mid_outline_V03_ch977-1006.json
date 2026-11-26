@@ -1,0 +1,314 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      977,
+      1006
+    ],
+    "node_chapters_in_range": [
+      988
+    ],
+    "generated_at": "2026-11-25T06:26:55+00:00",
+    "batch_size": 5,
+    "status": "approved",
+    "audit": {
+      "last_run": true
+    },
+    "note": "18/29 entries approved; remainder pending_human/needs_regenerate kept for next pass"
+  },
+  "entries": {
+    "1000": {
+      "chapter": 1000,
+      "core_event": "陆烬利用残卷法诀辅助盟友破解资源分配不公的局中局",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1001": {
+      "chapter": 1001,
+      "core_event": "太虚外来的游方散修以\"义诊\"为名接触陆烬同门C005，暗中探问其\"内里气息\"是否有异",
+      "characters": [
+        "C001",
+        "C005",
+        "C007"
+      ],
+      "boundary_note": "需人工确认：外来散修是否为摄魂阁外围试探（f003/f009相关），需确认仅停留在\"模糊察觉\"层面，不得点明组织名称或人造飞升目的",
+      "status": "pending_human"
+    },
+    "1002": {
+      "chapter": 1002,
+      "core_event": "陆烬察觉C005被外来者接触后主动追踪，发现对方留下的一枚玉片刻有与残卷隐纹同源的半枚印",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": "需人工确认：玉片印与f001三件残物的关联程度，需确认仅呈现\"同源感\"而非\"完全解读用途\"",
+      "status": "pending_human"
+    },
+    "1003": {
+      "chapter": 1003,
+      "core_event": "测试后陆烬被分配至资源匮乏的杂役峰，目睹同脉修士排挤寒门弟子",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1004": {
+      "chapter": 1004,
+      "core_event": "陆烬在杂役峰结识老仆，获得《太上养魂经》残卷的初步提示",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1005": {
+      "chapter": 1005,
+      "core_event": "<core_event>",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1006": {
+      "chapter": 1006,
+      "core_event": "<core_event>",
+      "characters": [
+        "C001",
+        "C007",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "977": {
+      "chapter": 977,
+      "core_event": "仙门季度考核中，陆烬因无世家背景被分至末等资源区，高脉弟子当众斥其\"凡骨\"，陆烬在末等资源区旧架上发现一册残卷，扉页刻有陌生符文",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "978": {
+      "chapter": 978,
+      "core_event": "陆烬被分派至杂务堂清理陈年魂灰，在灰堆中发现刻有摄魂阁徽记的残符",
+      "characters": [
+        "C001",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "979": {
+      "chapter": 979,
+      "core_event": "陆烬试图用残符对照自身神魂变化，导致杂务堂出现异常魂光波动，惊动巡值执事",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "980": {
+      "chapter": 980,
+      "core_event": "执事带走残符并质问陆烬，陆烬隐瞒两界神魂特性，仅称误触古物反应",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "981": {
+      "chapter": 981,
+      "core_event": "执事上报结果，陆烬被临时禁足内堂静思，期间陈老根远程传讯告知外界局势紧张",
+      "characters": [
+        "C001",
+        "C002",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "982": {
+      "chapter": 982,
+      "core_event": "陆烬夜研残卷",
+      "characters": [],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "983": {
+      "chapter": 983,
+      "core_event": "陆烬在仙门大比预选中遭遇同门排挤，被指派清理废弃丹房以测试心性",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "984": {
+      "chapter": 984,
+      "core_event": "陆烬在丹房发现上古炼魂残阵，试图运转呼吸法却被反噬，引发神魂异动",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "985": {
+      "chapter": 985,
+      "core_event": "摄魂阁探子察觉丹房异动，暗中调查陆烬神魂特殊性，陆烬被误认为异类",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "986": {
+      "chapter": 986,
+      "core_event": "陆烬为证明清白参与夜间巡守，见证各脉弟子勾结偷窃资源，目睹虚伪表象",
+      "characters": [
+        "C001",
+        "C005",
+        "C008"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "987": {
+      "chapter": 987,
+      "core_event": "季度测试前资源分配，陆烬因'无派出身'被压至末档，他在后山孤崖独处时体内力量涌至临界却卡在最后一步，测试长老C003冷眼旁观不予额外资源",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "989": {
+      "chapter": 989,
+      "core_event": "突破后陆烬首次进入太虚仙门内院，各脉以'资历深浅'为由将其边缘化至最末座，同期某脉弟子C004当众嘲讽其'野路子'，陈老根C002暗中观察",
+      "characters": [
+        "C001",
+        "C002",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "990": {
+      "chapter": 990,
+      "core_event": "内院实战考核中C004设局挑衅，陆烬以远超其预期的感知速度反制，一招击退C004使其当众落败，全场哗然，考核长老被迫重新评定其档位",
+      "characters": [
+        "C001",
+        "C004",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "991": {
+      "chapter": 991,
+      "core_event": "暗册记录流传，太虚仙门内部开始讨论陆烬'感知异常'是否涉及某种罕见体质，陈老根C002向陆烬暗示'有些东西不必急着弄明白'，陆烬首次意识到自己体内有另一层从未触碰的东西在沉睡",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": "需人工确认：ch991涉及'体内另一层沉睡之物'是否触及f009_soul_duality（plant@702）的提前暴露，此处仅为'模糊感知'层面，未点明机制或名称，但需确认与f009埋设节点(702)及resolve(3800)的距离是否合规",
+      "status": "pending_human"
+    },
+    "992": {
+      "chapter": 992,
+      "core_event": "陆烬在杂役峰偶然发现一株具有微弱安神效果的灵草，尝试结合残卷入门法诀进行自我调理，神魂波动出现细微异常",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "993": {
+      "chapter": 993,
+      "core_event": "一名外门执事察觉陆烬夜间气息不稳，以违规修炼为由将其禁闭于思过崖，实为测试其神魂韧性",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "994": {
+      "chapter": 994,
+      "core_event": "陆烬在思过崖凭借残卷法诀压制神魂躁动，并在崖壁上刻录修炼心得，一名路过的游方散修驻足凝望",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "995": {
+      "chapter": 995,
+      "core_event": "内门例考中，陆烬因外门出身被三脉联立修士当众质疑考核资格，被要求补验入门凭证",
+      "characters": [
+        "C001",
+        "C003",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "pending_human"
+    },
+    "996": {
+      "chapter": 996,
+      "core_event": "陆烬夜翻残卷，发现末页有以血指压出的隐纹，纹路与他幼年模糊感知的某种印记隐隐吻合",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": "需人工确认：隐纹是否触及f001_royal_heirlooms中七窍碑残页的关联线索，需确认不提前坐实残物用途",
+      "status": "pending_human"
+    },
+    "997": {
+      "chapter": 997,
+      "core_event": "陆烬在秘境试炼中应对血脉歧视，暗中测试神魂防御极限",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "998": {
+      "chapter": 998,
+      "core_event": "补验考核中，陆烬以残卷中一段旧法应对试炼，输出远超同阶预期，此前施压的C003当众失态",
+      "characters": [
+        "C001",
+        "C003",
+        "C005",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "999": {
+      "chapter": 999,
+      "core_event": "陆烬遭遇摄魂阁外围探子，对方仅记录其神魂波动未泄露全貌",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}

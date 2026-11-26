@@ -22,7 +22,15 @@ from .execution import current_execution, budget_sleep, BudgetExceeded, route_at
 from .llm_client import LLMClient, TimeoutSpec
 from .errors import ConfigFatalError, TransientLLMError, PermanentLLMError
 from .rate_limiter import ModelRateLimiter, RateLimitError
-from novel_engine.quality.generation_constraints import generation_constraints
+
+# generation_constraints 是正篇管线专用的 guardrail 注入（quality 模块已移除）。
+# 用惰性导入：模块缺失时（condensed-only 部署）该功能自动降级为无 guardrail，
+# 不影响 ModelRouter 的核心路由/故障转移能力。
+try:
+    from novel_engine.quality.generation_constraints import generation_constraints
+except ModuleNotFoundError:  # pragma: no cover - condensed-only deployments
+    def generation_constraints(root, card):  # type: ignore[no-redef]
+        return ""
 
 logger = logging.getLogger(__name__)
 

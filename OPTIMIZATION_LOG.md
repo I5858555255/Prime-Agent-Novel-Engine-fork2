@@ -1,5 +1,10 @@
 # Prime-Agent-Novel-Engine 优化日志（问题与修复记录）
 
+> ⚠️ **历史记录**：本日志描述的 R1–R13 优化均针对已移除的正篇正文流水线
+> （`pipeline/`、`agents/`、`quality/`、`engine/` 及 88 分发布门等）。
+> 当前仓库为 **condensed-only**：简写生产 + 外部扩写包，无文学评分、无 fix-loop 自愈。
+> 本文件仅作历史溯源保留，不代表当前架构。
+
 > 生成时间：2026-09-05 02:00，SDD 现状刷新：2026-09-05  
 > 分支：`fix/architecture-patch-wiring`（基于 `feat/stability-quality`，保持本地未推送）  
 > 关联产物：`archify-novel-engine-architecture.html` / `runtime/logs/production.log` / `audit/per_chapter_reviews.json` / `docs/superpowers/plans/2026-09-05-quality-foundation.md`

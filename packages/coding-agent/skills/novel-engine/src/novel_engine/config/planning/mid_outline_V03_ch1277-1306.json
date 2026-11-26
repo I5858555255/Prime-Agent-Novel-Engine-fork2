@@ -1,0 +1,299 @@
+{
+  "meta": {
+    "vid": "V03",
+    "range": [
+      1277,
+      1306
+    ],
+    "node_chapters_in_range": [
+      1290
+    ],
+    "generated_at": "2026-10-30T07:28:41+00:00",
+    "batch_size": 6,
+    "status": "approved"
+  },
+  "entries": {
+    "1277": {
+      "chapter": 1277,
+      "core_event": "陆烬与同门在太虚仙门外围执行低阶任务，遭遇流寇突袭，首次直面修仙界残酷淘汰法则",
+      "characters": [
+        "C001",
+        "C003"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1278": {
+      "chapter": 1278,
+      "core_event": "任务结束后陆烬因出身低微被同门弟子嘲讽，引发出身歧视话题，陆烬隐忍不发暗中记恨",
+      "characters": [
+        "C001",
+        "C003",
+        "C004"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1279": {
+      "chapter": 1279,
+      "core_event": "陆烬回内门复盘遭遇，试图通过正规渠道申诉不公，却遭遇宗门官僚体系推诿，深感无力",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1280": {
+      "chapter": 1280,
+      "core_event": "陆烬在藏经阁借阅《太上养魂经》残篇，发现入门功法对神魂有隐性损伤，产生疑惑",
+      "characters": [
+        "C001",
+        "C005"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1281": {
+      "chapter": 1281,
+      "core_event": "一名神秘外门长老突然找陆烬谈话，暗示其神魂特质被外界势力关注，陆烬首次听到摄魂阁传闻",
+      "characters": [
+        "C001",
+        "C006"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1282": {
+      "chapter": 1282,
+      "core_event": "陆烬警觉后开始秘密测试神魂反应，发现常规吐纳无法消除隐患，决定寻找其他解决途径",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1283": {
+      "chapter": 1283,
+      "core_event": "陆烬随陈老根在坊市闲逛，围观凡人孩童对仙门弟子的狂热崇拜，内心生出疏离感",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1284": {
+      "chapter": 1284,
+      "core_event": "陈老根私下练习呼吸法时旧伤复发，陆烬在旁目睹其隐忍，首次察觉凡人修身的局限与痛苦",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1285": {
+      "chapter": 1285,
+      "core_event": "游商兜售的杂记中提及“神魂特异者”传闻，陆烬心中微动，但表面装作不懂，仅记录关键词",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1286": {
+      "chapter": 1286,
+      "core_event": "陆烬在街角偶遇一名神色匆忙的神秘男子，对方眼神阴冷，似乎在与陆烬进行某种无声的测试",
+      "characters": [
+        "C001",
+        "C007"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1287": {
+      "chapter": 1287,
+      "core_event": "陈老根因察觉儿子近日异常沉默，强行带陆烬回家休息，严厉告诫其不得卷入仙门背后的黑暗传闻",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1288": {
+      "chapter": 1288,
+      "core_event": "陆烬夜半惊醒，感到神魂深处一丝微弱异样，起身望向窗外迷雾，确认周围无人，压下悸动",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1289": {
+      "chapter": 1289,
+      "core_event": "陈老根（C002）指导陆烬（C001）完成人皇古玉的基础激活，古玉表面浮现暗纹。",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1291": {
+      "chapter": 1291,
+      "core_event": "陆烬（C001）利用古玉护盾与血冥教（N029前置节点）长老短暂对波，护盾出现裂痕。",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1292": {
+      "chapter": 1292,
+      "core_event": "陆烬（C001）在古玉反噬后陷入昏迷，陈老根（C002）用呼吸法残篇强行稳住陆烬神魂。",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1293": {
+      "chapter": 1293,
+      "core_event": "陆烬（C001）苏醒后发现神魂中多出陌生的“墟界”气息，陈老根（C002）察觉异常但隐瞒。",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1294": {
+      "chapter": 1294,
+      "core_event": "陈老根（C002）发现古玉裂纹扩大，陆烬（C001）的神魂波动开始与古玉共鸣，出现“钝痛”感。",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1295": {
+      "chapter": 1295,
+      "core_event": "陆烬（C001）尝试控制古玉，神魂产生剧烈撕裂感，陈老根（C002）决定暂停古玉修炼并寻找稳定神魂的方法。",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1296": {
+      "chapter": 1296,
+      "core_event": "陆烬消化古玉代价余痛，陈老根以残篇呼吸法辅助舒缓神魂震荡",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1297": {
+      "chapter": 1297,
+      "core_event": "太虚仙门外门考核公告下达，陆烬因神魂特质被卷入特殊测试环节",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1298": {
+      "chapter": 1298,
+      "core_event": "陆烬在考核中暴露神魂稳定性异常，引发各脉长老对出身歧视的争议",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1299": {
+      "chapter": 1299,
+      "core_event": "摄魂阁线人首次接触陆烬，以“神魂特异者”名义尝试收买与观察",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1300": {
+      "chapter": 1300,
+      "core_event": "陆烬察觉古玉与神魂异常的深层联系，拒绝摄魂阁诱导并引发冲突",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1301": {
+      "chapter": 1301,
+      "core_event": "冲突后陆烬神魂受损陷入昏迷，陈老根守护并启动古老禁制应对危机",
+      "characters": [
+        "C001",
+        "C002"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1302": {
+      "chapter": 1302,
+      "core_event": "陆烬整理古玉代价引发的灵力反噬，探索仙门藏经阁关于神魂受损的记载",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1303": {
+      "chapter": 1303,
+      "core_event": "陆烬在遗迹废墟中意外感应到比残留意志更古老的余韵，记录在怀",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1304": {
+      "chapter": 1304,
+      "core_event": "陆烬向长老咨询神魂异样原因，被暗示仙门内部存在监控神魂特异的秘密组织",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1305": {
+      "chapter": 1305,
+      "core_event": "陆烬夜间静坐尝试梳理反噬，首次以非修炼动作观察自身神魂波动异样",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    },
+    "1306": {
+      "chapter": 1306,
+      "core_event": "陆烬将神魂波动异样的记录封存，准备在下一次宗门大比前深入调查真相",
+      "characters": [
+        "C001"
+      ],
+      "boundary_note": null,
+      "status": "approved"
+    }
+  }
+}
