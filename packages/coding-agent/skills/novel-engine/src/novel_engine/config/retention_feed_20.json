@@ -1,0 +1,22 @@
+[
+  {"chapter": 1, "read_through": 0.92, "reread": 0.18, "abandon_rate": 0.06, "source": "reader-analytics-offline", "captured_at": "2026-11-01T00:00:00Z"},
+  {"chapter": 2, "read_through": 0.88, "reread": 0.15, "abandon_rate": 0.08, "source": "reader-analytics-offline", "captured_at": "2026-11-02T00:00:00Z"},
+  {"chapter": 3, "read_through": 0.85, "reread": 0.22, "abandon_rate": 0.09, "source": "reader-analytics-offline", "captured_at": "2026-11-03T00:00:00Z"},
+  {"chapter": 4, "read_through": 0.71, "reread": 0.12, "abandon_rate": 0.21, "source": "reader-analytics-offline", "captured_at": "2026-11-04T00:00:00Z"},
+  {"chapter": 5, "read_through": 0.95, "reread": 0.31, "abandon_rate": 0.04, "source": "reader-analytics-offline", "captured_at": "2026-11-05T00:00:00Z"},
+  {"chapter": 6, "read_through": 0.86, "reread": 0.17, "abandon_rate": 0.08, "source": "reader-analytics-offline", "captured_at": "2026-11-06T00:00:00Z"},
+  {"chapter": 7, "read_through": 0.89, "reread": 0.25, "abandon_rate": 0.07, "source": "reader-analytics-offline", "captured_at": "2026-11-07T00:00:00Z"},
+  {"chapter": 8, "read_through": 0.68, "reread": 0.11, "abandon_rate": 0.24, "source": "reader-analytics-offline", "captured_at": "2026-11-08T00:00:00Z"},
+  {"chapter": 9, "read_through": 0.91, "reread": 0.28, "abandon_rate": 0.05, "source": "reader-analytics-offline", "captured_at": "2026-11-09T00:00:00Z"},
+  {"chapter": 10, "read_through": 0.94, "reread": 0.29, "abandon_rate": 0.04, "source": "reader-analytics-offline", "captured_at": "2026-11-10T00:00:00Z"},
+  {"chapter": 11, "read_through": 0.82, "reread": 0.14, "abandon_rate": 0.11, "source": "reader-analytics-offline", "captured_at": "2026-11-11T00:00:00Z"},
+  {"chapter": 12, "read_through": 0.88, "reread": 0.24, "abandon_rate": 0.07, "source": "reader-analytics-offline", "captured_at": "2026-11-12T00:00:00Z"},
+  {"chapter": 13, "read_through": 0.74, "reread": 0.16, "abandon_rate": 0.18, "source": "reader-analytics-offline", "captured_at": "2026-11-13T00:00:00Z"},
+  {"chapter": 14, "read_through": 0.84, "reread": 0.19, "abandon_rate": 0.09, "source": "reader-analytics-offline", "captured_at": "2026-11-14T00:00:00Z"},
+  {"chapter": 15, "read_through": 0.96, "reread": 0.34, "abandon_rate": 0.03, "source": "reader-analytics-offline", "captured_at": "2026-11-15T00:00:00Z"},
+  {"chapter": 16, "read_through": 0.87, "reread": 0.23, "abandon_rate": 0.08, "source": "reader-analytics-offline", "captured_at": "2026-11-16T00:00:00Z"},
+  {"chapter": 17, "read_through": 0.89, "reread": 0.21, "abandon_rate": 0.07, "source": "reader-analytics-offline", "captured_at": "2026-11-17T00:00:00Z"},
+  {"chapter": 18, "read_through": 0.70, "reread": 0.13, "abandon_rate": 0.22, "source": "reader-analytics-offline", "captured_at": "2026-11-18T00:00:00Z"},
+  {"chapter": 19, "read_through": 0.90, "reread": 0.27, "abandon_rate": 0.06, "source": "reader-analytics-offline", "captured_at": "2026-11-19T00:00:00Z"},
+  {"chapter": 20, "read_through": 0.93, "reread": 0.30, "abandon_rate": 0.05, "source": "reader-analytics-offline", "captured_at": "2026-11-20T00:00:00Z"}
+]
