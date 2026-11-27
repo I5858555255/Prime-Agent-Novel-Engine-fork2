@@ -94,7 +94,9 @@ def test_expand_hard_accept_rejects_low_payoff():
     blocked = payoff_hard_block(weak_prose, ch5_card, arc)
     assert blocked is not None
     assert blocked["check"] == "payoff_not_ignited"
-    assert blocked["waivable"] is False  # hard (non-waivable) on climax chapters
+    # Waivable: a climax chapter the model can't catharize is a real gap but
+    # must NOT hard-lock the chapter (linear hash chain); L4 drift carries it.
+    assert blocked["waivable"] is True
 
     # prose that DOES ignite the payoff (echoes trigger + action CJK)
     strong_prose = "陆烬把契约往桌上一摊，众人脸色骤变——他反将一军，契约摊开的那一刻，" \
@@ -187,10 +189,23 @@ def test_suppression_exempt_chapter_gets_lower_floor():
     assert is_suppression_exempt(8, arc) is True
     assert is_suppression_exempt(5, arc) is False  # a climax target, not suppression
     assert satisfaction_floor_for(8, arc, floor_satisfaction=4) == 2  # lower floor
-    # climax chapter keeps the high floor
+    # climax chapter keeps the high floor (at least CLIMAX_MIN=4)
     assert satisfaction_floor_for(5, arc, floor_satisfaction=4) == 4
     # a plain non-climax, non-suppression chapter gets the lower floor too
     assert satisfaction_floor_for(3, arc, floor_satisfaction=4) == 2
+    # climax chapter floor is raised to CLIMAX_MIN even when the knob floor is lower
+    assert satisfaction_floor_for(5, arc, floor_satisfaction=3) == 4
+
+
+def test_climax_chapter_floor_is_at_least_climax_min():
+    """A climax chapter chases the climax bar (>=4) even when the volume knob
+    floor is 3 — Round 1 showed climax chapters stuck at 爽点 0-2 because L3
+    chased the knob floor instead of the climax minimum."""
+    arc, _ = _chapters()  # climax_at [5,10,15,20] min 4
+    assert satisfaction_floor_for(10, arc, floor_satisfaction=3) == 4
+    assert satisfaction_floor_for(5, arc, floor_satisfaction=3) == 4
+    # non-climax stays at the lower floor
+    assert satisfaction_floor_for(6, arc, floor_satisfaction=3) == 2
 
 
 def test_volume_ratio_dual_uses_per_chapter_floor():

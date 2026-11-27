@@ -383,9 +383,14 @@ def expand_until_range(package: Path, base_url: str, api_key: str, model: str,
                                 max_tokens=10000, temperature=0.5)
             sat_clean, _ = extract_prose(sat_out)
             if han_count(sat_clean) < max(0.5 * han_count(final_prose), han_count(final_prose) - 800):
+                # Collapsed: a satisfaction re-expand that gutted the prose is kept
+                # out, but we DO NOT abandon the whole L3 loop — advance the round
+                # and let the next attempt (or the cap) decide. Breaking here meant
+                # a single collapsed round froze the chapter at a low 爽点.
                 print(f"[expand ch{manifest['chapter']}] satisfaction repair collapsed the "
-                      f"prose; keeping the previous draft", flush=True)
-                break
+                      f"prose; keeping the previous draft, advancing round", flush=True)
+                cur_scores = verdict  # re-evaluate the next decision against the kept prose
+                continue
             final_prose = sat_clean
             verdict = judge_prose(final_prose, spec, judge_provider, trace_id,
                                   knob_set_hash_arg=knob_set_hash(spec))
