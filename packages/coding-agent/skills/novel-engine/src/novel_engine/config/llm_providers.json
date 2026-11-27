@@ -1,6 +1,6 @@
 {
   "_help": "把 active_profile 改成 profiles 里的供应商即可整体切换；api_key 只写环境变量名。相位级模型：writer 链路 scenes/outline/director/synopsis 用 agnes-2.5-flash；文字精修 polish/refine(扩写+文学重写) 与 review 用 agnes-2.5-pro（首位为主，flash 为故障回退）。phases 可覆盖 response_format/concurrency/stream/idle_timeout_s/total_timeout_s。",
-  "active_profile": "agnes_30_token",
+  "active_profile": "agnes_30",
   "profiles": {
     "agnes": {
       "family": "agnes",
@@ -206,7 +206,7 @@
             "agnes-3.0-flash"
           ],
           "response_format": "json_object",
-          "concurrency": 4,
+          "concurrency": 8,
           "stream": true,
           "idle_timeout_s": 100,
           "total_timeout_s": 650
@@ -216,7 +216,7 @@
             "agnes-3.0-flash"
           ],
           "response_format": null,
-          "concurrency": 4,
+          "concurrency": 8,
           "stream": true,
           "idle_timeout_s": 100,
           "total_timeout_s": 650,
@@ -243,10 +243,23 @@
             "agnes-3.0-flash"
           ],
           "response_format": null,
-          "concurrency": 4,
+          "concurrency": 8,
           "stream": true,
           "idle_timeout_s": 100,
           "total_timeout_s": 650,
+          "extra_body": {
+            "reasoning_effort": "none"
+          }
+        },
+        "judge": {
+          "models": [
+            "agnes-3.0-flash"
+          ],
+          "response_format": "json_object",
+          "stream": false,
+          "temperature": 0,
+          "idle_timeout_s": 100,
+          "total_timeout_s": 220,
           "extra_body": {
             "reasoning_effort": "none"
           }

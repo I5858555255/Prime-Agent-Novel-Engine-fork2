@@ -254,6 +254,21 @@ def check_prose(prose: str, card: dict, manifest: dict,
                     "detail": f"{dim} score {score} below knob {knob} (soft, non-blocking)",
                 })
         result["quality_notes"] = notes
+
+    # 9. 爽点硬验收（L2）：高潮章设计的 payoff beat 必须在正文引爆。
+    #    非高潮章 payoff 缺失只记 note，不阻断。arc 读自 committed arc_constraints。
+    try:
+        from novel_engine.condensed import satisfaction, story_arc
+        arc = story_arc.load_arc(satisfaction.arc_path())
+        if arc is not None:
+            pb = satisfaction.payoff_hard_block(prose, card, arc)
+            if pb is not None:
+                blocking.append(pb)
+    except Exception:
+        # arc/satisfaction is an additive layer; a load failure degrades to
+        # "no payoff hard check" (back-compat) rather than crashing accept-check.
+        pass
+
     return result
 
 

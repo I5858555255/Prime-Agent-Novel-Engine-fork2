@@ -4,7 +4,7 @@
     {"stage": 1, "knob_set": {"爽点": 3, "钩子": 3, "压抑": 2}},
     {"stage": 2, "knob_set": {"爽点": 4, "钩子": 4, "压抑": 3}}
   ],
-  "token_cap": 5000000,
+  "token_cap": 20000000,
   "alert_pct": 90,
   "rationale_max_chars": 80,
   "beat_coverage_threshold": 0.6,

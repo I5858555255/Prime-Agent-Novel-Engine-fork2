@@ -425,7 +425,23 @@ class CondensedPipeline:
                         basic_pass = validate_review(review, hashed)
                         if basic_pass:
                             bind_review_evidence(review, candidate, context["plan"], self.canon["milestones"])
-                            passed = validate_review(review, hashed, candidate, context.get("plan"))
+                            try:
+                                passed = validate_review(review, hashed, candidate, context.get("plan"))
+                            except ValueError as citation_exc:
+                                # The draft is fine but the reviewer over-cited a
+                                # beat (cited a beat whose event_ids lacks the
+                                # claimed event). This is a deterministic, trivially
+                                # correctable error — fix the citation in place and
+                                # re-validate, instead of spinning the LLM re-guessing
+                                # the same wrong mapping.
+                                from .contracts import correct_review_citations
+                                fixed = correct_review_citations(review, candidate, context.get("plan"))
+                                if fixed:
+                                    logger.info("corrected %d reviewer coverage citation(s) on %s", fixed, name)
+                                    bind_review_evidence(review, candidate, context["plan"], self.canon["milestones"])
+                                    passed = validate_review(review, hashed, candidate, context.get("plan"))
+                                else:
+                                    raise
                         else:
                             passed = False
                         review["quality_contract"] = 3
@@ -523,6 +539,13 @@ class CondensedPipeline:
                 normalize_timeline(value, day, prior_phase, plan=plan)
                 from .contracts import normalize_event_tags
                 normalize_event_tags(value, plan)
+                # L1 deterministic backfill: a climax chapter must carry a payoff
+                # beat; flash skips the optional field (all null), so we synthesize
+                # one on the most payoff-like beat so L2/L3 have a catharsis target.
+                from . import satisfaction, story_arc
+                arc = story_arc.load_arc(satisfaction.arc_path())
+                if arc is not None and satisfaction.ensure_climax_payoff(value, arc):
+                    logger.info("L1 backfilled payoff beat on climax chapter %s", chapter)
                 return render_brief(value)
             contract = DRAFT.format(context=dumps_compact(context)) + self._draft_guard(chapter)
             for planning_attempt in range(3):
@@ -789,14 +812,27 @@ def main(argv=None):
     parser.add_argument("--rationale", default="", help="commit-override: operator rationale recorded on the leaf")
     parser.add_argument("--refresh-uncommitted-canon", action="store_true",
                         help="adopt corrected canon only before any chapter commits; retain all request budgets")
+    parser.add_argument("--repair-rounds", type=int, default=None,
+                        help="run: override the reviewer repair-round budget for hard chapters "
+                             "(default: ProductionConfig.repair_rounds). Higher values give a "
+                             "quality-blocked chapter more shots at a clean review.")
     args = parser.parse_args(argv)
     load_project_env()
     args.output.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(filename=args.output / "production.log", level=logging.INFO,
                         format="%(asctime)s %(levelname)s %(name)s %(message)s")
+    from dataclasses import replace as _dc_replace
+    base_config = ProductionConfig()
+    if args.repair_rounds is not None:
+        base_config = _dc_replace(base_config, repair_rounds=args.repair_rounds)
     if args.command in ("run", "status", "export", "archive", "verify", "compile", "invalidate", "extend-budget",
-                        "qc", "knobs", "note-quality", "commit-override"):
-        pipeline = CondensedPipeline(args.source, args.output, refresh_uncommitted_canon=args.refresh_uncommitted_canon)
+                        "qc", "knobs", "note-quality", "commit-override",
+                        # store-dependent verbs: expand (critic verdict) + the
+                        # accept-check / dual-check / mark-verified chain all need
+                        # the pipeline's Store (budget guard + verdict leaves).
+                        "expand", "accept-check", "dual-check", "mark-verified"):
+        pipeline = CondensedPipeline(args.source, args.output, config=base_config,
+                                     refresh_uncommitted_canon=args.refresh_uncommitted_canon)
     else:
         pipeline = None
     exit_code = 0

@@ -43,7 +43,8 @@ def run_viral_loop(*,
                    arc: dict | None = None,
                    window: int = 10,
                    min_n: int = 30,
-                   source: str = "offline-feed") -> dict:
+                   source: str = "offline-feed",
+                   floor_satisfaction: int | None = None) -> dict:
     """Run one offline viral-quality closed-loop pass.
 
     Args:
@@ -138,11 +139,29 @@ def run_viral_loop(*,
         history = [v for v in usable if v["chapter"] < latest["chapter"]]
         arc_result = story_arc.check_arc(latest["chapter"], latest, arc, history=history)
 
+    # 6. L4 爽点达标占比（volume satisfaction ratio）+ drift suspect。
+    #    No-op when floor_satisfaction is None (no floor configured). A scored
+    #    verdict is one carrying a 爽点 int; the ratio is "reaches floor / scored".
+    #    Dual-target: each chapter is judged against its OWN floor (climax ->
+    #    floor_satisfaction; non-climax/suppression -> NON_CLIMAX_SAT_FLOOR).
+    from . import satisfaction
+    if floor_satisfaction is not None:
+        dual = satisfaction.volume_satisfaction_ratio_dual(
+            verdicts, arc, climax_floor=floor_satisfaction,
+            target=satisfaction.SAT_VOLUME_TARGET)
+        satisfaction_ratio = dual["ratio"]
+        satisfaction_drift = dual["drift_suspect"]
+    else:
+        satisfaction_ratio = None
+        satisfaction_drift = False
+
     return {
         "agreement": agreement,
         "drift_window": drift_window,
         "ingested_retention": ingested_retention,
         "suspect_emitted": suspect_emitted,
         "arc": arc_result,
+        "satisfaction_ratio": satisfaction_ratio,
+        "satisfaction_drift_suspect": satisfaction_drift,
         "ready": bool(agreement.get("ready", False)),
     }

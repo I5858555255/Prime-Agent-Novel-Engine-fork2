@@ -68,7 +68,8 @@ DRAFT = """请生成本章完整叙事简写。必要事件必须体现在实际
 "time_scope":"present（当前事件）或flashback（回忆）",
 "pov":"视角人物","cast":["在场人物"],"start":"起始状态",
 "beats":[{{"id":"S1-B1","event_ids":["规划事件编号"],"action":"动作/交锋",
-"cause":"动机/依据","outcome":"结果及信息变化"}}],
+"cause":"动机/依据","outcome":"结果及信息变化",
+ "payoff":{{可选爽点引爆设计：{{"type":"打脸|反转|升级|解压抑","release_of":"压抑来源或F编号","trigger":"引爆动作","intensity":1至5}}；本beat无爽点引爆则填null}}}}],
 "dialogue_intents":["谁对谁说什么、隐藏什么；无对白场景填空数组[]，字段必须存在，无需注明原因"],
 "emotion":"情绪转折","end":"结束状态","expansion_weight":本场相对篇幅权重正整数（通常1至5）,
 "expansion_guidance":"扩写内容依据、详略、人物声线与不可变更事项"}}],
@@ -82,6 +83,10 @@ DRAFT = """请生成本章完整叙事简写。必要事件必须体现在实际
 跨地点的泛称群体不能共用身份；群体状态使用“地点/群体”限定实体，具名人物保持唯一规范名。
 每次伏笔暗示、推进或回收，都必须用对应F编号作为entity记录；对照近30章活动遵守暗示密度。
 首次出现的相关状态before可以是null；但不能借null否认历史事实。不要输出plan/context字段。
+爽点设计（爆款节奏）：爽点是压抑的兑现。含打脸/反转/升级/解压抑的beat必须设计payoff引爆——
+把已积累的压抑在该beat引爆（打脸/反转/获得认可或资源），payoff.trigger写清引爆动作，intensity按冲击强度给1至5。
+若本章是arc高潮章（climax_at命中章），必须至少一个payoff beat且前置到场景前1/3（该场景expansion_weight拉高、
+expansion_guidance点名引爆）；非高潮章payoff可选，但压抑来源须标release_of为后续兑现埋线。不得让负面情节悬置超过1个场景。
 
 完整任务、设定与上下文：
 {context}
