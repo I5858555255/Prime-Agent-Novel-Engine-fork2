@@ -230,7 +230,12 @@ def normalize_event_tags(chapter, plan):
     # Which required events are already tagged on some beat?
     tagged = set()
     for scene in chapter.get("scenes", []):
+        if not isinstance(scene, dict):
+            continue  # a malformed (e.g. string) scene contributes no beats; the
+            # validator will flag the structure, not crash the normalizer.
         for beat in scene.get("beats", []):
+            if not isinstance(beat, dict):
+                continue
             for ref in beat.get("event_ids") or []:
                 tagged.add(ref)
     missing = required - tagged
@@ -242,7 +247,8 @@ def normalize_event_tags(chapter, plan):
         runs = _re.findall(r"[\u4e00-\u9fff]{2,}", text or "")
         return max(runs, key=len) if runs else ""
 
-    beats = [b for s in chapter.get("scenes", []) for b in s.get("beats", [])]
+    beats = [b for s in chapter.get("scenes", []) if isinstance(s, dict)
+             for b in s.get("beats", []) if isinstance(b, dict)]
     for ev_id in sorted(missing):
         ev_action = ev_by_id[ev_id].get("action", "")
         sig = cjk_sig(ev_action)
@@ -442,6 +448,74 @@ def validate_review(review, input_hash, candidate=None, plan=None):
             if not item["covered"] and checks["coverage"]:
                 raise ValueError("uncovered milestone cannot pass coverage")
     return all(checks.values())
+
+
+def correct_review_citations(review, candidate, plan):
+    """Deterministically fix a reviewer's event_evidence coverage citations.
+
+    A reviewer can over-cite: list a beat as evidence for an event even though
+    that beat's event_ids does not contain the event (the prompt's hard rule is
+    to cite only beats whose event_ids contain the event). The draft itself is
+    usually fine (the events ARE tagged on the right beats); only the reviewer's
+    citation is imprecise. Re-asking the LLM to re-guess the citation spins on
+    the same error, so instead we fix it deterministically:
+
+    - For each event_evidence item, keep only the cited beat_ids whose
+      `event_ids` actually contain the item's event_id (drop the stray beats).
+    - If the item was `covered=True` but ends up with NO valid beat, downgrade
+      it to `covered=False` and add a `coverage` issue so the gap is real and
+      actionable (not silently passed).
+    - Rebuild `evidence` from the corrected beats' actions so the quote stays
+      truthful.
+
+    Returns the number of items corrected (0 when nothing needed fixing). This
+    never weakens the gate: it only drops citations that are factually wrong
+    against the draft's own event_ids; it never invents coverage.
+    """
+    if not isinstance(candidate, dict) or not isinstance(plan, dict):
+        return 0
+    beats = {}
+    for scene in candidate.get("scenes", []):
+        if not isinstance(scene, dict):
+            continue
+        for beat in scene.get("beats", []):
+            if isinstance(beat, dict):
+                beats[beat.get("id")] = beat
+    items = review.get("event_evidence")
+    if not isinstance(items, list):
+        return 0
+    corrected = 0
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        event_id = item.get("event_id")
+        refs = item.get("beat_ids")
+        if not isinstance(refs, list):
+            continue
+        # Keep only beats that (a) exist and (b) actually tag this event_id.
+        valid = [r for r in refs if r in beats and event_id in (beats[r].get("event_ids") or [])]
+        dropped = [r for r in refs if r not in valid]
+        if not dropped:
+            continue  # citation was already clean.
+        corrected += 1
+        item["beat_ids"] = valid
+        if item.get("covered") and not valid:
+            # The event had no valid beat after dropping stray citations: it is
+            # genuinely under-covered — make that an explicit, actionable issue
+            # rather than silently passing a wrong citation.
+            item["covered"] = False
+            item["evidence"] = ""
+            issues = review.get("issues")
+            if not isinstance(issues, list):
+                issues = []
+                review["issues"] = issues
+            issues.append({"check": "coverage",
+                           "location": f"{event_id}",
+                           "evidence": "reviewer cited beats that do not tag this event; no valid beat remains",
+                           "repair": f"add a beat whose action implements {event_id} and tag it with {event_id}"})
+        else:
+            item["evidence"] = "\n".join(beats[r]["action"] for r in valid) if valid else ""
+    return corrected
 
 
 def bind_review_evidence(review, candidate, plan, milestones):

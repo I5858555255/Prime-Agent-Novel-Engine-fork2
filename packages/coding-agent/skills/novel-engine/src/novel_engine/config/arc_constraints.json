@@ -1,0 +1,15 @@
+{
+  "rubric": "离线最小剧情走向约束：爽点爆发章 / 压抑-释放节奏 / 钩子密度。真实 OQ 落地后替换为运营写的完整 arc。",
+  "climax_at": [5, 10, 15, 20],
+  "climax_min": 4,
+  "suppression_release": {
+    "chapter": 7,
+    "min_压抑": 4,
+    "release_by_chapter": 9
+  },
+  "hook_density": {
+    "min_hooks": 4,
+    "window": 5,
+    "ratio": 0.4
+  }
+}

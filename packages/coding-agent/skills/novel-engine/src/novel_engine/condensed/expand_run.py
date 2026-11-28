@@ -62,6 +62,42 @@ REPAIR_EXPAND_TEMPLATE = """你是本小说的正文修订兼扩写者。以下�
 {prose}
 """
 
+SAT_REPAIR_TEMPLATE = """你是本小说的正文爽点强化修订者。以下正文经质检判定爽点低于目标（当前爽点判分偏低），
+读者情绪峰值不足、压抑未被兑现。请做【爽点强化修订】：
+1. 把本章设计的爽点（payoff：打脸/反转/能力升级/解压抑）在前1/3篇幅内引爆——让读者看到压抑被反将一军、实力或信息差打脸、获得认可或资源；
+2. 负面情节（羞辱/轻视/规则刁难）必须在同一场景或紧邻场景给出反转，不得悬置；
+3. 用短句+动作+结果直接呈现情绪峰值，不靠内心独白堆砌；
+4. 保留情节、因果、人物声线、场景顺序、字数规模（约 {target} 汉字）与章末钩子不变，只强化爽点节奏。
+爽点目标下限：{floor_satisfaction}/5。
+{payoff_hint}
+{forbidden_terms}
+【需爽点强化的正文】
+{prose}
+"""
+
+
+def _payoff_hint(card: dict) -> str:
+    """Extract the chapter's designed payoff beats as a re-expand hint.
+
+    A card carrying a payoff beat (L1) names it so the L3 re-expand can ignite
+    that exact payoff. No payoff beats -> a generic hint. Deterministic.
+    """
+    lines = []
+    for scene in card.get("scenes", []) if isinstance(card, dict) else []:
+        if not isinstance(scene, dict):
+            continue
+        for beat in scene.get("beats", []):
+            if not isinstance(beat, dict):
+                continue
+            payoff = beat.get("payoff")
+            if isinstance(payoff, dict) and (payoff.get("type") or payoff.get("trigger")):
+                lines.append(f"- 场景{scene.get('id')} beat {beat.get('id')}: "
+                             f"爽点={payoff.get('type')} 引爆='{payoff.get('trigger')}' "
+                             f"释放来源={payoff.get('release_of','')} 强度={payoff.get('intensity','?')}/5")
+    if not lines:
+        return "（本章未显式设计 payoff beat；按打脸/反转/升级/解压抑自定一处在前1/3引爆）"
+    return "本章设计的爽点（必须引爆）：\n" + "\n".join(lines)
+
 
 def _collect_violations(report: dict) -> list[str]:
     """Gather the offending terms/phrases from a blocking report, for a repair prompt."""
@@ -298,9 +334,71 @@ def expand_until_range(package: Path, base_url: str, api_key: str, model: str,
         judge_provider = load_provider_full("judge")
         verdict = judge_prose(final_prose, spec, judge_provider, trace_id,
                               knob_set_hash_arg=knob_set_hash(spec))
+    # L3 爽点自动返工：verdict 爽点 < floor（spec 的 爽点 维度）或 arc climax 违规时，
+    # 用 payoff beat 做定向重扩，每章最多 SAT_RETRY_CAP 轮；超了 HARD_BLOCK（防死循环）。
+    # 仅在 spec（knob set）已判分时生效；无 spec（back-compat）跳过，不放大成本。
+    sat_retries = 0
+    if spec is not None and store is not None:
+        from novel_engine.condensed import satisfaction, story_arc
+        arc = story_arc.load_arc(satisfaction.arc_path())
+        # Per-chapter floor (L4 dual-target): a climax chapter targets the high
+        # climax floor (spec 爽点, e.g. 4); a non-climax / suppression-exempt
+        # chapter targets the lower NON_CLIMAX_SAT_FLOOR. This is what L3 re-
+        # expand chases, so suppression-heavy chapters don't burn all 3 rounds
+        # chasing a climax bar they are designed to miss.
+        climax_floor = spec.get("爽点")
+        chapter_num = manifest["chapter"]
+        floor_sat = satisfaction.satisfaction_floor_for(chapter_num, arc, climax_floor) \
+            if (arc is not None or spec is not None) else climax_floor
+        card_for_arc = card if isinstance(card, dict) else {}
+        cur_scores = verdict
+        while sat_retries < satisfaction.SAT_RETRY_CAP and floor_sat is not None:
+            arc_violation = False
+            if arc is not None:
+                # check_arc(chapter, verdict, arc, history) — same order viral_loop uses.
+                arc_res = story_arc.check_arc(manifest["chapter"], cur_scores, arc, history=[])
+                arc_violation = any("climax" in v or "suppression" in v
+                                    for v in arc_res.get("violations", []))
+            decision = satisfaction.satisfaction_retry_decision(
+                cur_scores, {"爽点": floor_sat}, arc_violation,
+                round_no=sat_retries + 1, cap=satisfaction.SAT_RETRY_CAP)
+            if decision["action"] == "pass":
+                break
+            if decision["action"] == "hard_block":
+                print(f"[expand ch{manifest['chapter']}] satisfaction HARD_BLOCK: "
+                      f"{decision['reason']}; stopping re-expand", flush=True)
+                break
+            # retry_satisfaction: targeted payoff re-expand (L3)
+            sat_retries += 1
+            payoff_hint = _payoff_hint(card)
+            sat_fix = SAT_REPAIR_TEMPLATE.format(
+                target=target, current=han_count(final_prose),
+                floor_satisfaction=floor_sat,
+                payoff_hint=payoff_hint,
+                forbidden_terms=_forbidden_terms_block(manifest.get("chapter", 0)),
+                prose=final_prose)
+            sat_out = _call_llm([{"role": "system",
+                                  "content": "你是小说正文爽点强化修订者。只输出修订后的完整正文，不加标签或说明。"},
+                                 {"role": "user", "content": sat_fix}],
+                                max_tokens=10000, temperature=0.5)
+            sat_clean, _ = extract_prose(sat_out)
+            if han_count(sat_clean) < max(0.5 * han_count(final_prose), han_count(final_prose) - 800):
+                # Collapsed: a satisfaction re-expand that gutted the prose is kept
+                # out, but we DO NOT abandon the whole L3 loop — advance the round
+                # and let the next attempt (or the cap) decide. Breaking here meant
+                # a single collapsed round froze the chapter at a low 爽点.
+                print(f"[expand ch{manifest['chapter']}] satisfaction repair collapsed the "
+                      f"prose; keeping the previous draft, advancing round", flush=True)
+                cur_scores = verdict  # re-evaluate the next decision against the kept prose
+                continue
+            final_prose = sat_clean
+            verdict = judge_prose(final_prose, spec, judge_provider, trace_id,
+                                  knob_set_hash_arg=knob_set_hash(spec))
+            cur_scores = verdict
     final_report = check_prose(final_prose, card, manifest, spec=spec, verdict=verdict)
     summary["final_blocking"] = [b.get("check") for b in final_report["blocking"]]
     summary["quality_notes"] = final_report.get("quality_notes", [])
+    summary["satisfaction_retries"] = sat_retries
     summary["pass"] = not final_report["blocking"] and lo <= han_count(final_prose) <= hi
     if spec is not None:
         prose_sha256 = hashlib.sha256(final_prose.encode("utf-8")).hexdigest()
