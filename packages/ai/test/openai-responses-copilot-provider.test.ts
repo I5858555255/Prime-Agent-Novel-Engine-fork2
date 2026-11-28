@@ -23,7 +23,7 @@ function getHeader(headers: CapturedHeaders, name: string): string | null {
 
 async function captureOpenAIResponseHeaders(
 	options: Parameters<typeof streamOpenAIResponses>[2],
-	model: Model<"openai-responses"> = getModel("openai", "gpt-5.4"),
+	model: Model<"openai-responses"> = getModel("openai", "gpt-5.4") as Model<"openai-responses">,
 ): Promise<{ sessionId: string | null; clientRequestId: string | null }> {
 	const captured = { sessionId: null as string | null, clientRequestId: null as string | null };
 	vi.spyOn(globalThis, "fetch").mockImplementation(async (_input, init) => {
@@ -58,7 +58,7 @@ describe("openai-responses provider defaults", () => {
 	});
 
 	it("omits reasoning when no reasoning is requested", async () => {
-		const model = getModel("github-copilot", "gpt-5-mini");
+		const model = getModel("github-copilot", "gpt-5-mini") as Model<"openai-responses">;
 		let capturedPayload: unknown;
 
 		vi.spyOn(globalThis, "fetch").mockResolvedValue(
