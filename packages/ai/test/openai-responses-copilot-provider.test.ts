@@ -23,7 +23,7 @@ function getHeader(headers: CapturedHeaders, name: string): string | null {
 
 async function captureOpenAIResponseHeaders(
 	options: Parameters<typeof streamOpenAIResponses>[2],
-	model: Model<"openai-responses"> = getModel("openai", "gpt-5.4"),
+	model: Model<"openai-responses"> = getModel("openai", "gpt-5.4") as Model<"openai-responses">,
 ): Promise<{ sessionId: string | null; clientRequestId: string | null }> {
 	const captured = { sessionId: null as string | null, clientRequestId: null as string | null };
 	vi.spyOn(globalThis, "fetch").mockImplementation(async (_input, init) => {
@@ -58,7 +58,7 @@ describe("openai-responses provider defaults", () => {
 	});
 
 	it("omits reasoning when no reasoning is requested", async () => {
-		const model = getModel("github-copilot", "gpt-5-mini");
+		const model = getModel("github-copilot", "gpt-5-mini") as Model<"openai-responses">;
 		let capturedPayload: unknown;
 
 		vi.spyOn(globalThis, "fetch").mockResolvedValue(
@@ -95,7 +95,7 @@ describe("openai-responses provider defaults", () => {
 	it.each(["gpt-5.1", "gpt-5.2", "gpt-5.3-codex", "gpt-5.4", "gpt-5.4-mini", "gpt-5.4-nano", "gpt-5.5"] as const)(
 		"sends none reasoning effort for OpenAI %s when no reasoning is requested",
 		async (modelId) => {
-			const model = getModel("openai", modelId);
+			const model = getModel("openai", modelId) as Model<"openai-responses">;
 			let capturedPayload: unknown;
 
 			vi.spyOn(globalThis, "fetch").mockResolvedValue(
@@ -132,7 +132,7 @@ describe("openai-responses provider defaults", () => {
 	it.each(["gpt-5", "gpt-5-mini", "gpt-5-nano", "gpt-5-pro", "gpt-5.2-pro", "gpt-5.4-pro", "gpt-5.5-pro"] as const)(
 		"omits reasoning effort for OpenAI %s when off is unsupported",
 		async (modelId) => {
-			const model = getModel("openai", modelId);
+			const model = getModel("openai", modelId) as Model<"openai-responses">;
 			let capturedPayload: unknown;
 
 			vi.spyOn(globalThis, "fetch").mockResolvedValue(
@@ -174,7 +174,7 @@ describe("openai-responses provider defaults", () => {
 
 	it("sets cache-affinity headers for proxy OpenAI Responses requests with a sessionId", async () => {
 		const proxyModel: Model<"openai-responses"> = {
-			...getModel("openai", "gpt-5.4"),
+			...(getModel("openai", "gpt-5.4") as Model<"openai-responses">),
 			provider: "opencode",
 			baseUrl: "https://proxy.example.com/v1",
 		};
@@ -185,7 +185,7 @@ describe("openai-responses provider defaults", () => {
 
 	it("can omit the session_id header while preserving other cache-affinity headers", async () => {
 		const proxyModel: Model<"openai-responses"> = {
-			...getModel("openai", "gpt-5.4"),
+			...(getModel("openai", "gpt-5.4") as Model<"openai-responses">),
 			provider: "opencode",
 			baseUrl: "https://proxy.example.com/v1",
 			compat: { sendSessionIdHeader: false },
@@ -218,7 +218,7 @@ describe("openai-responses provider defaults", () => {
 		["gpt-5.5", "priority", 2.5],
 		["gpt-5.5", "flex", 0.5],
 	] as const)("applies %s %s service-tier cost multiplier", async (modelId, serviceTier, multiplier) => {
-		const model = getModel("openai", modelId);
+		const model = getModel("openai", modelId) as Model<"openai-responses">;
 		const sse = `${[
 			`data: ${JSON.stringify({
 				type: "response.completed",
