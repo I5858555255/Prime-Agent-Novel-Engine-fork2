@@ -80,7 +80,7 @@
 		"chalk": "^5.6.2",
 		"openai": "7.36.0",
 		"partial-json": "^0.1.7",
-		"proxy-agent": "^6.5.0",
+		"proxy-agent": "^8.0.3",
 		"undici": "^8.13.1",
 		"zod-to-json-schema": "^3.24.6"
 	},
